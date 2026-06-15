@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Engineering projects by Vinayak Nair — GNC, autonomy, structures, and embedded systems.">
+  <title>Projects — Vinayak Nair</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <div class="page">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="site-name">Vinayak Nair <span>/ GNC</span></a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+        <nav id="site-nav" class="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="projects.html" aria-current="page">Projects</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="assets/resume.pdf" download>Resume</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <div class="container">
+        <header class="page-title-block">
+          <p class="section-label">Project index</p>
+          <h1>Projects</h1>
+          <p>Engineering work in GNC, autonomy, structures, and embedded systems. Each entry follows a mission-spec format: problem, approach, result.</p>
+        </header>
+
+        <!-- 1. GHOST -->
+        <article id="ghost" class="project-card fade-in">
+          <div class="project-header">
+            <h2 class="project-title">
+              GHOST
+              <span class="project-title-sub">GPS-Denied Hardware Occlusion-Survivable Tracker</span>
+            </h2>
+            <span class="status-tag status-active">Active development</span>
+          </div>
+
+          <ul class="tag-list" aria-label="Technologies">
+            <li>ROS2</li>
+            <li>ESKF</li>
+            <li>Raspberry Pi 4B</li>
+            <li>IMX296</li>
+            <li>PX4 SITL</li>
+            <li>MAVLink</li>
+            <li>Python</li>
+          </ul>
+
+          <div class="project-spec">
+            <h3>Problem</h3>
+            <p>Autonomous platforms lose navigation accuracy in GPS-denied environments and need vision-based state estimation that's robust to sensor occlusion.</p>
+          </div>
+
+          <div class="project-spec">
+            <h3>Approach</h3>
+            <p>Dual-filter architecture — a 9-state camera platform attitude ESKF fused with AprilTag-based vision measurements, paired with a CV/CTRV/IMM target tracking filter. Runs on a Raspberry Pi 4B with an IMX296 global shutter camera and ICM-42688-P IMU, communicating with PX4 SITL over pure UDP MAVLink.</p>
+          </div>
+
+          <div class="project-spec">
+            <h3>Result</h3>
+            <p>~55% of software pipeline complete; hardware integration in progress. Demo video below.</p>
+          </div>
+
+          <div class="project-actions">
+            <a href="https://github.com/XpiredRuby/ghost-vins-eskf" class="btn btn-external" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+
+          <!-- TODO: embed demo video here -->
+          <div class="video-embed" role="img" aria-label="GHOST demo video placeholder — video to be added"></div>
+        </article>
+
+        <!-- 2. TAMU-SPIRIT -->
+        <article id="tamu-spirit" class="project-card fade-in">
+          <div class="project-header">
+            <h2 class="project-title">
+              TAMU-SPIRIT ISS Capstone Project
+            </h2>
+            <span class="status-tag status-complete">Complete</span>
+          </div>
+
+          <ul class="tag-list" aria-label="Technologies">
+            <li>NASA design review process</li>
+            <li>Systems engineering</li>
+            <li>ISS payload</li>
+          </ul>
+
+          <div class="project-spec">
+            <h3>Problem</h3>
+            <p>[Placeholder — describe the specific design constraint or problem your subsystem addressed for the ISS-bound payload.]</p>
+          </div>
+
+          <div class="project-spec">
+            <h3>Approach</h3>
+            <p>[Placeholder — describe your role and methodology through SRR, PDR, and SCR design reviews.]</p>
+          </div>
+
+          <div class="project-spec">
+            <h3>Result</h3>
+            <p>[Placeholder — describe outcome, what passed review, and what was delivered.]</p>
+          </div>
+        </article>
+
+        <!-- 3. Monte Carlo GNC -->
+        <article id="monte-carlo-gnc" class="project-card fade-in">
+          <div class="project-header">
+            <h2 class="project-title">Monte Carlo GNC Simulation</h2>
+            <span class="status-tag status-complete">Complete</span>
+          </div>
+
+          <ul class="tag-list" aria-label="Technologies">
+            <li>Python</li>
+            <li>Monte Carlo</li>
+            <li>GNC</li>
+            <li>Sensor uncertainty</li>
+          </ul>
+
+          <div class="project-spec">
+            <h3>Problem</h3>
+            <p>[Placeholder — what system or scenario was simulated.]</p>
+          </div>
+
+          <div class="project-spec">
+            <h3>Approach</h3>
+            <p>[Placeholder — 500 Monte Carlo runs, what parameters were varied.]</p>
+          </div>
+
+          <div class="project-spec">
+            <h3>Result</h3>
+            <p>[Placeholder — what the analysis showed.]</p>
+          </div>
+        </article>
+
+        <!-- 4. Inverted Pendulum -->
+        <article id="inverted-pendulum" class="project-card fade-in">
+          <div class="project-header">
+            <h2 class="project-title">Inverted Pendulum PID Control</h2>
+            <span class="status-tag status-complete">Complete</span>
+          </div>
+
+          <ul class="tag-list" aria-label="Technologies">
+            <li>PID control</li>
+            <li>Hardware</li>
+            <li>Embedded systems</li>
+          </ul>
+
+          <div class="project-spec">
+            <h3>Problem</h3>
+            <p>[Placeholder — describe the control challenge and system requirements.]</p>
+          </div>
+
+          <div class="project-spec">
+            <h3>Approach</h3>
+            <p>[Placeholder — controller design and tuning process.]</p>
+          </div>
+
+          <div class="project-spec">
+            <h3>Result</h3>
+            <p>[Placeholder — describe stabilization performance and validation results.]</p>
+          </div>
+
+          <div class="video-embed" role="img" aria-label="Inverted pendulum demo video placeholder — video to be added"></div>
+        </article>
+
+        <!-- 5. BLNC Robotics -->
+        <article id="blnc-robotics" class="project-card fade-in">
+          <div class="project-header">
+            <h2 class="project-title">BLNC Robotics — Motor Validation</h2>
+            <span class="status-tag status-complete">Complete</span>
+          </div>
+
+          <ul class="tag-list" aria-label="Technologies">
+            <li>Robotics</li>
+            <li>Motor validation</li>
+            <li>Embedded testing</li>
+          </ul>
+
+          <div class="project-spec">
+            <h3>Problem</h3>
+            <p>[Placeholder — describe the motor characterization or validation requirement.]</p>
+          </div>
+
+          <div class="project-spec">
+            <h3>Approach</h3>
+            <p>[Placeholder — testing methodology and instrumentation used.]</p>
+          </div>
+
+          <div class="project-spec">
+            <h3>Result</h3>
+            <p>[Placeholder — quantify error reduction if possible.]</p>
+          </div>
+        </article>
+
+        <!-- 6. Project KESTREL -->
+        <article id="project-kestrel" class="project-card fade-in">
+          <div class="project-header">
+            <h2 class="project-title">
+              Project KESTREL
+              <span class="project-title-sub">Archived</span>
+            </h2>
+            <span class="status-tag status-archived">Archived</span>
+          </div>
+
+          <ul class="tag-list" aria-label="Technologies">
+            <li>Jetson Orin Nano</li>
+            <li>Pixhawk 6C</li>
+            <li>Vision-only EKF</li>
+            <li>Throw-launch UAV</li>
+          </ul>
+
+          <div class="project-spec">
+            <h3>Problem</h3>
+            <p>Designing a throw-launch autonomous precision landing drone targeting sub-5cm CEP.</p>
+          </div>
+
+          <div class="project-spec">
+            <h3>Approach</h3>
+            <p>Vision-only EKF fusion for state estimation, full PDR/CDR-level design documentation.</p>
+          </div>
+
+          <div class="project-spec">
+            <h3>Result</h3>
+            <p>Reached full Critical Design Review readiness before being shelved due to budget constraints. Demonstrates full-cycle design discipline.</p>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>&copy; 2026 Vinayak Nair</span>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

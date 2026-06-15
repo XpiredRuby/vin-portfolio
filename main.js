@@ -1,0 +1,49 @@
+(function () {
+  "use strict";
+
+  /* Mobile nav toggle */
+  const navToggle = document.querySelector(".nav-toggle");
+  const siteNav = document.querySelector(".site-nav");
+
+  if (navToggle && siteNav) {
+    navToggle.addEventListener("click", function () {
+      const expanded = navToggle.getAttribute("aria-expanded") === "true";
+      navToggle.setAttribute("aria-expanded", String(!expanded));
+      siteNav.classList.toggle("is-open");
+    });
+
+    siteNav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        if (window.matchMedia("(max-width: 639px)").matches) {
+          navToggle.setAttribute("aria-expanded", "false");
+          siteNav.classList.remove("is-open");
+        }
+      });
+    });
+  }
+
+  /* Subtle fade-in on scroll for project cards */
+  const fadeElements = document.querySelectorAll(".fade-in");
+
+  if (fadeElements.length && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    fadeElements.forEach(function (el) {
+      observer.observe(el);
+    });
+  } else {
+    fadeElements.forEach(function (el) {
+      el.classList.add("is-visible");
+    });
+  }
+})();

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vinayak Nair — Aerospace Engineering student at Texas A&amp;M focused on GNC, autonomy, and GPS-denied navigation systems.">
+  <title>Vinayak Nair — Aerospace Engineering, GNC &amp; Autonomy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <div class="page">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="site-name">Vinayak Nair <span>/ GNC</span></a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+        <nav id="site-nav" class="site-nav" aria-label="Primary">
+          <ul>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="assets/resume.pdf" download>Resume</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <div class="container">
+        <section class="hero" aria-labelledby="hero-heading">
+          <p class="hero-meta">Portfolio v1.0 — Mission Brief</p>
+          <h1 id="hero-heading">Vinayak Nair — Aerospace Engineering, GNC &amp; Autonomy</h1>
+          <p class="lead">Aerospace engineering senior at Texas A&amp;M pursuing an MS in spacecraft GNC. Building autonomous navigation and guidance systems for GPS-denied environments.</p>
+          <div class="cta-group">
+            <a href="projects.html" class="btn btn-primary">View projects</a>
+            <a href="assets/resume.pdf" class="btn" download>Download resume</a>
+          </div>
+        </section>
+
+        <div class="stats-bar" role="list" aria-label="Quick stats">
+          <span role="listitem">TAMU Aero '27</span>
+          <span role="listitem">GNC-focused</span>
+          <span role="listitem">3.45 GPA</span>
+          <span role="listitem">Fast Track BS/MS</span>
+        </div>
+
+        <section class="section" aria-labelledby="featured-heading">
+          <div class="section-header">
+            <p class="section-label">Featured project</p>
+            <h2 id="featured-heading">GHOST</h2>
+          </div>
+
+          <article class="featured-project fade-in">
+            <div class="project-header">
+              <h3 class="project-title">
+                GPS-Denied Hardware Occlusion-Survivable Tracker
+                <span class="project-title-sub">Active development</span>
+              </h3>
+              <span class="status-tag status-active">Active development</span>
+            </div>
+
+            <p>Vision-based state estimation for GPS-denied environments. Dual-filter architecture combining a 9-state camera platform attitude ESKF with AprilTag vision measurements and a CV/CTRV/IMM target tracking filter — running on Raspberry Pi 4B with PX4 SITL over UDP MAVLink.</p>
+
+            <ul class="tag-list" aria-label="Technologies">
+              <li>ROS2</li>
+              <li>ESKF</li>
+              <li>Raspberry Pi 4B</li>
+              <li>PX4 SITL</li>
+              <li>MAVLink</li>
+              <li>Python</li>
+            </ul>
+
+            <div class="project-actions">
+              <a href="https://github.com/XpiredRuby/ghost-vins-eskf" class="btn btn-external" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="projects.html#ghost" class="btn">Full spec sheet</a>
+            </div>
+
+            <!-- TODO: embed GHOST demo video -->
+            <div class="video-embed" role="img" aria-label="GHOST demo video placeholder — video to be added"></div>
+          </article>
+        </section>
+
+        <section class="section" aria-labelledby="skills-heading">
+          <div class="section-header">
+            <p class="section-label">Capabilities</p>
+            <h2 id="skills-heading">Skills</h2>
+          </div>
+
+          <div class="skills-grid">
+            <div class="skill-category">
+              <h3>Languages</h3>
+              <ul class="skill-list">
+                <li>Python</li>
+                <li>C++</li>
+                <li>MATLAB</li>
+              </ul>
+            </div>
+
+            <div class="skill-category">
+              <h3>GNC / Estimation</h3>
+              <ul class="skill-list">
+                <li>Extended Kalman Filter</li>
+                <li>Error-State Kalman Filter (ESKF)</li>
+                <li>Proportional Navigation (ProNav)</li>
+                <li>Monte Carlo simulation</li>
+                <li>Sensor fusion</li>
+              </ul>
+            </div>
+
+            <div class="skill-category">
+              <h3>Robotics / Autonomy</h3>
+              <ul class="skill-list">
+                <li>ROS2</li>
+                <li>Gazebo</li>
+                <li>PX4 SITL</li>
+                <li>MAVLink</li>
+                <li>Embedded Linux (Raspberry Pi)</li>
+              </ul>
+            </div>
+
+            <div class="skill-category">
+              <h3>Structures / Analysis</h3>
+              <ul class="skill-list">
+                <li>Abaqus FEA</li>
+                <li>Structural analysis</li>
+                <li>Stress / deformation analysis</li>
+              </ul>
+            </div>
+
+            <div class="skill-category">
+              <h3>Tools</h3>
+              <ul class="skill-list">
+                <li>Git / GitHub</li>
+                <li>SSH / Linux</li>
+                <li>Cursor</li>
+                <li>SolidWorks</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>&copy; 2026 Vinayak Nair</span>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
