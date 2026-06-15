@@ -6,7 +6,8 @@ Place static media files in this directory.
 
 | File | Description |
 |------|-------------|
-| `resume.pdf` | Your resume PDF — linked from nav, hero CTA, and contact page |
+| `resume.pdf` | Your resume PDF — linked from resume page and contact page |
+| `og-image.svg` | Open Graph preview image for social sharing (replace with PNG for best LinkedIn support) |
 
 ## Optional files
 
@@ -14,7 +15,7 @@ Place static media files in this directory.
 |------|-------------|
 | `ghost-demo.mp4` | GHOST project demo video — embed in `index.html` and `projects.html` |
 | `pendulum-demo.mp4` | Inverted pendulum demo video — embed in `projects.html` |
-| `images/` | Any project screenshots or diagrams |
+| `images/` | Any project screenshots or diagrams — use `loading="lazy"` on images below the fold |
 
 ## Embedding videos
 

@@ -12,14 +12,23 @@ Built with plain HTML, CSS, and JavaScript. No build step, no framework. Deploye
 vin-portfolio/
 ├── index.html       # Home — hero, featured GHOST project, skills, stats
 ├── projects.html    # Full project spec sheets
+├── resume.html      # HTML resume (SEO-friendly, links to PDF)
 ├── about.html       # Bio, education, interests
 ├── contact.html     # Email, LinkedIn, GitHub, resume
-├── styles.css       # Shared stylesheet
-├── main.js          # Nav toggle + scroll fade-in
-├── assets/          # Resume PDF, videos, images
+├── 404.html         # Custom not-found page (GitHub Pages)
+├── robots.txt       # Crawler directives
+├── sitemap.xml      # Site index for search engines
+├── favicon.svg      # Site favicon
+├── styles.css       # Source stylesheet (edit this)
+├── styles.min.css   # Minified stylesheet (referenced by HTML)
+├── main.js          # Source JS (edit this)
+├── main.min.js      # Minified JS (referenced by HTML)
+├── assets/          # Resume PDF, videos, images, og-image
 │   └── README.md    # Asset placement guide
 └── README.md
 ```
+
+After editing `styles.css` or `main.js`, regenerate the minified files before deploying. The HTML pages reference `styles.min.css` and `main.min.js`.
 
 ## Local preview
 
