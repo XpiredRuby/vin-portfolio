@@ -1195,7 +1195,7 @@ p:last-child {
 .comm-link {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   padding: 8px 0;
   text-decoration: none;
   color: var(--accent);
@@ -1209,10 +1209,24 @@ p:last-child {
   padding-top: 0;
 }
 
+.comms-links svg.comm-icon {
+  width: 28px;
+  height: 28px;
+  max-width: 28px;
+  max-height: 28px;
+  flex: 0 0 28px;
+  display: block;
+  overflow: hidden;
+}
+
 .comm-icon {
-  width: 18px;
-  height: 18px;
+  width: 28px;
+  height: 28px;
+  max-width: 28px;
+  max-height: 28px;
+  flex: 0 0 28px;
   flex-shrink: 0;
+  display: block;
   transition: all 0.2s ease;
 }
 
