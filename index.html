@@ -26,7 +26,30 @@
 <body class="home">
   <a href="#main-content" class="skip-link">Skip to content</a>
 
+  <div id="boot-sequence" class="boot-sequence" role="dialog" aria-label="System initialization" aria-modal="true" hidden>
+    <div class="boot-panel">
+      <p class="boot-header">// MISSION_CONSOLE — SYS_INIT</p>
+      <ol class="boot-lines">
+        <li>GNC_MODULE<span class="boot-dots" aria-hidden="true"></span><span class="boot-status">[OK]</span></li>
+        <li>NAV_FILTER<span class="boot-dots" aria-hidden="true"></span><span class="boot-status">[OK]</span></li>
+        <li>VISION_PIPE<span class="boot-dots" aria-hidden="true"></span><span class="boot-status">[OK]</span></li>
+        <li>COMMS_LINK<span class="boot-dots" aria-hidden="true"></span><span class="boot-status">[STANDBY]</span></li>
+        <li>CONSOLE_UI<span class="boot-dots" aria-hidden="true"></span><span class="boot-status boot-status-live">[ONLINE]</span></li>
+      </ol>
+      <button type="button" class="boot-skip btn btn-primary" id="boot-skip">Skip init →</button>
+    </div>
+  </div>
+
   <div class="page mission-console">
+    <div class="hud-layer" aria-hidden="true">
+      <div class="hud-grid"></div>
+      <div class="hud-radar-sweep"></div>
+      <span class="hud-bracket hud-bracket-tl"></span>
+      <span class="hud-bracket hud-bracket-tr"></span>
+      <span class="hud-bracket hud-bracket-bl"></span>
+      <span class="hud-bracket hud-bracket-br"></span>
+    </div>
+
     <header class="status-bar" role="banner">
       <div class="status-bar-inner">
         <p class="status-bar-id">VIN NAIR // GNC &amp; AUTONOMY ENGINEER</p>
@@ -39,24 +62,50 @@
             <span class="clock-label">T+ MISSION CLOCK</span>
             <span id="elapsed-clock" class="clock-value" aria-live="off">T+0d 0h 0m</span>
           </div>
+          <div class="clock-readout track-readout" id="track-readout">
+            <span class="clock-label">CURSOR TRACK</span>
+            <span id="cursor-track" class="clock-value" aria-live="off">X +0.00 Y +0.00</span>
+          </div>
+          <div class="clock-readout scroll-readout">
+            <span class="clock-label">SCROLL DEPTH</span>
+            <span id="scroll-depth" class="clock-value" aria-live="off">000%</span>
+          </div>
         </div>
       </div>
+      <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     </header>
 
     <main id="main-content">
       <div class="console-container">
         <section class="pfd-hero" aria-labelledby="pfd-heading">
-          <h1 id="pfd-heading" class="pfd-name">VINAYAK NAIR</h1>
-          <p class="pfd-status">
-            <span class="status-dot status-dot-seeking" aria-hidden="true"></span>
-            STATUS: SEEKING GNC/AUTONOMY ROLES — FALL 2026/SPRING 2027
-          </p>
-          <!-- TODO: replace placeholder below with final 2-sentence bio copy -->
-          <p class="pfd-bio">Aerospace engineering student at Texas A&amp;M, building GHOST — a GPS-denied vision navigation pipeline for autonomous platforms. Targeting GNC and autonomy roles in defense and space, with sights set on NASA astronaut selection.</p>
+          <div class="pfd-hero-grid">
+            <div class="pfd-hero-copy">
+              <p class="pfd-meta">PRIMARY FLIGHT DISPLAY // CALLSIGN VN-01</p>
+              <h1 id="pfd-heading" class="pfd-name">VINAYAK NAIR</h1>
+              <p class="pfd-status">
+                <span class="status-dot status-dot-seeking" aria-hidden="true"></span>
+                STATUS: SEEKING GNC/AUTONOMY ROLES — FALL 2026/SPRING 2027
+              </p>
+              <p class="pfd-bio">Aerospace engineering student at Texas A&amp;M, building GHOST — a GPS-denied vision navigation pipeline for autonomous platforms. Targeting GNC and autonomy roles in defense and space, with sights set on NASA astronaut selection.</p>
+            </div>
+            <div class="pfd-instruments" aria-hidden="true">
+              <div class="attitude-indicator">
+                <div class="attitude-sky"></div>
+                <div class="attitude-ground"></div>
+                <div class="attitude-ring"></div>
+                <div class="attitude-aircraft"></div>
+                <span class="attitude-label">ATT</span>
+              </div>
+              <div class="heading-readout">
+                <span class="heading-label">HDG</span>
+                <span class="heading-value" id="heading-value">087°</span>
+              </div>
+            </div>
+          </div>
         </section>
 
         <nav class="systems-grid" aria-label="Mission systems navigation">
-          <a href="projects.html" class="instrument-panel panel-enter" style="--panel-i: 0">
+          <a href="projects.html" class="instrument-panel panel-enter panel-accent-amber" style="--panel-i: 0">
             <span class="panel-tag">PANEL 01</span>
             <span class="panel-title">PROJECTS</span>
             <span class="panel-subtitle">Payload manifest</span>
@@ -67,7 +116,7 @@
             </ul>
           </a>
 
-          <a href="resume.html" class="instrument-panel panel-enter" style="--panel-i: 1">
+          <a href="resume.html" class="instrument-panel panel-enter panel-accent-cyan" style="--panel-i: 1">
             <span class="panel-tag">PANEL 02</span>
             <span class="panel-title">RESUME</span>
             <span class="panel-subtitle">Crew file: V. NAIR</span>
@@ -78,7 +127,7 @@
             </dl>
           </a>
 
-          <a href="#systems-skills" class="instrument-panel panel-enter" style="--panel-i: 2">
+          <a href="#systems-skills" class="instrument-panel panel-enter panel-accent-amber" style="--panel-i: 2">
             <span class="panel-tag">PANEL 03</span>
             <span class="panel-title">SKILLS</span>
             <span class="panel-subtitle">Systems online check</span>
@@ -90,14 +139,14 @@
             </ul>
           </a>
 
-          <a href="about.html" class="instrument-panel panel-enter" style="--panel-i: 3">
+          <a href="about.html" class="instrument-panel panel-enter panel-accent-cyan" style="--panel-i: 3">
             <span class="panel-tag">PANEL 04</span>
             <span class="panel-title">ABOUT</span>
             <span class="panel-subtitle">Briefing: Who is Vin</span>
             <p class="panel-teaser">Fast Track BS/MS at Texas A&amp;M. GNC-focused engineer with long-term interest in spacecraft systems and human spaceflight.</p>
           </a>
 
-          <div class="instrument-panel panel-enter panel-wide panel-contact" style="--panel-i: 4">
+          <div class="instrument-panel panel-enter panel-wide panel-contact panel-accent-amber" style="--panel-i: 4">
             <span class="panel-tag">PANEL 05</span>
             <span class="panel-title">CONTACT</span>
             <span class="panel-subtitle">Comms link</span>
@@ -164,6 +213,12 @@
           <header class="ghost-telemetry-header">
             <h2 id="ghost-telemetry-heading">Active mission: GHOST — GPS-Denied Hardware Occlusion-Survivable Tracker</h2>
           </header>
+          <div class="scope-display" aria-hidden="true">
+            <svg class="scope-wave" viewBox="0 0 240 48" preserveAspectRatio="none">
+              <path class="scope-path" d="M0,24 L12,24 L18,14 L24,34 L30,18 L36,28 L42,24 L240,24" />
+            </svg>
+            <span class="scope-label">IMU / VISION — LIVE TRACE</span>
+          </div>
           <div class="telemetry-feed" role="list">
             <div class="telemetry-row" role="listitem">
               <span class="t-label">Filter state</span>
@@ -173,7 +228,7 @@
             <div class="telemetry-row" role="listitem">
               <span class="t-label">Pipeline completion</span>
               <span class="t-leader" aria-hidden="true"></span>
-              <span class="t-value">55%</span>
+              <span class="t-value"><span class="pipeline-bar" id="pipeline-bar" data-target="55"><span class="pipeline-fill"></span></span> 55%</span>
             </div>
             <div class="telemetry-row" role="listitem">
               <span class="t-label">Hardware</span>
