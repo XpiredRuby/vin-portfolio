@@ -46,4 +46,37 @@
       el.classList.add("is-visible");
     });
   }
+
+  /* Mission control clocks (homepage) */
+  const utcClock = document.getElementById("utc-clock");
+  const elapsedClock = document.getElementById("elapsed-clock");
+
+  if (utcClock && elapsedClock) {
+    const T0 = Date.UTC(2025, 0, 1, 0, 0, 0);
+
+    function pad(n) {
+      return String(n).padStart(2, "0");
+    }
+
+    function updateClocks() {
+      const now = new Date();
+      const h = pad(now.getUTCHours());
+      const m = pad(now.getUTCMinutes());
+      const s = pad(now.getUTCSeconds());
+      const utcString = h + ":" + m + ":" + s + " UTC";
+
+      utcClock.textContent = utcString;
+      utcClock.setAttribute("datetime", now.toISOString());
+
+      const elapsedMs = now.getTime() - T0;
+      const days = Math.floor(elapsedMs / 86400000);
+      const hours = Math.floor((elapsedMs % 86400000) / 3600000);
+      const minutes = Math.floor((elapsedMs % 3600000) / 60000);
+
+      elapsedClock.textContent = "T+" + days + "d " + hours + "h " + minutes + "m";
+    }
+
+    updateClocks();
+    setInterval(updateClocks, 1000);
+  }
 })();
