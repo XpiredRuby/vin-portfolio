@@ -4,13 +4,13 @@
    ========================================================================== */
 
 :root {
-  --bg: #0D0F12;
+  --bg: #0A0A0F;
   --text: #E8E6E0;
   --text-muted: rgba(232, 230, 224, 0.65);
-  --accent: #EF9F27;
-  --accent-hover: #f5b04a;
-  --status-complete: #1D9E75;
-  --status-active: #EF9F27;
+  --accent: #FF9F1C;
+  --accent-hover: #ffb347;
+  --status-complete: #2EE6D6;
+  --status-active: #FF9F1C;
   --status-archived: #A8A59E;
   --border: rgba(232, 230, 224, 0.12);
   --border-strong: rgba(232, 230, 224, 0.22);
@@ -40,6 +40,11 @@ body {
   font-size: 1rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+}
+
+body.home {
+  background-color: #0A0A0F;
+  background-image: radial-gradient(ellipse at center, #12121A 0%, #0A0A0F 72%);
 }
 
 img {
@@ -849,7 +854,7 @@ p:last-child {
 
 .mission-console {
   --console-max: 980px;
-  --panel-glow: rgba(239, 159, 39, 0.07);
+  --panel-glow: rgba(255, 159, 28, 0.07);
   --panel-bg: rgba(232, 230, 224, 0.025);
 }
 
@@ -868,7 +873,7 @@ p:last-child {
   top: 0;
   z-index: 100;
   border-bottom: 1px solid var(--border);
-  background: rgba(8, 9, 11, 0.96);
+  background: rgba(10, 10, 15, 0.96);
   backdrop-filter: blur(8px);
 }
 
@@ -952,22 +957,29 @@ p:last-child {
 }
 
 .status-dot {
+  position: relative;
   flex-shrink: 0;
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: var(--accent);
+  background: #FF9F1C;
 }
 
-.status-dot-seeking {
-  background: var(--accent);
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 1px solid #FF9F1C;
+  border-radius: 50%;
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .status-dot-seeking {
-    animation: status-pulse 2s ease-in-out infinite;
-  }
-
   .panel-enter {
     opacity: 0;
     transform: translateY(10px);
@@ -976,9 +988,11 @@ p:last-child {
   }
 }
 
-@keyframes status-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.55; transform: scale(0.88); }
+@media (prefers-reduced-motion: reduce) {
+  .status-dot::after {
+    animation: none;
+    display: none;
+  }
 }
 
 @keyframes panel-rise {
@@ -1028,15 +1042,16 @@ p:last-child {
   text-decoration: none;
   background: var(--panel-bg);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: border-color var(--transition), box-shadow var(--transition);
+  border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
 .instrument-panel:hover,
 .instrument-panel:focus-visible {
   color: var(--text);
-  border-color: rgba(239, 159, 39, 0.55);
-  box-shadow: 0 0 0 1px rgba(239, 159, 39, 0.12), 0 0 28px var(--panel-glow);
+  border-color: rgba(255, 159, 28, 0.55);
+  box-shadow: 0 0 16px rgba(255, 159, 28, 0.35), inset 0 0 8px rgba(255, 159, 28, 0.05);
+  transform: translateY(-2px);
   outline: none;
 }
 
@@ -1045,14 +1060,20 @@ p:last-child {
   outline-offset: 2px;
 }
 
+.panel-contact:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--border);
+}
+
 .panel-tag {
   position: absolute;
   top: 0.625rem;
   right: 0.75rem;
   font-family: var(--font-mono);
   font-size: 0.5625rem;
-  letter-spacing: 0.1em;
-  color: rgba(232, 230, 224, 0.28);
+  letter-spacing: 0.14em;
+  color: #2EE6D6;
 }
 
 .panel-title {
@@ -1075,16 +1096,14 @@ p:last-child {
 }
 
 .manifest-list,
-.systems-check,
-.comms-ports {
+.systems-check {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .manifest-list li,
-.systems-check li,
-.comms-ports li {
+.systems-check li {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1097,8 +1116,7 @@ p:last-child {
 }
 
 .manifest-list li:first-child,
-.systems-check li:first-child,
-.comms-ports li:first-child {
+.systems-check li:first-child {
   border-top: none;
   padding-top: 0;
 }
@@ -1167,12 +1185,70 @@ p:last-child {
   min-width: 3rem;
 }
 
+.comms-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.comm-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  text-decoration: none;
+  color: #FF9F1C;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border-top: 1px solid var(--border);
+}
+
+.comm-link:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.comm-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.comm-link:hover,
+.comm-link:focus-visible {
+  color: #2EE6D6;
+  transform: translateX(4px);
+  background: rgba(46, 230, 214, 0.05);
+}
+
+.comm-link:hover .comm-icon,
+.comm-link:focus-visible .comm-icon {
+  filter: drop-shadow(0 0 6px rgba(46, 230, 214, 0.5));
+}
+
+.comm-link:focus-visible {
+  outline: 2px solid #2EE6D6;
+  outline-offset: 2px;
+}
+
+.comm-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  opacity: 0.6;
+  min-width: 60px;
+}
+
+.comm-value {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+}
+
 /* Skills console section */
 .skills-console {
   margin-bottom: 2.5rem;
   padding: 1.25rem;
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 4px;
   background: var(--panel-bg);
   scroll-margin-top: 4rem;
 }
@@ -1241,17 +1317,42 @@ p:last-child {
   padding: 0.1rem 0.35rem;
   font-size: 0.5625rem;
   letter-spacing: 0.08em;
-  color: var(--status-complete);
-  border: 1px solid rgba(29, 158, 117, 0.35);
-  border-radius: var(--radius);
+  color: #2EE6D6;
+  border: 1px solid rgba(46, 230, 214, 0.35);
+  border-radius: 4px;
 }
 
 /* GHOST telemetry */
-.ghost-telemetry {
+.ghost-telemetry,
+.telemetry-panel {
+  position: relative;
+  overflow: hidden;
   padding: 1.5rem;
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 4px;
   background: var(--panel-bg);
+}
+
+.telemetry-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #2EE6D6, transparent);
+  animation: scanline 4s linear infinite;
+}
+
+@keyframes scanline {
+  100% { left: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .telemetry-panel::before {
+    animation: none;
+    display: none;
+  }
 }
 
 .ghost-telemetry-header h2 {
@@ -1294,7 +1395,7 @@ p:last-child {
 .t-leader {
   flex: 1;
   min-width: 1rem;
-  border-bottom: 1px dotted rgba(232, 230, 224, 0.18);
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.15);
   margin-bottom: 0.15em;
 }
 
@@ -1302,12 +1403,12 @@ p:last-child {
   flex-shrink: 0;
   max-width: 55%;
   text-align: right;
-  color: var(--text);
+  color: #2EE6D6;
   line-height: 1.4;
 }
 
 .telemetry-nominal {
-  color: var(--status-complete);
+  color: #2EE6D6;
   letter-spacing: 0.04em;
 }
 
@@ -1375,8 +1476,13 @@ p:last-child {
     animation: none;
   }
 
-  .status-dot-seeking {
-    animation: none;
+  .instrument-panel:hover {
+    transform: none;
+  }
+
+  .comm-link:hover,
+  .comm-link:focus-visible {
+    transform: none;
   }
 }
 
