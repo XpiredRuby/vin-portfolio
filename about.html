@@ -53,11 +53,27 @@
           <h1>About</h1>
         </header>
 
-        <section class="section" aria-labelledby="bio-heading">
+        <section class="about-hero" aria-labelledby="bio-heading">
+          <figure class="about-photo">
+            <img src="assets/profile-placeholder.svg" alt="Profile photo placeholder for Vinayak Nair">
+            <figcaption>Replace with a professional headshot: <code>assets/profile.jpg</code></figcaption>
+          </figure>
+          <div class="info-block about-copy">
+            <h2 id="bio-heading">Engineering focus</h2>
+            <p>I'm an Aerospace Engineering student at Texas A&amp;M focused on flight software, guidance/navigation/control, autonomy, and verification systems. I build projects that combine aerospace theory with executable software: command/telemetry links, estimation pipelines, watchdog logic, hardware-in-the-loop runs, and repeatable evidence capture.</p>
+            <p>My current flagship project is AstraSim-FSW, a C++17/Python flight-software-in-the-loop verification framework with Raspberry Pi HIL evidence. I also work on GPS-denied navigation through GHOST, a vision/IMU state-estimation pipeline for autonomous platforms.</p>
+            <p>I am looking for engineering roles where I can contribute to embedded aerospace software, GNC tools, autonomy systems, test infrastructure, simulation, and hardware-in-the-loop verification.</p>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="working-style-heading">
           <div class="info-block">
-            <h2 id="bio-heading">Bio</h2>
-            <p>I'm a senior in Aerospace Engineering at Texas A&amp;M University, enrolled in the Fast Track BS/MS program with a focus on guidance, navigation, and control. My work centers on autonomous navigation and state estimation — particularly in GPS-denied environments — with a long-term career goal in GNC and autonomy engineering for aerospace systems.</p>
-            <p>Beyond coursework, I'm drawn to spacecraft GNC and human spaceflight applications. I build software-side projects to sharpen estimation and control skills, and I'm actively seeking internships and roles in GNC and structures engineering at companies pushing the boundary of flight and space systems.</p>
+            <h2 id="working-style-heading">How I work</h2>
+            <ul class="skill-list">
+              <li>I prefer projects with measurable evidence: tests, logs, plots, traces, and reproducible procedures.</li>
+              <li>I care about the interface between software and physical systems: packet formats, timing, fault handling, and observability.</li>
+              <li>I use side projects to build the engineering habits expected in flight and autonomy work: verification, documentation, and disciplined iteration.</li>
+            </ul>
           </div>
         </section>
 
@@ -81,10 +97,11 @@
           <div class="info-block">
             <h2 id="interests-heading">Interests</h2>
             <ul class="skill-list">
-              <li>Flight simulation (X-Plane, MSFS)</li>
-              <li>Software side projects</li>
-              <li>GNC and autonomy research</li>
-              <li>Spacecraft systems and human spaceflight</li>
+              <li>Flight software and embedded verification</li>
+              <li>Guidance, navigation, control, and estimation</li>
+              <li>GPS-denied autonomy and sensor fusion</li>
+              <li>Spacecraft systems, mission operations, and human spaceflight</li>
+              <li>Hardware-in-the-loop testing and technical visualization</li>
             </ul>
           </div>
         </section>
@@ -100,7 +117,5 @@
   </div>
 
   <script src="main.min.js"></script>
-  <!-- TODO: replace YOURSITE with your GoatCounter site code (e.g. vin-portfolio) -->
-  <script data-goatcounter="https://YOURSITE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

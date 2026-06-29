@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Vinayak Nair is an Aerospace Engineering senior at Texas A&amp;M pursuing spacecraft GNC. Portfolio of autonomous navigation, state estimation, and guidance systems work.">
+  <meta name="description" content="Vinayak Nair is an Aerospace Engineering student at Texas A&amp;M building flight-software verification, Raspberry Pi HIL systems, autonomous navigation, GNC, and embedded test infrastructure.">
   <meta name="author" content="Vinayak Nair">
   <link rel="canonical" href="https://xpiredruby.github.io/vin-portfolio/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Vinayak Nair">
-  <meta property="og:title" content="Vinayak Nair | Aerospace Engineering — GNC &amp; Autonomy">
-  <meta property="og:description" content="Aerospace engineering senior at Texas A&amp;M pursuing an MS in spacecraft GNC. Building autonomous navigation and guidance systems for GPS-denied environments.">
+  <meta property="og:title" content="Vinayak Nair | Aerospace Software, GNC &amp; HIL Verification">
+  <meta property="og:description" content="Aerospace engineering student building C++/Python flight-software verification systems, Raspberry Pi HIL demos, autonomous navigation, and GNC tooling.">
   <meta property="og:url" content="https://xpiredruby.github.io/vin-portfolio/">
   <meta property="og:image" content="https://xpiredruby.github.io/vin-portfolio/assets/og-image.svg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Vinayak Nair | Aerospace Engineering — GNC &amp; Autonomy">
-  <meta name="twitter:description" content="Aerospace engineering senior at Texas A&amp;M pursuing an MS in spacecraft GNC. Building autonomous navigation and guidance systems for GPS-denied environments.">
+  <meta name="twitter:title" content="Vinayak Nair | Aerospace Software, GNC &amp; HIL Verification">
+  <meta name="twitter:description" content="Aerospace engineering student building C++/Python flight-software verification systems, Raspberry Pi HIL demos, autonomous navigation, and GNC tooling.">
   <meta name="twitter:image" content="https://xpiredruby.github.io/vin-portfolio/assets/og-image.svg">
-  <title>Vinayak Nair | Aerospace Engineering — GNC &amp; Autonomy</title>
+  <title>Vinayak Nair | Aerospace Software, GNC &amp; HIL Verification</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,9 +84,9 @@
               <h1 id="pfd-heading" class="pfd-name">VINAYAK NAIR</h1>
               <p class="pfd-status">
                 <span class="status-dot status-dot-seeking" aria-hidden="true"></span>
-                STATUS: SEEKING GNC/AUTONOMY ROLES — FALL 2026/SPRING 2027
+                STATUS: SEEKING AEROSPACE SOFTWARE / GNC / HIL VERIFICATION ROLES
               </p>
-              <p class="pfd-bio">Aerospace engineering student at Texas A&amp;M, building GHOST — a GPS-denied vision navigation pipeline for autonomous platforms. Targeting GNC and autonomy roles in defense and space, with sights set on NASA astronaut selection.</p>
+              <p class="pfd-bio">Aerospace engineering student at Texas A&amp;M building flight-software verification systems, Raspberry Pi hardware-in-the-loop demos, binary command/telemetry links, watchdog and health-monitor logic, and GPS-denied navigation projects.</p>
             </div>
             <div class="pfd-instruments" aria-hidden="true">
               <div class="attitude-indicator">
@@ -104,15 +104,46 @@
           </div>
         </section>
 
+        <section class="flagship-project" aria-labelledby="flagship-heading">
+          <div class="flagship-copy">
+            <p class="section-label">Flagship engineering case study</p>
+            <h2 id="flagship-heading">AstraSim-FSW — Flight Software HIL Verification Workstation</h2>
+            <p>C++17/Python flight-software-in-the-loop framework with UDP command/telemetry, binary packets, CRC-16 validation, command acknowledgements, fault injection, watchdog and health monitoring, YAML scenarios, Monte Carlo regression, plots, and Raspberry Pi aarch64 HIL evidence.</p>
+            <div class="flagship-metrics" aria-label="AstraSim verification metrics">
+              <span>9/9 CTest suites</span>
+              <span>5/5 scenarios</span>
+              <span>25/25 Monte Carlo</span>
+              <span>Pi HIL verified</span>
+            </div>
+            <div class="project-actions">
+              <a href="projects.html#astrasim-fsw" class="btn btn-primary">Read case study</a>
+              <a href="demos/astrasim-fsw-hil-workstation.html" class="btn btn-external">Open HIL workstation</a>
+              <a href="https://github.com/XpiredRuby/AstraSim-FSW" class="btn btn-external" target="_blank" rel="noopener noreferrer">Source repository</a>
+            </div>
+          </div>
+          <div class="flagship-panel" aria-hidden="true">
+            <div class="flagship-screen">
+              <span class="screen-label">HIL VERIFICATION</span>
+              <strong>NOMINAL</strong>
+              <small>fault=NONE · ack=SET_MODE · crc=VALID</small>
+              <div class="screen-bars">
+                <i style="--w:100%"></i>
+                <i style="--w:100%"></i>
+                <i style="--w:100%"></i>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <nav class="systems-grid" aria-label="Mission systems navigation">
           <a href="projects.html" class="instrument-panel panel-enter panel-accent-amber" style="--panel-i: 0">
             <span class="panel-tag">PANEL 01</span>
             <span class="panel-title">PROJECTS</span>
             <span class="panel-subtitle">Payload manifest</span>
             <ul class="manifest-list">
+              <li><span class="dot dot-complete" aria-hidden="true"></span> ASTRA-FSW — HIL VERIFIED</li>
               <li><span class="dot dot-active" aria-hidden="true"></span> GHOST — ACTIVE</li>
               <li><span class="dot dot-archived" aria-hidden="true"></span> KESTREL — ARCHIVED</li>
-              <li><span class="dot dot-complete" aria-hidden="true"></span> SPIRIT — COMPLETE</li>
             </ul>
           </a>
 
@@ -241,9 +272,8 @@
               <span class="t-value">PX4 SITL — UDP/MAVLink <span class="telemetry-nominal">[CONNECTED]</span></span>
             </div>
           </div>
-          <!-- TODO: embed GHOST demo video -->
           <div class="video-embed" aria-hidden="true"></div>
-          <p class="visually-hidden">GHOST demo video placeholder — video to be added.</p>
+          <p class="visually-hidden">GHOST demo media slot.</p>
           <a href="projects.html#ghost" class="btn btn-primary ghost-log-link">View full mission log →</a>
         </section>
       </div>
@@ -255,7 +285,5 @@
   </div>
 
   <script src="main.min.js"></script>
-  <!-- TODO: replace YOURSITE with your GoatCounter site code (e.g. vin-portfolio) -->
-  <script data-goatcounter="https://YOURSITE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

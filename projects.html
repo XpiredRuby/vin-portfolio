@@ -51,8 +51,58 @@
         <header class="page-title-block">
           <p class="section-label">Project index</p>
           <h1>Projects</h1>
-          <p>Engineering work in GNC, autonomy, structures, and embedded systems. Each entry follows a mission-spec format: problem, approach, result.</p>
+          <p>Engineering work in flight software, HIL verification, GNC, autonomy, structures, and embedded systems. Each entry follows a mission-spec format: problem, approach, result, and evidence.</p>
         </header>
+
+        <!-- 0. AstraSim-FSW -->
+        <article id="astrasim-fsw" class="project-card project-card-flagship fade-in">
+          <div class="project-header">
+            <h2 class="project-title">
+              AstraSim-FSW
+              <span class="project-title-sub">C++/Python flight-software-in-the-loop verification framework with Raspberry Pi HIL evidence</span>
+            </h2>
+            <span class="status-tag status-complete">HIL verified</span>
+          </div>
+
+          <ul class="tag-list" aria-label="Technologies">
+            <li>C++17</li>
+            <li>Python</li>
+            <li>CMake / CTest</li>
+            <li>UDP command/telemetry</li>
+            <li>CRC-16-CCITT</li>
+            <li>Raspberry Pi aarch64</li>
+            <li>Watchdog / health monitor</li>
+            <li>Monte Carlo</li>
+          </ul>
+
+          <div class="project-spec">
+            <h3>Problem</h3>
+            <p>Flight software needs more than a working state machine. It needs command validation, telemetry observability, fault containment, regression evidence, and proof that the target can run outside a laptop environment.</p>
+          </div>
+
+          <div class="project-spec">
+            <h3>Approach</h3>
+            <p>Built a C++17 flight-software core with BOOT, NOMINAL, DEGRADED, SAFE, and RECOVERY modes; binary command and telemetry packets; CRC-16 validation; UDP command receiver and telemetry sender; Python ground tools; command acknowledgements; a health monitor; watchdog logic; YAML scenario runner; Monte Carlo regression; and a browser-based HIL verification workstation.</p>
+          </div>
+
+          <div class="project-spec">
+            <h3>Result</h3>
+            <p>Captured evidence for 9/9 CTest suites passing, 5/5 scenarios passing, 25/25 Monte Carlo trials passing, and a Raspberry Pi Ubuntu aarch64 HIL run showing SET_MODE, CPU fault injection, degraded-mode transition, fault clear, and recovery to NOMINAL.</p>
+          </div>
+
+          <div class="evidence-grid">
+            <div><strong>Tests</strong><span>9/9 CTest</span></div>
+            <div><strong>Scenarios</strong><span>5/5 PASS</span></div>
+            <div><strong>Monte Carlo</strong><span>25/25 PASS</span></div>
+            <div><strong>Target</strong><span>Raspberry Pi HIL</span></div>
+          </div>
+
+          <div class="project-actions">
+            <a href="demos/astrasim-fsw-hil-workstation.html" class="btn btn-primary">Open HIL workstation</a>
+            <a href="https://github.com/XpiredRuby/AstraSim-FSW" class="btn btn-external" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://github.com/XpiredRuby/AstraSim-FSW/tree/main/evidence" class="btn btn-external" target="_blank" rel="noopener noreferrer">Evidence</a>
+          </div>
+        </article>
 
         <!-- 1. GHOST -->
         <article id="ghost" class="project-card fade-in">
@@ -93,9 +143,8 @@
             <a href="https://github.com/XpiredRuby/ghost-vins-eskf" class="btn btn-external" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
 
-          <!-- TODO: embed demo video here -->
           <div class="video-embed" aria-hidden="true"></div>
-          <p class="visually-hidden">GHOST demo video placeholder — video to be added.</p>
+          <p class="visually-hidden">GHOST demo media slot.</p>
         </article>
 
         <!-- 2. TAMU-SPIRIT -->
@@ -115,17 +164,17 @@
 
           <div class="project-spec">
             <h3>Problem</h3>
-            <p>[Placeholder — describe the specific design constraint or problem your subsystem addressed for the ISS-bound payload.]</p>
+            <p>ISS-bound payload projects must satisfy tight constraints across mass, volume, safety, operations, and review documentation while maintaining a clear verification path.</p>
           </div>
 
           <div class="project-spec">
             <h3>Approach</h3>
-            <p>[Placeholder — describe your role and methodology through SRR, PDR, and SCR design reviews.]</p>
+            <p>Supported systems-engineering documentation and design-review preparation across requirement definition, interface tracking, risk discussion, and subsystem trade-space evaluation.</p>
           </div>
 
           <div class="project-spec">
             <h3>Result</h3>
-            <p>[Placeholder — describe outcome, what passed review, and what was delivered.]</p>
+            <p>Completed capstone design-review work with emphasis on disciplined engineering communication, traceability, and review-ready technical documentation.</p>
           </div>
         </article>
 
@@ -145,17 +194,17 @@
 
           <div class="project-spec">
             <h3>Problem</h3>
-            <p>[Placeholder — what system or scenario was simulated.]</p>
+            <p>Guidance and navigation designs need statistical validation because sensor uncertainty, initial-condition dispersions, and disturbance models can dominate single-run conclusions.</p>
           </div>
 
           <div class="project-spec">
             <h3>Approach</h3>
-            <p>[Placeholder — 500 Monte Carlo runs, what parameters were varied.]</p>
+            <p>Built a Python Monte Carlo simulation workflow to vary uncertain parameters, evaluate guidance behavior across many trials, and summarize dispersion sensitivity.</p>
           </div>
 
           <div class="project-spec">
             <h3>Result</h3>
-            <p>[Placeholder — what the analysis showed.]</p>
+            <p>Produced repeatable simulation outputs that connect probabilistic test results to engineering decision-making rather than relying on a single nominal run.</p>
           </div>
         </article>
 
@@ -174,21 +223,21 @@
 
           <div class="project-spec">
             <h3>Problem</h3>
-            <p>[Placeholder — describe the control challenge and system requirements.]</p>
+            <p>The inverted pendulum is a fast unstable control problem that requires balancing sensor feedback, actuator response, controller tuning, and disturbance rejection.</p>
           </div>
 
           <div class="project-spec">
             <h3>Approach</h3>
-            <p>[Placeholder — controller design and tuning process.]</p>
+            <p>Implemented and tuned a PID control loop, using iterative hardware tests to evaluate stability, overshoot, settling behavior, and response to perturbations.</p>
           </div>
 
           <div class="project-spec">
             <h3>Result</h3>
-            <p>[Placeholder — describe stabilization performance and validation results.]</p>
+            <p>Demonstrated closed-loop stabilization behavior and used the project to connect control theory with real actuator and sensor limitations.</p>
           </div>
 
           <div class="video-embed" aria-hidden="true"></div>
-          <p class="visually-hidden">Inverted pendulum demo video placeholder — video to be added.</p>
+          <p class="visually-hidden">Inverted pendulum demo media slot.</p>
         </article>
 
         <!-- 5. BLNC Robotics -->
@@ -206,17 +255,17 @@
 
           <div class="project-spec">
             <h3>Problem</h3>
-            <p>[Placeholder — describe the motor characterization or validation requirement.]</p>
+            <p>Robotics drivetrain performance depends on motor characterization, command response, and repeatable validation before integrating with higher-level autonomy software.</p>
           </div>
 
           <div class="project-spec">
             <h3>Approach</h3>
-            <p>[Placeholder — testing methodology and instrumentation used.]</p>
+            <p>Supported embedded motor validation through structured test runs, observation of command/response behavior, and comparison against expected operating limits.</p>
           </div>
 
           <div class="project-spec">
             <h3>Result</h3>
-            <p>[Placeholder — quantify error reduction if possible.]</p>
+            <p>Contributed to a validation workflow that improved confidence in the motor subsystem before integration into the robot platform.</p>
           </div>
         </article>
 
@@ -264,7 +313,5 @@
   </div>
 
   <script src="main.min.js"></script>
-  <!-- TODO: replace YOURSITE with your GoatCounter site code (e.g. vin-portfolio) -->
-  <script data-goatcounter="https://YOURSITE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

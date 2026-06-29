@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Resume of Vinayak Nair — Aerospace Engineering senior at Texas A&amp;M focused on GNC, autonomy, and embedded navigation systems.">
+  <meta name="description" content="Resume of Vinayak Nair — Aerospace Engineering student focused on aerospace software, GNC, autonomy, embedded systems, and HIL verification.">
   <meta name="author" content="Vinayak Nair">
   <link rel="canonical" href="https://xpiredruby.github.io/vin-portfolio/resume.html">
   <meta property="og:type" content="profile">
   <meta property="og:site_name" content="Vinayak Nair">
-  <meta property="og:title" content="Vinayak Nair | Resume — GNC &amp; Aerospace Engineering">
-  <meta property="og:description" content="Aerospace Engineering senior at Texas A&amp;M pursuing Fast Track BS/MS with focus on GNC, state estimation, and autonomous navigation.">
+  <meta property="og:title" content="Vinayak Nair | Resume — Aerospace Software, GNC &amp; HIL">
+  <meta property="og:description" content="Aerospace Engineering student at Texas A&amp;M focused on flight software verification, GNC, state estimation, autonomy, and embedded systems.">
   <meta property="og:url" content="https://xpiredruby.github.io/vin-portfolio/resume.html">
   <meta property="og:image" content="https://xpiredruby.github.io/vin-portfolio/assets/og-image.svg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Vinayak Nair | Resume — GNC &amp; Aerospace Engineering">
-  <meta name="twitter:description" content="Aerospace Engineering senior at Texas A&amp;M pursuing Fast Track BS/MS with focus on GNC, state estimation, and autonomous navigation.">
+  <meta name="twitter:title" content="Vinayak Nair | Resume — Aerospace Software, GNC &amp; HIL">
+  <meta name="twitter:description" content="Aerospace Engineering student at Texas A&amp;M focused on flight software verification, GNC, state estimation, autonomy, and embedded systems.">
   <meta name="twitter:image" content="https://xpiredruby.github.io/vin-portfolio/assets/og-image.svg">
-  <title>Vinayak Nair | Resume — GNC &amp; Aerospace Engineering</title>
+  <title>Vinayak Nair | Resume — Aerospace Software, GNC &amp; HIL</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,9 +51,9 @@
         <header class="page-title-block resume-header">
           <p class="section-label">Personnel record</p>
           <h1>Resume</h1>
-          <p>Vinayak Manoj Nair — Aerospace Engineering, GNC &amp; Autonomy</p>
+          <p>Vinayak Manoj Nair — Aerospace Software, GNC, Autonomy &amp; HIL Verification</p>
           <div class="cta-group resume-actions">
-            <a href="assets/resume.pdf" class="btn btn-primary" download>Download PDF</a>
+            <a href="contact.html" class="btn btn-primary">Request PDF resume</a>
             <a href="mailto:vinayak.mnair@gmail.com" class="btn">Email</a>
             <a href="https://linkedin.com/in/vinayakmnair" class="btn btn-external" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
@@ -62,7 +62,7 @@
         <section class="section resume-section" aria-labelledby="resume-summary-heading">
           <div class="info-block">
             <h2 id="resume-summary-heading">Summary</h2>
-            <p>Aerospace engineering senior at Texas A&amp;M University in the Fast Track BS/MS program, focused on guidance, navigation, and control. Building autonomous navigation and state estimation systems for GPS-denied environments. Seeking GNC and structures engineering internships and roles in aerospace and defense.</p>
+            <p>Aerospace engineering student at Texas A&amp;M University focused on aerospace software, guidance/navigation/control, autonomy, embedded systems, and verification. Building C++/Python flight-software infrastructure, Raspberry Pi hardware-in-the-loop demos, and GPS-denied navigation projects with repeatable test evidence.</p>
             <p class="resume-meta">vinayak.mnair@gmail.com · github.com/XpiredRuby · GPA 3.45 · May 2027</p>
           </div>
         </section>
@@ -120,6 +120,12 @@
             <p class="resume-note">Brief summaries below — full spec sheets on the <a href="projects.html">projects page</a>.</p>
 
             <article class="resume-project">
+              <h3><a href="projects.html#astrasim-fsw">AstraSim-FSW — Flight Software HIL Verification Framework</a></h3>
+              <p>Built a C++17/Python flight-software-in-the-loop verification framework with UDP command/telemetry, CRC-16 packet validation, command acknowledgements, fault injection, watchdog and health-monitor logic, YAML scenarios, Monte Carlo regression, plots, and Raspberry Pi aarch64 HIL evidence.</p>
+              <p class="resume-meta"><span class="status-tag status-complete">HIL verified</span> · C++17, Python, CMake, CTest, Raspberry Pi, UDP</p>
+            </article>
+
+            <article class="resume-project">
               <h3><a href="projects.html#ghost">GHOST — GPS-Denied Hardware Occlusion-Survivable Tracker</a></h3>
               <p>Dual-filter vision-based state estimation for GPS-denied navigation: 9-state camera platform ESKF with AprilTag fusion and CV/CTRV/IMM target tracking on Raspberry Pi 4B with PX4 SITL.</p>
               <p class="resume-meta"><span class="status-tag status-active">Active development</span> · ROS2, ESKF, Python, MAVLink</p>
@@ -168,7 +174,5 @@
   </div>
 
   <script src="main.min.js"></script>
-  <!-- TODO: replace YOURSITE with your GoatCounter site code (e.g. vin-portfolio) -->
-  <script data-goatcounter="https://YOURSITE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

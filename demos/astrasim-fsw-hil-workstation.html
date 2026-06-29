@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AstraSim-FSW HIL Verification Workstation</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#06080d;--panel:#0b111a;--panel2:#101824;--panel3:#141f2d;
+  --line:#223244;--line2:#31485f;--text:#e8f1f8;--muted:#91a6b8;--dim:#607688;
+  --green:#2ee889;--cyan:#5ad7ff;--amber:#ffbd4a;--red:#ff5e66;--blue:#7aa7ff;
+  --greenA:rgba(46,232,137,.12);--cyanA:rgba(90,215,255,.12);--amberA:rgba(255,189,74,.14);
+  --mono:"SFMono-Regular","Consolas","Liberation Mono",monospace;
+  --ui:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--ui);font-size:14px;line-height:1.45}
+body{min-height:100vh}
+button,a{font:inherit}
+.shell{max-width:1560px;margin:0 auto;padding:18px}
+.top{
+  position:sticky;top:0;z-index:30;margin:-18px -18px 16px;padding:14px 18px;
+  background:rgba(6,8,13,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)
+}
+.toprow{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;min-width:280px}
+.mark{width:38px;height:38px;border:1px solid var(--cyan);display:grid;place-items:center;color:var(--cyan);font-family:var(--mono);font-weight:800;background:var(--cyanA)}
+h1{font-size:24px;line-height:1.1;margin:0}
+.tag{font-size:12px;color:var(--muted);margin-top:4px}
+.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{border:1px solid var(--line2);background:var(--panel2);color:var(--text);padding:9px 13px;border-radius:4px;cursor:pointer;font-weight:700}
+.btn.primary{background:linear-gradient(180deg,#1fbf72,#15985c);border-color:#31e38c;color:#021008}
+.btn:hover{border-color:var(--cyan)}
+.badge{font-family:var(--mono);font-size:12px;border:1px solid var(--line2);padding:7px 10px;border-radius:999px;color:var(--muted);background:var(--panel)}
+.badge.good{color:var(--green);border-color:rgba(46,232,137,.45);background:var(--greenA)}
+.badge.warn{color:var(--amber);border-color:rgba(255,189,74,.45);background:var(--amberA)}
+.tabs{display:flex;gap:6px;margin-top:12px;overflow-x:auto;padding-bottom:1px}
+.tab{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:8px 10px;border-radius:4px;cursor:pointer;font-family:var(--mono);font-size:12px}
+.tab.active{color:var(--green);border-color:rgba(46,232,137,.55);background:var(--greenA)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-bottom:14px}
+.proofstrip{display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:10px;margin-bottom:14px}
+.proof{border:1px solid var(--line);background:var(--panel2);border-radius:8px;padding:12px}
+.proof strong{display:block;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.proof p{margin:0;color:var(--muted);font-size:12px}
+.proof.good{border-color:rgba(46,232,137,.45);background:var(--greenA)}
+.proof.warn{border-color:rgba(255,189,74,.45);background:var(--amberA)}
+.card{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),#080d14);border-radius:8px;overflow:hidden}
+.card.pad{padding:16px}
+.ch{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);border-bottom:1px solid var(--line);padding:10px 12px;display:flex;justify-content:space-between;gap:10px}
+.cb{padding:12px}
+.claim{font-size:22px;font-weight:800;margin:0 0 10px}
+.claim span{color:var(--green)}
+.sub{color:var(--muted);max-width:980px}
+.metricgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.metric{border:1px solid var(--line);background:var(--panel2);padding:12px;border-radius:6px}
+.ml{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+.mv{font-family:var(--mono);font-size:24px;font-weight:800;margin-top:5px}
+.mv.good{color:var(--green)}.mv.warn{color:var(--amber)}.mv.cyan{color:var(--cyan)}
+.grid{display:grid;grid-template-columns:280px minmax(0,1fr) 340px;gap:14px;align-items:start}
+.left,.right{display:flex;flex-direction:column;gap:14px}
+.main{display:flex;flex-direction:column;gap:14px;min-width:0}
+.step{display:grid;grid-template-columns:34px 1fr 70px;gap:8px;align-items:center;padding:9px 10px;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:none}
+.num{font-family:var(--mono);font-size:12px;color:var(--dim);font-weight:800}
+.sname{font-family:var(--mono);font-weight:800;font-size:12px}
+.sdesc{font-size:12px;color:var(--muted)}
+.status{font-family:var(--mono);font-size:11px;text-align:right;color:var(--dim);font-weight:800}
+.status.pass{color:var(--green)}.status.run{color:var(--amber)}
+.view{display:none}.view.active{display:block}
+.arch{position:relative;display:grid;grid-template-columns:1fr 90px 1fr 90px 1fr;gap:0;align-items:center;padding:12px}
+.node{border:1px solid var(--line2);background:var(--panel2);min-height:108px;border-radius:6px;padding:12px;transition:.2s}
+.node.active{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyanA),0 0 22px var(--cyanA)}
+.node.pass{border-color:var(--green);background:var(--greenA)}
+.nt{font-family:var(--mono);font-weight:900}.nd{color:var(--muted);font-size:12px;margin-top:6px}
+.link{height:2px;background:var(--line2);position:relative}
+.packet{position:absolute;top:-5px;left:0;width:12px;height:12px;background:var(--green);border-radius:50%;opacity:0;box-shadow:0 0 18px var(--green)}
+.pipe{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;padding:12px}
+.mod{border:1px solid var(--line);background:var(--panel2);border-radius:6px;min-height:118px;padding:10px;transition:.2s}
+.mod.active{border-color:var(--cyan);background:var(--cyanA)}
+.mod.fault{border-color:var(--amber);background:var(--amberA)}
+.mod.done{border-color:rgba(46,232,137,.5)}
+.modt{font-family:var(--mono);font-weight:900;font-size:12px}.modd{color:var(--muted);font-size:12px;margin-top:6px}
+.charts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.chart{height:170px;border:1px solid var(--line);background:#05080d;border-radius:6px;padding:8px}
+canvas{width:100%;height:120px;display:block}
+.charttop{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:4px}
+.kv{display:grid;grid-template-columns:1fr auto;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px}
+.kv:last-child{border-bottom:none}.k{color:var(--muted)}.v{font-weight:800}.v.good{color:var(--green)}.v.warn{color:var(--amber)}.v.cyan{color:var(--cyan)}
+.table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
+.table th{color:var(--muted);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--line);padding:8px}
+.table td{border-bottom:1px solid var(--line);padding:8px;color:var(--text)}
+.table tr:last-child td{border-bottom:none}
+.pass{color:var(--green);font-weight:900}.warn{color:var(--amber);font-weight:900}
+.log{font-family:var(--mono);font-size:12px;min-height:220px;max-height:300px;overflow:auto;background:#030509;padding:10px;border-radius:6px;border:1px solid var(--line)}
+.logline{display:grid;grid-template-columns:58px 70px 1fr;gap:8px;padding:3px 0;color:var(--muted)}
+.logline b{color:var(--green);font-weight:800}.logline .w{color:var(--amber)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.trace{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.tracebox{border:1px solid var(--line);background:var(--panel2);padding:10px;border-radius:6px;min-height:86px}
+.tl{font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}.tv{font-family:var(--mono);font-weight:900;margin-top:6px}
+.riskgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.risk{border:1px solid var(--line);background:var(--panel2);border-radius:6px;padding:12px}
+.risk.hot{border-color:rgba(255,189,74,.6);background:var(--amberA)}
+.rt{font-family:var(--mono);font-weight:900}.rd{font-size:12px;color:var(--muted);margin-top:7px}
+.trade{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.trade .metric{min-height:150px}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:8px}.fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));width:0;transition:.5s}
+.note{font-size:12px;color:var(--dim);margin-top:10px}
+.linklist{display:flex;flex-direction:column;gap:8px}
+.plink{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:1px solid var(--line);background:var(--panel2);border-radius:6px;padding:9px 10px;color:var(--text);text-decoration:none}
+.plink:hover{border-color:var(--cyan)}
+.plink span:first-child{font-family:var(--mono);font-weight:800;font-size:12px}
+.plink span:last-child{font-family:var(--mono);font-size:11px;color:var(--cyan)}
+.reviewer{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.reviewer .proof{min-height:110px}
+.maturity{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px}
+.mitem{border:1px solid var(--line);background:var(--panel2);border-radius:8px;padding:12px;min-height:104px}
+.mitem.done{border-color:rgba(46,232,137,.45);background:var(--greenA)}
+.mitem.next{border-color:rgba(255,189,74,.45);background:var(--amberA)}
+.mi-k{font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}
+.mi-v{font-family:var(--mono);font-size:18px;font-weight:900;margin-top:6px}
+.mi-d{font-size:12px;color:var(--muted);margin-top:6px}
+.icdgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.frame{border:1px solid var(--line);background:#030509;border-radius:6px;padding:10px;font-family:var(--mono);font-size:12px;overflow:auto}
+.byte{display:grid;grid-template-columns:70px 110px 1fr;gap:10px;padding:5px 0;border-bottom:1px solid var(--line)}
+.byte:last-child{border-bottom:none}
+.byte .off{color:var(--dim)}.byte .field{color:var(--cyan);font-weight:900}.byte .desc{color:var(--muted)}
+.timeline{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.tbox{border:1px solid var(--line);background:var(--panel2);border-radius:6px;padding:10px;min-height:110px}
+.tbox.good{border-color:rgba(46,232,137,.45);background:var(--greenA)}
+.tbox.warn{border-color:rgba(255,189,74,.45);background:var(--amberA)}
+.tms{font-family:var(--mono);font-size:20px;font-weight:900}
+.tlabel{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:4px}
+.tdesc{font-size:12px;color:var(--muted);margin-top:8px}
+.assurance{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.assurance .card{min-height:240px}
+.scorecard{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.score{border:1px solid var(--line);background:var(--panel2);border-radius:8px;padding:12px}
+.score .mv{font-size:21px}
+@media(max-width:1180px){.maturity,.scorecard,.timeline,.assurance,.icdgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.maturity,.scorecard,.timeline,.assurance,.icdgrid{grid-template-columns:1fr}}
+@media(max-width:1180px){.grid,.hero,.proofstrip{grid-template-columns:1fr}.metricgrid,.charts,.pipe,.riskgrid,.trade,.split,.trace,.reviewer{grid-template-columns:1fr 1fr}.left,.right{display:grid;grid-template-columns:1fr 1fr}.arch{grid-template-columns:1fr}.link{height:24px;width:2px;margin:auto}}
+@media(max-width:760px){.shell{padding:10px}.top{margin:-10px -10px 10px}.metricgrid,.charts,.pipe,.riskgrid,.trade,.split,.trace,.left,.right,.reviewer{grid-template-columns:1fr}.mv{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="top">
+    <div class="toprow">
+      <div class="brand">
+        <div class="mark">AS</div>
+        <div>
+          <h1>AstraSim-FSW Evidence Replay</h1>
+          <div class="tag">C++17 flight software + Python ground tooling + Raspberry Pi hardware-in-the-loop verification</div>
+        </div>
+      </div>
+      <div class="actions">
+        <span class="badge good" id="verified">HIL VERIFIED</span>
+        <span class="badge warn">EVIDENCE REPLAY</span>
+        <span class="badge" id="clock">T+0.0s</span>
+        <button class="btn primary" onclick="startReplay()">Start Evidence Replay</button>
+        <button class="btn" onclick="startTour()">Run Review Sequence</button>
+        <button class="btn" onclick="resetReplay()">Reset</button>
+        <a class="btn" href="https://github.com/XpiredRuby/AstraSim-FSW" target="_blank" rel="noreferrer">Source Repository</a>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="tab('mission',this)">Mission Replay</button>
+      <button class="tab" onclick="tab('telemetry',this)">Telemetry & Plots</button>
+      <button class="tab" onclick="tab('internals',this)">Inside FSW</button>
+      <button class="tab" onclick="tab('safety',this)">FDIR / Safety</button>
+      <button class="tab" onclick="tab('verification',this)">V&V Evidence</button>
+      <button class="tab" onclick="tab('icd',this)">ICD / Protocol</button>
+      <button class="tab" onclick="tab('timing',this)">Timing Budget</button>
+      <button class="tab" onclick="tab('assurance',this)">Assurance Case</button>
+      <button class="tab" onclick="tab('trade',this)">Trade Study</button>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="card pad">
+      <p class="claim">Evidence-backed visual replay of a <span>Raspberry Pi HIL flight-software verification run</span>.</p>
+      <p class="sub">This workstation is the visual evidence layer for the system verification campaign. The underlying implementation includes a C++ flight-software core, Python command/telemetry tools, binary packets with CRC, watchdog and health monitoring, scenario regression, Monte Carlo testing, plots, and committed Raspberry Pi HIL evidence logs.</p>
+    </div>
+    <div class="metricgrid">
+      <div class="metric"><div class="ml">Unit Tests</div><div class="mv good">9/9</div><div class="note">CTest on laptop and Pi</div></div>
+      <div class="metric"><div class="ml">Scenarios</div><div class="mv good">5/5</div><div class="note">YAML procedures</div></div>
+      <div class="metric"><div class="ml">Monte Carlo</div><div class="mv good">25/25</div><div class="note">Regression trials</div></div>
+      <div class="metric"><div class="ml">Target</div><div class="mv cyan">aarch64</div><div class="note">Raspberry Pi Ubuntu</div></div>
+      <div class="metric"><div class="ml">Evidence Class</div><div class="mv good">HIL</div><div class="note">hardware target run</div></div>
+    </div>
+  </section>
+
+  <section class="maturity">
+    <div class="mitem done"><div class="mi-k">software baseline</div><div class="mi-v">C++17 FSW</div><div class="mi-d">mode manager, commands, telemetry, health monitor, watchdog</div></div>
+    <div class="mitem done"><div class="mi-k">verification baseline</div><div class="mi-v">V&V Green</div><div class="mi-d">unit tests, scenarios, Monte Carlo, requirement check</div></div>
+    <div class="mitem done"><div class="mi-k">hardware baseline</div><div class="mi-v">Pi HIL</div><div class="mi-d">aarch64 build and command/telemetry evidence</div></div>
+    <div class="mitem done"><div class="mi-k">data integrity</div><div class="mi-v">CRC Gate</div><div class="mi-d">binary packet validation and ACK telemetry proof</div></div>
+    <div class="mitem next"><div class="mi-k">next maturity step</div><div class="mi-v">Live Bridge</div><div class="mi-d">WebSocket telemetry bridge and physical sensor loop</div></div>
+  </section>
+
+  <section class="proofstrip">
+    <div class="proof good">
+      <strong>What is real</strong>
+      <p>C++ target built on Raspberry Pi aarch64, accepted UDP commands, produced telemetry, passed 9/9 tests, and generated committed evidence files.</p>
+    </div>
+    <div class="proof warn">
+      <strong>What is replayed</strong>
+      <p>This workstation replays the recorded HIL run deterministically so the verification sequence can be reviewed without manually coordinating terminals.</p>
+    </div>
+    <div class="proof">
+      <strong>What to inspect</strong>
+      <p>README, fsw/src, tools, evidence, reports, plots, and resume bullets in the GitHub repository.</p>
+    </div>
+    <div class="proof">
+      <strong>Why it matters</strong>
+      <p>Shows embedded C++, packet protocols, FDIR behavior, test automation, hardware deployment, and verification discipline.</p>
+    </div>
+  </section>
+
+  <div class="grid">
+    <aside class="left">
+      <div class="card">
+        <div class="ch">Run Procedure <span id="procstate">READY</span></div>
+        <div id="steps">
+          <div class="step" id="s0"><div class="num">00</div><div><div class="sname">INIT HIL TARGET</div><div class="sdesc">bind command and telemetry ports</div></div><div class="status">WAIT</div></div>
+          <div class="step" id="s1"><div class="num">01</div><div><div class="sname">SET_MODE NOMINAL</div><div class="sdesc">verify nominal transition</div></div><div class="status">WAIT</div></div>
+          <div class="step" id="s2"><div class="num">02</div><div><div class="sname">INJECT CPU FAULT</div><div class="sdesc">drive degraded payload path</div></div><div class="status">WAIT</div></div>
+          <div class="step" id="s3"><div class="num">03</div><div><div class="sname">CLEAR_FAULT</div><div class="sdesc">validate fault clear behavior</div></div><div class="status">WAIT</div></div>
+          <div class="step" id="s4"><div class="num">04</div><div><div class="sname">SET_MODE NOMINAL</div><div class="sdesc">operator recovery to nominal</div></div><div class="status">WAIT</div></div>
+          <div class="step" id="s5"><div class="num">05</div><div><div class="sname">EVIDENCE GATE</div><div class="sdesc">tests, plots, traces, HIL logs</div></div><div class="status">WAIT</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ch">Run Context</div>
+        <div class="cb">
+          <div class="kv"><span class="k">target</span><span class="v good">Raspberry Pi</span></div>
+          <div class="kv"><span class="k">architecture</span><span class="v">aarch64</span></div>
+          <div class="kv"><span class="k">flight core</span><span class="v">C++17</span></div>
+          <div class="kv"><span class="k">ground tools</span><span class="v">Python</span></div>
+          <div class="kv"><span class="k">command link</span><span class="v cyan">UDP 6000</span></div>
+          <div class="kv"><span class="k">telemetry link</span><span class="v cyan">UDP 5005</span></div>
+          <div class="kv"><span class="k">integrity</span><span class="v">CRC-16-CCITT</span></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="view active" id="mission">
+        <div class="card">
+          <div class="ch">Ground-To-Target Closed Loop <span id="missionstate">IDLE</span></div>
+          <div class="arch">
+            <div class="node" id="nGround"><div class="nt">Ground Test Station</div><div class="nd">Python command sender, telemetry dashboard, replay/evidence capture.</div></div>
+            <div class="link"><div class="packet" id="pkt1"></div></div>
+            <div class="node" id="nPi"><div class="nt">Raspberry Pi FSW Target</div><div class="nd">C++ app loop, command receiver, ModeManager, HealthMonitor, Watchdog.</div></div>
+            <div class="link"><div class="packet" id="pkt2"></div></div>
+            <div class="node" id="nEvidence"><div class="nt">Evidence Repository</div><div class="nd">CTest output, HIL logs, scenario reports, Monte Carlo summary, plots.</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="ch">Live Mission Strip Charts <span id="stripstate">waiting</span></div>
+          <div class="charts">
+            <div class="chart"><div class="charttop"><span>mode vs time</span><span id="modeNow">BOOT</span></div><canvas id="cMode"></canvas></div>
+            <div class="chart"><div class="charttop"><span>fault vs time</span><span id="faultNow">NONE</span></div><canvas id="cFault"></canvas></div>
+            <div class="chart"><div class="charttop"><span>cpu / memory</span><span id="loadNow">0% / 0%</span></div><canvas id="cLoad"></canvas></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="telemetry">
+        <div class="split">
+          <div class="card">
+            <div class="ch">Telemetry Packet Inspector <span id="crcNow" class="pass">CRC VALID</span></div>
+            <div class="cb">
+              <table class="table">
+                <tr><th>Field</th><th>Current Value</th><th>Purpose</th></tr>
+                <tr><td>magic</td><td>ASTR</td><td>frame sync</td></tr>
+                <tr><td>sequence_number</td><td id="seqField">000</td><td>packet ordering</td></tr>
+                <tr><td>mode</td><td id="modeField">BOOT</td><td>FSW state proof</td></tr>
+                <tr><td>last_fault</td><td id="faultField">NONE</td><td>fault containment proof</td></tr>
+                <tr><td>heartbeat_count</td><td id="hbField">000</td><td>app loop liveness</td></tr>
+                <tr><td>ack_command</td><td id="ackField">NONE</td><td>command acceptance proof</td></tr>
+                <tr><td>ack_status</td><td id="ackStatusField">NONE</td><td>accepted/rejected gate</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ch">Telemetry Meaning</div>
+            <div class="cb">
+              <div class="trace">
+                <div class="tracebox"><div class="tl">operator sends</div><div class="tv">SET_MODE</div></div>
+                <div class="tracebox"><div class="tl">packet gate</div><div class="tv">CRC PASS</div></div>
+                <div class="tracebox"><div class="tl">state update</div><div class="tv">NOMINAL</div></div>
+                <div class="tracebox"><div class="tl">fault injection</div><div class="tv warn">CPU</div></div>
+                <div class="tracebox"><div class="tl">containment</div><div class="tv warn">DEGRADED</div></div>
+                <div class="tracebox"><div class="tl">recovery</div><div class="tv pass">NOMINAL</div></div>
+              </div>
+              <p class="note">This view maps telemetry fields to verification evidence: state observability, command acknowledgement, fault containment, heartbeat liveness, and packet integrity.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="internals">
+        <div class="card">
+          <div class="ch">Inside The Flight Software Target <span>Command Processing Path</span></div>
+          <div class="pipe">
+            <div class="mod" id="m0"><div class="modt">UDP Receiver</div><div class="modd">datagram ingest, source capture, byte count check</div></div>
+            <div class="mod" id="m1"><div class="modt">Packet Decoder</div><div class="modd">magic, version, sequence, command_id, argument</div></div>
+            <div class="mod" id="m2"><div class="modt">CRC Gate</div><div class="modd">CRC-16-CCITT, reject corrupted commands</div></div>
+            <div class="mod" id="m3"><div class="modt">Command Processor</div><div class="modd">dispatch handler, generate command ACK</div></div>
+            <div class="mod" id="m4"><div class="modt">ModeManager</div><div class="modd">transition guards and fault-driven modes</div></div>
+            <div class="mod" id="m5"><div class="modt">Health/Watchdog</div><div class="modd">heartbeat, CPU/memory/sensor checks</div></div>
+            <div class="mod" id="m6"><div class="modt">TLM Encoder</div><div class="modd">serialize health packet, append CRC, downlink</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="safety">
+        <div class="card">
+          <div class="ch">Fault Detection, Isolation, And Recovery <span>FDIR / FMEA</span></div>
+          <div class="cb">
+            <div class="riskgrid">
+              <div class="risk hot"><div class="rt">CPU_OVERLOAD</div><div class="rd">Detected by health monitor. Contained by DEGRADED_PAYLOAD mode. Recovered by CLEAR_FAULT + SET_MODE.</div></div>
+              <div class="risk"><div class="rt">BAD_COMMAND_CRC</div><div class="rd">Detected before command dispatch. Packet is dropped and cannot mutate FSW state.</div></div>
+              <div class="risk"><div class="rt">WATCHDOG_STALL</div><div class="rd">Detected by heartbeat supervision. Drives watchdog fault path and recovery tests.</div></div>
+              <div class="risk"><div class="rt">SENSOR_TIMEOUT</div><div class="rd">Detected by stale sensor health input. Covered by scenario tests and safe-mode path.</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="verification">
+        <div class="card">
+          <div class="ch">Requirement-To-Evidence Traceability <span id="vvstate">PENDING</span></div>
+          <div class="cb">
+            <table class="table">
+              <tr><th>Requirement</th><th>Verification Method</th><th>Evidence Artifact</th><th>Status</th></tr>
+              <tr><td>FSW-REQ-002 nominal transition</td><td>commanded HIL run</td><td>pi_command_telemetry_demo.txt</td><td class="pass" id="r0">WAIT</td></tr>
+              <tr><td>FSW-REQ-004 CPU fault response</td><td>fault injection</td><td>DEGRADED_PAYLOAD telemetry</td><td class="pass" id="r1">WAIT</td></tr>
+              <tr><td>FSW-REQ-005 fault clear</td><td>CLEAR_FAULT command</td><td>fault=NONE telemetry</td><td class="pass" id="r2">WAIT</td></tr>
+              <tr><td>VER-REQ-006 regression evidence</td><td>scenarios + Monte Carlo</td><td>results_summary.md</td><td class="pass" id="r3">WAIT</td></tr>
+              <tr><td>HIL-REQ-001 target execution</td><td>Pi aarch64 build and run</td><td>pi_ctest_results.txt</td><td class="pass" id="r4">WAIT</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <div class="ch">Technical Review Path <span>evidence inspection sequence</span></div>
+          <div class="cb reviewer">
+            <div class="proof"><strong>1. Verify code exists</strong><p>Open <code>fsw/src</code> and inspect ModeManager, command packets, telemetry packets, watchdog, and app loop.</p></div>
+            <div class="proof"><strong>2. Verify tests exist</strong><p>Open CTest output and scenario reports. The project is not only a UI; it has executable test evidence.</p></div>
+            <div class="proof"><strong>3. Verify hardware execution</strong><p>Open Pi evidence files showing aarch64 build, command acceptance, fault injection, and recovery.</p></div>
+            <div class="proof"><strong>4. Verify analysis artifacts</strong><p>Open plots and summary reports showing scenario, Monte Carlo, and requirement-check outcomes.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="icd">
+        <div class="card">
+          <div class="ch">Interface Control Definition <span>command / telemetry link contract</span></div>
+          <div class="cb icdgrid">
+            <div>
+              <div class="ml" style="margin-bottom:8px">Command Packet Frame</div>
+              <div class="frame">
+                <div class="byte"><span class="off">0x00</span><span class="field">magic</span><span class="desc">ASTR sync word, rejects non-project frames</span></div>
+                <div class="byte"><span class="off">0x04</span><span class="field">version</span><span class="desc">protocol compatibility gate</span></div>
+                <div class="byte"><span class="off">0x06</span><span class="field">packet_type</span><span class="desc">command vs health telemetry discriminator</span></div>
+                <div class="byte"><span class="off">0x08</span><span class="field">sequence</span><span class="desc">operator command ordering and ACK correlation</span></div>
+                <div class="byte"><span class="off">0x0C</span><span class="field">command_id</span><span class="desc">NOOP, SET_MODE, INJECT_FAULT, CLEAR_FAULT</span></div>
+                <div class="byte"><span class="off">0x10</span><span class="field">argument</span><span class="desc">mode enum or fault enum payload</span></div>
+                <div class="byte"><span class="off">tail</span><span class="field">crc16</span><span class="desc">CRC-16-CCITT over frame body</span></div>
+              </div>
+            </div>
+            <div>
+              <div class="ml" style="margin-bottom:8px">Health Telemetry Frame</div>
+              <div class="frame">
+                <div class="byte"><span class="off">state</span><span class="field">mode</span><span class="desc">BOOT, NOMINAL, DEGRADED_PAYLOAD, SAFE, RECOVERY</span></div>
+                <div class="byte"><span class="off">fault</span><span class="field">last_fault</span><span class="desc">NONE, CPU_OVERLOAD, SENSOR_TIMEOUT, watchdog faults</span></div>
+                <div class="byte"><span class="off">health</span><span class="field">cpu/mem</span><span class="desc">target load values used by health monitor</span></div>
+                <div class="byte"><span class="off">liveness</span><span class="field">heartbeat</span><span class="desc">app-loop progress and watchdog supervision</span></div>
+                <div class="byte"><span class="off">ack</span><span class="field">ack_seq</span><span class="desc">last processed command sequence number</span></div>
+                <div class="byte"><span class="off">ack</span><span class="field">ack_cmd</span><span class="desc">last command accepted or rejected</span></div>
+                <div class="byte"><span class="off">tail</span><span class="field">crc16</span><span class="desc">telemetry integrity validation at receiver</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <div class="ch">Interface Failure Modes <span>receiver-side gates</span></div>
+          <div class="cb trace">
+            <div class="tracebox"><div class="tl">bad magic</div><div class="tv">DROP</div></div>
+            <div class="tracebox"><div class="tl">bad version</div><div class="tv">REJECT</div></div>
+            <div class="tracebox"><div class="tl">bad crc</div><div class="tv warn">NO STATE MUTATION</div></div>
+            <div class="tracebox"><div class="tl">unknown command</div><div class="tv warn">ACK REJECTED</div></div>
+            <div class="tracebox"><div class="tl">valid command</div><div class="tv pass">DISPATCH</div></div>
+            <div class="tracebox"><div class="tl">telemetry</div><div class="tv pass">ACK + STATE</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="timing">
+        <div class="card">
+          <div class="ch">Timing And Deadline Budget <span>recorded HIL replay values</span></div>
+          <div class="cb timeline">
+            <div class="tbox good"><div class="tms">&lt;5 ms</div><div class="tlabel">command encode</div><div class="tdesc">Python sender serializes command frame and CRC.</div></div>
+            <div class="tbox good"><div class="tms">&lt;20 ms</div><div class="tlabel">LAN delivery</div><div class="tdesc">UDP command path from ground to Pi target.</div></div>
+            <div class="tbox good"><div class="tms">&lt;10 ms</div><div class="tlabel">decode + CRC</div><div class="tdesc">frame validation before command dispatch.</div></div>
+            <div class="tbox good"><div class="tms">39-44 ms</div><div class="tlabel">observed ACK</div><div class="tdesc">command accepted and reflected through telemetry.</div></div>
+            <div class="tbox good"><div class="tms">1/cycle</div><div class="tlabel">telemetry cadence</div><div class="tdesc">health packet emitted per app-loop cycle.</div></div>
+            <div class="tbox warn"><div class="tms">Next</div><div class="tlabel">jitter histogram</div><div class="tdesc">planned latency distribution and packet-loss campaign.</div></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <div class="ch">Performance Acceptance Criteria <span>engineering limits</span></div>
+          <div class="cb">
+            <table class="table">
+              <tr><th>Metric</th><th>Limit</th><th>Observed / Evidence</th><th>Disposition</th></tr>
+              <tr><td>Command ACK latency</td><td>&lt;100 ms</td><td>39, 41, 42, 44 ms replay values</td><td class="pass">PASS</td></tr>
+              <tr><td>Command CRC validation</td><td>mandatory</td><td>CRC gate before dispatch</td><td class="pass">PASS</td></tr>
+              <tr><td>Mode transition observability</td><td>telemetry-proven</td><td>mode field changes after command</td><td class="pass">PASS</td></tr>
+              <tr><td>Fault containment</td><td>degraded mode response</td><td>CPU_OVERLOAD -> DEGRADED_PAYLOAD</td><td class="pass">PASS</td></tr>
+              <tr><td>Recovery path</td><td>operator command recovery</td><td>CLEAR_FAULT + SET_MODE NOMINAL</td><td class="pass">PASS</td></tr>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="assurance">
+        <div class="card">
+          <div class="ch">Assurance Case Summary <span>claim / argument / evidence</span></div>
+          <div class="cb assurance">
+            <div class="card">
+              <div class="ch">Claim</div>
+              <div class="cb">
+                <p class="claim" style="font-size:18px">The FSW target can accept validated commands, transition modes, contain injected faults, and report state through integrity-checked telemetry.</p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="ch">Argument</div>
+              <div class="cb">
+                <div class="kv"><span class="k">command integrity</span><span class="v good">CRC gate</span></div>
+                <div class="kv"><span class="k">state control</span><span class="v good">ModeManager</span></div>
+                <div class="kv"><span class="k">fault containment</span><span class="v good">FDIR path</span></div>
+                <div class="kv"><span class="k">liveness</span><span class="v good">watchdog</span></div>
+                <div class="kv"><span class="k">observability</span><span class="v good">telemetry ACK</span></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="ch">Evidence</div>
+              <div class="cb">
+                <div class="kv"><span class="k">unit tests</span><span class="v good">9/9</span></div>
+                <div class="kv"><span class="k">scenarios</span><span class="v good">5/5</span></div>
+                <div class="kv"><span class="k">monte carlo</span><span class="v good">25/25</span></div>
+                <div class="kv"><span class="k">Pi HIL</span><span class="v good">verified</span></div>
+                <div class="kv"><span class="k">plots</span><span class="v good">generated</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="trade">
+        <div class="card">
+          <div class="ch">Engineering Trade Study <span>Why This Architecture</span></div>
+          <div class="cb trade">
+            <div class="metric"><div class="ml">UDP vs TCP</div><div class="mv cyan">UDP</div><p class="note">Chosen because command/telemetry links in embedded test rigs often prioritize low overhead, explicit packet validation, and application-level sequencing.</p></div>
+            <div class="metric"><div class="ml">Pi HIL vs Sim Only</div><div class="mv good">HIL</div><p class="note">Pi execution proves the C++ target builds and runs on non-x86 hardware, catching architecture and deployment issues.</p></div>
+            <div class="metric"><div class="ml">Replay vs Live HIL</div><div class="mv warn">Both</div><p class="note">Replay provides deterministic evidence review. Live HIL execution remains available through the command/telemetry tools and evidence workflow.</p></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <div class="ch">Known Limitations <span>Honest engineering boundary</span></div>
+          <div class="cb">
+            <table class="table">
+              <tr><th>Current Limit</th><th>Why it matters</th><th>Next upgrade</th></tr>
+              <tr><td>Replay workstation is not live-connected</td><td>The current browser view is deterministic replay, not active UDP telemetry streaming</td><td>Add WebSocket bridge from telemetry receiver to browser</td></tr>
+              <tr><td>No physical sensor loop yet</td><td>Faults are software-injected instead of driven by real sensors</td><td>Add Pi GPIO/I2C sensor input and payload heartbeat source</td></tr>
+              <tr><td>Timing analysis is basic</td><td>ACK latency is shown, but no full jitter/deadline histogram</td><td>Add latency distribution, packet-loss injection, and deadline budget report</td></tr>
+              <tr><td>Single-node HIL target</td><td>Pi validates deployment, but not distributed spacecraft bus behavior</td><td>Add simulated bus nodes or second Pi payload computer</td></tr>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="right">
+      <div class="card">
+        <div class="ch">Current State</div>
+        <div class="cb">
+          <div class="kv"><span class="k">mode</span><span class="v cyan" id="stateMode">BOOT</span></div>
+          <div class="kv"><span class="k">fault</span><span class="v good" id="stateFault">NONE</span></div>
+          <div class="kv"><span class="k">last command</span><span class="v" id="stateCmd">NONE</span></div>
+          <div class="kv"><span class="k">ack status</span><span class="v" id="stateAck">NONE</span></div>
+          <div class="kv"><span class="k">crc gate</span><span class="v good">VALID</span></div>
+          <div class="kv"><span class="k">hil result</span><span class="v good" id="stateHil">RUNNING</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ch">Proof Links <span>GitHub</span></div>
+        <div class="cb">
+          <div class="linklist">
+            <a class="plink" href="https://github.com/XpiredRuby/AstraSim-FSW#readme" target="_blank" rel="noreferrer"><span>README overview</span><span>open</span></a>
+            <a class="plink" href="https://github.com/XpiredRuby/AstraSim-FSW/tree/main/fsw/src" target="_blank" rel="noreferrer"><span>C++ FSW core</span><span>open</span></a>
+            <a class="plink" href="https://github.com/XpiredRuby/AstraSim-FSW/tree/main/tools" target="_blank" rel="noreferrer"><span>Python ground tools</span><span>open</span></a>
+            <a class="plink" href="https://github.com/XpiredRuby/AstraSim-FSW/tree/main/evidence" target="_blank" rel="noreferrer"><span>HIL evidence logs</span><span>open</span></a>
+            <a class="plink" href="https://github.com/XpiredRuby/AstraSim-FSW/tree/main/reports" target="_blank" rel="noreferrer"><span>Verification reports</span><span>open</span></a>
+            <a class="plink" href="https://github.com/XpiredRuby/AstraSim-FSW/tree/main/media/plots" target="_blank" rel="noreferrer"><span>Result plots</span><span>open</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ch">Event Log <span id="logcount">0</span></div>
+        <div class="cb"><div class="log" id="log"></div></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+let running=false,t0=0,raf=0,timers=[],stepIndex=0;
+let cur={mode:"BOOT",fault:"NONE",cmd:"NONE",ack:"NONE",seq:0,hb:0,cpu:18,mem:54,lat:0};
+let samples={mode:[],fault:[],cpu:[],mem:[],hb:[]};
+const events=[
+  {t:.7,step:0,msg:"Pi target initialized; command UDP :6000 and telemetry UDP :5005 ready.",cmd:"INIT",mode:"BOOT",fault:"NONE",mods:[0,1],req:[],lat:0},
+  {t:2.0,step:1,msg:"SET_MODE NOMINAL accepted; ModeManager guard passed BOOT -> NOMINAL.",cmd:"SET_MODE NOMINAL",mode:"NOMINAL",fault:"NONE",mods:[0,1,2,3,4,6],req:["r0"],lat:41},
+  {t:4.8,step:2,msg:"INJECT_FAULT CPU_OVERLOAD accepted; FSW entered DEGRADED_PAYLOAD.",cmd:"INJECT_FAULT CPU_OVERLOAD",mode:"DEGRADED_PAYLOAD",fault:"CPU_OVERLOAD",mods:[0,1,2,3,4,5,6],faulty:true,req:["r1"],lat:44},
+  {t:7.5,step:3,msg:"CLEAR_FAULT accepted; fault telemetry returned to NONE while mode remains controlled.",cmd:"CLEAR_FAULT",mode:"DEGRADED_PAYLOAD",fault:"NONE",mods:[0,1,2,3,4,6],req:["r2"],lat:39},
+  {t:10.0,step:4,msg:"SET_MODE NOMINAL accepted; operator recovery returned system to NOMINAL.",cmd:"SET_MODE NOMINAL",mode:"NOMINAL",fault:"NONE",mods:[0,1,2,3,4,5,6],req:["r3"],lat:42},
+  {t:12.0,step:5,msg:"Evidence gate closed: Pi CTest 9/9, scenarios 5/5, Monte Carlo 25/25, HIL evidence committed.",cmd:"EVIDENCE_GATE",mode:"NOMINAL",fault:"NONE",mods:[6],req:["r4"],final:true,lat:0}
+];
+function tab(id,el){
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  $(id).classList.add("active"); el.classList.add("active"); drawAll();
+}
+function selectTab(id){
+  const buttons=[...document.querySelectorAll(".tab")];
+  const btn=buttons.find(b=>b.getAttribute("onclick")&&b.getAttribute("onclick").includes("'"+id+"'"));
+  if(btn)tab(id,btn);
+}
+function log(src,msg,kind=""){
+  const l=$("log"); const n=l.children.length+1;
+  const row=document.createElement("div"); row.className="logline";
+  row.innerHTML=`<span>T+${((performance.now()-t0)/1000||0).toFixed(1)}</span><span>${src}</span><span class="${kind}">${msg}</span>`;
+  l.appendChild(row); l.scrollTop=l.scrollHeight; $("logcount").textContent=n;
+}
+function setStep(i,cls,text){
+  const el=$("s"+i); if(!el)return;
+  el.querySelector(".status").textContent=text;
+  el.querySelector(".status").className="status "+cls;
+}
+function pulsePacket(id){
+  const p=$(id); p.style.transition="none"; p.style.left="0"; p.style.opacity="1";
+  requestAnimationFrame(()=>{p.style.transition="left .75s linear";p.style.left="100%";setTimeout(()=>p.style.opacity="0",780)});
+}
+function activateMods(mods,faulty){
+  document.querySelectorAll(".mod").forEach(m=>m.classList.remove("active","fault","done"));
+  mods.forEach((i,k)=>setTimeout(()=>{const m=$("m"+i);m.classList.add(faulty?"fault":"active");setTimeout(()=>{m.classList.remove("active","fault");m.classList.add("done")},400)},k*120));
+}
+function updateState(){
+  $("stateMode").textContent=cur.mode;$("stateMode").className="v "+(cur.mode==="DEGRADED_PAYLOAD"?"warn":"good");
+  $("stateFault").textContent=cur.fault;$("stateFault").className="v "+(cur.fault==="NONE"?"good":"warn");
+  $("stateCmd").textContent=cur.cmd;$("stateAck").textContent=cur.ack;
+  $("modeNow").textContent=cur.mode;$("faultNow").textContent=cur.fault;$("loadNow").textContent=Math.round(cur.cpu)+"% / "+Math.round(cur.mem)+"%";
+  $("seqField").textContent=String(cur.seq).padStart(3,"0");$("modeField").textContent=cur.mode;$("faultField").textContent=cur.fault;
+  $("hbField").textContent=String(cur.hb).padStart(3,"0");$("ackField").textContent=cur.cmd;$("ackStatusField").textContent=cur.ack;
+}
+function processEvent(e){
+  setStep(e.step,"run","RUN");
+  cur.cmd=e.cmd;cur.mode=e.mode;cur.fault=e.fault;cur.ack=e.cmd==="INIT"?"READY":"ACCEPTED";cur.seq++;cur.lat=e.lat;
+  pulsePacket("pkt1");setTimeout(()=>pulsePacket("pkt2"),650);
+  $("nGround").classList.add("active");$("nPi").classList.add(e.faulty?"active":"active");setTimeout(()=>$("nEvidence").classList.add("active"),650);
+  activateMods(e.mods,e.faulty);
+  e.req.forEach(id=>{$(id).textContent="PASS";});
+  log("PI",e.msg,e.faulty?"w":"");
+  setTimeout(()=>setStep(e.step,"pass","PASS"),900);
+  if(e.final){$("vvstate").textContent="PASS";$("procstate").textContent="COMPLETE";$("missionstate").textContent="VERIFIED";$("stateHil").textContent="PASS";$("nGround").classList.add("pass");$("nPi").classList.add("pass");$("nEvidence").classList.add("pass");}
+  updateState();
+}
+function loop(){
+  if(!running)return;
+  const t=(performance.now()-t0)/1000;$("clock").textContent="T+"+t.toFixed(1)+"s";
+  cur.hb=Math.floor(t*13);cur.cpu=(cur.fault==="CPU_OVERLOAD"?76:18+Math.sin(t*1.3)*4);cur.mem=55+Math.sin(t*.8)*5;
+  if(samples.mode.length>80){Object.keys(samples).forEach(k=>samples[k].shift())}
+  samples.mode.push(cur.mode==="BOOT"?0:cur.mode==="NOMINAL"?1:2);samples.fault.push(cur.fault==="NONE"?0:1);samples.cpu.push(cur.cpu);samples.mem.push(cur.mem);samples.hb.push(cur.hb);
+  updateState();drawAll();raf=requestAnimationFrame(loop);
+}
+function startReplay(){
+  resetReplay();running=true;t0=performance.now();$("procstate").textContent="RUNNING";$("missionstate").textContent="RUNNING";log("SYS","Evidence replay started from committed Raspberry Pi HIL run.","b");
+  events.forEach((e,i)=>timers.push(setTimeout(()=>processEvent(e),e.t*1000)));
+  raf=requestAnimationFrame(loop);
+}
+function startTour(){
+  startReplay();
+  [
+    [0,"mission"],
+    [2600,"internals"],
+    [5200,"telemetry"],
+    [7600,"safety"],
+    [9800,"icd"],
+    [11600,"timing"],
+    [13200,"verification"],
+    [14800,"assurance"],
+    [16400,"trade"]
+  ].forEach(([ms,id])=>timers.push(setTimeout(()=>selectTab(id),ms)));
+}
+function resetReplay(){
+  running=false;cancelAnimationFrame(raf);timers.forEach(clearTimeout);timers=[];
+  cur={mode:"BOOT",fault:"NONE",cmd:"NONE",ack:"NONE",seq:0,hb:0,cpu:18,mem:54,lat:0};samples={mode:[],fault:[],cpu:[],mem:[],hb:[]};
+  $("log").innerHTML="";$("logcount").textContent="0";$("clock").textContent="T+0.0s";$("procstate").textContent="READY";$("missionstate").textContent="IDLE";$("vvstate").textContent="PENDING";$("stateHil").textContent="READY";
+  for(let i=0;i<6;i++)setStep(i,"","WAIT");for(let i=0;i<5;i++)$("r"+i).textContent="WAIT";
+  document.querySelectorAll(".node,.mod").forEach(e=>e.classList.remove("active","pass","fault","done"));
+  updateState();drawAll();
+}
+function drawLine(c,data,max,color,color2){
+  const ctx=c.getContext("2d"),w=c.clientWidth,h=c.clientHeight,dpr=devicePixelRatio||1;c.width=w*dpr;c.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
+  ctx.strokeStyle="#1b2938";ctx.lineWidth=1;for(let i=1;i<4;i++){ctx.beginPath();ctx.moveTo(0,h*i/4);ctx.lineTo(w,h*i/4);ctx.stroke()}
+  if(data.length<2)return;ctx.lineWidth=2;ctx.strokeStyle=color;ctx.beginPath();
+  data.forEach((v,i)=>{const x=i/(data.length-1)*w,y=h-(v/max)*h*.86-8;if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y)});ctx.stroke();
+  if(color2){ctx.strokeStyle=color2;ctx.beginPath();samples.mem.forEach((v,i)=>{const x=i/(samples.mem.length-1)*w,y=h-(v/100)*h*.86-8;if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y)});ctx.stroke()}
+}
+function drawAll(){
+  const green=getComputedStyle(document.documentElement).getPropertyValue("--green").trim();
+  const amber=getComputedStyle(document.documentElement).getPropertyValue("--amber").trim();
+  const cyan=getComputedStyle(document.documentElement).getPropertyValue("--cyan").trim();
+  const blue=getComputedStyle(document.documentElement).getPropertyValue("--blue").trim();
+  drawLine($("cMode"),samples.mode,2,green);
+  drawLine($("cFault"),samples.fault,1,amber);
+  drawLine($("cLoad"),samples.cpu,100,cyan,blue);
+}
+resetReplay();
+</script>
+</body>
+</html>

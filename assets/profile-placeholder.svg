@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 800" role="img" aria-labelledby="title desc">
+  <title id="title">Profile photo placeholder</title>
+  <desc id="desc">Technical profile photo placeholder for Vinayak Nair.</desc>
+  <rect width="640" height="800" fill="#0A0A0F"/>
+  <rect x="24" y="24" width="592" height="752" fill="#101820" stroke="#2EE6D6" stroke-width="2"/>
+  <path d="M120 590c34-104 113-156 200-156s166 52 200 156" fill="none" stroke="#FF9F1C" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="320" cy="292" r="118" fill="none" stroke="#2EE6D6" stroke-width="18"/>
+  <path d="M76 92h112M452 92h112M76 708h112M452 708h112" stroke="#FF9F1C" stroke-width="10" stroke-linecap="round"/>
+  <text x="320" y="692" text-anchor="middle" fill="#E8E6E0" font-family="Consolas, monospace" font-size="24">ADD PROFILE PHOTO</text>
+</svg>
