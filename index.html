@@ -1,88 +1,925 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vinayak Nair // GNC & Autonomy Engineer</title>
-    <link rel="stylesheet" href="styles.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinayak Nair // GNC Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e14;
+    --panel:#0d1220;
+    --border:#1c2436;
+    --border-bright:#2a3450;
+    --amber:#ffb454;
+    --cyan:#5ccfe6;
+    --text-bright:#e6edf3;
+    --text-dim:#7a8699;
+    --text-faint:#4a5568;
+    --green:#7fd88f;
+    --red:#ff6b6b;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--text-bright);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size:48px 48px;
+    background-position:-1px -1px;
+    background-blend-mode:overlay;
+    background-color:var(--bg);
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:radial-gradient(ellipse at top left, rgba(92,207,230,0.05), transparent 50%),
+               radial-gradient(ellipse at bottom right, rgba(255,180,84,0.04), transparent 50%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  a{color:inherit; text-decoration:none;}
+  a:focus-visible, button:focus-visible, .nav-item:focus-visible{
+    outline:2px solid var(--cyan);
+    outline-offset:2px;
+  }
+
+  .frame{
+    max-width:1100px;
+    margin:0 auto;
+    padding:24px;
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 24px;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 20px;
+    border:1px solid var(--border);
+    border-radius:6px;
+    background:rgba(13,18,32,0.7);
+    backdrop-filter:blur(6px);
+    margin-bottom:20px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.03em;
+  }
+  .topbar-group{display:flex; gap:20px; flex-wrap:wrap; align-items:center;}
+  .topbar .label{color:var(--text-faint);}
+  .topbar .val{color:var(--text-dim); margin-left:6px;}
+  .status-nominal{color:var(--green); font-weight:600;}
+  .status-seeking{color:var(--amber); font-weight:600;}
+
+  .pulse-dot{
+    display:inline-block;
+    width:6px; height:6px;
+    border-radius:50%;
+    margin-right:6px;
+    position:relative;
+    top:-1px;
+  }
+  .pulse-dot.green{background:var(--green); box-shadow:0 0 0 0 rgba(127,216,143,0.6);}
+  .pulse-dot.amber{background:var(--amber); box-shadow:0 0 0 0 rgba(255,180,84,0.6);}
+  @media (prefers-reduced-motion: no-preference){
+    .pulse-dot.green{animation:pulse-green 2.2s infinite;}
+    .pulse-dot.amber{animation:pulse-amber 2.2s infinite;}
+  }
+  @keyframes pulse-green{
+    0%{box-shadow:0 0 0 0 rgba(127,216,143,0.55);}
+    70%{box-shadow:0 0 0 7px rgba(127,216,143,0);}
+    100%{box-shadow:0 0 0 0 rgba(127,216,143,0);}
+  }
+  @keyframes pulse-amber{
+    0%{box-shadow:0 0 0 0 rgba(255,180,84,0.55);}
+    70%{box-shadow:0 0 0 7px rgba(255,180,84,0);}
+    100%{box-shadow:0 0 0 0 rgba(255,180,84,0);}
+  }
+
+  /* ---------- LAYOUT ---------- */
+  .layout{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:20px;
+    align-items:start;
+  }
+  @media (max-width:760px){
+    .layout{grid-template-columns:1fr;}
+  }
+
+  .sidebar{
+    border:1px solid var(--border);
+    border-radius:6px;
+    background:rgba(13,18,32,0.5);
+    overflow:hidden;
+    position:sticky;
+    top:24px;
+  }
+  @media (max-width:760px){
+    .sidebar{position:static; display:flex; overflow-x:auto;}
+  }
+
+  .nav-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.04em;
+    color:var(--text-dim);
+    border-bottom:1px solid var(--border);
+    cursor:pointer;
+    background:none;
+    border-left:2px solid transparent;
+    width:100%;
+    text-align:left;
+    transition:background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  @media (max-width:760px){
+    .nav-item{border-bottom:none; border-right:1px solid var(--border); white-space:nowrap;}
+  }
+  .nav-item:hover{color:var(--text-bright); background:rgba(255,255,255,0.02);}
+  .nav-item.active{
+    color:var(--cyan);
+    border-left-color:var(--cyan);
+    background:rgba(92,207,230,0.06);
+  }
+  @media (max-width:760px){
+    .nav-item.active{border-left-color:transparent; border-bottom:2px solid var(--cyan);}
+  }
+  .nav-item .sys-id{color:var(--text-faint); font-size:11px;}
+  .nav-item.active .sys-id{color:var(--cyan);}
+
+  .sidebar-footer{
+    padding:16px 18px;
+    border-top:1px solid var(--border);
+  }
+  .meter-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    color:var(--text-faint);
+    letter-spacing:0.05em;
+    margin-bottom:4px;
+    display:flex;
+    justify-content:space-between;
+  }
+  .meter-track{
+    height:3px;
+    background:var(--border);
+    border-radius:2px;
+    overflow:hidden;
+    margin-bottom:12px;
+  }
+  .meter-fill{height:100%; border-radius:2px;}
+  .meter-fill.amber{background:var(--amber); width:62%;}
+  .meter-fill.cyan{background:var(--cyan); width:38%;}
+  .copyright{font-size:10px; color:var(--text-faint); font-family:'JetBrains Mono', monospace; margin-top:8px;}
+
+  /* ---------- MAIN PANEL ---------- */
+  .panel{
+    border:1px solid var(--border);
+    border-radius:6px;
+    background:rgba(13,18,32,0.5);
+    padding:36px;
+    min-height:520px;
+  }
+  @media (max-width:600px){
+    .panel{padding:22px;}
+  }
+
+  .view{display:none;}
+  .view.active{display:block;}
+
+  @media (prefers-reduced-motion: no-preference){
+    .view.active{animation:view-in 0.25s ease;}
+    .reveal-row{
+      opacity:0;
+      transform:translateY(6px);
+      animation:row-in 0.35s ease forwards;
+    }
+  }
+  @keyframes view-in{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+  @keyframes row-in{to{opacity:1; transform:translateY(0);}}
+
+  h1.name{
+    font-family:'JetBrains Mono', monospace;
+    font-size:clamp(22px, 3.4vw, 30px);
+    font-weight:700;
+    letter-spacing:0.01em;
+    color:var(--text-bright);
+  }
+  h1.name .role{color:var(--cyan); font-weight:600;}
+
+  .bio{
+    color:var(--text-dim);
+    font-size:14.5px;
+    line-height:1.65;
+    max-width:640px;
+    margin-top:12px;
+  }
+
+  h2.section-title{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.08em;
+    color:var(--cyan);
+    text-transform:uppercase;
+    margin:36px 0 14px 0;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--border-bright);
+  }
+  h2.section-title:first-of-type{margin-top:28px;}
+
+  .data-grid{display:flex; flex-direction:column;}
+  .data-row{
+    display:grid;
+    grid-template-columns:160px 1fr;
+    gap:16px;
+    padding:10px 0;
+    border-bottom:1px solid var(--border);
+    font-size:13.5px;
+  }
+  @media (max-width:600px){
+    .data-row{grid-template-columns:1fr;}
+  }
+  .data-row:last-child{border-bottom:none;}
+  .data-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.05em;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    padding-top:1px;
+  }
+  .data-value{color:var(--text-bright);}
+  .data-value.accent{color:var(--cyan);}
+
+  /* Contact icons */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:14px;
+    margin-top:8px;
+  }
+  .contact-card{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:16px 18px;
+    border:1px solid var(--border);
+    border-radius:6px;
+    transition:border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+  }
+  .contact-card:hover, .contact-card:focus-visible{
+    border-color:var(--cyan);
+    background:rgba(92,207,230,0.05);
+    transform:translateY(-2px);
+  }
+  .icon-box{
+    width:38px; height:38px;
+    border:1px solid var(--border-bright);
+    border-radius:6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--cyan);
+    flex-shrink:0;
+  }
+  .icon-box svg{width:19px; height:19px;}
+  .contact-text .contact-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    color:var(--text-faint);
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+  }
+  .contact-text .contact-value{
+    font-size:13.5px;
+    color:var(--text-bright);
+    margin-top:2px;
+    word-break:break-all;
+  }
+
+  /* Project / experience cards */
+  .card{
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:20px 22px;
+    margin-bottom:16px;
+  }
+  .card-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:6px;
+  }
+  .card-title{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14.5px;
+    font-weight:600;
+    color:var(--text-bright);
+  }
+  .card-org{color:var(--text-dim); font-size:12.5px; margin-top:2px;}
+  .card-meta{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--text-faint);
+    text-align:right;
+    white-space:nowrap;
+  }
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.04em;
+    padding:3px 8px;
+    border-radius:4px;
+    border:1px solid var(--border-bright);
+    text-transform:uppercase;
+  }
+  .badge.active{color:var(--amber); border-color:rgba(255,180,84,0.35);}
+  .badge.complete{color:var(--green); border-color:rgba(127,216,143,0.35);}
+
+  .card ul{
+    margin:10px 0 12px 0;
+    padding-left:18px;
+    color:var(--text-dim);
+    font-size:13px;
+    line-height:1.6;
+  }
+  .card ul li::marker{color:var(--cyan);}
+
+  .stack-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:10px;
+  }
+  .stack-chip{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    color:var(--text-dim);
+    border:1px solid var(--border);
+    border-radius:4px;
+    padding:3px 8px;
+  }
+
+  .status-note{
+    font-size:12.5px;
+    color:var(--text-faint);
+    border-left:2px solid var(--amber);
+    padding:8px 12px;
+    margin-top:10px;
+    background:rgba(255,180,84,0.04);
+  }
+
+  footer.page-footer{
+    text-align:center;
+    color:var(--text-faint);
+    font-size:11px;
+    font-family:'JetBrains Mono', monospace;
+    padding:24px 0 8px;
+  }
+
+  /* ---------- BOOT SEQUENCE ---------- */
+  #boot-overlay{
+    position:fixed; inset:0;
+    background:#05070c;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  #boot-overlay.hidden{
+    animation:boot-fade-out 0.5s ease forwards;
+    pointer-events:none;
+  }
+  @keyframes boot-fade-out{ to{opacity:0; visibility:hidden;} }
+  .boot-text{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--green);
+    line-height:1.9;
+    max-width:520px;
+    width:100%;
+  }
+  .boot-line{ opacity:0; white-space:pre; }
+  .boot-line.show{ opacity:1; }
+  .boot-line .ok{ color:var(--cyan); float:right; }
+  .boot-cursor{
+    display:inline-block; width:8px; height:14px;
+    background:var(--cyan); margin-left:4px;
+    vertical-align:middle;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .boot-cursor{ animation:cursor-blink 0.9s steps(1) infinite; }
+  }
+  @keyframes cursor-blink{ 50%{ opacity:0; } }
+
+  /* ---------- HUD CORNER BRACKETS ---------- */
+  .frame{ position:relative; }
+  .hud-corner{
+    position:absolute;
+    width:22px; height:22px;
+    border:2px solid var(--cyan);
+    opacity:0.55;
+    z-index:2;
+    pointer-events:none;
+  }
+  .hud-corner.tl{ top:8px; left:8px; border-right:none; border-bottom:none; }
+  .hud-corner.tr{ top:8px; right:8px; border-left:none; border-bottom:none; }
+  .hud-corner.bl{ bottom:8px; left:8px; border-right:none; border-top:none; }
+  .hud-corner.br{ bottom:8px; right:8px; border-left:none; border-top:none; }
+
+  /* ---------- SCANLINE ATMOSPHERE ---------- */
+  .scanlines{
+    position:fixed; inset:0;
+    z-index:3;
+    pointer-events:none;
+    background:repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.012) 0px,
+      rgba(255,255,255,0.012) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    mix-blend-mode:overlay;
+  }
+
+  /* ---------- DEPTH / GLOW ---------- */
+  .topbar{ box-shadow:0 0 24px rgba(92,207,230,0.04), inset 0 1px 0 rgba(255,255,255,0.02); }
+  .panel{ box-shadow:0 0 40px rgba(92,207,230,0.03), 0 20px 60px rgba(0,0,0,0.4); }
+  .sidebar{ box-shadow:0 20px 60px rgba(0,0,0,0.35); }
+  .nav-item.active{ box-shadow:inset 3px 0 8px -3px rgba(92,207,230,0.4); }
+  h1.name .role{ text-shadow:0 0 18px rgba(92,207,230,0.35); }
+  .contact-card:hover, .contact-card:focus-visible{
+    box-shadow:0 0 24px rgba(92,207,230,0.12), 0 8px 20px rgba(0,0,0,0.3);
+  }
+  .card{ transition:border-color 0.2s ease, box-shadow 0.2s ease; }
+  .card:hover{
+    border-color:var(--border-bright);
+    box-shadow:0 0 24px rgba(0,0,0,0.25);
+  }
+
+  /* ---------- PROJECT MEDIA ---------- */
+  .media-strip{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+    gap:10px;
+    margin-top:14px;
+  }
+  .media-slot{
+    aspect-ratio:16/10;
+    border:1px dashed var(--border-bright);
+    border-radius:5px;
+    overflow:hidden;
+    position:relative;
+    background:rgba(255,255,255,0.015);
+  }
+  .media-slot img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .media-slot.empty{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    color:var(--text-faint);
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.04em;
+    text-align:center;
+    padding:10px;
+  }
+  .media-slot.empty svg{ width:20px; height:20px; opacity:0.5; }
+  .media-caption{
+    position:absolute;
+    bottom:0; left:0; right:0;
+    background:linear-gradient(transparent, rgba(5,7,12,0.85));
+    color:var(--text-dim);
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    padding:14px 8px 6px;
+  }
+</style>
 </head>
 <body>
-    <!-- MISSION CONSOLE BOOT SEQUENCE -->
-    <div id="boot-sequence">
-        <pre>
-// MISSION_CONSOLE — SYS_INIT
-1. GNC_MODULE[OK]
-2. NAV_FILTER[OK]
-3. VISION_PIPE[OK]
-4. COMMS_LINK[STANDBY]
-5. CONSOLE_UI[ONLINE]
-        </pre>
-        <a href="#" onclick="skipBoot(); return false;">Skip init →</a>
+
+<div id="boot-overlay">
+  <div class="boot-text" id="boot-text"></div>
+</div>
+<div class="scanlines"></div>
+
+<div class="frame">
+  <div class="hud-corner tl"></div>
+  <div class="hud-corner tr"></div>
+  <div class="hud-corner bl"></div>
+  <div class="hud-corner br"></div>
+
+  <div class="topbar">
+    <div class="topbar-group">
+      <span><span class="label">SYS:</span><span class="val">VN-OS</span></span>
+      <span><span class="label">NODE:</span><span class="val">GNC_CORE</span></span>
+      <span><span class="label">STATE:</span><span class="val status-nominal"><span class="pulse-dot green"></span>NOMINAL</span></span>
     </div>
+    <div class="topbar-group">
+      <span><span class="label">UTC:</span><span class="val" id="utc-clock">--:--:--</span></span>
+      <span><span class="label">MET:</span><span class="val" id="met-clock">T+000:00:00:00</span></span>
+      <span><span class="label">STATUS:</span><span class="val status-seeking"><span class="pulse-dot amber"></span>ACTIVE SEEKING</span></span>
+    </div>
+  </div>
 
-    <header>
-        <h1>VIN NAIR // GNC & AUTONOMY ENGINEER</h1>
-        <p>STATUS: SEEKING AEROSPACE SOFTWARE / GNC / HIL VERIFICATION ROLES</p>
-        <p>Aerospace engineering student at Texas A&M building flight-software verification systems, Raspberry Pi hardware-in-the-loop demos, binary command/telemetry links, watchdog and health-monitor logic, and GPS-denied navigation projects.</p>
-    </header>
+  <div class="layout">
 
-    <main>
-        <!-- FLAGSHIP PROJECT -->
-        <section class="flagship">
-            <h2>Flagship engineering case study</h2>
-            <h3>AstraSim-FSW — Flight Software HIL Verification Workstation</h3>
-            <p>C++17/Python flight-software-in-the-loop framework with UDP command/telemetry, binary packets, CRC-16 validation, command acknowledgements, fault injection, watchdog and health monitoring, YAML scenarios, Monte Carlo regression, plots, and Raspberry Pi aarch64 HIL evidence.</p>
-            <ul>
-                <li>9/9 CTest suites</li>
-                <li>5/5 scenarios</li>
-                <li>25/25 Monte Carlo</li>
-                <li>Pi HIL verified</li>
-            </ul>
-            <a href="projects.html#astrasim-fsw">Read case study</a>
-        </section>
+    <nav class="sidebar" aria-label="Section navigation">
+      <button class="nav-item active" data-view="profile" onclick="switchView('profile', this)">
+        <span>Profile</span><span class="sys-id">[01]</span>
+      </button>
+      <button class="nav-item" data-view="experience" onclick="switchView('experience', this)">
+        <span>Experience</span><span class="sys-id">[02]</span>
+      </button>
+      <button class="nav-item" data-view="projects" onclick="switchView('projects', this)">
+        <span>Projects</span><span class="sys-id">[03]</span>
+      </button>
+      <button class="nav-item" data-view="contact" onclick="switchView('contact', this)">
+        <span>Contact</span><span class="sys-id">[04]</span>
+      </button>
 
-        <!-- PANELS / NAVIGATION -->
-        <section class="panels">
-            <div class="panel">
-                <h4>PANEL 01 // PROJECTS</h4>
-                <p>Payload manifest</p>
-                <p>ASTRA-FSW — HIL VERIFIED</p>
-                <p>GHOST — ACTIVE</p>
+      <div class="sidebar-footer">
+        <div class="meter-label"><span>SYS_LOAD</span><span>62%</span></div>
+        <div class="meter-track"><div class="meter-fill amber"></div></div>
+        <div class="meter-label"><span>MEM_USE</span><span>38%</span></div>
+        <div class="meter-track"><div class="meter-fill cyan"></div></div>
+        <div class="copyright">V.NAIR &copy; 2026</div>
+      </div>
+    </nav>
+
+    <main class="panel">
+
+      <!-- PROFILE -->
+      <section class="view active" id="view-profile">
+        <h1 class="name">VINAYAK NAIR <span class="role">// GNC ENGINEER</span></h1>
+        <p class="bio">Aerospace engineering student at Texas A&amp;M. Specializing in flight-software verification, hardware-in-the-loop architectures, GPS-denied state estimation, and structural analysis. Ready for deployment.</p>
+
+        <h2 class="section-title">System Parameters</h2>
+        <div class="data-grid">
+          <div class="data-row reveal-row" style="animation-delay:0.03s"><div class="data-label">Education</div><div class="data-value">Texas A&amp;M University, B.S. Aerospace Engineering</div></div>
+          <div class="data-row reveal-row" style="animation-delay:0.07s"><div class="data-label">Graduation</div><div class="data-value">May 2027</div></div>
+          <div class="data-row reveal-row" style="animation-delay:0.11s"><div class="data-label">GPA</div><div class="data-value">3.45 / 4.00</div></div>
+          <div class="data-row reveal-row" style="animation-delay:0.15s"><div class="data-label">Focus</div><div class="data-value accent">GNC / Autonomy / FSW Verification / Structures</div></div>
+          <div class="data-row reveal-row" style="animation-delay:0.19s"><div class="data-label">Core Stack</div><div class="data-value">C++17, Python, MATLAB, NumPy/SciPy, SolidWorks, Abaqus FEA, PX4 SITL, Linux</div></div>
+        </div>
+
+        <h2 class="section-title">Verified Capabilities</h2>
+        <div class="data-grid">
+          <div class="data-row reveal-row" style="animation-delay:0.03s"><div class="data-label">Structures / FEA</div><div class="data-value">Identified 3 structural failure sites under 2.5G flight loading via Static/Thermal/Modal FEA on a 24-part aircraft assembly (AeroFrame-MD11)</div></div>
+          <div class="data-row reveal-row" style="animation-delay:0.07s"><div class="data-label">GNC Simulation</div><div class="data-value">Validated 6-DOF booster descent GNC across 500 Monte Carlo runs to sub-2.0m landing accuracy</div></div>
+          <div class="data-row reveal-row" style="animation-delay:0.11s"><div class="data-label">State Estimation</div><div class="data-value">Built a dual-filter ESKF/vision tracking pipeline on embedded Linux hardware (GHOST — in progress)</div></div>
+          <div class="data-row reveal-row" style="animation-delay:0.15s"><div class="data-label">Embedded / Real-Time</div><div class="data-value">Achieved sub-100ms closed-loop latency integrating YOLO detection, Kalman filtering, and motor control on Raspberry Pi 4</div></div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section class="view" id="view-experience">
+        <h2 class="section-title" style="margin-top:0;">Experience</h2>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <div class="card-title">Spacecraft Systems Engineer — TAMU-SPIRIT Capstone</div>
+              <div class="card-org">Aegis Aerospace / ISS · College Station, TX</div>
             </div>
+            <div class="card-meta">Jan 2026 – Present</div>
+          </div>
+          <ul>
+            <li>Maintained 100% milestone compliance for 4 ISS-bound experiments targeting Sep 2028 SpaceX Dragon launch by managing engineering change requests and NASA compliance tracking through SCR, SRR, and PDR government design reviews</li>
+            <li>Reduced thermal design risk for DASH by performing material selection trades and thermal analysis across &minus;120&deg;C to +120&deg;C LEO cycling</li>
+            <li>Advanced the project toward late-2026 hardware manufacturing by coordinating quality documentation across an 8-person engineering team</li>
+          </ul>
+          <div class="stack-row">
+            <span class="stack-chip">SCR/SRR/PDR</span><span class="stack-chip">NASA/DCMA Compliance</span><span class="stack-chip">Thermal Analysis</span>
+          </div>
+        </div>
 
-            <div class="panel">
-                <h4>PANEL 02 // RESUME</h4>
-                <img src="assets/headshot.jpg" alt="Vinayak Nair Headshot" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid #ffb300; margin-bottom: 10px;">
-                <p>Crew file: V. NAIR</p>
-                <p>Education: TAMU AERO '27</p>
-                <p>GPA: 3.5</p>
-                <p>Focus: GNC / AUTONOMY</p>
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <div class="card-title">Controls &amp; Embedded Systems Engineer</div>
+              <div class="card-org">BLNC Turtle Robotics · College Station, TX</div>
             </div>
+            <div class="card-meta">Aug – Dec 2025</div>
+          </div>
+          <ul>
+            <li>Reduced motor validation errors by standardizing bench-test procedures in LabVIEW and maintaining as-built documentation</li>
+            <li>Achieved full autonomous stabilization of a two-wheeled inverted pendulum rover, building hardware from component level and implementing cascaded PID control</li>
+          </ul>
+          <div class="stack-row">
+            <span class="stack-chip">LabVIEW</span><span class="stack-chip">Cascaded PID</span><span class="stack-chip">HIL Testing</span>
+          </div>
+        </div>
 
-            <div class="panel">
-                <h4>PANEL 03 // SKILLS</h4>
-                <p>Systems online check</p>
-                <p>✓ Languages (Python, C++, MATLAB)</p>
-                <p>✓ GNC / Estimation (EKF, ESKF)</p>
-                <p>✓ Robotics / Autonomy (ROS2, PX4)</p>
-                <p>✓ Structures (Abaqus FEA)</p>
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <div class="card-title">Undergraduate Research Assistant</div>
+              <div class="card-org">TAMU ACE Lab · Dr. Sasangohar · College Station, TX</div>
             </div>
+            <div class="card-meta">Dec 2023 – Dec 2024</div>
+          </div>
+          <ul>
+            <li>Cut manual analysis time by 40% and accelerated report delivery by 2 days by building a Python pipeline processing 5,000+ data points per run</li>
+          </ul>
+          <div class="stack-row">
+            <span class="stack-chip">Python</span><span class="stack-chip">Data Pipelines</span>
+          </div>
+        </div>
+      </section>
 
-            <div class="panel">
-                <h4>PANEL 04 // ABOUT</h4>
-                <p>Briefing: Fast Track BS/MS at Texas A&M. GNC-focused engineer with long-term interest in spacecraft systems and human spaceflight.</p>
-            </div>
+      <!-- PROJECTS -->
+      <section class="view" id="view-projects">
+        <h2 class="section-title" style="margin-top:0;">Projects</h2>
 
-            <div class="panel">
-                <h4>PANEL 05 // CONTACT</h4>
-                <p>Comms link</p>
-                <p><a href="mailto:Vin@tamu.edu">PORT A: Vin@tamu.edu</a></p>
-                <p><a href="https://www.linkedin.com/in/vinayakmnair/" target="_blank">PORT B: linkedin.com/in/vinayakmnair</a></p>
-                <p><a href="https://github.com/XpiredRuby" target="_blank">PORT C: github.com/XpiredRuby</a></p>
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <div class="card-title">GHOST — GPS-Denied Hardware Occlusion-Survivable Tracker</div>
+              <div class="card-org">Dual-filter ESKF / vision pipeline, PX4 SITL</div>
             </div>
-        </section>
+            <div class="card-meta">
+              <span class="badge active">In Progress</span>
+            </div>
+          </div>
+          <ul>
+            <li>Building a dual ESKF/CV state estimation pipeline on Raspberry Pi 4B + IMX296 camera + ICM-42688-P IMU, communicating with PX4 SITL over UDP MAVLink</li>
+            <li>Design iterated through 10 revisions with 20 documented engineering flaws found and fixed via external review</li>
+          </ul>
+          <div class="status-note">Currently hardware-blocked on an IMX296 camera driver/kernel issue on Ubuntu 22.04 — software layer (ESKF, CV filter, NIS validation, CI) is complete and committed.</div>
+          <div class="stack-row">
+            <span class="stack-chip">C++</span><span class="stack-chip">Python</span><span class="stack-chip">ESKF</span><span class="stack-chip">PX4 SITL</span><span class="stack-chip">MAVLink</span>
+          </div>
+          <div class="media-strip">
+            <!-- Replace src below with your actual hardware rig photo, e.g. media/ghost-rig.jpg -->
+            <div class="media-slot empty" data-caption="Hardware rig">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
+              <span>ADD: HARDWARE RIG PHOTO<br>(Pi 4B + IMX296 + ICM-42688-P)</span>
+            </div>
+            <div class="media-slot empty" data-caption="PX4 SITL sim">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
+              <span>ADD: PX4 SITL<br>SIMULATION SCREENSHOT</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <div class="card-title">MD-11 Aircraft CAD Assembly &amp; Structural Analysis</div>
+              <div class="card-org">SolidWorks · Abaqus FEA (Static / Thermal / Modal)</div>
+            </div>
+            <div class="card-meta">
+              <span class="badge complete">Complete</span><br>Jun 2025
+            </div>
+          </div>
+          <ul>
+            <li>Identified 3 structural failure sites under 2.5G flight loading by modeling a 24-part aircraft assembly with full parametric CAD and GD&amp;T</li>
+            <li>Produced a complete manufacturing-release drawing package with fabrication callouts and BOM</li>
+          </ul>
+          <div class="stack-row">
+            <span class="stack-chip">SolidWorks</span><span class="stack-chip">Abaqus FEA</span><span class="stack-chip">GD&amp;T</span>
+          </div>
+          <div class="media-strip">
+            <div class="media-slot empty" data-caption="CAD assembly">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
+              <span>ADD: SOLIDWORKS<br>ASSEMBLY RENDER</span>
+            </div>
+            <div class="media-slot empty" data-caption="FEA stress plot">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
+              <span>ADD: ABAQUS FEA<br>STRESS-CONTOUR PLOT</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <div class="card-title">Rocket Landing GNC Simulation</div>
+              <div class="card-org">Python · 6-DOF · Monte Carlo · PID / TVC</div>
+            </div>
+            <div class="card-meta">
+              <span class="badge complete">Complete</span><br>Dec 2025
+            </div>
+          </div>
+          <ul>
+            <li>Validated GNC robustness across 500 Monte Carlo stochastic wind runs with sub-2.0m landing accuracy</li>
+            <li>Developed a 6-DOF booster descent simulator with aerothermodynamic heating and propulsion modeling</li>
+          </ul>
+          <div class="stack-row">
+            <span class="stack-chip">Python</span><span class="stack-chip">6-DOF Sim</span><span class="stack-chip">Monte Carlo</span>
+          </div>
+          <div class="media-strip">
+            <div class="media-slot empty" data-caption="Monte Carlo dispersion">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
+              <span>ADD: 500-RUN MONTE CARLO<br>LANDING DISPERSION PLOT</span>
+            </div>
+            <div class="media-slot empty" data-caption="6-DOF trajectory">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
+              <span>ADD: 6-DOF DESCENT<br>TRAJECTORY PLOT</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <div class="card-title">AI-Powered Autonomous Interception Robot</div>
+              <div class="card-org">Python · YOLO · Kalman Filter · Raspberry Pi</div>
+            </div>
+            <div class="card-meta">
+              <span class="badge complete">Complete</span><br>Jan 2026
+            </div>
+          </div>
+          <ul>
+            <li>Achieved sub-100ms closed-loop latency on embedded Linux hardware</li>
+            <li>Integrated YOLO object detection, Kalman filter state estimation, and PWM motor control on a Raspberry Pi 4</li>
+          </ul>
+          <div class="stack-row">
+            <span class="stack-chip">YOLO</span><span class="stack-chip">Kalman Filter</span><span class="stack-chip">Raspberry Pi</span>
+          </div>
+          <div class="media-strip">
+            <div class="media-slot empty" data-caption="Robot hardware">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
+              <span>ADD: ROBOT HARDWARE<br>PHOTO</span>
+            </div>
+            <div class="media-slot empty" data-caption="YOLO detection output">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
+              <span>ADD: YOLO DETECTION<br>BOUNDING-BOX FRAME</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="view" id="view-contact">
+        <h2 class="section-title" style="margin-top:0;">Direct Comms</h2>
+        <div class="contact-grid">
+
+          <a class="contact-card" href="mailto:vinhoustontexas@gmail.com">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M3 6.5l9 6.5 9-6.5"/></svg>
+            </div>
+            <div class="contact-text">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">vinhoustontexas@gmail.com</div>
+            </div>
+          </a>
+
+          <a class="contact-card" href="https://linkedin.com/in/Vin2005" target="_blank" rel="noopener">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.2" cy="8.5" r="0.6" fill="currentColor" stroke="none"/><path d="M8.2 11v6"/><path d="M12 17v-3.6c0-1.5 1.2-2.4 2.5-2.4s2.3 0.9 2.3 2.4V17"/></svg>
+            </div>
+            <div class="contact-text">
+              <div class="contact-label">LinkedIn</div>
+              <div class="contact-value">linkedin.com/in/Vin2005</div>
+            </div>
+          </a>
+
+          <a class="contact-card" href="https://github.com/XpiredRuby" target="_blank" rel="noopener">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2-.2 4.5-1 4.5-4.5 0-1-.4-1.8-1-2.5.1-.2.4-1.2-.1-2.5 0 0-.8-.3-2.7 1a9.4 9.4 0 0 0-5 0c-1.9-1.3-2.7-1-2.7-1-.5 1.3-.2 2.3-.1 2.5-.6.7-1 1.5-1 2.5 0 3.5 2.5 4.3 4.5 4.5-.4.4-.5.8-.5 1.5v3"/></svg>
+            </div>
+            <div class="contact-text">
+              <div class="contact-label">GitHub</div>
+              <div class="contact-value">github.com/XpiredRuby</div>
+            </div>
+          </a>
+
+          <a class="contact-card" href="tel:+14132756713">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4.5c0-1 .8-1.5 1.5-1.5h2.4c.6 0 1.1.4 1.3 1l1 3.2c.2.6 0 1.2-.4 1.6l-1.4 1.3a13 13 0 0 0 5.5 5.5l1.3-1.4c.4-.4 1-.6 1.6-.4l3.2 1c.6.2 1 .7 1 1.3v2.4c0 .7-.5 1.5-1.5 1.5C10.5 20 4 13.5 4 4.5z"/></svg>
+            </div>
+            <div class="contact-text">
+              <div class="contact-label">Phone</div>
+              <div class="contact-value">(413) 275-6713</div>
+            </div>
+          </a>
+
+        </div>
+      </section>
+
     </main>
+  </div>
 
-    <script src="main.min.js"></script>
+  <footer class="page-footer">TEXAS A&amp;M UNIVERSITY // AEROSPACE ENGINEERING // CLASS OF 2027</footer>
+
+</div>
+
+<script>
+  function switchView(view, btn){
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('view-' + view).classList.add('active');
+    btn.classList.add('active');
+
+    // restart stagger animations on the newly shown view
+    var rows = document.getElementById('view-' + view).querySelectorAll('.reveal-row');
+    rows.forEach(function(r){
+      r.style.animation = 'none';
+      void r.offsetWidth;
+      r.style.animation = '';
+    });
+  }
+
+  // Live UTC clock
+  function updateClock(){
+    var now = new Date();
+    var h = String(now.getUTCHours()).padStart(2,'0');
+    var m = String(now.getUTCMinutes()).padStart(2,'0');
+    var s = String(now.getUTCSeconds()).padStart(2,'0');
+    document.getElementById('utc-clock').textContent = h+':'+m+':'+s;
+  }
+
+  // Mission Elapsed Time — counting from portfolio "launch" epoch
+  var metEpoch = new Date('2025-01-01T00:00:00Z').getTime();
+  function updateMET(){
+    var diff = Date.now() - metEpoch;
+    var totalSec = Math.floor(diff / 1000);
+    var days = Math.floor(totalSec / 86400);
+    var hrs = String(Math.floor((totalSec % 86400) / 3600)).padStart(2,'0');
+    var mins = String(Math.floor((totalSec % 3600) / 60)).padStart(2,'0');
+    var secs = String(totalSec % 60).padStart(2,'0');
+    document.getElementById('met-clock').textContent = 'T+'+String(days).padStart(3,'0')+':'+hrs+':'+mins+':'+secs;
+  }
+
+  updateClock();
+  updateMET();
+  setInterval(updateClock, 1000);
+  setInterval(updateMET, 1000);
+
+  // ---------- BOOT SEQUENCE ----------
+  var bootLines = [
+    'INITIALIZING VN-OS...',
+    'LOADING NODE: GNC_CORE...',
+    'AUTHENTICATING USER: VINAYAK NAIR',
+    'MOUNTING SUBSYSTEMS: PROFILE / EXPERIENCE / PROJECTS / CONTACT',
+    'SYSTEM STATE: NOMINAL',
+    'STATUS: ACTIVE SEEKING'
+  ];
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var bootTextEl = document.getElementById('boot-text');
+  var bootOverlay = document.getElementById('boot-overlay');
+
+  function finishBoot(){
+    bootOverlay.classList.add('hidden');
+    setTimeout(function(){ bootOverlay.style.display = 'none'; }, 550);
+  }
+
+  if(reduceMotion){
+    finishBoot();
+  } else {
+    var i = 0;
+    function typeNextLine(){
+      if(i >= bootLines.length){
+        setTimeout(finishBoot, 350);
+        return;
+      }
+      var line = document.createElement('div');
+      line.className = 'boot-line show';
+      var okTag = (i === bootLines.length - 1) ? '' : '<span class="ok">OK</span>';
+      line.innerHTML = bootLines[i] + okTag;
+      bootTextEl.appendChild(line);
+      i++;
+      setTimeout(typeNextLine, 260);
+    }
+    setTimeout(typeNextLine, 200);
+  }
+</script>
+
 </body>
 </html>
