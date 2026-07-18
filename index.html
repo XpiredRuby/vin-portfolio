@@ -1,289 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Vinayak Nair is an Aerospace Engineering student at Texas A&amp;M building flight-software verification, Raspberry Pi HIL systems, autonomous navigation, GNC, and embedded test infrastructure.">
-  <meta name="author" content="Vinayak Nair">
-  <link rel="canonical" href="https://xpiredruby.github.io/vin-portfolio/">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Vinayak Nair">
-  <meta property="og:title" content="Vinayak Nair | Aerospace Software, GNC &amp; HIL Verification">
-  <meta property="og:description" content="Aerospace engineering student building C++/Python flight-software verification systems, Raspberry Pi HIL demos, autonomous navigation, and GNC tooling.">
-  <meta property="og:url" content="https://xpiredruby.github.io/vin-portfolio/">
-  <meta property="og:image" content="https://xpiredruby.github.io/vin-portfolio/assets/og-image.svg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Vinayak Nair | Aerospace Software, GNC &amp; HIL Verification">
-  <meta name="twitter:description" content="Aerospace engineering student building C++/Python flight-software verification systems, Raspberry Pi HIL demos, autonomous navigation, and GNC tooling.">
-  <meta name="twitter:image" content="https://xpiredruby.github.io/vin-portfolio/assets/og-image.svg">
-  <title>Vinayak Nair | Aerospace Software, GNC &amp; HIL Verification</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinayak Nair // GNC & Autonomy Engineer</title>
+    <link rel="stylesheet" href="styles.min.css">
 </head>
-<body class="home">
-  <a href="#main-content" class="skip-link">Skip to content</a>
-
-  <div id="boot-sequence" class="boot-sequence" role="dialog" aria-label="System initialization" aria-modal="true" hidden>
-    <div class="boot-panel">
-      <p class="boot-header">// MISSION_CONSOLE — SYS_INIT</p>
-      <ol class="boot-lines">
-        <li>GNC_MODULE<span class="boot-dots" aria-hidden="true"></span><span class="boot-status">[OK]</span></li>
-        <li>NAV_FILTER<span class="boot-dots" aria-hidden="true"></span><span class="boot-status">[OK]</span></li>
-        <li>VISION_PIPE<span class="boot-dots" aria-hidden="true"></span><span class="boot-status">[OK]</span></li>
-        <li>COMMS_LINK<span class="boot-dots" aria-hidden="true"></span><span class="boot-status">[STANDBY]</span></li>
-        <li>CONSOLE_UI<span class="boot-dots" aria-hidden="true"></span><span class="boot-status boot-status-live">[ONLINE]</span></li>
-      </ol>
-      <button type="button" class="boot-skip btn btn-primary" id="boot-skip">Skip init →</button>
-    </div>
-  </div>
-
-  <div class="page mission-console">
-    <div class="hud-layer" aria-hidden="true">
-      <div class="hud-grid"></div>
-      <div class="hud-radar-sweep"></div>
-      <span class="hud-bracket hud-bracket-tl"></span>
-      <span class="hud-bracket hud-bracket-tr"></span>
-      <span class="hud-bracket hud-bracket-bl"></span>
-      <span class="hud-bracket hud-bracket-br"></span>
+<body>
+    <!-- MISSION CONSOLE BOOT SEQUENCE -->
+    <div id="boot-sequence">
+        <pre>
+// MISSION_CONSOLE — SYS_INIT
+1. GNC_MODULE[OK]
+2. NAV_FILTER[OK]
+3. VISION_PIPE[OK]
+4. COMMS_LINK[STANDBY]
+5. CONSOLE_UI[ONLINE]
+        </pre>
+        <a href="#" onclick="skipBoot(); return false;">Skip init →</a>
     </div>
 
-    <header class="status-bar" role="banner">
-      <div class="status-bar-inner">
-        <p class="status-bar-id">VIN NAIR // GNC &amp; AUTONOMY ENGINEER</p>
-        <div class="status-bar-clocks" aria-label="Mission time readouts">
-          <div class="clock-readout">
-            <span class="clock-label">UTC TIME</span>
-            <time id="utc-clock" class="clock-value" datetime="" aria-live="off">00:00:00 UTC</time>
-          </div>
-          <div class="clock-readout">
-            <span class="clock-label">T+ MISSION CLOCK</span>
-            <span id="elapsed-clock" class="clock-value" aria-live="off">T+0d 0h 0m</span>
-          </div>
-          <div class="clock-readout track-readout" id="track-readout">
-            <span class="clock-label">CURSOR TRACK</span>
-            <span id="cursor-track" class="clock-value" aria-live="off">X +0.00 Y +0.00</span>
-          </div>
-          <div class="clock-readout scroll-readout">
-            <span class="clock-label">SCROLL DEPTH</span>
-            <span id="scroll-depth" class="clock-value" aria-live="off">000%</span>
-          </div>
-        </div>
-      </div>
-      <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+    <header>
+        <h1>VIN NAIR // GNC & AUTONOMY ENGINEER</h1>
+        <p>STATUS: SEEKING AEROSPACE SOFTWARE / GNC / HIL VERIFICATION ROLES</p>
+        <p>Aerospace engineering student at Texas A&M building flight-software verification systems, Raspberry Pi hardware-in-the-loop demos, binary command/telemetry links, watchdog and health-monitor logic, and GPS-denied navigation projects.</p>
     </header>
 
-    <main id="main-content">
-      <div class="console-container">
-        <section class="pfd-hero" aria-labelledby="pfd-heading">
-          <div class="pfd-hero-grid">
-            <div class="pfd-hero-copy">
-              <p class="pfd-meta">PRIMARY FLIGHT DISPLAY // CALLSIGN VN-01</p>
-              <h1 id="pfd-heading" class="pfd-name">VINAYAK NAIR</h1>
-              <p class="pfd-status">
-                <span class="status-dot status-dot-seeking" aria-hidden="true"></span>
-                STATUS: SEEKING AEROSPACE SOFTWARE / GNC / HIL VERIFICATION ROLES
-              </p>
-              <p class="pfd-bio">Aerospace engineering student at Texas A&amp;M building flight-software verification systems, Raspberry Pi hardware-in-the-loop demos, binary command/telemetry links, watchdog and health-monitor logic, and GPS-denied navigation projects.</p>
-            </div>
-            <div class="pfd-instruments" aria-hidden="true">
-              <div class="attitude-indicator">
-                <div class="attitude-sky"></div>
-                <div class="attitude-ground"></div>
-                <div class="attitude-ring"></div>
-                <div class="attitude-aircraft"></div>
-                <span class="attitude-label">ATT</span>
-              </div>
-              <div class="heading-readout">
-                <span class="heading-label">HDG</span>
-                <span class="heading-value" id="heading-value">087°</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="flagship-project" aria-labelledby="flagship-heading">
-          <div class="flagship-copy">
-            <p class="section-label">Flagship engineering case study</p>
-            <h2 id="flagship-heading">AstraSim-FSW — Flight Software HIL Verification Workstation</h2>
+    <main>
+        <!-- FLAGSHIP PROJECT -->
+        <section class="flagship">
+            <h2>Flagship engineering case study</h2>
+            <h3>AstraSim-FSW — Flight Software HIL Verification Workstation</h3>
             <p>C++17/Python flight-software-in-the-loop framework with UDP command/telemetry, binary packets, CRC-16 validation, command acknowledgements, fault injection, watchdog and health monitoring, YAML scenarios, Monte Carlo regression, plots, and Raspberry Pi aarch64 HIL evidence.</p>
-            <div class="flagship-metrics" aria-label="AstraSim verification metrics">
-              <span>9/9 CTest suites</span>
-              <span>5/5 scenarios</span>
-              <span>25/25 Monte Carlo</span>
-              <span>Pi HIL verified</span>
-            </div>
-            <div class="project-actions">
-              <a href="projects.html#astrasim-fsw" class="btn btn-primary">Read case study</a>
-              <a href="demos/astrasim-fsw-hil-workstation.html" class="btn btn-external">Open HIL workstation</a>
-              <a href="https://github.com/XpiredRuby/AstraSim-FSW" class="btn btn-external" target="_blank" rel="noopener noreferrer">Source repository</a>
-            </div>
-          </div>
-          <div class="flagship-panel" aria-hidden="true">
-            <div class="flagship-screen">
-              <span class="screen-label">HIL VERIFICATION</span>
-              <strong>NOMINAL</strong>
-              <small>fault=NONE · ack=SET_MODE · crc=VALID</small>
-              <div class="screen-bars">
-                <i style="--w:100%"></i>
-                <i style="--w:100%"></i>
-                <i style="--w:100%"></i>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <nav class="systems-grid" aria-label="Mission systems navigation">
-          <a href="projects.html" class="instrument-panel panel-enter panel-accent-amber" style="--panel-i: 0">
-            <span class="panel-tag">PANEL 01</span>
-            <span class="panel-title">PROJECTS</span>
-            <span class="panel-subtitle">Payload manifest</span>
-            <ul class="manifest-list">
-              <li><span class="dot dot-complete" aria-hidden="true"></span> ASTRA-FSW — HIL VERIFIED</li>
-              <li><span class="dot dot-active" aria-hidden="true"></span> GHOST — ACTIVE</li>
-              <li><span class="dot dot-archived" aria-hidden="true"></span> KESTREL — ARCHIVED</li>
+            <ul>
+                <li>9/9 CTest suites</li>
+                <li>5/5 scenarios</li>
+                <li>25/25 Monte Carlo</li>
+                <li>Pi HIL verified</li>
             </ul>
-          </a>
-
-          <a href="resume.html" class="instrument-panel panel-enter panel-accent-cyan" style="--panel-i: 1">
-            <span class="panel-tag">PANEL 02</span>
-            <span class="panel-title">RESUME</span>
-            <span class="panel-subtitle">Crew file: V. NAIR</span>
-            <dl class="spec-rows">
-              <div><dt>Education</dt><dd>TAMU AERO '27</dd></div>
-              <div><dt>GPA</dt><dd>3.45</dd></div>
-              <div><dt>Focus</dt><dd>GNC / AUTONOMY</dd></div>
-            </dl>
-          </a>
-
-          <a href="#systems-skills" class="instrument-panel panel-enter panel-accent-amber" style="--panel-i: 2">
-            <span class="panel-tag">PANEL 03</span>
-            <span class="panel-title">SKILLS</span>
-            <span class="panel-subtitle">Systems online check</span>
-            <ul class="systems-check">
-              <li><span class="check-indicator" aria-hidden="true">✓</span> Languages</li>
-              <li><span class="check-indicator" aria-hidden="true">✓</span> GNC / Estimation</li>
-              <li><span class="check-indicator" aria-hidden="true">✓</span> Robotics / Autonomy</li>
-              <li><span class="check-indicator" aria-hidden="true">✓</span> Structures</li>
-            </ul>
-          </a>
-
-          <a href="about.html" class="instrument-panel panel-enter panel-accent-cyan" style="--panel-i: 3">
-            <span class="panel-tag">PANEL 04</span>
-            <span class="panel-title">ABOUT</span>
-            <span class="panel-subtitle">Briefing: Who is Vin</span>
-            <p class="panel-teaser">Fast Track BS/MS at Texas A&amp;M. GNC-focused engineer with long-term interest in spacecraft systems and human spaceflight.</p>
-          </a>
-
-          <div class="instrument-panel panel-enter panel-wide panel-contact panel-accent-amber" style="--panel-i: 4">
-            <span class="panel-tag">PANEL 05</span>
-            <span class="panel-title">CONTACT</span>
-            <span class="panel-subtitle">Comms link</span>
-            <div class="comms-links" aria-label="Contact channels">
-              <a href="mailto:vinayak.mnair@gmail.com" class="comm-link">
-                <svg class="comm-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                  <polyline points="22,6 12,13 2,6"/>
-                </svg>
-                <span class="comm-label">PORT A</span>
-                <span class="comm-value">vinayak.mnair@gmail.com</span>
-              </a>
-
-              <a href="https://linkedin.com/in/vinayakmnair" target="_blank" rel="noopener noreferrer" class="comm-link">
-                <svg class="comm-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.27c-.97 0-1.75-.78-1.75-1.75s.78-1.75 1.75-1.75 1.75.78 1.75 1.75-.78 1.75-1.75 1.75zm13.5 12.27h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-11h2.88v1.5h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.59v6.47z"/>
-                </svg>
-                <span class="comm-label">PORT B</span>
-                <span class="comm-value">linkedin.com/in/vinayakmnair</span>
-              </a>
-
-              <a href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer" class="comm-link">
-                <svg class="comm-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.305 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                <span class="comm-label">PORT C</span>
-                <span class="comm-value">github.com/XpiredRuby</span>
-              </a>
-            </div>
-            <a href="contact.html" class="comm-page-link">Full contact page →</a>
-          </div>
-        </nav>
-
-        <section id="systems-skills" class="skills-console" aria-labelledby="skills-console-heading">
-          <header class="skills-console-header">
-            <h2 id="skills-console-heading">Systems online — full checklist</h2>
-            <p class="skills-console-note">Pre-flight capability verification</p>
-          </header>
-          <div class="skills-console-grid">
-            <div class="skill-row-online">
-              <span class="skill-row-label">Languages</span>
-              <span class="skill-row-status"><span class="online-tag">ONLINE</span> Python · C++ · MATLAB</span>
-            </div>
-            <div class="skill-row-online">
-              <span class="skill-row-label">GNC / Estimation</span>
-              <span class="skill-row-status"><span class="online-tag">ONLINE</span> EKF · ESKF · ProNav · Monte Carlo · Sensor fusion</span>
-            </div>
-            <div class="skill-row-online">
-              <span class="skill-row-label">Robotics / Autonomy</span>
-              <span class="skill-row-status"><span class="online-tag">ONLINE</span> ROS2 · Gazebo · PX4 SITL · MAVLink · Raspberry Pi</span>
-            </div>
-            <div class="skill-row-online">
-              <span class="skill-row-label">Structures / Analysis</span>
-              <span class="skill-row-status"><span class="online-tag">ONLINE</span> Abaqus FEA · Structural analysis · Stress / deformation</span>
-            </div>
-            <div class="skill-row-online">
-              <span class="skill-row-label">Tools</span>
-              <span class="skill-row-status"><span class="online-tag">ONLINE</span> Git/GitHub · SSH/Linux · Cursor · SolidWorks</span>
-            </div>
-          </div>
+            <a href="projects.html#astrasim-fsw">Read case study</a>
         </section>
 
-        <section class="ghost-telemetry telemetry-panel" aria-labelledby="ghost-telemetry-heading">
-          <header class="ghost-telemetry-header">
-            <h2 id="ghost-telemetry-heading">Active mission: GHOST — GPS-Denied Hardware Occlusion-Survivable Tracker</h2>
-          </header>
-          <div class="scope-display" aria-hidden="true">
-            <svg class="scope-wave" viewBox="0 0 240 48" preserveAspectRatio="none">
-              <path class="scope-path" d="M0,24 L12,24 L18,14 L24,34 L30,18 L36,28 L42,24 L240,24" />
-            </svg>
-            <span class="scope-label">IMU / VISION — LIVE TRACE</span>
-          </div>
-          <div class="telemetry-feed" role="list">
-            <div class="telemetry-row" role="listitem">
-              <span class="t-label">Filter state</span>
-              <span class="t-leader" aria-hidden="true"></span>
-              <span class="t-value">ESKF 9-DOF <span class="telemetry-nominal">[NOMINAL]</span></span>
+        <!-- PANELS / NAVIGATION -->
+        <section class="panels">
+            <div class="panel">
+                <h4>PANEL 01 // PROJECTS</h4>
+                <p>Payload manifest</p>
+                <p>ASTRA-FSW — HIL VERIFIED</p>
+                <p>GHOST — ACTIVE</p>
             </div>
-            <div class="telemetry-row" role="listitem">
-              <span class="t-label">Pipeline completion</span>
-              <span class="t-leader" aria-hidden="true"></span>
-              <span class="t-value"><span class="pipeline-bar" id="pipeline-bar" data-target="55"><span class="pipeline-fill"></span></span> 55%</span>
+
+            <div class="panel">
+                <h4>PANEL 02 // RESUME</h4>
+                <img src="assets/headshot.jpg" alt="Vinayak Nair Headshot" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid #ffb300; margin-bottom: 10px;">
+                <p>Crew file: V. NAIR</p>
+                <p>Education: TAMU AERO '27</p>
+                <p>GPA: 3.5</p>
+                <p>Focus: GNC / AUTONOMY</p>
             </div>
-            <div class="telemetry-row" role="listitem">
-              <span class="t-label">Hardware</span>
-              <span class="t-leader" aria-hidden="true"></span>
-              <span class="t-value">Raspberry Pi 4B / IMX296 / ICM-42688-P</span>
+
+            <div class="panel">
+                <h4>PANEL 03 // SKILLS</h4>
+                <p>Systems online check</p>
+                <p>✓ Languages (Python, C++, MATLAB)</p>
+                <p>✓ GNC / Estimation (EKF, ESKF)</p>
+                <p>✓ Robotics / Autonomy (ROS2, PX4)</p>
+                <p>✓ Structures (Abaqus FEA)</p>
             </div>
-            <div class="telemetry-row" role="listitem">
-              <span class="t-label">Link status</span>
-              <span class="t-leader" aria-hidden="true"></span>
-              <span class="t-value">PX4 SITL — UDP/MAVLink <span class="telemetry-nominal">[CONNECTED]</span></span>
+
+            <div class="panel">
+                <h4>PANEL 04 // ABOUT</h4>
+                <p>Briefing: Fast Track BS/MS at Texas A&M. GNC-focused engineer with long-term interest in spacecraft systems and human spaceflight.</p>
             </div>
-          </div>
-          <div class="video-embed" aria-hidden="true"></div>
-          <p class="visually-hidden">GHOST demo media slot.</p>
-          <a href="projects.html#ghost" class="btn btn-primary ghost-log-link">View full mission log →</a>
+
+            <div class="panel">
+                <h4>PANEL 05 // CONTACT</h4>
+                <p>Comms link</p>
+                <p><a href="mailto:Vin@tamu.edu">PORT A: Vin@tamu.edu</a></p>
+                <p><a href="https://www.linkedin.com/in/vinayakmnair/" target="_blank">PORT B: linkedin.com/in/vinayakmnair</a></p>
+                <p><a href="https://github.com/XpiredRuby" target="_blank">PORT C: github.com/XpiredRuby</a></p>
+            </div>
         </section>
-      </div>
     </main>
 
-    <footer class="console-footer">
-      <p>© 2026 VINAYAK NAIR — BUILT WITH HTML/CSS/JS — SOURCE AT <a href="https://github.com/XpiredRuby/vin-portfolio" target="_blank" rel="noopener noreferrer">GITHUB.COM/XPIREDRUBY/VIN-PORTFOLIO</a></p>
-    </footer>
-  </div>
-
-  <script src="main.min.js"></script>
+    <script src="main.min.js"></script>
 </body>
 </html>
