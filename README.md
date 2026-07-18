@@ -4,7 +4,7 @@ Personal portfolio site for Vinayak Nair — aerospace engineering student focus
 
 Built with plain HTML, CSS, and JavaScript. No build step, no framework. Deployed via GitHub Pages.
 
-**Live site:** `https://xpiredruby.github.io/vin-portfolio/` (after Pages is enabled)
+**Live site:** `https://vinnair.me/` (after Pages is enabled)
 
 ## Structure
 
