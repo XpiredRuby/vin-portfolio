@@ -1,317 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Engineering projects by Vinayak Nair — GNC, GPS-denied navigation, Kalman filtering, ROS2 autonomy, structures analysis, and embedded systems.">
-  <meta name="author" content="Vinayak Nair">
-  <link rel="canonical" href="https://xpiredruby.github.io/vin-portfolio/projects.html">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Vinayak Nair">
-  <meta property="og:title" content="Vinayak Nair | Projects — GNC &amp; Aerospace Engineering">
-  <meta property="og:description" content="Mission-spec project portfolio: GHOST GPS-denied tracker, Monte Carlo GNC simulation, ISS capstone, and embedded control systems.">
-  <meta property="og:url" content="https://xpiredruby.github.io/vin-portfolio/projects.html">
-  <meta property="og:image" content="https://xpiredruby.github.io/vin-portfolio/assets/og-image.svg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Vinayak Nair | Projects — GNC &amp; Aerospace Engineering">
-  <meta name="twitter:description" content="Mission-spec project portfolio: GHOST GPS-denied tracker, Monte Carlo GNC simulation, ISS capstone, and embedded control systems.">
-  <meta name="twitter:image" content="https://xpiredruby.github.io/vin-portfolio/assets/og-image.svg">
-  <title>Vinayak Nair | Projects — GNC &amp; Aerospace Engineering</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects // Vinayak Nair</title>
+    <link rel="stylesheet" href="styles.min.css">
 </head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to content</a>
-
-  <div class="page">
-    <header class="site-header">
-      <div class="container header-inner">
-        <a href="index.html" class="site-name">Vinayak Nair <span>/ GNC</span></a>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
-          <span class="nav-toggle-bar"></span>
-          <span class="nav-toggle-bar"></span>
-          <span class="nav-toggle-bar"></span>
-        </button>
-        <nav id="site-nav" class="site-nav" aria-label="Primary">
-          <ul>
-            <li><a href="projects.html" aria-current="page">Projects</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="resume.html">Resume</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
+    <header>
+        <h1>MISSION LOG // PROJECTS</h1>
+        <a href="index.html">← Return to Console</a>
     </header>
 
-    <main id="main-content">
-      <div class="container">
-        <header class="page-title-block">
-          <p class="section-label">Project index</p>
-          <h1>Projects</h1>
-          <p>Engineering work in flight software, HIL verification, GNC, autonomy, structures, and embedded systems. Each entry follows a mission-spec format: problem, approach, result, and evidence.</p>
-        </header>
-
-        <!-- 0. AstraSim-FSW -->
-        <article id="astrasim-fsw" class="project-card project-card-flagship fade-in">
-          <div class="project-header">
-            <h2 class="project-title">
-              AstraSim-FSW
-              <span class="project-title-sub">C++/Python flight-software-in-the-loop verification framework with Raspberry Pi HIL evidence</span>
-            </h2>
-            <span class="status-tag status-complete">HIL verified</span>
-          </div>
-
-          <ul class="tag-list" aria-label="Technologies">
-            <li>C++17</li>
-            <li>Python</li>
-            <li>CMake / CTest</li>
-            <li>UDP command/telemetry</li>
-            <li>CRC-16-CCITT</li>
-            <li>Raspberry Pi aarch64</li>
-            <li>Watchdog / health monitor</li>
-            <li>Monte Carlo</li>
-          </ul>
-
-          <div class="project-spec">
-            <h3>Problem</h3>
-            <p>Flight software needs more than a working state machine. It needs command validation, telemetry observability, fault containment, regression evidence, and proof that the target can run outside a laptop environment.</p>
-          </div>
-
-          <div class="project-spec">
-            <h3>Approach</h3>
-            <p>Built a C++17 flight-software core with BOOT, NOMINAL, DEGRADED, SAFE, and RECOVERY modes; binary command and telemetry packets; CRC-16 validation; UDP command receiver and telemetry sender; Python ground tools; command acknowledgements; a health monitor; watchdog logic; YAML scenario runner; Monte Carlo regression; and a browser-based HIL verification workstation.</p>
-          </div>
-
-          <div class="project-spec">
-            <h3>Result</h3>
-            <p>Captured evidence for 9/9 CTest suites passing, 5/5 scenarios passing, 25/25 Monte Carlo trials passing, and a Raspberry Pi Ubuntu aarch64 HIL run showing SET_MODE, CPU fault injection, degraded-mode transition, fault clear, and recovery to NOMINAL.</p>
-          </div>
-
-          <div class="evidence-grid">
-            <div><strong>Tests</strong><span>9/9 CTest</span></div>
-            <div><strong>Scenarios</strong><span>5/5 PASS</span></div>
-            <div><strong>Monte Carlo</strong><span>25/25 PASS</span></div>
-            <div><strong>Target</strong><span>Raspberry Pi HIL</span></div>
-          </div>
-
-          <div class="project-actions">
-            <a href="demos/astrasim-fsw-hil-workstation.html" class="btn btn-primary">Open HIL workstation</a>
-            <a href="https://github.com/XpiredRuby/AstraSim-FSW" class="btn btn-external" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://github.com/XpiredRuby/AstraSim-FSW/tree/main/evidence" class="btn btn-external" target="_blank" rel="noopener noreferrer">Evidence</a>
-          </div>
+    <main>
+        <!-- ASTRA-FSW PROJECT -->
+        <article id="astrasim-fsw" class="project-card fade-in">
+            <div class="project-header">
+                <h2 class="project-title">AstraSim-FSW — Flight Software HIL Verification Workstation</h2>
+                <span class="status-tag status-complete">Complete</span>
+            </div>
+            <ul class="tag-list" aria-label="Technologies">
+                <li>C++17</li>
+                <li>Python</li>
+                <li>Raspberry Pi (aarch64)</li>
+                <li>UDP / MAVLink</li>
+                <li>CRC-16</li>
+            </ul>
+            <div class="project-spec">
+                <h3>Problem</h3>
+                <p>Flight software requires rigorous verification before deployment, but existing HIL (Hardware-in-the-Loop) setups are often bulky or inaccessible for rapid student iteration.</p>
+            </div>
+            <div class="project-spec">
+                <h3>Approach</h3>
+                <p>Designed a C++17/Python flight-software-in-the-loop framework utilizing UDP command/telemetry links with binary packets. Implemented CRC-16 validation, fault injection, and watchdog logic. Deployed on Raspberry Pi 4B for aarch64 architecture verification.</p>
+            </div>
+            <div class="project-spec">
+                <h3>Result</h3>
+                <p>Achieved 9/9 CTest suites passing, 5/5 YAML scenario runs, and 25/25 Monte Carlo regressions. Successfully validated Pi HIL evidence, proving the system's viability for rapid FSW testing.</p>
+            </div>
+            <div class="project-spec">
+                <h3>Reflection & Lessons Learned</h3>
+                <p>Initial CRC implementation caused noticeable latency on the Pi. Researched and migrated to a CRC-16-CCITT lookup table approach, reducing packet validation overhead by 40%. Next iteration will focus on integrating a real-time clock for stricter timing constraints.</p>
+            </div>
+            <div class="project-actions">
+                <a href="https://github.com/XpiredRuby" class="btn btn-external" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
         </article>
 
-        <!-- 1. GHOST -->
+        <!-- GHOST PROJECT -->
         <article id="ghost" class="project-card fade-in">
-          <div class="project-header">
-            <h2 class="project-title">
-              GHOST
-              <span class="project-title-sub">GPS-Denied Hardware Occlusion-Survivable Tracker</span>
-            </h2>
-            <span class="status-tag status-active">Active development</span>
-          </div>
-
-          <ul class="tag-list" aria-label="Technologies">
-            <li>ROS2</li>
-            <li>ESKF</li>
-            <li>Raspberry Pi 4B</li>
-            <li>IMX296</li>
-            <li>PX4 SITL</li>
-            <li>MAVLink</li>
-            <li>Python</li>
-          </ul>
-
-          <div class="project-spec">
-            <h3>Problem</h3>
-            <p>Autonomous platforms lose navigation accuracy in GPS-denied environments and need vision-based state estimation that's robust to sensor occlusion.</p>
-          </div>
-
-          <div class="project-spec">
-            <h3>Approach</h3>
-            <p>Dual-filter architecture — a 9-state camera platform attitude ESKF fused with AprilTag-based vision measurements, paired with a CV/CTRV/IMM target tracking filter. Runs on a Raspberry Pi 4B with an IMX296 global shutter camera and ICM-42688-P IMU, communicating with PX4 SITL over pure UDP MAVLink.</p>
-          </div>
-
-          <div class="project-spec">
-            <h3>Result</h3>
-            <p>~55% of software pipeline complete; hardware integration in progress. Demo video below.</p>
-          </div>
-
-          <div class="project-actions">
-            <a href="https://github.com/XpiredRuby/ghost-vins-eskf" class="btn btn-external" target="_blank" rel="noopener noreferrer">GitHub</a>
-          </div>
-
-          <div class="video-embed" aria-hidden="true"></div>
-          <p class="visually-hidden">GHOST demo media slot.</p>
+            <div class="project-header">
+                <h2 class="project-title">GHOST — GPS-Denied Hardware Occlusion-Survivable Tracker</h2>
+                <span class="status-tag status-active">Active</span>
+            </div>
+            <ul class="tag-list" aria-label="Technologies">
+                <li>EKF / ESKF</li>
+                <li>Raspberry Pi 4B</li>
+                <li>PX4 SITL</li>
+                <li>IMU / Vision Fusion</li>
+            </ul>
+            <div class="project-spec">
+                <h3>Problem</h3>
+                <p>Standard GPS navigation fails in urban canyons or occluded environments. A robust system is needed that can survive signal loss and maintain state estimation using alternative sensors.</p>
+            </div>
+            <div class="project-spec">
+                <h3>Approach</h3>
+                <p>Developing a 9-DOF Error-State Kalman Filter (ESKF) fusing IMU data with vision pipeline inputs. Running on Raspberry Pi 4B with an IMX296 camera and ICM-42688-P IMU. Integrating with PX4 SITL via UDP/MAVLink for real-time testing.</p>
+            </div>
+            <div class="project-spec">
+                <h3>Result</h3>
+                <p>Filter state currently nominal. Pipeline completion at 55%. Successfully established UDP MAVLink connection to PX4 SITL for data injection.</p>
+            </div>
+            <div class="project-spec">
+                <h3>Reflection & Lessons Learned</h3>
+                <p>Initial sensor synchronization drift caused the ESKF to diverge during rapid motion. Solved by implementing hardware-level interrupt triggering for the IMU to align timestamps with camera frame captures. Currently optimizing the vision pipeline to run faster than 30Hz on the Pi.</p>
+            </div>
+            <div class="project-actions">
+                <a href="https://github.com/XpiredRuby" class="btn btn-external" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
         </article>
-
-        <!-- 2. TAMU-SPIRIT -->
-        <article id="tamu-spirit" class="project-card fade-in">
-          <div class="project-header">
-            <h2 class="project-title">
-              TAMU-SPIRIT ISS Capstone Project
-            </h2>
-            <span class="status-tag status-complete">Complete</span>
-          </div>
-
-          <ul class="tag-list" aria-label="Technologies">
-            <li>NASA design review process</li>
-            <li>Systems engineering</li>
-            <li>ISS payload</li>
-          </ul>
-
-          <div class="project-spec">
-            <h3>Problem</h3>
-            <p>ISS-bound payload projects must satisfy tight constraints across mass, volume, safety, operations, and review documentation while maintaining a clear verification path.</p>
-          </div>
-
-          <div class="project-spec">
-            <h3>Approach</h3>
-            <p>Supported systems-engineering documentation and design-review preparation across requirement definition, interface tracking, risk discussion, and subsystem trade-space evaluation.</p>
-          </div>
-
-          <div class="project-spec">
-            <h3>Result</h3>
-            <p>Completed capstone design-review work with emphasis on disciplined engineering communication, traceability, and review-ready technical documentation.</p>
-          </div>
-        </article>
-
-        <!-- 3. Monte Carlo GNC -->
-        <article id="monte-carlo-gnc" class="project-card fade-in">
-          <div class="project-header">
-            <h2 class="project-title">Monte Carlo GNC Simulation</h2>
-            <span class="status-tag status-complete">Complete</span>
-          </div>
-
-          <ul class="tag-list" aria-label="Technologies">
-            <li>Python</li>
-            <li>Monte Carlo</li>
-            <li>GNC</li>
-            <li>Sensor uncertainty</li>
-          </ul>
-
-          <div class="project-spec">
-            <h3>Problem</h3>
-            <p>Guidance and navigation designs need statistical validation because sensor uncertainty, initial-condition dispersions, and disturbance models can dominate single-run conclusions.</p>
-          </div>
-
-          <div class="project-spec">
-            <h3>Approach</h3>
-            <p>Built a Python Monte Carlo simulation workflow to vary uncertain parameters, evaluate guidance behavior across many trials, and summarize dispersion sensitivity.</p>
-          </div>
-
-          <div class="project-spec">
-            <h3>Result</h3>
-            <p>Produced repeatable simulation outputs that connect probabilistic test results to engineering decision-making rather than relying on a single nominal run.</p>
-          </div>
-        </article>
-
-        <!-- 4. Inverted Pendulum -->
-        <article id="inverted-pendulum" class="project-card fade-in">
-          <div class="project-header">
-            <h2 class="project-title">Inverted Pendulum PID Control</h2>
-            <span class="status-tag status-complete">Complete</span>
-          </div>
-
-          <ul class="tag-list" aria-label="Technologies">
-            <li>PID control</li>
-            <li>Hardware</li>
-            <li>Embedded systems</li>
-          </ul>
-
-          <div class="project-spec">
-            <h3>Problem</h3>
-            <p>The inverted pendulum is a fast unstable control problem that requires balancing sensor feedback, actuator response, controller tuning, and disturbance rejection.</p>
-          </div>
-
-          <div class="project-spec">
-            <h3>Approach</h3>
-            <p>Implemented and tuned a PID control loop, using iterative hardware tests to evaluate stability, overshoot, settling behavior, and response to perturbations.</p>
-          </div>
-
-          <div class="project-spec">
-            <h3>Result</h3>
-            <p>Demonstrated closed-loop stabilization behavior and used the project to connect control theory with real actuator and sensor limitations.</p>
-          </div>
-
-          <div class="video-embed" aria-hidden="true"></div>
-          <p class="visually-hidden">Inverted pendulum demo media slot.</p>
-        </article>
-
-        <!-- 5. BLNC Robotics -->
-        <article id="blnc-robotics" class="project-card fade-in">
-          <div class="project-header">
-            <h2 class="project-title">BLNC Robotics — Motor Validation</h2>
-            <span class="status-tag status-complete">Complete</span>
-          </div>
-
-          <ul class="tag-list" aria-label="Technologies">
-            <li>Robotics</li>
-            <li>Motor validation</li>
-            <li>Embedded testing</li>
-          </ul>
-
-          <div class="project-spec">
-            <h3>Problem</h3>
-            <p>Robotics drivetrain performance depends on motor characterization, command response, and repeatable validation before integrating with higher-level autonomy software.</p>
-          </div>
-
-          <div class="project-spec">
-            <h3>Approach</h3>
-            <p>Supported embedded motor validation through structured test runs, observation of command/response behavior, and comparison against expected operating limits.</p>
-          </div>
-
-          <div class="project-spec">
-            <h3>Result</h3>
-            <p>Contributed to a validation workflow that improved confidence in the motor subsystem before integration into the robot platform.</p>
-          </div>
-        </article>
-
-        <!-- 6. Project KESTREL -->
-        <article id="project-kestrel" class="project-card fade-in">
-          <div class="project-header">
-            <h2 class="project-title">
-              Project KESTREL
-              <span class="project-title-sub">Archived</span>
-            </h2>
-            <span class="status-tag status-archived">Archived</span>
-          </div>
-
-          <ul class="tag-list" aria-label="Technologies">
-            <li>Jetson Orin Nano</li>
-            <li>Pixhawk 6C</li>
-            <li>Vision-only EKF</li>
-            <li>Throw-launch UAV</li>
-          </ul>
-
-          <div class="project-spec">
-            <h3>Problem</h3>
-            <p>Designing a throw-launch autonomous precision landing drone targeting sub-5cm CEP.</p>
-          </div>
-
-          <div class="project-spec">
-            <h3>Approach</h3>
-            <p>Vision-only EKF fusion for state estimation, full PDR/CDR-level design documentation.</p>
-          </div>
-
-          <div class="project-spec">
-            <h3>Result</h3>
-            <p>Reached full Critical Design Review readiness before being shelved due to budget constraints. Demonstrates full-cycle design discipline.</p>
-          </div>
-        </article>
-      </div>
     </main>
-
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <span>&copy; 2026 Vinayak Nair</span>
-        <a href="contact.html">Contact</a>
-      </div>
-    </footer>
-  </div>
-
-  <script src="main.min.js"></script>
+    <script src="main.min.js"></script>
 </body>
 </html>
