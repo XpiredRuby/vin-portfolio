@@ -2,924 +2,592 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vinayak Nair // GNC Engineer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vinayak Manoj Nair — Aerospace Engineer | GNC, Flight Software &amp; Autonomy</title>
+<meta name="description" content="Aerospace Engineering student at Texas A&amp;M University (May 2027) specializing in Guidance, Navigation &amp; Control, systems engineering, embedded flight software, and autonomous robotics. Engineering case studies with simulation results, verification evidence, and performance metrics.">
+<meta name="author" content="Vinayak Manoj Nair">
+<meta name="theme-color" content="#07090D">
+<link rel="canonical" href="https://vinnair.me/">
+
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Vinayak Manoj Nair">
+<meta property="og:title" content="Vinayak Manoj Nair — Aerospace Engineer | GNC, Flight Software &amp; Autonomy">
+<meta property="og:description" content="Texas A&amp;M Aerospace Engineering, May 2027. GNC and state estimation, flight-software verification with hardware-in-the-loop evidence, structural analysis, and autonomous robotics.">
+<meta property="og:url" content="https://vinnair.me/">
+<meta property="og:image" content="https://vinnair.me/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vinayak Manoj Nair — Aerospace Engineer">
+<meta name="twitter:description" content="GNC · Flight Software Verification · Embedded Systems · Autonomous Robotics. Texas A&amp;M Aerospace Engineering, May 2027.">
+<meta name="twitter:image" content="https://vinnair.me/assets/og-image.png">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0a0e14;
-    --panel:#0d1220;
-    --border:#1c2436;
-    --border-bright:#2a3450;
-    --amber:#ffb454;
-    --cyan:#5ccfe6;
-    --text-bright:#e6edf3;
-    --text-dim:#7a8699;
-    --text-faint:#4a5568;
-    --green:#7fd88f;
-    --red:#ff6b6b;
-  }
+<link rel="preload" as="image" href="assets/headshot.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
 
-  *{box-sizing:border-box; margin:0; padding:0;}
-
-  html{scroll-behavior:smooth;}
-
-  body{
-    background:var(--bg);
-    color:var(--text-bright);
-    font-family:'Inter', sans-serif;
-    min-height:100vh;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size:48px 48px;
-    background-position:-1px -1px;
-    background-blend-mode:overlay;
-    background-color:var(--bg);
-  }
-
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:radial-gradient(ellipse at top left, rgba(92,207,230,0.05), transparent 50%),
-               radial-gradient(ellipse at bottom right, rgba(255,180,84,0.04), transparent 50%);
-    pointer-events:none;
-    z-index:0;
-  }
-
-  .mono{font-family:'JetBrains Mono', monospace;}
-
-  a{color:inherit; text-decoration:none;}
-  a:focus-visible, button:focus-visible, .nav-item:focus-visible{
-    outline:2px solid var(--cyan);
-    outline-offset:2px;
-  }
-
-  .frame{
-    max-width:1100px;
-    margin:0 auto;
-    padding:24px;
-    position:relative;
-    z-index:1;
-  }
-
-  /* ---------- TOP BAR ---------- */
-  .topbar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px 24px;
-    align-items:center;
-    justify-content:space-between;
-    padding:12px 20px;
-    border:1px solid var(--border);
-    border-radius:6px;
-    background:rgba(13,18,32,0.7);
-    backdrop-filter:blur(6px);
-    margin-bottom:20px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    letter-spacing:0.03em;
-  }
-  .topbar-group{display:flex; gap:20px; flex-wrap:wrap; align-items:center;}
-  .topbar .label{color:var(--text-faint);}
-  .topbar .val{color:var(--text-dim); margin-left:6px;}
-  .status-nominal{color:var(--green); font-weight:600;}
-  .status-seeking{color:var(--amber); font-weight:600;}
-
-  .pulse-dot{
-    display:inline-block;
-    width:6px; height:6px;
-    border-radius:50%;
-    margin-right:6px;
-    position:relative;
-    top:-1px;
-  }
-  .pulse-dot.green{background:var(--green); box-shadow:0 0 0 0 rgba(127,216,143,0.6);}
-  .pulse-dot.amber{background:var(--amber); box-shadow:0 0 0 0 rgba(255,180,84,0.6);}
-  @media (prefers-reduced-motion: no-preference){
-    .pulse-dot.green{animation:pulse-green 2.2s infinite;}
-    .pulse-dot.amber{animation:pulse-amber 2.2s infinite;}
-  }
-  @keyframes pulse-green{
-    0%{box-shadow:0 0 0 0 rgba(127,216,143,0.55);}
-    70%{box-shadow:0 0 0 7px rgba(127,216,143,0);}
-    100%{box-shadow:0 0 0 0 rgba(127,216,143,0);}
-  }
-  @keyframes pulse-amber{
-    0%{box-shadow:0 0 0 0 rgba(255,180,84,0.55);}
-    70%{box-shadow:0 0 0 7px rgba(255,180,84,0);}
-    100%{box-shadow:0 0 0 0 rgba(255,180,84,0);}
-  }
-
-  /* ---------- LAYOUT ---------- */
-  .layout{
-    display:grid;
-    grid-template-columns:220px 1fr;
-    gap:20px;
-    align-items:start;
-  }
-  @media (max-width:760px){
-    .layout{grid-template-columns:1fr;}
-  }
-
-  .sidebar{
-    border:1px solid var(--border);
-    border-radius:6px;
-    background:rgba(13,18,32,0.5);
-    overflow:hidden;
-    position:sticky;
-    top:24px;
-  }
-  @media (max-width:760px){
-    .sidebar{position:static; display:flex; overflow-x:auto;}
-  }
-
-  .nav-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:14px 18px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
-    letter-spacing:0.04em;
-    color:var(--text-dim);
-    border-bottom:1px solid var(--border);
-    cursor:pointer;
-    background:none;
-    border-left:2px solid transparent;
-    width:100%;
-    text-align:left;
-    transition:background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-  }
-  @media (max-width:760px){
-    .nav-item{border-bottom:none; border-right:1px solid var(--border); white-space:nowrap;}
-  }
-  .nav-item:hover{color:var(--text-bright); background:rgba(255,255,255,0.02);}
-  .nav-item.active{
-    color:var(--cyan);
-    border-left-color:var(--cyan);
-    background:rgba(92,207,230,0.06);
-  }
-  @media (max-width:760px){
-    .nav-item.active{border-left-color:transparent; border-bottom:2px solid var(--cyan);}
-  }
-  .nav-item .sys-id{color:var(--text-faint); font-size:11px;}
-  .nav-item.active .sys-id{color:var(--cyan);}
-
-  .sidebar-footer{
-    padding:16px 18px;
-    border-top:1px solid var(--border);
-  }
-  .meter-label{
-    font-family:'JetBrains Mono', monospace;
-    font-size:10px;
-    color:var(--text-faint);
-    letter-spacing:0.05em;
-    margin-bottom:4px;
-    display:flex;
-    justify-content:space-between;
-  }
-  .meter-track{
-    height:3px;
-    background:var(--border);
-    border-radius:2px;
-    overflow:hidden;
-    margin-bottom:12px;
-  }
-  .meter-fill{height:100%; border-radius:2px;}
-  .meter-fill.amber{background:var(--amber); width:62%;}
-  .meter-fill.cyan{background:var(--cyan); width:38%;}
-  .copyright{font-size:10px; color:var(--text-faint); font-family:'JetBrains Mono', monospace; margin-top:8px;}
-
-  /* ---------- MAIN PANEL ---------- */
-  .panel{
-    border:1px solid var(--border);
-    border-radius:6px;
-    background:rgba(13,18,32,0.5);
-    padding:36px;
-    min-height:520px;
-  }
-  @media (max-width:600px){
-    .panel{padding:22px;}
-  }
-
-  .view{display:none;}
-  .view.active{display:block;}
-
-  @media (prefers-reduced-motion: no-preference){
-    .view.active{animation:view-in 0.25s ease;}
-    .reveal-row{
-      opacity:0;
-      transform:translateY(6px);
-      animation:row-in 0.35s ease forwards;
-    }
-  }
-  @keyframes view-in{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
-  @keyframes row-in{to{opacity:1; transform:translateY(0);}}
-
-  h1.name{
-    font-family:'JetBrains Mono', monospace;
-    font-size:clamp(22px, 3.4vw, 30px);
-    font-weight:700;
-    letter-spacing:0.01em;
-    color:var(--text-bright);
-  }
-  h1.name .role{color:var(--cyan); font-weight:600;}
-
-  .bio{
-    color:var(--text-dim);
-    font-size:14.5px;
-    line-height:1.65;
-    max-width:640px;
-    margin-top:12px;
-  }
-
-  h2.section-title{
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
-    letter-spacing:0.08em;
-    color:var(--cyan);
-    text-transform:uppercase;
-    margin:36px 0 14px 0;
-    padding-bottom:8px;
-    border-bottom:1px solid var(--border-bright);
-  }
-  h2.section-title:first-of-type{margin-top:28px;}
-
-  .data-grid{display:flex; flex-direction:column;}
-  .data-row{
-    display:grid;
-    grid-template-columns:160px 1fr;
-    gap:16px;
-    padding:10px 0;
-    border-bottom:1px solid var(--border);
-    font-size:13.5px;
-  }
-  @media (max-width:600px){
-    .data-row{grid-template-columns:1fr;}
-  }
-  .data-row:last-child{border-bottom:none;}
-  .data-label{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.05em;
-    color:var(--text-faint);
-    text-transform:uppercase;
-    padding-top:1px;
-  }
-  .data-value{color:var(--text-bright);}
-  .data-value.accent{color:var(--cyan);}
-
-  /* Contact icons */
-  .contact-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-    gap:14px;
-    margin-top:8px;
-  }
-  .contact-card{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:16px 18px;
-    border:1px solid var(--border);
-    border-radius:6px;
-    transition:border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
-  }
-  .contact-card:hover, .contact-card:focus-visible{
-    border-color:var(--cyan);
-    background:rgba(92,207,230,0.05);
-    transform:translateY(-2px);
-  }
-  .icon-box{
-    width:38px; height:38px;
-    border:1px solid var(--border-bright);
-    border-radius:6px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--cyan);
-    flex-shrink:0;
-  }
-  .icon-box svg{width:19px; height:19px;}
-  .contact-text .contact-label{
-    font-family:'JetBrains Mono', monospace;
-    font-size:10px;
-    color:var(--text-faint);
-    letter-spacing:0.05em;
-    text-transform:uppercase;
-  }
-  .contact-text .contact-value{
-    font-size:13.5px;
-    color:var(--text-bright);
-    margin-top:2px;
-    word-break:break-all;
-  }
-
-  /* Project / experience cards */
-  .card{
-    border:1px solid var(--border);
-    border-radius:6px;
-    padding:20px 22px;
-    margin-bottom:16px;
-  }
-  .card-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-bottom:6px;
-  }
-  .card-title{
-    font-family:'JetBrains Mono', monospace;
-    font-size:14.5px;
-    font-weight:600;
-    color:var(--text-bright);
-  }
-  .card-org{color:var(--text-dim); font-size:12.5px; margin-top:2px;}
-  .card-meta{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    color:var(--text-faint);
-    text-align:right;
-    white-space:nowrap;
-  }
-  .badge{
-    display:inline-flex;
-    align-items:center;
-    gap:5px;
-    font-family:'JetBrains Mono', monospace;
-    font-size:10px;
-    letter-spacing:0.04em;
-    padding:3px 8px;
-    border-radius:4px;
-    border:1px solid var(--border-bright);
-    text-transform:uppercase;
-  }
-  .badge.active{color:var(--amber); border-color:rgba(255,180,84,0.35);}
-  .badge.complete{color:var(--green); border-color:rgba(127,216,143,0.35);}
-
-  .card ul{
-    margin:10px 0 12px 0;
-    padding-left:18px;
-    color:var(--text-dim);
-    font-size:13px;
-    line-height:1.6;
-  }
-  .card ul li::marker{color:var(--cyan);}
-
-  .stack-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    margin-top:10px;
-  }
-  .stack-chip{
-    font-family:'JetBrains Mono', monospace;
-    font-size:10.5px;
-    color:var(--text-dim);
-    border:1px solid var(--border);
-    border-radius:4px;
-    padding:3px 8px;
-  }
-
-  .status-note{
-    font-size:12.5px;
-    color:var(--text-faint);
-    border-left:2px solid var(--amber);
-    padding:8px 12px;
-    margin-top:10px;
-    background:rgba(255,180,84,0.04);
-  }
-
-  footer.page-footer{
-    text-align:center;
-    color:var(--text-faint);
-    font-size:11px;
-    font-family:'JetBrains Mono', monospace;
-    padding:24px 0 8px;
-  }
-
-  /* ---------- BOOT SEQUENCE ---------- */
-  #boot-overlay{
-    position:fixed; inset:0;
-    background:#05070c;
-    z-index:100;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:24px;
-  }
-  #boot-overlay.hidden{
-    animation:boot-fade-out 0.5s ease forwards;
-    pointer-events:none;
-  }
-  @keyframes boot-fade-out{ to{opacity:0; visibility:hidden;} }
-  .boot-text{
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
-    color:var(--green);
-    line-height:1.9;
-    max-width:520px;
-    width:100%;
-  }
-  .boot-line{ opacity:0; white-space:pre; }
-  .boot-line.show{ opacity:1; }
-  .boot-line .ok{ color:var(--cyan); float:right; }
-  .boot-cursor{
-    display:inline-block; width:8px; height:14px;
-    background:var(--cyan); margin-left:4px;
-    vertical-align:middle;
-  }
-  @media (prefers-reduced-motion: no-preference){
-    .boot-cursor{ animation:cursor-blink 0.9s steps(1) infinite; }
-  }
-  @keyframes cursor-blink{ 50%{ opacity:0; } }
-
-  /* ---------- HUD CORNER BRACKETS ---------- */
-  .frame{ position:relative; }
-  .hud-corner{
-    position:absolute;
-    width:22px; height:22px;
-    border:2px solid var(--cyan);
-    opacity:0.55;
-    z-index:2;
-    pointer-events:none;
-  }
-  .hud-corner.tl{ top:8px; left:8px; border-right:none; border-bottom:none; }
-  .hud-corner.tr{ top:8px; right:8px; border-left:none; border-bottom:none; }
-  .hud-corner.bl{ bottom:8px; left:8px; border-right:none; border-top:none; }
-  .hud-corner.br{ bottom:8px; right:8px; border-left:none; border-top:none; }
-
-  /* ---------- SCANLINE ATMOSPHERE ---------- */
-  .scanlines{
-    position:fixed; inset:0;
-    z-index:3;
-    pointer-events:none;
-    background:repeating-linear-gradient(
-      0deg,
-      rgba(255,255,255,0.012) 0px,
-      rgba(255,255,255,0.012) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-    mix-blend-mode:overlay;
-  }
-
-  /* ---------- DEPTH / GLOW ---------- */
-  .topbar{ box-shadow:0 0 24px rgba(92,207,230,0.04), inset 0 1px 0 rgba(255,255,255,0.02); }
-  .panel{ box-shadow:0 0 40px rgba(92,207,230,0.03), 0 20px 60px rgba(0,0,0,0.4); }
-  .sidebar{ box-shadow:0 20px 60px rgba(0,0,0,0.35); }
-  .nav-item.active{ box-shadow:inset 3px 0 8px -3px rgba(92,207,230,0.4); }
-  h1.name .role{ text-shadow:0 0 18px rgba(92,207,230,0.35); }
-  .contact-card:hover, .contact-card:focus-visible{
-    box-shadow:0 0 24px rgba(92,207,230,0.12), 0 8px 20px rgba(0,0,0,0.3);
-  }
-  .card{ transition:border-color 0.2s ease, box-shadow 0.2s ease; }
-  .card:hover{
-    border-color:var(--border-bright);
-    box-shadow:0 0 24px rgba(0,0,0,0.25);
-  }
-
-  /* ---------- PROJECT MEDIA ---------- */
-  .media-strip{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
-    gap:10px;
-    margin-top:14px;
-  }
-  .media-slot{
-    aspect-ratio:16/10;
-    border:1px dashed var(--border-bright);
-    border-radius:5px;
-    overflow:hidden;
-    position:relative;
-    background:rgba(255,255,255,0.015);
-  }
-  .media-slot img{
-    width:100%; height:100%;
-    object-fit:cover;
-    display:block;
-  }
-  .media-slot.empty{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:6px;
-    color:var(--text-faint);
-    font-family:'JetBrains Mono', monospace;
-    font-size:10px;
-    letter-spacing:0.04em;
-    text-align:center;
-    padding:10px;
-  }
-  .media-slot.empty svg{ width:20px; height:20px; opacity:0.5; }
-  .media-caption{
-    position:absolute;
-    bottom:0; left:0; right:0;
-    background:linear-gradient(transparent, rgba(5,7,12,0.85));
-    color:var(--text-dim);
-    font-family:'JetBrains Mono', monospace;
-    font-size:10px;
-    padding:14px 8px 6px;
-  }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Vinayak Manoj Nair",
+  "alternateName": "Vinayak Nair",
+  "url": "https://vinnair.me/",
+  "image": "https://vinnair.me/assets/headshot.jpg",
+  "email": "mailto:vinhoustontexas@gmail.com",
+  "jobTitle": "Aerospace Engineering Student",
+  "description": "Aerospace Engineering student at Texas A&M University specializing in guidance, navigation and control, systems engineering, embedded flight software, and autonomous robotics.",
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Texas A&M University",
+    "department": "Department of Aerospace Engineering"
+  },
+  "homeLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "College Station", "addressRegion": "TX", "addressCountry": "US" } },
+  "knowsAbout": ["Guidance Navigation and Control", "Kalman Filtering", "State Estimation", "Flight Software", "Hardware-in-the-Loop Testing", "Systems Engineering", "Finite Element Analysis", "Embedded Systems", "Autonomous Robotics", "Monte Carlo Simulation"],
+  "sameAs": ["https://github.com/XpiredRuby", "https://linkedin.com/in/Vin2005"]
+}
+</script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<div id="boot-overlay">
-  <div class="boot-text" id="boot-text"></div>
-</div>
-<div class="scanlines"></div>
-
-<div class="frame">
-  <div class="hud-corner tl"></div>
-  <div class="hud-corner tr"></div>
-  <div class="hud-corner bl"></div>
-  <div class="hud-corner br"></div>
-
-  <div class="topbar">
-    <div class="topbar-group">
-      <span><span class="label">SYS:</span><span class="val">VN-OS</span></span>
-      <span><span class="label">NODE:</span><span class="val">GNC_CORE</span></span>
-      <span><span class="label">STATE:</span><span class="val status-nominal"><span class="pulse-dot green"></span>NOMINAL</span></span>
-    </div>
-    <div class="topbar-group">
-      <span><span class="label">UTC:</span><span class="val" id="utc-clock">--:--:--</span></span>
-      <span><span class="label">MET:</span><span class="val" id="met-clock">T+000:00:00:00</span></span>
-      <span><span class="label">STATUS:</span><span class="val status-seeking"><span class="pulse-dot amber"></span>ACTIVE SEEKING</span></span>
-    </div>
-  </div>
-
-  <div class="layout">
-
-    <nav class="sidebar" aria-label="Section navigation">
-      <button class="nav-item active" data-view="profile" onclick="switchView('profile', this)">
-        <span>Profile</span><span class="sys-id">[01]</span>
-      </button>
-      <button class="nav-item" data-view="experience" onclick="switchView('experience', this)">
-        <span>Experience</span><span class="sys-id">[02]</span>
-      </button>
-      <button class="nav-item" data-view="projects" onclick="switchView('projects', this)">
-        <span>Projects</span><span class="sys-id">[03]</span>
-      </button>
-      <button class="nav-item" data-view="contact" onclick="switchView('contact', this)">
-        <span>Contact</span><span class="sys-id">[04]</span>
-      </button>
-
-      <div class="sidebar-footer">
-        <div class="meter-label"><span>SYS_LOAD</span><span>62%</span></div>
-        <div class="meter-track"><div class="meter-fill amber"></div></div>
-        <div class="meter-label"><span>MEM_USE</span><span>38%</span></div>
-        <div class="meter-track"><div class="meter-fill cyan"></div></div>
-        <div class="copyright">V.NAIR &copy; 2026</div>
-      </div>
+<header class="masthead">
+  <div class="shell masthead__bar">
+    <a class="brand" href="index.html">
+      <span class="brand__mark" aria-hidden="true">VN</span>
+      <span class="brand__name">Vinayak Nair</span>
+      <span class="brand__role">/ AEROSPACE</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="projects.html">Projects</a>
+      <a href="experience.html">Experience</a>
+      <a href="skills.html">Skills</a>
+      <a href="#github">GitHub</a>
+      <a href="contact.html">Contact</a>
+      <a class="nav__cta" href="resume.html">Resume</a>
     </nav>
-
-    <main class="panel">
-
-      <!-- PROFILE -->
-      <section class="view active" id="view-profile">
-        <h1 class="name">VINAYAK NAIR <span class="role">// GNC ENGINEER</span></h1>
-        <p class="bio">Aerospace engineering student at Texas A&amp;M. Specializing in flight-software verification, hardware-in-the-loop architectures, GPS-denied state estimation, and structural analysis. Ready for deployment.</p>
-
-        <h2 class="section-title">System Parameters</h2>
-        <div class="data-grid">
-          <div class="data-row reveal-row" style="animation-delay:0.03s"><div class="data-label">Education</div><div class="data-value">Texas A&amp;M University, B.S. Aerospace Engineering</div></div>
-          <div class="data-row reveal-row" style="animation-delay:0.07s"><div class="data-label">Graduation</div><div class="data-value">May 2027</div></div>
-          <div class="data-row reveal-row" style="animation-delay:0.11s"><div class="data-label">GPA</div><div class="data-value">3.45 / 4.00</div></div>
-          <div class="data-row reveal-row" style="animation-delay:0.15s"><div class="data-label">Focus</div><div class="data-value accent">GNC / Autonomy / FSW Verification / Structures</div></div>
-          <div class="data-row reveal-row" style="animation-delay:0.19s"><div class="data-label">Core Stack</div><div class="data-value">C++17, Python, MATLAB, NumPy/SciPy, SolidWorks, Abaqus FEA, PX4 SITL, Linux</div></div>
-        </div>
-
-        <h2 class="section-title">Verified Capabilities</h2>
-        <div class="data-grid">
-          <div class="data-row reveal-row" style="animation-delay:0.03s"><div class="data-label">Structures / FEA</div><div class="data-value">Identified 3 structural failure sites under 2.5G flight loading via Static/Thermal/Modal FEA on a 24-part aircraft assembly (AeroFrame-MD11)</div></div>
-          <div class="data-row reveal-row" style="animation-delay:0.07s"><div class="data-label">GNC Simulation</div><div class="data-value">Validated 6-DOF booster descent GNC across 500 Monte Carlo runs to sub-2.0m landing accuracy</div></div>
-          <div class="data-row reveal-row" style="animation-delay:0.11s"><div class="data-label">State Estimation</div><div class="data-value">Built a dual-filter ESKF/vision tracking pipeline on embedded Linux hardware (GHOST — in progress)</div></div>
-          <div class="data-row reveal-row" style="animation-delay:0.15s"><div class="data-label">Embedded / Real-Time</div><div class="data-value">Achieved sub-100ms closed-loop latency integrating YOLO detection, Kalman filtering, and motor control on Raspberry Pi 4</div></div>
-        </div>
-      </section>
-
-      <!-- EXPERIENCE -->
-      <section class="view" id="view-experience">
-        <h2 class="section-title" style="margin-top:0;">Experience</h2>
-
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <div class="card-title">Spacecraft Systems Engineer — TAMU-SPIRIT Capstone</div>
-              <div class="card-org">Aegis Aerospace / ISS · College Station, TX</div>
-            </div>
-            <div class="card-meta">Jan 2026 – Present</div>
-          </div>
-          <ul>
-            <li>Maintained 100% milestone compliance for 4 ISS-bound experiments targeting Sep 2028 SpaceX Dragon launch by managing engineering change requests and NASA compliance tracking through SCR, SRR, and PDR government design reviews</li>
-            <li>Reduced thermal design risk for DASH by performing material selection trades and thermal analysis across &minus;120&deg;C to +120&deg;C LEO cycling</li>
-            <li>Advanced the project toward late-2026 hardware manufacturing by coordinating quality documentation across an 8-person engineering team</li>
-          </ul>
-          <div class="stack-row">
-            <span class="stack-chip">SCR/SRR/PDR</span><span class="stack-chip">NASA/DCMA Compliance</span><span class="stack-chip">Thermal Analysis</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <div class="card-title">Controls &amp; Embedded Systems Engineer</div>
-              <div class="card-org">BLNC Turtle Robotics · College Station, TX</div>
-            </div>
-            <div class="card-meta">Aug – Dec 2025</div>
-          </div>
-          <ul>
-            <li>Reduced motor validation errors by standardizing bench-test procedures in LabVIEW and maintaining as-built documentation</li>
-            <li>Achieved full autonomous stabilization of a two-wheeled inverted pendulum rover, building hardware from component level and implementing cascaded PID control</li>
-          </ul>
-          <div class="stack-row">
-            <span class="stack-chip">LabVIEW</span><span class="stack-chip">Cascaded PID</span><span class="stack-chip">HIL Testing</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <div class="card-title">Undergraduate Research Assistant</div>
-              <div class="card-org">TAMU ACE Lab · Dr. Sasangohar · College Station, TX</div>
-            </div>
-            <div class="card-meta">Dec 2023 – Dec 2024</div>
-          </div>
-          <ul>
-            <li>Cut manual analysis time by 40% and accelerated report delivery by 2 days by building a Python pipeline processing 5,000+ data points per run</li>
-          </ul>
-          <div class="stack-row">
-            <span class="stack-chip">Python</span><span class="stack-chip">Data Pipelines</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- PROJECTS -->
-      <section class="view" id="view-projects">
-        <h2 class="section-title" style="margin-top:0;">Projects</h2>
-
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <div class="card-title">GHOST — GPS-Denied Hardware Occlusion-Survivable Tracker</div>
-              <div class="card-org">Dual-filter ESKF / vision pipeline, PX4 SITL</div>
-            </div>
-            <div class="card-meta">
-              <span class="badge active">In Progress</span>
-            </div>
-          </div>
-          <ul>
-            <li>Building a dual ESKF/CV state estimation pipeline on Raspberry Pi 4B + IMX296 camera + ICM-42688-P IMU, communicating with PX4 SITL over UDP MAVLink</li>
-            <li>Design iterated through 10 revisions with 20 documented engineering flaws found and fixed via external review</li>
-          </ul>
-          <div class="status-note">Currently hardware-blocked on an IMX296 camera driver/kernel issue on Ubuntu 22.04 — software layer (ESKF, CV filter, NIS validation, CI) is complete and committed.</div>
-          <div class="stack-row">
-            <span class="stack-chip">C++</span><span class="stack-chip">Python</span><span class="stack-chip">ESKF</span><span class="stack-chip">PX4 SITL</span><span class="stack-chip">MAVLink</span>
-          </div>
-          <div class="media-strip">
-            <!-- Replace src below with your actual hardware rig photo, e.g. media/ghost-rig.jpg -->
-            <div class="media-slot empty" data-caption="Hardware rig">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
-              <span>ADD: HARDWARE RIG PHOTO<br>(Pi 4B + IMX296 + ICM-42688-P)</span>
-            </div>
-            <div class="media-slot empty" data-caption="PX4 SITL sim">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
-              <span>ADD: PX4 SITL<br>SIMULATION SCREENSHOT</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <div class="card-title">MD-11 Aircraft CAD Assembly &amp; Structural Analysis</div>
-              <div class="card-org">SolidWorks · Abaqus FEA (Static / Thermal / Modal)</div>
-            </div>
-            <div class="card-meta">
-              <span class="badge complete">Complete</span><br>Jun 2025
-            </div>
-          </div>
-          <ul>
-            <li>Identified 3 structural failure sites under 2.5G flight loading by modeling a 24-part aircraft assembly with full parametric CAD and GD&amp;T</li>
-            <li>Produced a complete manufacturing-release drawing package with fabrication callouts and BOM</li>
-          </ul>
-          <div class="stack-row">
-            <span class="stack-chip">SolidWorks</span><span class="stack-chip">Abaqus FEA</span><span class="stack-chip">GD&amp;T</span>
-          </div>
-          <div class="media-strip">
-            <div class="media-slot empty" data-caption="CAD assembly">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
-              <span>ADD: SOLIDWORKS<br>ASSEMBLY RENDER</span>
-            </div>
-            <div class="media-slot empty" data-caption="FEA stress plot">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
-              <span>ADD: ABAQUS FEA<br>STRESS-CONTOUR PLOT</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <div class="card-title">Rocket Landing GNC Simulation</div>
-              <div class="card-org">Python · 6-DOF · Monte Carlo · PID / TVC</div>
-            </div>
-            <div class="card-meta">
-              <span class="badge complete">Complete</span><br>Dec 2025
-            </div>
-          </div>
-          <ul>
-            <li>Validated GNC robustness across 500 Monte Carlo stochastic wind runs with sub-2.0m landing accuracy</li>
-            <li>Developed a 6-DOF booster descent simulator with aerothermodynamic heating and propulsion modeling</li>
-          </ul>
-          <div class="stack-row">
-            <span class="stack-chip">Python</span><span class="stack-chip">6-DOF Sim</span><span class="stack-chip">Monte Carlo</span>
-          </div>
-          <div class="media-strip">
-            <div class="media-slot empty" data-caption="Monte Carlo dispersion">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
-              <span>ADD: 500-RUN MONTE CARLO<br>LANDING DISPERSION PLOT</span>
-            </div>
-            <div class="media-slot empty" data-caption="6-DOF trajectory">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
-              <span>ADD: 6-DOF DESCENT<br>TRAJECTORY PLOT</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-head">
-            <div>
-              <div class="card-title">AI-Powered Autonomous Interception Robot</div>
-              <div class="card-org">Python · YOLO · Kalman Filter · Raspberry Pi</div>
-            </div>
-            <div class="card-meta">
-              <span class="badge complete">Complete</span><br>Jan 2026
-            </div>
-          </div>
-          <ul>
-            <li>Achieved sub-100ms closed-loop latency on embedded Linux hardware</li>
-            <li>Integrated YOLO object detection, Kalman filter state estimation, and PWM motor control on a Raspberry Pi 4</li>
-          </ul>
-          <div class="stack-row">
-            <span class="stack-chip">YOLO</span><span class="stack-chip">Kalman Filter</span><span class="stack-chip">Raspberry Pi</span>
-          </div>
-          <div class="media-strip">
-            <div class="media-slot empty" data-caption="Robot hardware">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
-              <span>ADD: ROBOT HARDWARE<br>PHOTO</span>
-            </div>
-            <div class="media-slot empty" data-caption="YOLO detection output">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 16l5-4 4 3 3-2 6 5"/></svg>
-              <span>ADD: YOLO DETECTION<br>BOUNDING-BOX FRAME</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section class="view" id="view-contact">
-        <h2 class="section-title" style="margin-top:0;">Direct Comms</h2>
-        <div class="contact-grid">
-
-          <a class="contact-card" href="mailto:vinhoustontexas@gmail.com">
-            <div class="icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M3 6.5l9 6.5 9-6.5"/></svg>
-            </div>
-            <div class="contact-text">
-              <div class="contact-label">Email</div>
-              <div class="contact-value">vinhoustontexas@gmail.com</div>
-            </div>
-          </a>
-
-          <a class="contact-card" href="https://linkedin.com/in/Vin2005" target="_blank" rel="noopener">
-            <div class="icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.2" cy="8.5" r="0.6" fill="currentColor" stroke="none"/><path d="M8.2 11v6"/><path d="M12 17v-3.6c0-1.5 1.2-2.4 2.5-2.4s2.3 0.9 2.3 2.4V17"/></svg>
-            </div>
-            <div class="contact-text">
-              <div class="contact-label">LinkedIn</div>
-              <div class="contact-value">linkedin.com/in/Vin2005</div>
-            </div>
-          </a>
-
-          <a class="contact-card" href="https://github.com/XpiredRuby" target="_blank" rel="noopener">
-            <div class="icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2-.2 4.5-1 4.5-4.5 0-1-.4-1.8-1-2.5.1-.2.4-1.2-.1-2.5 0 0-.8-.3-2.7 1a9.4 9.4 0 0 0-5 0c-1.9-1.3-2.7-1-2.7-1-.5 1.3-.2 2.3-.1 2.5-.6.7-1 1.5-1 2.5 0 3.5 2.5 4.3 4.5 4.5-.4.4-.5.8-.5 1.5v3"/></svg>
-            </div>
-            <div class="contact-text">
-              <div class="contact-label">GitHub</div>
-              <div class="contact-value">github.com/XpiredRuby</div>
-            </div>
-          </a>
-
-          <a class="contact-card" href="tel:+14132756713">
-            <div class="icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4.5c0-1 .8-1.5 1.5-1.5h2.4c.6 0 1.1.4 1.3 1l1 3.2c.2.6 0 1.2-.4 1.6l-1.4 1.3a13 13 0 0 0 5.5 5.5l1.3-1.4c.4-.4 1-.6 1.6-.4l3.2 1c.6.2 1 .7 1 1.3v2.4c0 .7-.5 1.5-1.5 1.5C10.5 20 4 13.5 4 4.5z"/></svg>
-            </div>
-            <div class="contact-text">
-              <div class="contact-label">Phone</div>
-              <div class="contact-value">(413) 275-6713</div>
-            </div>
-          </a>
-
-        </div>
-      </section>
-
-    </main>
   </div>
+</header>
 
-  <footer class="page-footer">TEXAS A&amp;M UNIVERSITY // AEROSPACE ENGINEERING // CLASS OF 2027</footer>
-
+<div class="statusbar">
+  <div class="shell statusbar__inner">
+    <span><i class="dot" aria-hidden="true"></i>STATUS <b>OPEN TO 2026 INTERNSHIPS &amp; 2027 FULL-TIME</b></span>
+    <span class="sep">|</span>
+    <span>LOCATION <b>COLLEGE STATION, TX</b></span>
+    <span class="sep">|</span>
+    <span>GRADUATION <b>MAY 2027 &middot; <span id="grad-countdown">T-000d</span></b></span>
+    <span class="sep">|</span>
+    <span>UTC <b><span id="utc-clock">--:--:--</span></b></span>
+  </div>
 </div>
 
-<script>
-  function switchView(view, btn){
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    document.getElementById('view-' + view).classList.add('active');
-    btn.classList.add('active');
+<main id="main">
 
-    // restart stagger animations on the newly shown view
-    var rows = document.getElementById('view-' + view).querySelectorAll('.reveal-row');
-    rows.forEach(function(r){
-      r.style.animation = 'none';
-      void r.offsetWidth;
-      r.style.animation = '';
-    });
-  }
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <svg class="hero__orbit" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="core" cx="50%" cy="50%">
+        <stop offset="0%" stop-color="#2B7FFF" stop-opacity="0.16"/>
+        <stop offset="70%" stop-color="#2B7FFF" stop-opacity="0"/>
+      </radialGradient>
+      <path id="orbit-a" d="M500,500 m-390,0 a390,150 0 1,0 780,0 a390,150 0 1,0 -780,0"/>
+      <path id="orbit-b" d="M500,500 m-300,0 a300,300 0 1,0 600,0 a300,300 0 1,0 -600,0"/>
+    </defs>
+    <circle cx="500" cy="500" r="420" fill="url(#core)"/>
+    <g fill="none" stroke="#28313F" stroke-width="1">
+      <use href="#orbit-a" transform="rotate(-24 500 500)"/>
+      <use href="#orbit-a" transform="rotate(36 500 500)"/>
+      <use href="#orbit-b" stroke-dasharray="3 7" stroke="#1A202B"/>
+      <circle cx="500" cy="500" r="418" stroke="#12171F"/>
+      <circle cx="500" cy="500" r="180" stroke="#12171F" stroke-dasharray="2 9"/>
+    </g>
+    <g stroke="#1A202B" stroke-width="1">
+      <line x1="500" y1="60" x2="500" y2="120"/><line x1="500" y1="880" x2="500" y2="940"/>
+      <line x1="60" y1="500" x2="120" y2="500"/><line x1="880" y1="500" x2="940" y2="500"/>
+    </g>
+    <circle r="4" fill="#22D3EE">
+      <animateMotion dur="34s" repeatCount="indefinite" rotate="auto">
+        <mpath href="#orbit-b"/>
+      </animateMotion>
+    </circle>
+    <circle r="3" fill="#FF7A18">
+      <animateMotion dur="48s" repeatCount="indefinite" begin="-12s">
+        <mpath href="#orbit-a"/>
+      </animateMotion>
+    </circle>
+  </svg>
 
-  // Live UTC clock
-  function updateClock(){
-    var now = new Date();
-    var h = String(now.getUTCHours()).padStart(2,'0');
-    var m = String(now.getUTCMinutes()).padStart(2,'0');
-    var s = String(now.getUTCSeconds()).padStart(2,'0');
-    document.getElementById('utc-clock').textContent = h+':'+m+':'+s;
-  }
+  <div class="shell hero__grid">
+    <div data-reveal>
+      <p class="eyebrow">Texas A&amp;M University &middot; B.S. Aerospace Engineering &middot; May 2027</p>
+      <h1>Vinayak Manoj<br>Nair</h1>
+      <p class="hero__spec mono">
+        AEROSPACE ENGINEER &mdash; <b>GUIDANCE, NAVIGATION &amp; CONTROL</b> /
+        <b>SYSTEMS ENGINEERING</b> / <b>EMBEDDED SYSTEMS</b> / <b>AUTONOMOUS ROBOTICS</b>
+      </p>
+      <p class="lede">
+        I build and verify the systems that keep vehicles on trajectory &mdash; estimation and control
+        algorithms, flight software with hardware-in-the-loop evidence, and the structural analysis
+        that has to close before any of it flies.
+      </p>
 
-  // Mission Elapsed Time — counting from portfolio "launch" epoch
-  var metEpoch = new Date('2025-01-01T00:00:00Z').getTime();
-  function updateMET(){
-    var diff = Date.now() - metEpoch;
-    var totalSec = Math.floor(diff / 1000);
-    var days = Math.floor(totalSec / 86400);
-    var hrs = String(Math.floor((totalSec % 86400) / 3600)).padStart(2,'0');
-    var mins = String(Math.floor((totalSec % 3600) / 60)).padStart(2,'0');
-    var secs = String(totalSec % 60).padStart(2,'0');
-    document.getElementById('met-clock').textContent = 'T+'+String(days).padStart(3,'0')+':'+hrs+':'+mins+':'+secs;
-  }
+      <div class="btn-row" style="margin-top:1.9rem">
+        <a class="btn btn--primary" href="resume.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
+          Resume
+        </a>
+        <a class="btn" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+        <a class="btn" href="https://linkedin.com/in/Vin2005" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+          LinkedIn
+        </a>
+        <a class="btn btn--cyan" href="contact.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/></svg>
+          Contact
+        </a>
+      </div>
 
-  updateClock();
-  updateMET();
-  setInterval(updateClock, 1000);
-  setInterval(updateMET, 1000);
+      <div class="hero__meta">
+        <span>GPA <b>3.45 / 4.00</b></span>
+        <span>FAST TRACK <b>BS/MS</b></span>
+        <span>FOCUS <b>GNC &middot; FSW &middot; STRUCTURES</b></span>
+      </div>
+    </div>
 
-  // ---------- BOOT SEQUENCE ----------
-  var bootLines = [
-    'INITIALIZING VN-OS...',
-    'LOADING NODE: GNC_CORE...',
-    'AUTHENTICATING USER: VINAYAK NAIR',
-    'MOUNTING SUBSYSTEMS: PROFILE / EXPERIENCE / PROJECTS / CONTACT',
-    'SYSTEM STATE: NOMINAL',
-    'STATUS: ACTIVE SEEKING'
-  ];
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var bootTextEl = document.getElementById('boot-text');
-  var bootOverlay = document.getElementById('boot-overlay');
+    <div class="portrait" data-reveal data-delay="2">
+      <div class="portrait__tick" aria-hidden="true"></div>
+      <div class="portrait__frame">
+        <img src="assets/headshot.jpg" width="400" height="400" alt="Vinayak Manoj Nair" fetchpriority="high">
+      </div>
+      <div class="portrait__readout">
+        <span>ID / VN-2027</span>
+        <span>TAMU AERO</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  function finishBoot(){
-    bootOverlay.classList.add('hidden');
-    setTimeout(function(){ bootOverlay.style.display = 'none'; }, 550);
-  }
+<!-- ============ STATS ============ -->
+<section class="shell section section--tight" aria-labelledby="metrics-h">
+  <h2 id="metrics-h" class="sr-only">Portfolio metrics</h2>
+  <!-- NOTE: verify SIM HOURS and YEARS ENGINEERING against your own records before publishing. -->
+  <div class="stats" data-reveal>
+    <div class="stat">
+      <div class="stat__val"><span data-count="7" data-fill="70">0</span></div>
+      <div class="stat__key">Projects delivered</div>
+      <div class="stat__bar"><i></i></div>
+    </div>
+    <div class="stat">
+      <div class="stat__val"><span data-count="5" data-fill="62">0</span></div>
+      <div class="stat__key">Engineering disciplines</div>
+      <div class="stat__bar"><i></i></div>
+    </div>
+    <div class="stat">
+      <div class="stat__val"><span data-count="5" data-fill="62">0</span></div>
+      <div class="stat__key">Programming languages</div>
+      <div class="stat__bar"><i></i></div>
+    </div>
+    <div class="stat">
+      <div class="stat__val"><span data-count="525" data-fill="88">0</span></div>
+      <div class="stat__key">Monte Carlo runs</div>
+      <div class="stat__bar"><i></i></div>
+    </div>
+    <div class="stat">
+      <div class="stat__val"><span data-count="900" data-fill="90">0</span><sup>+</sup></div>
+      <div class="stat__key">Simulation hours</div>
+      <div class="stat__bar"><i></i></div>
+    </div>
+    <div class="stat">
+      <div class="stat__val"><span data-count="4" data-fill="80">0</span></div>
+      <div class="stat__key">Years engineering</div>
+      <div class="stat__bar"><i></i></div>
+    </div>
+  </div>
+</section>
 
-  if(reduceMotion){
-    finishBoot();
-  } else {
-    var i = 0;
-    function typeNextLine(){
-      if(i >= bootLines.length){
-        setTimeout(finishBoot, 350);
-        return;
-      }
-      var line = document.createElement('div');
-      line.className = 'boot-line show';
-      var okTag = (i === bootLines.length - 1) ? '' : '<span class="ok">OK</span>';
-      line.innerHTML = bootLines[i] + okTag;
-      bootTextEl.appendChild(line);
-      i++;
-      setTimeout(typeNextLine, 260);
-    }
-    setTimeout(typeNextLine, 200);
-  }
-</script>
+<!-- ============ DISCIPLINES ============ -->
+<section class="shell section" aria-labelledby="disc-h">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">01 &mdash; Capability</p>
+      <h2 id="disc-h">Where I do the work</h2>
+      <p>Four domains, one loop: model the physics, write the software that acts on it,
+         put it on hardware, and produce evidence that it behaves.</p>
+    </div>
+    <a class="link-arrow" href="skills.html">Full skills matrix</a>
+  </div>
 
+  <div class="grid-4">
+    <div class="panel" data-reveal>
+      <div class="panel__head"><span>01 / GNC</span><span class="u-blue">&#9679;</span></div>
+      <div class="panel__body stack--sm" style="display:grid">
+        <h3>Guidance, Navigation &amp; Control</h3>
+        <p class="u-dim" style="font-size:.9rem">Error-state and extended Kalman filtering, IMM target tracking,
+           proportional navigation, PID and cascaded control, 6-DOF trajectory simulation, Monte Carlo dispersion analysis.</p>
+      </div>
+    </div>
+    <div class="panel" data-reveal data-delay="1">
+      <div class="panel__head"><span>02 / SYSTEMS</span><span class="u-cyan">&#9679;</span></div>
+      <div class="panel__body stack--sm" style="display:grid">
+        <h3>Systems Engineering</h3>
+        <p class="u-dim" style="font-size:.9rem">Requirements decomposition and traceability, NASA-style SCR/SRR/PDR review
+           packages, interface control, engineering change requests, verification &amp; validation planning, trade studies.</p>
+      </div>
+    </div>
+    <div class="panel" data-reveal data-delay="2">
+      <div class="panel__head"><span>03 / EMBEDDED</span><span class="u-blue">&#9679;</span></div>
+      <div class="panel__body stack--sm" style="display:grid">
+        <h3>Embedded &amp; Flight Software</h3>
+        <p class="u-dim" style="font-size:.9rem">C++17 on embedded Linux, binary command/telemetry protocols with CRC,
+           watchdogs and FDIR state machines, hardware-in-the-loop rigs, deterministic logging and test automation.</p>
+      </div>
+    </div>
+    <div class="panel" data-reveal data-delay="3">
+      <div class="panel__head"><span>04 / AUTONOMY</span><span class="u-cyan">&#9679;</span></div>
+      <div class="panel__body stack--sm" style="display:grid">
+        <h3>Autonomous Robotics</h3>
+        <p class="u-dim" style="font-size:.9rem">GPS-denied navigation, visual-inertial fusion, real-time object detection,
+           closed-loop perception-to-actuation pipelines, PX4/MAVLink integration, ROS 2 and Gazebo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TECH STACK ============ -->
+<section class="shell section" aria-labelledby="stack-h">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">02 &mdash; Toolchain</p>
+      <h2 id="stack-h">Working toolchain</h2>
+      <p>Tools I have used to produce delivered analysis, code, or hardware results &mdash; not a list of things I have read about.</p>
+    </div>
+  </div>
+
+  <div class="tech-grid" data-reveal>
+    <div class="tech"><span class="tech__i">01</span><span class="tech__n">Python</span></div>
+    <div class="tech"><span class="tech__i">02</span><span class="tech__n">MATLAB</span></div>
+    <div class="tech"><span class="tech__i">03</span><span class="tech__n">C++</span></div>
+    <div class="tech"><span class="tech__i">04</span><span class="tech__n">SolidWorks</span></div>
+    <div class="tech"><span class="tech__i">05</span><span class="tech__n">Abaqus</span></div>
+    <div class="tech"><span class="tech__i">06</span><span class="tech__n">Linux</span></div>
+    <div class="tech"><span class="tech__i">07</span><span class="tech__n">LabVIEW</span></div>
+    <div class="tech"><span class="tech__i">08</span><span class="tech__n">Git</span></div>
+    <div class="tech"><span class="tech__i">09</span><span class="tech__n">YOLO</span></div>
+    <div class="tech"><span class="tech__i">10</span><span class="tech__n">Raspberry Pi</span></div>
+    <div class="tech"><span class="tech__i">11</span><span class="tech__n">Kalman Filter</span></div>
+    <div class="tech"><span class="tech__i">12</span><span class="tech__n">PID Control</span></div>
+    <div class="tech"><span class="tech__i">13</span><span class="tech__n">Monte Carlo</span></div>
+    <div class="tech"><span class="tech__i">14</span><span class="tech__n">Finite Element Analysis</span></div>
+  </div>
+</section>
+
+<!-- ============ FEATURED PROJECTS ============ -->
+<section class="shell section" aria-labelledby="proj-h">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">03 &mdash; Engineering case studies</p>
+      <h2 id="proj-h">Featured projects</h2>
+      <p>Each project is documented as an engineering report: problem, requirements, architecture,
+         design decisions, results, tradeoffs, and what I would change.</p>
+    </div>
+    <a class="link-arrow" href="projects.html">All 7 projects</a>
+  </div>
+
+  <div class="stack" style="gap:1.5rem">
+
+    <article class="case" data-reveal>
+      <div class="case__visual">
+        <span class="case__id">PRJ-01</span>
+        <img src="assets/diagrams/ghost-architecture.svg" width="880" height="400" loading="lazy" alt="GHOST system block diagram: sensors feed an AprilTag detector and IMU preintegration into a 9-state ESKF and an IMM tracker, which publish to PX4 over MAVLink UDP.">
+      </div>
+      <div class="case__body">
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
+          <span class="pill pill--active"><i class="dot dot--amber"></i>Active development</span>
+          <span class="case__sub">2026 &mdash; PRESENT</span>
+        </div>
+        <h3 class="case__title"><a href="projects/ghost.html">GHOST &mdash; GPS-Denied Occlusion-Survivable Tracker</a></h3>
+        <p class="case__sub">Dual-filter visual-inertial estimation on embedded Linux</p>
+
+        <div class="case__block">
+          <h4>Engineering challenge</h4>
+          <p>GNSS is the first thing an adversary or an urban canyon takes away. The vehicle still has to know
+             where it is, and where a moving target is, through seconds-long visual occlusions &mdash; on a
+             compute budget that fits a Raspberry Pi.</p>
+        </div>
+        <div class="case__block">
+          <h4>Approach</h4>
+          <p>Two filters with separate jobs: a 9-state error-state Kalman filter fusing 200 Hz IMU propagation
+             with 30 Hz AprilTag pose fixes for ego-state, and an interacting-multiple-model tracker
+             (constant-velocity / constant-turn) that coasts the target through dropouts with a &chi;&sup2; gate
+             on reacquisition.</p>
+        </div>
+
+        <div class="metrics">
+          <div class="metric"><div class="metric__v">9</div><div class="metric__k">ESKF states</div></div>
+          <div class="metric"><div class="metric__v">200 Hz</div><div class="metric__k">Propagation</div></div>
+          <div class="metric metric--orange"><div class="metric__v">10</div><div class="metric__k">Design revisions</div></div>
+          <div class="metric metric--orange"><div class="metric__v">20</div><div class="metric__k">Flaws found &amp; fixed</div></div>
+        </div>
+
+        <div class="chips">
+          <span class="chip chip--accent">C++</span><span class="chip chip--accent">Python</span>
+          <span class="chip">ESKF</span><span class="chip">IMM</span><span class="chip">PX4 SITL</span>
+          <span class="chip">MAVLink</span><span class="chip">Raspberry Pi 4B</span>
+        </div>
+
+        <div class="btn-row">
+          <a class="btn btn--sm btn--primary" href="projects/ghost.html">Read case study</a>
+          <a class="btn btn--sm" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="case" data-reveal>
+      <div class="case__visual">
+        <span class="case__id">PRJ-02</span>
+        <img src="assets/diagrams/astrasim-architecture.svg" width="880" height="400" loading="lazy" alt="AstraSim-FSW topology: a Python ground segment exchanges CRC-16 checked binary UDP packets with a C++17 flight segment running on a Raspberry Pi.">
+      </div>
+      <div class="case__body">
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
+          <span class="pill pill--live"><i class="dot"></i>HIL verified</span>
+          <span class="case__sub">COMPLETE</span>
+        </div>
+        <h3 class="case__title"><a href="projects/astrasim-fsw.html">AstraSim-FSW &mdash; Flight Software HIL Verification Framework</a></h3>
+        <p class="case__sub">C++17 flight segment · Python ground segment · Raspberry Pi target</p>
+
+        <div class="case__block">
+          <h4>Engineering challenge</h4>
+          <p>Flight software claims are worthless without evidence. Building the evidence chain &mdash; commands,
+             telemetry, fault injection, watchdog behaviour, regression &mdash; usually requires lab hardware a
+             student cannot get near.</p>
+        </div>
+        <div class="case__block">
+          <h4>Approach</h4>
+          <p>A complete command/telemetry stack: binary packets with CRC-16-CCITT validation and command
+             acknowledgement, a mode manager, health monitor and watchdog, a fault injector that drops, corrupts
+             and delays packets, YAML-driven scenarios, and a seeded Monte Carlo regression harness &mdash; all
+             cross-built and run on an aarch64 Raspberry Pi target.</p>
+        </div>
+
+        <div class="metrics">
+          <div class="metric metric--green"><div class="metric__v">9/9</div><div class="metric__k">CTest suites</div></div>
+          <div class="metric metric--green"><div class="metric__v">5/5</div><div class="metric__k">Scenarios</div></div>
+          <div class="metric metric--green"><div class="metric__v">25/25</div><div class="metric__k">Monte Carlo trials</div></div>
+          <div class="metric"><div class="metric__v">40%</div><div class="metric__k">CRC overhead cut</div></div>
+        </div>
+
+        <div class="chips">
+          <span class="chip chip--accent">C++17</span><span class="chip chip--accent">Python</span>
+          <span class="chip">CMake / CTest</span><span class="chip">UDP</span><span class="chip">CRC-16</span>
+          <span class="chip">aarch64</span><span class="chip">FDIR</span>
+        </div>
+
+        <div class="btn-row">
+          <a class="btn btn--sm btn--primary" href="projects/astrasim-fsw.html">Read case study</a>
+          <a class="btn btn--sm btn--cyan" href="demos/astrasim-fsw-hil-workstation.html">Live demo</a>
+          <a class="btn btn--sm" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="case" data-reveal>
+      <div class="case__visual">
+        <span class="case__id">PRJ-03</span>
+        <img src="assets/diagrams/gnc-loop.svg" width="880" height="320" loading="lazy" alt="Booster descent GNC loop: guidance, control, actuator, 6-DOF plant and navigation blocks with wind and sensor-noise disturbance injection and state feedback.">
+      </div>
+      <div class="case__body">
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
+          <span class="pill pill--done">Complete</span>
+          <span class="case__sub">DEC 2025</span>
+        </div>
+        <h3 class="case__title"><a href="projects/rocket-landing-gnc.html">Rocket Landing GNC Simulation</a></h3>
+        <p class="case__sub">6-DOF booster descent · TVC control · 500-run Monte Carlo campaign</p>
+
+        <div class="case__block">
+          <h4>Engineering challenge</h4>
+          <p>A propulsive landing controller that works on the nominal trajectory proves nothing. The question
+             a reviewer asks is: what is the landing dispersion across the wind and sensor-error envelope, and
+             what fraction of cases close?</p>
+        </div>
+        <div class="case__block">
+          <h4>Approach</h4>
+          <p>A 6-DOF descent simulator with rigid-body dynamics, aerodynamic and aerothermal modelling, mass
+             depletion and thrust-vector actuation, wrapped in a Monte Carlo harness that dispersed initial
+             state, winds and sensor bias across 500 seeded trials.</p>
+        </div>
+
+        <div class="metrics">
+          <div class="metric"><div class="metric__v">6-DOF</div><div class="metric__k">Dynamics</div></div>
+          <div class="metric metric--orange"><div class="metric__v">500</div><div class="metric__k">MC trials</div></div>
+          <div class="metric metric--green"><div class="metric__v">&lt;2.0 m</div><div class="metric__k">Landing accuracy</div></div>
+          <div class="metric"><div class="metric__v">PID</div><div class="metric__k">TVC control law</div></div>
+        </div>
+
+        <div class="chips">
+          <span class="chip chip--accent">Python</span><span class="chip">NumPy / SciPy</span>
+          <span class="chip">Monte Carlo</span><span class="chip">TVC</span><span class="chip">Aerothermodynamics</span>
+        </div>
+
+        <div class="btn-row">
+          <a class="btn btn--sm btn--primary" href="projects/rocket-landing-gnc.html">Read case study</a>
+          <a class="btn btn--sm" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="shell section" aria-labelledby="exp-h">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">04 &mdash; Engineering experience</p>
+      <h2 id="exp-h">Where I have shipped</h2>
+    </div>
+    <a class="link-arrow" href="experience.html">Full experience record</a>
+  </div>
+
+  <div class="timeline" data-reveal>
+    <div class="tl tl--current">
+      <div class="tl__date">Jan 2026 &mdash; Present</div>
+      <h3 class="tl__role">Spacecraft Systems Engineer &mdash; TAMU-SPIRIT Capstone</h3>
+      <p class="tl__org">Aegis Aerospace / ISS payload program <span>&middot; College Station, TX</span></p>
+      <ul class="tick-list">
+        <li>Maintained <b>100% milestone compliance</b> for 4 ISS-bound experiments targeting a Sep 2028 SpaceX Dragon launch, managing engineering change requests and NASA compliance tracking through SCR, SRR and PDR government design reviews.</li>
+        <li>Reduced thermal design risk on the DASH payload through material trades and thermal analysis across &minus;120 &deg;C to +120 &deg;C LEO cycling.</li>
+      </ul>
+    </div>
+    <div class="tl">
+      <div class="tl__date">Aug &mdash; Dec 2025</div>
+      <h3 class="tl__role">Controls &amp; Embedded Systems Engineer</h3>
+      <p class="tl__org">BLNC Turtle Robotics <span>&middot; College Station, TX</span></p>
+      <ul class="tick-list">
+        <li>Reduced motor validation errors by standardizing bench-test procedures in LabVIEW and maintaining as-built documentation.</li>
+        <li>Achieved full autonomous stabilization of a two-wheeled inverted-pendulum rover built from component level, using cascaded PID control.</li>
+      </ul>
+    </div>
+    <div class="tl">
+      <div class="tl__date">Dec 2023 &mdash; Dec 2024</div>
+      <h3 class="tl__role">Undergraduate Research Assistant</h3>
+      <p class="tl__org">TAMU ACE Lab &mdash; Dr. Sasangohar <span>&middot; College Station, TX</span></p>
+      <ul class="tick-list">
+        <li>Cut manual analysis time <b>40%</b> and accelerated report delivery by 2 days with a Python pipeline processing 5,000+ data points per run.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GITHUB ============ -->
+<section class="shell section" id="github" aria-labelledby="gh-h">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">05 &mdash; Source</p>
+      <h2 id="gh-h">Repositories</h2>
+      <p>Live from the GitHub API &mdash; pinned work first, then most recently pushed.</p>
+    </div>
+    <a class="link-arrow" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">github.com/XpiredRuby</a>
+  </div>
+
+  <div class="metrics" id="gh-stats" style="margin-bottom:1.15rem"></div>
+
+  <div class="repos" id="gh-repos" data-reveal>
+    <div class="repo"><span class="repo__name skeleton">loading</span><span class="repo__desc skeleton">loading repository metadata</span></div>
+    <div class="repo"><span class="repo__name skeleton">loading</span><span class="repo__desc skeleton">loading repository metadata</span></div>
+    <div class="repo"><span class="repo__name skeleton">loading</span><span class="repo__desc skeleton">loading repository metadata</span></div>
+  </div>
+
+  <div class="panel" style="margin-top:1.15rem" data-reveal>
+    <div class="panel__head"><span>Recent commit activity</span><span class="mono">PUBLIC EVENTS</span></div>
+    <div class="panel__body">
+      <div class="commits" id="gh-commits">
+        <p class="u-mute" style="font-size:.85rem">Loading commit feed&hellip;</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT CTA ============ -->
+<section class="shell section" aria-labelledby="cta-h">
+  <div class="panel" data-reveal>
+    <div class="panel__head"><span>06 &mdash; Availability</span><span><i class="dot" aria-hidden="true"></i>OPEN</span></div>
+    <div class="panel__body" style="padding:clamp(1.5rem,4vw,2.5rem)">
+      <h2 id="cta-h" style="max-width:22ch">Looking for GNC, flight software, and systems engineering work.</h2>
+      <p class="lede" style="margin-top:1rem">
+        Available for Summer 2026 internships and May 2027 full-time roles. Happy to walk through any
+        project's derivations, test evidence, or source in detail.
+      </p>
+      <div class="btn-row" style="margin-top:1.75rem">
+        <a class="btn btn--primary" href="mailto:vinhoustontexas@gmail.com">vinhoustontexas@gmail.com</a>
+        <a class="btn" href="resume.html">Resume</a>
+        <a class="btn" href="https://linkedin.com/in/Vin2005" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="btn" href="contact.html">All contact details</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <div>
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="skills.html">Technical skills</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Case studies</h5>
+        <ul>
+          <li><a href="projects/ghost.html">GHOST</a></li>
+          <li><a href="projects/astrasim-fsw.html">AstraSim-FSW</a></li>
+          <li><a href="projects/rocket-landing-gnc.html">Rocket Landing GNC</a></li>
+          <li><a href="projects/md11-structures.html">AeroFrame-MD11</a></li>
+          <li><a href="projects/interceptor.html">Interception Robot</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Elsewhere</h5>
+        <ul>
+          <li><a href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/Vin2005" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="mailto:vinhoustontexas@gmail.com">Email</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Status</h5>
+        <ul>
+          <li class="u-dim" style="font-size:.855rem">Texas A&amp;M University</li>
+          <li class="u-dim" style="font-size:.855rem">B.S. Aerospace Engineering</li>
+          <li class="u-dim" style="font-size:.855rem">Expected May 2027</li>
+          <li class="u-green" style="font-size:.855rem">Open to opportunities</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bar">
+      <span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span>
+      <span>Built from scratch &mdash; no framework, no build step</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js" defer></script>
+<script src="assets/js/github.js" defer></script>
 </body>
 </html>

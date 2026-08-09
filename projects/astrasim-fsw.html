@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AstraSim-FSW — Flight Software HIL Verification Framework | Vinayak Manoj Nair</title>
+<meta name="description" content="Engineering case study: a C++17 flight software core with a Python ground segment, CRC-16 binary command and telemetry, watchdog and FDIR logic, fault injection, YAML scenarios and Monte Carlo regression — verified on a Raspberry Pi aarch64 hardware target.">
+<meta name="author" content="Vinayak Manoj Nair">
+<meta name="theme-color" content="#07090D">
+<link rel="canonical" href="https://vinnair.me/projects/astrasim-fsw.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Vinayak Manoj Nair">
+<meta property="og:title" content="AstraSim-FSW — Flight Software HIL Verification Framework">
+<meta property="og:description" content="C++17 flight software, Python ground tooling, CRC-checked binary packets, fault injection and Monte Carlo regression — with committed hardware-in-the-loop evidence.">
+<meta property="og:url" content="https://vinnair.me/projects/astrasim-fsw.html">
+<meta property="og:image" content="https://vinnair.me/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://vinnair.me/assets/og-image.png">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","headline":"AstraSim-FSW — Flight Software HIL Verification Framework","description":"C++17 flight software with Python ground tooling, CRC-checked binary packets, FDIR logic and hardware-in-the-loop verification evidence.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Flight software","Verification and validation","Hardware-in-the-loop","Embedded systems"],"url":"https://vinnair.me/projects/astrasim-fsw.html"}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__bar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark" aria-hidden="true">VN</span>
+      <span class="brand__name">Vinayak Nair</span>
+      <span class="brand__role">/ AEROSPACE</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="../projects.html" aria-current="page">Projects</a>
+      <a href="../experience.html">Experience</a>
+      <a href="../skills.html">Skills</a>
+      <a href="../index.html#github">GitHub</a>
+      <a href="../contact.html">Contact</a>
+      <a class="nav__cta" href="../resume.html">Resume</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="shell">
+    <p class="crumbs"><a href="../index.html">Home</a> <span>/</span> <a href="../projects.html">Projects</a> <span>/</span> <span>PRJ-02 AstraSim-FSW</span></p>
+    <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:1.2rem">
+      <span class="pill pill--live"><i class="dot"></i>HIL verified</span>
+      <span class="pill">Evidence class: hardware target run</span>
+    </div>
+    <h1>AstraSim-FSW</h1>
+    <p class="hero__spec mono" style="margin-top:.9rem">FLIGHT SOFTWARE &middot; COMMAND &amp; TELEMETRY &middot; FDIR &middot; HIL VERIFICATION</p>
+    <p class="lede">
+      A flight software core and the verification apparatus that proves it works: CRC-checked binary
+      command and telemetry, mode management, watchdog and fault response, deliberate fault injection,
+      scenario regression, and committed evidence from a real hardware target.
+    </p>
+    <div class="btn-row" style="margin-top:1.75rem">
+      <a class="btn btn--primary" href="../demos/astrasim-fsw-hil-workstation.html">Open live demo</a>
+      <a class="btn" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+      <a class="btn btn--ghost" href="../projects.html">All projects</a>
+    </div>
+  </div>
+</section>
+
+<div class="shell section" style="padding-top:clamp(2rem,4vw,3rem)">
+<div class="doc">
+
+  <nav class="toc" aria-label="Case study contents">
+    <p class="toc__t">Contents</p>
+    <a href="#problem">01 Problem</a>
+    <a href="#requirements">02 Requirements</a>
+    <a href="#constraints">03 Constraints</a>
+    <a href="#design">04 System design</a>
+    <a href="#protocol">05 Interface &amp; protocol</a>
+    <a href="#algorithms">06 Algorithms</a>
+    <a href="#implementation">07 Implementation</a>
+    <a href="#testing">08 Testing</a>
+    <a href="#validation">09 Validation</a>
+    <a href="#performance">10 Performance</a>
+    <a href="#results">11 Results</a>
+    <a href="#tradeoffs">12 Tradeoffs</a>
+    <a href="#lessons">13 Lessons learned</a>
+    <a href="#future">14 Future work</a>
+    <a href="#gallery">15 Gallery</a>
+    <a href="#downloads">16 Downloads</a>
+  </nav>
+
+  <div>
+
+    <section class="doc__section" id="problem" data-reveal>
+      <h2><span class="num">01</span>Problem</h2>
+      <p>
+        Flight software is judged on evidence, not on features. The question at any review is not "does it
+        work" but "show me the run where it did not, and show me what it did about it." Producing that
+        evidence normally requires a lab: a flight-like target, a ground station, a way to corrupt the link
+        on purpose, and an automated way to repeat the whole thing after every change.
+      </p>
+      <p>
+        A student cannot get access to that lab. AstraSim-FSW was built to answer the question of whether the
+        entire verification chain &mdash; flight target, ground segment, fault injection, regression, evidence
+        capture &mdash; could be constructed from a Raspberry Pi and a laptop, and still produce artefacts that
+        would survive being shown to a flight software engineer.
+      </p>
+      <p><b class="u-cyan">Problem statement.</b> Build a flight software core and a verification campaign
+        around it, on commodity hardware, that produces reproducible, machine-readable evidence of correct
+        behaviour under both nominal and fault conditions.</p>
+    </section>
+
+    <section class="doc__section" id="requirements" data-reveal>
+      <h2><span class="num">02</span>Requirements</h2>
+      <div class="table-wrap">
+        <table class="reqs">
+          <thead><tr><th>ID</th><th>Requirement</th><th>Value</th><th>Verification</th></tr></thead>
+          <tbody>
+            <tr><td>AS-001</td><td>All command and telemetry shall use binary packets with integrity checking</td><td>CRC-16-CCITT</td><td>Unit test + corrupted-packet injection</td></tr>
+            <tr><td>AS-002</td><td>Every accepted command shall be acknowledged in telemetry</td><td>1:1 ACK</td><td>Scenario run, ACK matching</td></tr>
+            <tr><td>AS-003</td><td>Packets failing integrity check shall be discarded without state change</td><td>Silent reject</td><td>Fault injection test</td></tr>
+            <tr><td>AS-004</td><td>Flight software shall maintain an explicit mode state</td><td>Safe / nominal / fault</td><td>State-machine test</td></tr>
+            <tr><td>AS-005</td><td>Loss of ground contact shall trigger an autonomous safe transition</td><td>Watchdog on missed ticks</td><td>Link-drop injection</td></tr>
+            <tr><td>AS-006</td><td>Telemetry shall be emitted at a fixed rate independent of command traffic</td><td>10 Hz</td><td>Timing trace</td></tr>
+            <tr><td>AS-007</td><td>Health monitor shall detect out-of-limit and trending parameters</td><td>Limit + trend</td><td>Scenario run</td></tr>
+            <tr><td>AS-008</td><td>The full test suite shall pass on the hardware target, not only on the host</td><td>aarch64</td><td>CTest on Raspberry Pi</td></tr>
+            <tr><td>AS-009</td><td>Behaviour shall be reproducible from a seed</td><td>Seeded Monte Carlo</td><td>25-trial regression</td></tr>
+            <tr><td>AS-010</td><td>Every run shall write timestamped evidence to disk</td><td>Logs + plots</td><td>Artefact inspection</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="constraints" data-reveal>
+      <h2><span class="num">03</span>Constraints</h2>
+      <div class="grid-2">
+        <div class="panel"><div class="panel__head"><span>Platform</span></div><div class="panel__body">
+          <table class="spec spec--tight">
+            <tr><th>Flight target</th><td>Raspberry Pi 4B, Ubuntu aarch64 &mdash; cross-architecture from the x86-64 development host</td></tr>
+            <tr><th>Flight language</th><td>C++17, no exceptions in the command path</td></tr>
+            <tr><th>Ground language</th><td>Python 3</td></tr>
+            <tr><th>Link</th><td>UDP &mdash; unreliable by design, which is the point</td></tr>
+            <tr><th>Build / test</th><td>CMake and CTest, same suite on host and target</td></tr>
+          </table>
+        </div></div>
+        <div class="panel"><div class="panel__head"><span>Engineering</span></div><div class="panel__body">
+          <ul class="tick-list tick-list--orange">
+            <li><b>No reliable transport.</b> UDP was chosen deliberately &mdash; if the software assumes delivery, the fault handling is untested fiction.</li>
+            <li><b>Evidence is a deliverable.</b> A run that does not leave artefacts did not happen.</li>
+            <li><b>Same tests, both architectures.</b> A suite that only passes on the development host proves nothing about the target.</li>
+            <li><b>Determinism.</b> Every stochastic behaviour is seeded so failures are reproducible.</li>
+          </ul>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="doc__section" id="design" data-reveal>
+      <h2><span class="num">04</span>System design</h2>
+      <p>
+        Two segments with a deliberately hostile link between them. The ground segment issues commands,
+        decodes telemetry, and &mdash; critically &mdash; contains a fault injector that can drop, corrupt
+        and delay packets on demand. The flight segment parses, validates, acts, and reports, and is
+        responsible for behaving correctly when the link misbehaves.
+      </p>
+
+      <figure class="fig" style="margin:1.5rem 0">
+        <div class="fig__body">
+          <img src="../assets/diagrams/astrasim-architecture.svg" width="880" height="400" loading="lazy" alt="Ground segment with command client, telemetry decoder, fault injector and Monte Carlo harness connected by CRC-checked binary UDP packets to a flight segment with command handler, mode manager, telemetry encoder, health monitor, watchdog, fault response and evidence writer.">
+        </div>
+        <figcaption><b>Fig. 1</b> &mdash; HIL verification topology. The fault injector sits inside the ground segment so that the flight segment cannot distinguish an injected fault from a real one.</figcaption>
+      </figure>
+
+      <h3>Design decisions</h3>
+      <div class="table-wrap">
+        <table class="reqs">
+          <thead><tr><th>Decision</th><th>Chosen</th><th>Rejected alternative</th><th>Rationale</th></tr></thead>
+          <tbody>
+            <tr><td>DD-1</td><td>Binary packets</td><td>JSON / text protocol</td><td>Fixed-width binary is bandwidth-predictable, parseable without allocation, and representative of real spacecraft interfaces</td></tr>
+            <tr><td>DD-2</td><td>UDP</td><td>TCP</td><td>TCP hides exactly the failures the software must handle; the retransmit and ordering logic belongs in the application where it can be tested</td></tr>
+            <tr><td>DD-3</td><td>CRC-16-CCITT</td><td>Checksum / no check</td><td>Detects all single-bit and burst errors up to 16 bits at trivial cost; a simple checksum misses transpositions</td></tr>
+            <tr><td>DD-4</td><td>Explicit mode state machine</td><td>Implicit state via flags</td><td>An explicit machine is enumerable, drawable, and testable for unreachable and illegal transitions</td></tr>
+            <tr><td>DD-5</td><td>Fault injection in the ground segment</td><td>Fault flags inside flight software</td><td>Test hooks inside flight software are code that flies but is never exercised in flight &mdash; a classic source of latent defects</td></tr>
+            <tr><td>DD-6</td><td>YAML scenarios</td><td>Hand-run test procedures</td><td>Scenarios become version-controlled artefacts that can be diffed, reviewed and replayed</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="protocol" data-reveal>
+      <h2><span class="num">05</span>Interface &amp; protocol</h2>
+      <p>The interface control definition is the contract between segments. It is fixed-width, little-endian,
+         and validated before a single field is trusted.</p>
+      <div class="eq"><span class="c">— packet layout —</span>
+ 0        1        2        3        4                 N-2      N
+┌────────┬────────┬────────┬────────┬─────────────────┬────────────┐
+│  SYNC  │  TYPE  │  SEQ   │  LEN   │     PAYLOAD     │   CRC-16   │
+└────────┴────────┴────────┴────────┴─────────────────┴────────────┘
+
+<span class="c">— validation order, strictest first —</span>
+1. SYNC word matches            → else discard, do not advance state
+2. LEN within bounds            → else discard (guards the payload read)
+3. CRC-16-CCITT over [TYPE..PAYLOAD] matches trailer
+4. TYPE is a known command
+5. SEQ is not a replay
+→ only then: dispatch to the command handler</div>
+      <p class="eq__note">
+        The ordering matters. Length is validated <i>before</i> the payload is read, so a corrupted length
+        field can never cause an over-read &mdash; the check that protects the parser cannot depend on data
+        the parser has not yet verified.
+      </p>
+    </section>
+
+    <section class="doc__section" id="algorithms" data-reveal>
+      <h2><span class="num">06</span>Algorithms &amp; logic</h2>
+      <ul class="tick-list">
+        <li><b>CRC-16-CCITT, table driven.</b> A 256-entry lookup table replaces per-bit computation.</li>
+        <li><b>Mode state machine.</b> Safe / nominal / fault with explicitly enumerated legal transitions; illegal transitions are a test assertion, not a comment.</li>
+        <li><b>Watchdog.</b> A missed-tick counter that triggers an autonomous transition to safe when ground contact is lost, independent of any command.</li>
+        <li><b>Health monitor.</b> Limit checking plus trend detection, so a parameter walking toward a limit is caught before it crosses it.</li>
+        <li><b>FDIR response.</b> Detection, isolation and a defined recovery action per fault class, with the transition recorded in telemetry so the ground can see why the vehicle changed mode.</li>
+        <li><b>Seeded Monte Carlo regression.</b> 25 trials with dispersed fault timing and packet loss, all reproducible from their seeds.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="implementation" data-reveal>
+      <h2><span class="num">07</span>Implementation</h2>
+      <table class="spec">
+        <tr><th>Flight segment</th><td>C++17 &mdash; command handler, mode manager, telemetry encoder, health monitor, watchdog, FDIR state machine, evidence writer</td></tr>
+        <tr><th>Ground segment</th><td>Python 3 &mdash; command client, telemetry decoder, fault injector, YAML scenario runner, Monte Carlo harness, plotting</td></tr>
+        <tr><th>Build system</th><td>CMake, cross-built and natively built on the Pi</td></tr>
+        <tr><th>Test framework</th><td>CTest &mdash; 9 suites, executed on both x86-64 host and aarch64 target</td></tr>
+        <tr><th>Evidence</th><td>Timestamped logs, decoded telemetry tables, generated plots, all committed to the repository</td></tr>
+      </table>
+      <div class="note note--blue" style="margin-top:1.25rem">
+        <div class="note__t">What is real vs. what is replayed</div>
+        <p>The C++ target was built on Raspberry Pi aarch64, accepted UDP commands, produced telemetry,
+           passed 9/9 tests and generated committed evidence files. The
+           <a class="u-cyan" href="../demos/astrasim-fsw-hil-workstation.html">live demo workstation</a>
+           deterministically replays that recorded run so the verification sequence can be reviewed without
+           coordinating terminals &mdash; it visualises real evidence, it does not simulate results.</p>
+      </div>
+    </section>
+
+    <section class="doc__section" id="testing" data-reveal>
+      <h2><span class="num">08</span>Testing</h2>
+      <ol class="num-list">
+        <li><b>Unit tests.</b> CRC computation against known vectors, packet encode/decode round-trip, state-machine transitions including every illegal transition.</li>
+        <li><b>Nominal scenarios.</b> YAML-defined command sequences with expected telemetry responses and acknowledgement matching.</li>
+        <li><b>Fault injection.</b> Dropped packets, bit-flipped payloads, corrupted length fields, delayed delivery, and total link loss &mdash; each with an asserted expected response.</li>
+        <li><b>Monte Carlo regression.</b> 25 seeded trials dispersing fault timing and loss rate, run as a gate on changes.</li>
+        <li><b>Hardware target execution.</b> The same suite re-run on aarch64, because endianness, alignment and timing behaviour differ from the host.</li>
+      </ol>
+      <div class="metrics" style="margin-top:1.5rem">
+        <div class="metric metric--green"><div class="metric__v">9/9</div><div class="metric__k">CTest suites</div></div>
+        <div class="metric metric--green"><div class="metric__v">5/5</div><div class="metric__k">Scenario runs</div></div>
+        <div class="metric metric--green"><div class="metric__v">25/25</div><div class="metric__k">Monte Carlo trials</div></div>
+        <div class="metric"><div class="metric__v">2</div><div class="metric__k">Architectures</div></div>
+      </div>
+    </section>
+
+    <section class="doc__section" id="validation" data-reveal>
+      <h2><span class="num">09</span>Validation</h2>
+      <p>
+        Verification asks whether the software meets its requirements. Validation asks whether meeting them
+        actually produces safe behaviour. The distinction shows up clearly in the watchdog: it is
+        straightforward to verify that a missed-tick counter fires, and much more interesting to validate
+        that the resulting safe-mode transition happens fast enough to matter, and that it does not fire
+        spuriously under normal packet loss.
+      </p>
+      <ul class="tick-list tick-list--cyan">
+        <li><b>Requirement traceability.</b> Each requirement maps to at least one executing test, and the mapping is checked rather than asserted.</li>
+        <li><b>Negative testing.</b> Every integrity mechanism is validated by breaking it on purpose &mdash; a CRC check nobody has ever seen reject a packet is an untested branch.</li>
+        <li><b>Cross-architecture evidence.</b> Passing on the host and on aarch64 validates that no host-specific assumption about width or alignment leaked into the packet layer.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="performance" data-reveal>
+      <h2><span class="num">10</span>Performance</h2>
+      <p>
+        The first CRC implementation computed bit-by-bit and produced measurable packet-validation latency on
+        the Pi &mdash; visible as jitter in the telemetry cadence, which is exactly the sort of thing that is
+        invisible on a development laptop. Migrating to a table-driven CRC-16-CCITT implementation
+        <b>reduced packet validation overhead by 40%</b> and flattened the telemetry timing.
+      </p>
+      <div class="metrics">
+        <div class="metric"><div class="metric__v">40%</div><div class="metric__k">Validation overhead cut</div></div>
+        <div class="metric"><div class="metric__v">10 Hz</div><div class="metric__k">Telemetry cadence</div></div>
+        <div class="metric metric--green"><div class="metric__v">100%</div><div class="metric__k">Corrupted packets rejected</div></div>
+        <div class="metric"><div class="metric__v">aarch64</div><div class="metric__k">Verified target</div></div>
+      </div>
+    </section>
+
+    <section class="doc__section" id="results" data-reveal>
+      <h2><span class="num">11</span>Results</h2>
+      <ul class="tick-list tick-list--cyan">
+        <li>Full command and telemetry chain operating on a hardware target, with committed evidence files rather than screenshots.</li>
+        <li>9/9 CTest suites, 5/5 YAML scenarios and 25/25 Monte Carlo regressions passing on both host and Raspberry Pi.</li>
+        <li>Every injected fault class &mdash; drop, corruption, delay, link loss &mdash; produced the designed response, including autonomous safe-mode entry on watchdog expiry.</li>
+        <li>A 40% reduction in packet validation overhead from the table-driven CRC migration, verified on the target rather than inferred.</li>
+        <li>A replayable evidence workstation that lets a reviewer inspect the verification sequence in a browser.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="tradeoffs" data-reveal>
+      <h2><span class="num">12</span>Engineering tradeoffs</h2>
+      <div class="table-wrap">
+        <table class="reqs">
+          <thead><tr><th>Tradeoff</th><th>Gained</th><th>Paid</th></tr></thead>
+          <tbody>
+            <tr><td>UDP over TCP</td><td>Fault handling that is real and tested</td><td>Sequencing, retransmission and duplicate detection all become application responsibilities</td></tr>
+            <tr><td>Binary over text protocol</td><td>Predictable bandwidth, allocation-free parsing</td><td>Not human-readable on the wire &mdash; a decoder is required to debug anything</td></tr>
+            <tr><td>Table-driven CRC</td><td>40% less validation overhead</td><td>256-entry constant table in flash and a small loss of code obviousness</td></tr>
+            <tr><td>Fault injection outside flight software</td><td>No test-only code in the flight build</td><td>Cannot inject faults internal to the flight segment &mdash; only link-level ones</td></tr>
+            <tr><td>Full evidence capture on every run</td><td>Reproducible, reviewable results</td><td>Disk usage and run time grow; evidence has to be curated</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="lessons" data-reveal>
+      <h2><span class="num">13</span>Lessons learned</h2>
+      <ul class="tick-list tick-list--orange">
+        <li><b>Profile on the target, not the host.</b> The CRC cost was invisible on a laptop and obvious on the Pi. Development-host performance is not evidence.</li>
+        <li><b>Validate before you parse.</b> Ordering the checks so that length is verified before the payload is read is the difference between a robust parser and a buffer overrun.</li>
+        <li><b>Test-only code in a flight build is a liability.</b> Keeping the fault injector on the ground side keeps the flight binary honest.</li>
+        <li><b>Evidence is the deliverable.</b> The artefacts &mdash; logs, plots, test output &mdash; are what let someone else believe the claims without re-running anything.</li>
+        <li><b>A protocol is a contract.</b> Writing the ICD before the code eliminated an entire class of integration argument.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="future" data-reveal>
+      <h2><span class="num">14</span>Future work</h2>
+      <ol class="num-list">
+        <li>Live WebSocket telemetry bridge so the workstation shows a running target rather than a replay.</li>
+        <li>Real-time clock integration and a hard timing budget with measured worst-case execution time per task.</li>
+        <li>Physical sensor in the loop, closing the last gap between software-in-the-loop and true hardware-in-the-loop.</li>
+        <li>Requirement coverage reporting generated automatically from the test run rather than maintained by hand.</li>
+        <li>Expand the FDIR matrix to cover sensor faults, not only link faults.</li>
+      </ol>
+    </section>
+
+    <section class="doc__section" id="gallery" data-reveal>
+      <h2><span class="num">15</span>Gallery</h2>
+      <div class="grid-2">
+        <div class="panel"><div class="panel__head"><span>Interactive</span><span class="mono">EVIDENCE REPLAY</span></div><div class="panel__body">
+          <p class="u-dim" style="font-size:.9rem">A browser-based verification workstation that replays the recorded HIL run: mission replay, telemetry plots, FSW internals, FDIR behaviour, V&amp;V evidence, ICD, timing budget, assurance case and trade study.</p>
+          <div class="btn-row" style="margin-top:1rem"><a class="btn btn--sm btn--cyan" href="../demos/astrasim-fsw-hil-workstation.html">Open workstation</a></div>
+        </div></div>
+        <div class="slot"><span class="slot__t">Pending &mdash; hardware photograph</span><span class="slot__d">Raspberry Pi target and ground station bench setup.</span></div>
+      </div>
+    </section>
+
+    <section class="doc__section" id="downloads" data-reveal>
+      <h2><span class="num">16</span>Source &amp; downloads</h2>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+        <a class="btn btn--cyan" href="../demos/astrasim-fsw-hil-workstation.html">Live demo</a>
+        <a class="btn" href="../contact.html">Request technical report</a>
+        <a class="btn btn--ghost" href="rocket-landing-gnc.html">Next: Rocket Landing GNC &rarr;</a>
+      </div>
+    </section>
+
+  </div>
+</div>
+</div>
+
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <div><h5>Navigate</h5><ul>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../experience.html">Experience</a></li>
+        <li><a href="../skills.html">Technical skills</a></li>
+        <li><a href="../resume.html">Resume</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul></div>
+      <div><h5>Case studies</h5><ul>
+        <li><a href="ghost.html">GHOST</a></li>
+        <li><a href="astrasim-fsw.html">AstraSim-FSW</a></li>
+        <li><a href="rocket-landing-gnc.html">Rocket Landing GNC</a></li>
+        <li><a href="md11-structures.html">AeroFrame-MD11</a></li>
+        <li><a href="interceptor.html">Interception Robot</a></li>
+      </ul></div>
+      <div><h5>Elsewhere</h5><ul>
+        <li><a href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/Vin2005" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:vinhoustontexas@gmail.com">Email</a></li>
+      </ul></div>
+      <div><h5>Status</h5><ul>
+        <li class="u-dim" style="font-size:.855rem">Texas A&amp;M University</li>
+        <li class="u-dim" style="font-size:.855rem">B.S. Aerospace Engineering</li>
+        <li class="u-dim" style="font-size:.855rem">Expected May 2027</li>
+        <li class="u-green" style="font-size:.855rem">Open to opportunities</li>
+      </ul></div>
+    </div>
+    <div class="footer__bar">
+      <span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span>
+      <span>PRJ-02 &middot; ASTRASIM-FSW</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>

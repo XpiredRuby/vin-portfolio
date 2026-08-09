@@ -1,72 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Page not found — Vinayak Nair portfolio.">
-  <meta name="robots" content="noindex">
-  <title>404 — Telemetry Lost | Vinayak Nair</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 — Signal Lost | Vinayak Manoj Nair</title>
+<meta name="description" content="Page not found.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07090D">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to content</a>
-
-  <div class="page">
-    <header class="site-header">
-      <div class="container header-inner">
-        <a href="index.html" class="site-name">Vinayak Nair <span>/ GNC</span></a>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
-          <span class="nav-toggle-bar"></span>
-          <span class="nav-toggle-bar"></span>
-          <span class="nav-toggle-bar"></span>
-        </button>
-        <nav id="site-nav" class="site-nav" aria-label="Primary">
-          <ul>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="resume.html">Resume</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-
-    <main id="main-content">
-      <div class="container">
-        <section class="error-page" aria-labelledby="error-heading">
-          <p class="hero-meta">ERR 404 — Signal lost</p>
-          <h1 id="error-heading">Telemetry lost</h1>
-          <p class="lead">The requested coordinate does not exist in this mission database. The page may have moved, been renamed, or never existed.</p>
-          <dl class="error-diagnostics">
-            <div>
-              <dt>Status</dt>
-              <dd><span class="status-tag status-archived">Not found</span></dd>
-            </div>
-            <div>
-              <dt>Recommended action</dt>
-              <dd>Return to base station</dd>
-            </div>
-          </dl>
-          <div class="cta-group">
-            <a href="index.html" class="btn btn-primary">Return home</a>
-            <a href="projects.html" class="btn">View projects</a>
-          </div>
-        </section>
-      </div>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <span>&copy; 2026 Vinayak Nair</span>
-        <a href="contact.html">Contact</a>
-      </div>
-    </footer>
+<header class="masthead">
+  <div class="shell masthead__bar">
+    <a class="brand" href="/index.html">
+      <span class="brand__mark" aria-hidden="true">VN</span>
+      <span class="brand__name">Vinayak Nair</span>
+      <span class="brand__role">/ AEROSPACE</span>
+    </a>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="/projects.html">Projects</a>
+      <a href="/experience.html">Experience</a>
+      <a href="/skills.html">Skills</a>
+      <a href="/contact.html">Contact</a>
+      <a class="nav__cta" href="/resume.html">Resume</a>
+    </nav>
   </div>
+</header>
 
-  <script src="main.min.js"></script>
+<main id="main">
+  <section class="shell section" style="min-height:58vh;display:grid;align-content:center">
+    <p class="eyebrow">Telemetry &middot; NO LOCK</p>
+    <h1 style="margin-top:1rem">404 &mdash; Signal lost</h1>
+    <p class="lede" style="margin-top:1.1rem">
+      The requested resource is not on this vehicle. The navigation state is still valid &mdash;
+      pick a destination below.
+    </p>
+
+    <div class="metrics" style="margin-top:2rem;max-width:640px">
+      <div class="metric"><div class="metric__v">404</div><div class="metric__k">Status code</div></div>
+      <div class="metric metric--orange"><div class="metric__v">LOST</div><div class="metric__k">Link state</div></div>
+      <div class="metric metric--green"><div class="metric__v">NOMINAL</div><div class="metric__k">All other systems</div></div>
+    </div>
+
+    <div class="btn-row" style="margin-top:2rem">
+      <a class="btn btn--primary" href="/index.html">Return to home</a>
+      <a class="btn" href="/projects.html">Projects</a>
+      <a class="btn" href="/resume.html">Resume</a>
+      <a class="btn" href="/contact.html">Contact</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__bar" style="border:0;padding-top:0">
+      <span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span>
+      <span>ERR 404 &middot; RESOURCE NOT FOUND</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
 </body>
 </html>

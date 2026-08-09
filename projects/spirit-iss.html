@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TAMU-SPIRIT — ISS Payload Systems Engineering | Vinayak Manoj Nair</title>
+<meta name="description" content="Engineering case study: systems engineering for four ISS-bound experiments with Aegis Aerospace — requirements traceability, engineering change control, NASA SCR/SRR/PDR design reviews, and thermal trades across the LEO cycling envelope.">
+<meta name="author" content="Vinayak Manoj Nair">
+<meta name="theme-color" content="#07090D">
+<link rel="canonical" href="https://vinnair.me/projects/spirit-iss.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Vinayak Manoj Nair">
+<meta property="og:title" content="TAMU-SPIRIT — ISS Payload Systems Engineering">
+<meta property="og:description" content="Four ISS-bound experiments through SCR, SRR and PDR government design reviews with 100% milestone compliance.">
+<meta property="og:url" content="https://vinnair.me/projects/spirit-iss.html">
+<meta property="og:image" content="https://vinnair.me/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://vinnair.me/assets/og-image.png">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","headline":"TAMU-SPIRIT — ISS Payload Systems Engineering","description":"Systems engineering for four ISS-bound experiments through NASA design review gates.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Systems engineering","Requirements management","Design reviews","Thermal analysis"],"url":"https://vinnair.me/projects/spirit-iss.html"}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__bar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark" aria-hidden="true">VN</span>
+      <span class="brand__name">Vinayak Nair</span>
+      <span class="brand__role">/ AEROSPACE</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="../projects.html" aria-current="page">Projects</a>
+      <a href="../experience.html">Experience</a>
+      <a href="../skills.html">Skills</a>
+      <a href="../index.html#github">GitHub</a>
+      <a href="../contact.html">Contact</a>
+      <a class="nav__cta" href="../resume.html">Resume</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="shell">
+    <p class="crumbs"><a href="../index.html">Home</a> <span>/</span> <a href="../projects.html">Projects</a> <span>/</span> <span>PRJ-06 TAMU-SPIRIT</span></p>
+    <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:1.2rem">
+      <span class="pill pill--active"><i class="dot dot--amber"></i>Active</span>
+      <span class="pill">SCR / SRR / PDR complete</span>
+    </div>
+    <h1>TAMU-SPIRIT</h1>
+    <p class="hero__spec mono" style="margin-top:.9rem">ISS PAYLOAD &middot; SYSTEMS ENGINEERING &middot; NASA DESIGN REVIEWS</p>
+    <p class="lede">
+      Four experiments manifested for the International Space Station, taken through government design
+      reviews with an eight-person engineering team. The technical work here is not an algorithm &mdash;
+      it is requirements, traceability, change control, and the discipline that keeps a real launch date
+      from slipping.
+    </p>
+    <div class="btn-row" style="margin-top:1.75rem">
+      <a class="btn btn--primary" href="../experience.html">Experience record</a>
+      <a class="btn btn--ghost" href="../projects.html">All projects</a>
+    </div>
+  </div>
+</section>
+
+<div class="shell section" style="padding-top:clamp(2rem,4vw,3rem)">
+<div class="doc">
+
+  <nav class="toc" aria-label="Case study contents">
+    <p class="toc__t">Contents</p>
+    <a href="#problem">01 Problem</a>
+    <a href="#requirements">02 Requirements</a>
+    <a href="#constraints">03 Constraints</a>
+    <a href="#design">04 Review lifecycle</a>
+    <a href="#process">05 Systems process</a>
+    <a href="#thermal">06 Thermal trade</a>
+    <a href="#implementation">07 My contribution</a>
+    <a href="#validation">08 V&amp;V approach</a>
+    <a href="#results">09 Results</a>
+    <a href="#tradeoffs">10 Tradeoffs</a>
+    <a href="#challenges">11 Challenges</a>
+    <a href="#lessons">12 Lessons learned</a>
+    <a href="#future">13 Forward work</a>
+    <a href="#gallery">14 Gallery</a>
+  </nav>
+
+  <div>
+
+    <section class="doc__section" id="problem" data-reveal>
+      <h2><span class="num">01</span>Problem</h2>
+      <p>
+        Hardware that flies to the International Space Station is not judged only on whether it works.
+        It is judged on whether the programme can demonstrate, at a government review board, that every
+        requirement is traceable to a verification method, that every change since the last review has been
+        assessed and dispositioned, and that the design closes against the environment it will actually see.
+      </p>
+      <p>
+        A student team can build competent hardware and still fail that bar entirely, because the failure
+        mode is not technical &mdash; it is a requirement nobody owns, a change nobody recorded, or an
+        analysis whose assumptions nobody wrote down. With four experiments, eight engineers, and a
+        Sep 2028 SpaceX Dragon manifest, the coordination problem is the engineering problem.
+      </p>
+      <p><b class="u-cyan">Problem statement.</b> Carry four ISS-bound experiments through NASA design review
+        gates with complete requirement traceability and change control, while closing the thermal design
+        against the low Earth orbit environment.</p>
+    </section>
+
+    <section class="doc__section" id="requirements" data-reveal>
+      <h2><span class="num">02</span>Programme requirements</h2>
+      <div class="table-wrap">
+        <table class="reqs">
+          <thead><tr><th>ID</th><th>Requirement</th><th>Driver</th><th>Verification</th></tr></thead>
+          <tbody>
+            <tr><td>SP-001</td><td>Payload shall survive the LEO thermal cycling environment</td><td>&minus;120 &deg;C to +120 &deg;C</td><td>Thermal analysis + test</td></tr>
+            <tr><td>SP-002</td><td>Payload shall meet launch vehicle structural and interface requirements</td><td>Dragon manifest</td><td>Analysis + interface review</td></tr>
+            <tr><td>SP-003</td><td>All requirements shall be traceable to a verification method</td><td>NASA review standard</td><td>Traceability matrix audit</td></tr>
+            <tr><td>SP-004</td><td>Design changes shall be dispositioned through a formal ECR process</td><td>Configuration control</td><td>ECR log review</td></tr>
+            <tr><td>SP-005</td><td>Programme shall satisfy each review gate on schedule</td><td>SCR, SRR, PDR</td><td>Board disposition</td></tr>
+            <tr><td>SP-006</td><td>Quality documentation shall be maintained across all four experiments</td><td>8-person team</td><td>Document control audit</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="constraints" data-reveal>
+      <h2><span class="num">03</span>Constraints</h2>
+      <div class="grid-2">
+        <div class="panel"><div class="panel__head"><span>Environment</span></div><div class="panel__body">
+          <ul class="tick-list">
+            <li><b>Thermal cycling.</b> &minus;120 &deg;C to +120 &deg;C across the orbital day/night cycle, repeated for the duration of the mission.</li>
+            <li><b>Launch environment.</b> Vibration, acoustic and quasi-static loading from the Dragon ascent.</li>
+            <li><b>No servicing.</b> Once it is up there, nothing gets adjusted.</li>
+          </ul>
+        </div></div>
+        <div class="panel"><div class="panel__head"><span>Programmatic</span></div><div class="panel__body">
+          <ul class="tick-list tick-list--orange">
+            <li><b>Fixed manifest date.</b> Sep 2028 launch &mdash; the schedule is not the variable.</li>
+            <li><b>Government review gates.</b> Progress is gated on board disposition, not on internal opinion.</li>
+            <li><b>Distributed team.</b> Four experiments, eight engineers, one configuration baseline.</li>
+            <li><b>Compliance regime.</b> NASA and DCMA documentation standards apply.</li>
+          </ul>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="doc__section" id="design" data-reveal>
+      <h2><span class="num">04</span>Review lifecycle</h2>
+      <p>
+        Each gate answers a different question, and answering them out of order is the classic way to lose a
+        year: SCR asks whether the concept is sound, SRR asks whether the requirements are complete and
+        verifiable, PDR asks whether the design closes against them, and CDR asks whether it is ready to be
+        built.
+      </p>
+      <figure class="fig" style="margin:1.5rem 0">
+        <div class="fig__body">
+          <img src="../assets/diagrams/spirit-lifecycle.svg" width="880" height="300" loading="lazy" alt="Review gate sequence from system concept review through requirements, preliminary design and critical design review to Dragon flight in September 2028.">
+        </div>
+        <figcaption><b>Fig. 1</b> &mdash; Review gate sequence. SCR, SRR and PDR complete; CDR in work against the Sep 2028 manifest.</figcaption>
+      </figure>
+      <div class="table-wrap">
+        <table class="reqs">
+          <thead><tr><th>Gate</th><th>Question answered</th><th>Primary artefacts</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>SCR</td><td>Is the concept viable and worth resourcing?</td><td>Concept description, feasibility rationale</td><td>Complete</td></tr>
+            <tr><td>SRR</td><td>Are the requirements complete, consistent and verifiable?</td><td>Requirements set, traceability matrix, verification methods</td><td>Complete</td></tr>
+            <tr><td>PDR</td><td>Does the design close against the requirements?</td><td>Design description, analyses, interface definitions, risk register</td><td>Complete</td></tr>
+            <tr><td>CDR</td><td>Is the design ready to build?</td><td>Detailed drawings, full analysis set, verification plan</td><td>In work</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="process" data-reveal>
+      <h2><span class="num">05</span>Systems engineering process</h2>
+      <h3>Requirement traceability</h3>
+      <p>
+        Every requirement carries a parent, a verification method and an owner. The matrix is the artefact a
+        review board actually interrogates, because an orphaned requirement is either unnecessary or is the
+        one that will be missed.
+      </p>
+      <div class="eq">MISSION NEED
+   └── SYSTEM REQUIREMENT ──── verification method ──── owner
+          └── SUBSYSTEM REQUIREMENT ──── verification method ──── owner
+                 └── COMPONENT SPECIFICATION ──── acceptance criterion
+
+<span class="c">audit rule: every leaf traces up to a mission need, and down to a test, analysis,
+inspection or demonstration. no orphans in either direction.</span></div>
+
+      <h3>Engineering change requests</h3>
+      <p>
+        Every change to a baselined item goes through an ECR: what is changing, why, what it affects, who
+        assessed it, and what the disposition was. The discipline exists because on a distributed team the
+        expensive failure is not a bad change &mdash; it is a good change that two other subsystems never
+        heard about.
+      </p>
+      <ul class="tick-list tick-list--cyan">
+        <li><b>Impact assessment</b> against interfaces, mass, power, thermal and schedule before disposition.</li>
+        <li><b>Traceability</b> from the change back to the requirement it affects and forward to the re-verification it triggers.</li>
+        <li><b>Closure record</b> so the review board can see the full change history since the last gate.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="thermal" data-reveal>
+      <h2><span class="num">06</span>Thermal trade &mdash; DASH payload</h2>
+      <p>
+        The DASH payload's dominant risk was thermal. In low Earth orbit a payload passes through the
+        terminator roughly every 45 minutes, and the resulting cycling drives two distinct failure
+        mechanisms: instantaneous stress from differential expansion between dissimilar materials, and
+        cumulative fatigue over thousands of cycles.
+      </p>
+      <div class="eq">ΔT ≈ 240 °C                       <span class="c">−120 °C to +120 °C, orbital cycle</span>
+σ_thermal = E α ΔT / (1 − ν)      <span class="c">constrained differential expansion</span>
+
+<span class="c">— trade parameters —</span>
+  coefficient of thermal expansion mismatch between joined materials
+  thermal conductivity and resulting gradient across the interface
+  cycle count over mission duration → fatigue, not just peak stress
+  mass and manufacturability of each candidate</div>
+      <p>
+        The trade was resolved on CTE compatibility rather than on any single material's absolute
+        performance: a joint between two materials that expand at different rates generates stress every
+        orbit regardless of how good either material is on its own. Material selection plus thermal analysis
+        across the full band reduced the design risk carried into PDR.
+      </p>
+    </section>
+
+    <section class="doc__section" id="implementation" data-reveal>
+      <h2><span class="num">07</span>My contribution</h2>
+      <ul class="tick-list">
+        <li><b>Maintained 100% milestone compliance</b> for four ISS-bound experiments targeting the Sep 2028 SpaceX Dragon launch.</li>
+        <li><b>Managed engineering change requests</b> and NASA compliance tracking through SCR, SRR and PDR government design reviews.</li>
+        <li><b>Reduced thermal design risk for DASH</b> by performing material selection trades and thermal analysis across the &minus;120 &deg;C to +120 &deg;C LEO cycling environment.</li>
+        <li><b>Coordinated quality documentation</b> across an eight-person engineering team, advancing the project toward late-2026 hardware manufacturing.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="validation" data-reveal>
+      <h2><span class="num">08</span>Verification &amp; validation approach</h2>
+      <p>Verification method is assigned when the requirement is written, not when the hardware exists.
+         Assigning it late is how programmes discover that a requirement is untestable after the design is frozen.</p>
+      <div class="table-wrap">
+        <table class="reqs">
+          <thead><tr><th>Method</th><th>Applied to</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>Test</td><td>Thermal cycling survival, structural qualification</td><td>Environmental response cannot be argued, only demonstrated</td></tr>
+            <tr><td>Analysis</td><td>Thermal gradients, launch loads, margins</td><td>Covers conditions that cannot be reproduced affordably on the ground</td></tr>
+            <tr><td>Inspection</td><td>Dimensional conformance, workmanship, documentation</td><td>Direct observation is sufficient and cheapest</td></tr>
+            <tr><td>Demonstration</td><td>Operational sequences, crew interaction</td><td>Function is observable without instrumentation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="results" data-reveal>
+      <h2><span class="num">09</span>Results</h2>
+      <div class="metrics" style="margin-bottom:1.5rem">
+        <div class="metric metric--green"><div class="metric__v">100%</div><div class="metric__k">Milestone compliance</div></div>
+        <div class="metric"><div class="metric__v">4</div><div class="metric__k">ISS experiments</div></div>
+        <div class="metric"><div class="metric__v">3</div><div class="metric__k">Review gates passed</div></div>
+        <div class="metric metric--orange"><div class="metric__v">240 &deg;C</div><div class="metric__k">Thermal band closed</div></div>
+      </div>
+      <ul class="tick-list tick-list--cyan">
+        <li>SCR, SRR and PDR government design reviews satisfied on schedule, with CDR in work.</li>
+        <li>Thermal design risk on DASH reduced from a top programme risk to an analysed and dispositioned item.</li>
+        <li>Configuration baseline maintained across four experiments with a complete, auditable change history.</li>
+        <li>Programme advanced toward late-2026 hardware manufacturing.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="tradeoffs" data-reveal>
+      <h2><span class="num">10</span>Engineering tradeoffs</h2>
+      <div class="table-wrap">
+        <table class="reqs">
+          <thead><tr><th>Tradeoff</th><th>Gained</th><th>Paid</th></tr></thead>
+          <tbody>
+            <tr><td>Formal ECR process on a student team</td><td>Auditable baseline, no silent divergence between subsystems</td><td>Real overhead per change &mdash; unpopular until the first change that would have broken an interface</td></tr>
+            <tr><td>Verification method assigned at requirement authoring</td><td>No untestable requirements survive to CDR</td><td>Slower requirements phase</td></tr>
+            <tr><td>CTE compatibility over single-material optimisation</td><td>Lower cyclic stress at the joints</td><td>Rules out otherwise attractive materials on their individual merits</td></tr>
+            <tr><td>Analysis-heavy risk reduction before PDR</td><td>Risk retired early, when changes are still cheap</td><td>Front-loaded analysis effort before hardware exists to check it against</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="challenges" data-reveal>
+      <h2><span class="num">11</span>Challenges</h2>
+      <h3>Four experiments, one baseline</h3>
+      <p>
+        Each experiment had its own team, its own priorities and its own idea of what "done" meant. Holding a
+        single configuration baseline across all four is the work that does not appear in any technical
+        drawing and determines whether the programme passes its next gate.
+      </p>
+      <h3>Compliance as engineering, not paperwork</h3>
+      <p>
+        The temptation on a student programme is to treat NASA documentation requirements as bureaucracy
+        wrapped around the real work. They are not: the traceability matrix is a completeness check on the
+        requirement set, and the ECR log is a coupling analysis of the design. Treating them as engineering
+        artefacts is what made the reviews pass.
+      </p>
+      <h3>A launch date that does not move</h3>
+      <p>
+        A Sep 2028 manifest slot converts every schedule decision into a technical one. Scope, margin and
+        verification depth are the variables; the date is not.
+      </p>
+    </section>
+
+    <section class="doc__section" id="lessons" data-reveal>
+      <h2><span class="num">12</span>Lessons learned</h2>
+      <ul class="tick-list tick-list--orange">
+        <li><b>An untraceable requirement is an unverified requirement.</b> If nobody can say how it will be shown to be met, it will not be met.</li>
+        <li><b>Change control is coupling analysis.</b> The ECR process exists because subsystems are coupled and people are not.</li>
+        <li><b>Thermal failures are joint failures.</b> The stress comes from constraint and CTE mismatch, not from the temperature itself.</li>
+        <li><b>Review gates are a forcing function.</b> A hard external date exposes the assumptions a team has been carrying without noticing.</li>
+        <li><b>Systems engineering is a technical discipline.</b> The artefacts are analyses, not administration.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="future" data-reveal>
+      <h2><span class="num">13</span>Forward work</h2>
+      <ol class="num-list">
+        <li>Complete CDR: detailed drawings, full analysis set, and the verification plan for each experiment.</li>
+        <li>Begin hardware manufacturing in late 2026 against the released configuration.</li>
+        <li>Execute the environmental qualification campaign &mdash; thermal cycling and structural qualification.</li>
+        <li>Close the verification matrix item by item through to flight acceptance.</li>
+        <li>Support integration into the Sep 2028 Dragon manifest.</li>
+      </ol>
+    </section>
+
+    <section class="doc__section" id="gallery" data-reveal>
+      <h2><span class="num">14</span>Gallery</h2>
+      <div class="grid-2">
+        <div class="slot"><span class="slot__t">Pending &mdash; review artefacts</span><span class="slot__d">Redacted excerpts from the PDR package, subject to programme release approval.</span></div>
+        <div class="slot"><span class="slot__t">Pending &mdash; thermal analysis</span><span class="slot__d">DASH thermal model results across the LEO cycling envelope.</span></div>
+      </div>
+      <div class="note note--blue" style="margin-top:1.25rem">
+        <div class="note__t">Release note</div>
+        <p>Programme-specific design detail is withheld pending release approval. Everything described here
+           is at the level of process, method and publicly stated results.</p>
+      </div>
+    </section>
+
+  </div>
+</div>
+</div>
+
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <div><h5>Navigate</h5><ul>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../experience.html">Experience</a></li>
+        <li><a href="../skills.html">Technical skills</a></li>
+        <li><a href="../resume.html">Resume</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul></div>
+      <div><h5>Case studies</h5><ul>
+        <li><a href="ghost.html">GHOST</a></li>
+        <li><a href="astrasim-fsw.html">AstraSim-FSW</a></li>
+        <li><a href="rocket-landing-gnc.html">Rocket Landing GNC</a></li>
+        <li><a href="md11-structures.html">AeroFrame-MD11</a></li>
+        <li><a href="interceptor.html">Interception Robot</a></li>
+      </ul></div>
+      <div><h5>Elsewhere</h5><ul>
+        <li><a href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/Vin2005" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:vinhoustontexas@gmail.com">Email</a></li>
+      </ul></div>
+      <div><h5>Status</h5><ul>
+        <li class="u-dim" style="font-size:.855rem">Texas A&amp;M University</li>
+        <li class="u-dim" style="font-size:.855rem">B.S. Aerospace Engineering</li>
+        <li class="u-dim" style="font-size:.855rem">Expected May 2027</li>
+        <li class="u-green" style="font-size:.855rem">Open to opportunities</li>
+      </ul></div>
+    </div>
+    <div class="footer__bar">
+      <span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span>
+      <span>PRJ-06 &middot; TAMU-SPIRIT</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>
