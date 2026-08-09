@@ -116,12 +116,17 @@
     if (statMount) { statMount.innerHTML = ''; }
   }
 
+  // Never leave the section on skeletons: a hung request must fail like any other.
   function getJSON(url) {
-    return fetch(url, { headers: { 'Accept': 'application/vnd.github+json' } })
+    var timeout = new Promise(function (_, reject) {
+      setTimeout(function () { reject(new Error('timeout')); }, 8000);
+    });
+    var request = fetch(url, { headers: { 'Accept': 'application/vnd.github+json' } })
       .then(function (r) {
         if (!r.ok) { throw new Error('HTTP ' + r.status); }
         return r.json();
       });
+    return Promise.race([request, timeout]);
   }
 
   // Defer until the section is close to the viewport — keeps first paint clean.
