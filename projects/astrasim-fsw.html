@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AstraSim-FSW — Flight Software HIL Verification Framework | Vinayak Manoj Nair</title>
-<meta name="description" content="Engineering case study: a C++17 flight software core with a Python ground segment, CRC-16 binary command and telemetry, watchdog and FDIR logic, fault injection, YAML scenarios and Monte Carlo regression — verified on a Raspberry Pi aarch64 hardware target.">
+<title>AstraSim-FSW: Flight Software HIL Verification Framework | Vinayak Manoj Nair</title>
+<meta name="description" content="Engineering case study: a C++17 flight software core with a Python ground segment, CRC-16 binary command and telemetry, watchdog and FDIR logic, fault injection, YAML scenarios and Monte Carlo regression, verified on a Raspberry Pi aarch64 hardware target.">
 <meta name="author" content="Vinayak Manoj Nair">
 <meta name="theme-color" content="#07090D">
 <link rel="canonical" href="https://vinnair.me/projects/astrasim-fsw.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
-<meta property="og:title" content="AstraSim-FSW — Flight Software HIL Verification Framework">
-<meta property="og:description" content="C++17 flight software, Python ground tooling, CRC-checked binary packets, fault injection and Monte Carlo regression — with committed hardware-in-the-loop evidence.">
+<meta property="og:title" content="AstraSim-FSW: Flight Software HIL Verification Framework">
+<meta property="og:description" content="C++17 flight software, Python ground tooling, CRC-checked binary packets, fault injection and Monte Carlo regression, with committed hardware-in-the-loop evidence.">
 <meta property="og:url" content="https://vinnair.me/projects/astrasim-fsw.html">
 <meta property="og:image" content="https://vinnair.me/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -22,7 +22,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"TechArticle","headline":"AstraSim-FSW — Flight Software HIL Verification Framework","description":"C++17 flight software with Python ground tooling, CRC-checked binary packets, FDIR logic and hardware-in-the-loop verification evidence.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Flight software","Verification and validation","Hardware-in-the-loop","Embedded systems"],"url":"https://vinnair.me/projects/astrasim-fsw.html"}
+{"@context":"https://schema.org","@type":"TechArticle","headline":"AstraSim-FSW: Flight Software HIL Verification Framework","description":"C++17 flight software with Python ground tooling, CRC-checked binary packets, FDIR logic and hardware-in-the-loop verification evidence.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Flight software","Verification and validation","Hardware-in-the-loop","Embedded systems"],"url":"https://vinnair.me/projects/astrasim-fsw.html"}
 </script>
 </head>
 <body>
@@ -71,6 +71,11 @@
   </div>
 </section>
 
+<div class="shell" style="padding-top:clamp(1.5rem,3vw,2.25rem)">
+  <img class="hero-art" src="../assets/hero/astrasim.svg" width="1200" height="675"
+       alt="Illustration of the AstraSim-FSW loop: CRC-checked packets travelling to a flight-software target board, telemetry returning." fetchpriority="high">
+</div>
+
 <div class="shell section" style="padding-top:clamp(2rem,4vw,3rem)">
 <div class="doc">
 
@@ -106,8 +111,8 @@
       </p>
       <p>
         A student cannot get access to that lab. AstraSim-FSW was built to answer the question of whether the
-        entire verification chain &mdash; flight target, ground segment, fault injection, regression, evidence
-        capture &mdash; could be constructed from a Raspberry Pi and a laptop, and still produce artefacts that
+        entire verification chain, flight target, ground segment, fault injection, regression, evidence
+        capture, could be constructed from a Raspberry Pi and a laptop, and still produce artefacts that
         would survive being shown to a flight software engineer.
       </p>
       <p><b class="u-cyan">Problem statement.</b> Build a flight software core and a verification campaign
@@ -141,16 +146,16 @@
       <div class="grid-2">
         <div class="panel"><div class="panel__head"><span>Platform</span></div><div class="panel__body">
           <table class="spec spec--tight">
-            <tr><th>Flight target</th><td>Raspberry Pi 4B, Ubuntu aarch64 &mdash; cross-architecture from the x86-64 development host</td></tr>
+            <tr><th>Flight target</th><td>Raspberry Pi 4B, Ubuntu aarch64, cross-architecture from the x86-64 development host</td></tr>
             <tr><th>Flight language</th><td>C++17, no exceptions in the command path</td></tr>
             <tr><th>Ground language</th><td>Python 3</td></tr>
-            <tr><th>Link</th><td>UDP &mdash; unreliable by design, which is the point</td></tr>
+            <tr><th>Link</th><td>UDP, unreliable by design, which is the point</td></tr>
             <tr><th>Build / test</th><td>CMake and CTest, same suite on host and target</td></tr>
           </table>
         </div></div>
         <div class="panel"><div class="panel__head"><span>Engineering</span></div><div class="panel__body">
           <ul class="tick-list tick-list--orange">
-            <li><b>No reliable transport.</b> UDP was chosen deliberately &mdash; if the software assumes delivery, the fault handling is untested fiction.</li>
+            <li><b>No reliable transport.</b> UDP was chosen deliberately, if the software assumes delivery, the fault handling is untested fiction.</li>
             <li><b>Evidence is a deliverable.</b> A run that does not leave artefacts did not happen.</li>
             <li><b>Same tests, both architectures.</b> A suite that only passes on the development host proves nothing about the target.</li>
             <li><b>Determinism.</b> Every stochastic behaviour is seeded so failures are reproducible.</li>
@@ -163,7 +168,7 @@
       <h2><span class="num">04</span>System design</h2>
       <p>
         Two segments with a deliberately hostile link between them. The ground segment issues commands,
-        decodes telemetry, and &mdash; critically &mdash; contains a fault injector that can drop, corrupt
+        decodes telemetry, and, critically, contains a fault injector that can drop, corrupt
         and delay packets on demand. The flight segment parses, validates, acts, and reports, and is
         responsible for behaving correctly when the link misbehaves.
       </p>
@@ -172,7 +177,7 @@
         <div class="fig__body">
           <img src="../assets/diagrams/astrasim-architecture.svg" width="880" height="400" loading="lazy" alt="Ground segment with command client, telemetry decoder, fault injector and Monte Carlo harness connected by CRC-checked binary UDP packets to a flight segment with command handler, mode manager, telemetry encoder, health monitor, watchdog, fault response and evidence writer.">
         </div>
-        <figcaption><b>Fig. 1</b> &mdash; HIL verification topology. The fault injector sits inside the ground segment so that the flight segment cannot distinguish an injected fault from a real one.</figcaption>
+        <figcaption><b>Fig. 1</b>HIL verification topology. The fault injector sits inside the ground segment so that the flight segment cannot distinguish an injected fault from a real one.</figcaption>
       </figure>
 
       <h3>Design decisions</h3>
@@ -184,7 +189,7 @@
             <tr><td>DD-2</td><td>UDP</td><td>TCP</td><td>TCP hides exactly the failures the software must handle; the retransmit and ordering logic belongs in the application where it can be tested</td></tr>
             <tr><td>DD-3</td><td>CRC-16-CCITT</td><td>Checksum / no check</td><td>Detects all single-bit and burst errors up to 16 bits at trivial cost; a simple checksum misses transpositions</td></tr>
             <tr><td>DD-4</td><td>Explicit mode state machine</td><td>Implicit state via flags</td><td>An explicit machine is enumerable, drawable, and testable for unreachable and illegal transitions</td></tr>
-            <tr><td>DD-5</td><td>Fault injection in the ground segment</td><td>Fault flags inside flight software</td><td>Test hooks inside flight software are code that flies but is never exercised in flight &mdash; a classic source of latent defects</td></tr>
+            <tr><td>DD-5</td><td>Fault injection in the ground segment</td><td>Fault flags inside flight software</td><td>Test hooks inside flight software are code that flies but is never exercised in flight, a classic source of latent defects</td></tr>
             <tr><td>DD-6</td><td>YAML scenarios</td><td>Hand-run test procedures</td><td>Scenarios become version-controlled artefacts that can be diffed, reviewed and replayed</td></tr>
           </tbody>
         </table>
@@ -195,13 +200,13 @@
       <h2><span class="num">05</span>Interface &amp; protocol</h2>
       <p>The interface control definition is the contract between segments. It is fixed-width, little-endian,
          and validated before a single field is trusted.</p>
-      <div class="eq"><span class="c">— packet layout —</span>
+      <div class="eq"><span class="c">packet layout </span>
  0        1        2        3        4                 N-2      N
 ┌────────┬────────┬────────┬────────┬─────────────────┬────────────┐
 │  SYNC  │  TYPE  │  SEQ   │  LEN   │     PAYLOAD     │   CRC-16   │
 └────────┴────────┴────────┴────────┴─────────────────┴────────────┘
 
-<span class="c">— validation order, strictest first —</span>
+<span class="c">validation order, strictest first </span>
 1. SYNC word matches            → else discard, do not advance state
 2. LEN within bounds            → else discard (guards the payload read)
 3. CRC-16-CCITT over [TYPE..PAYLOAD] matches trailer
@@ -210,7 +215,7 @@
 → only then: dispatch to the command handler</div>
       <p class="eq__note">
         The ordering matters. Length is validated <i>before</i> the payload is read, so a corrupted length
-        field can never cause an over-read &mdash; the check that protects the parser cannot depend on data
+        field can never cause an over-read, the check that protects the parser cannot depend on data
         the parser has not yet verified.
       </p>
     </section>
@@ -230,10 +235,10 @@
     <section class="doc__section" id="implementation" data-reveal>
       <h2><span class="num">07</span>Implementation</h2>
       <table class="spec">
-        <tr><th>Flight segment</th><td>C++17 &mdash; command handler, mode manager, telemetry encoder, health monitor, watchdog, FDIR state machine, evidence writer</td></tr>
-        <tr><th>Ground segment</th><td>Python 3 &mdash; command client, telemetry decoder, fault injector, YAML scenario runner, Monte Carlo harness, plotting</td></tr>
+        <tr><th>Flight segment</th><td>C++17 / command handler, mode manager, telemetry encoder, health monitor, watchdog, FDIR state machine, evidence writer</td></tr>
+        <tr><th>Ground segment</th><td>Python 3, command client, telemetry decoder, fault injector, YAML scenario runner, Monte Carlo harness, plotting</td></tr>
         <tr><th>Build system</th><td>CMake, cross-built and natively built on the Pi</td></tr>
-        <tr><th>Test framework</th><td>CTest &mdash; 9 suites, executed on both x86-64 host and aarch64 target</td></tr>
+        <tr><th>Test framework</th><td>CTest, 9 suites, executed on both x86-64 host and aarch64 target</td></tr>
         <tr><th>Evidence</th><td>Timestamped logs, decoded telemetry tables, generated plots, all committed to the repository</td></tr>
       </table>
       <div class="note note--blue" style="margin-top:1.25rem">
@@ -242,7 +247,7 @@
            passed 9/9 tests and generated committed evidence files. The
            <a class="u-cyan" href="../demos/astrasim-fsw-hil-workstation.html">live demo workstation</a>
            deterministically replays that recorded run so the verification sequence can be reviewed without
-           coordinating terminals &mdash; it visualises real evidence, it does not simulate results.</p>
+           coordinating terminals, it visualises real evidence, it does not simulate results.</p>
       </div>
     </section>
 
@@ -251,7 +256,7 @@
       <ol class="num-list">
         <li><b>Unit tests.</b> CRC computation against known vectors, packet encode/decode round-trip, state-machine transitions including every illegal transition.</li>
         <li><b>Nominal scenarios.</b> YAML-defined command sequences with expected telemetry responses and acknowledgement matching.</li>
-        <li><b>Fault injection.</b> Dropped packets, bit-flipped payloads, corrupted length fields, delayed delivery, and total link loss &mdash; each with an asserted expected response.</li>
+        <li><b>Fault injection.</b> Dropped packets, bit-flipped payloads, corrupted length fields, delayed delivery, and total link loss, each with an asserted expected response.</li>
         <li><b>Monte Carlo regression.</b> 25 seeded trials dispersing fault timing and loss rate, run as a gate on changes.</li>
         <li><b>Hardware target execution.</b> The same suite re-run on aarch64, because endianness, alignment and timing behaviour differ from the host.</li>
       </ol>
@@ -274,7 +279,7 @@
       </p>
       <ul class="tick-list tick-list--cyan">
         <li><b>Requirement traceability.</b> Each requirement maps to at least one executing test, and the mapping is checked rather than asserted.</li>
-        <li><b>Negative testing.</b> Every integrity mechanism is validated by breaking it on purpose &mdash; a CRC check nobody has ever seen reject a packet is an untested branch.</li>
+        <li><b>Negative testing.</b> Every integrity mechanism is validated by breaking it on purpose, a CRC check nobody has ever seen reject a packet is an untested branch.</li>
         <li><b>Cross-architecture evidence.</b> Passing on the host and on aarch64 validates that no host-specific assumption about width or alignment leaked into the packet layer.</li>
       </ul>
     </section>
@@ -283,7 +288,7 @@
       <h2><span class="num">10</span>Performance</h2>
       <p>
         The first CRC implementation computed bit-by-bit and produced measurable packet-validation latency on
-        the Pi &mdash; visible as jitter in the telemetry cadence, which is exactly the sort of thing that is
+        the Pi, visible as jitter in the telemetry cadence, which is exactly the sort of thing that is
         invisible on a development laptop. Migrating to a table-driven CRC-16-CCITT implementation
         <b>reduced packet validation overhead by 40%</b> and flattened the telemetry timing.
       </p>
@@ -300,7 +305,7 @@
       <ul class="tick-list tick-list--cyan">
         <li>Full command and telemetry chain operating on a hardware target, with committed evidence files rather than screenshots.</li>
         <li>9/9 CTest suites, 5/5 YAML scenarios and 25/25 Monte Carlo regressions passing on both host and Raspberry Pi.</li>
-        <li>Every injected fault class &mdash; drop, corruption, delay, link loss &mdash; produced the designed response, including autonomous safe-mode entry on watchdog expiry.</li>
+        <li>Every injected fault class, drop, corruption, delay, link loss, produced the designed response, including autonomous safe-mode entry on watchdog expiry.</li>
         <li>A 40% reduction in packet validation overhead from the table-driven CRC migration, verified on the target rather than inferred.</li>
         <li>A replayable evidence workstation that lets a reviewer inspect the verification sequence in a browser.</li>
       </ul>
@@ -313,9 +318,9 @@
           <thead><tr><th>Tradeoff</th><th>Gained</th><th>Paid</th></tr></thead>
           <tbody>
             <tr><td>UDP over TCP</td><td>Fault handling that is real and tested</td><td>Sequencing, retransmission and duplicate detection all become application responsibilities</td></tr>
-            <tr><td>Binary over text protocol</td><td>Predictable bandwidth, allocation-free parsing</td><td>Not human-readable on the wire &mdash; a decoder is required to debug anything</td></tr>
+            <tr><td>Binary over text protocol</td><td>Predictable bandwidth, allocation-free parsing</td><td>Not human-readable on the wire, a decoder is required to debug anything</td></tr>
             <tr><td>Table-driven CRC</td><td>40% less validation overhead</td><td>256-entry constant table in flash and a small loss of code obviousness</td></tr>
-            <tr><td>Fault injection outside flight software</td><td>No test-only code in the flight build</td><td>Cannot inject faults internal to the flight segment &mdash; only link-level ones</td></tr>
+            <tr><td>Fault injection outside flight software</td><td>No test-only code in the flight build</td><td>Cannot inject faults internal to the flight segment, only link-level ones</td></tr>
             <tr><td>Full evidence capture on every run</td><td>Reproducible, reviewable results</td><td>Disk usage and run time grow; evidence has to be curated</td></tr>
           </tbody>
         </table>
@@ -328,7 +333,7 @@
         <li><b>Profile on the target, not the host.</b> The CRC cost was invisible on a laptop and obvious on the Pi. Development-host performance is not evidence.</li>
         <li><b>Validate before you parse.</b> Ordering the checks so that length is verified before the payload is read is the difference between a robust parser and a buffer overrun.</li>
         <li><b>Test-only code in a flight build is a liability.</b> Keeping the fault injector on the ground side keeps the flight binary honest.</li>
-        <li><b>Evidence is the deliverable.</b> The artefacts &mdash; logs, plots, test output &mdash; are what let someone else believe the claims without re-running anything.</li>
+        <li><b>Evidence is the deliverable.</b> The artefacts, logs, plots, test output, are what let someone else believe the claims without re-running anything.</li>
         <li><b>A protocol is a contract.</b> Writing the ICD before the code eliminated an entire class of integration argument.</li>
       </ul>
     </section>
@@ -351,7 +356,10 @@
           <p class="u-dim" style="font-size:.9rem">A browser-based verification workstation that replays the recorded HIL run: mission replay, telemetry plots, FSW internals, FDIR behaviour, V&amp;V evidence, ICD, timing budget, assurance case and trade study.</p>
           <div class="btn-row" style="margin-top:1rem"><a class="btn btn--sm btn--cyan" href="../demos/astrasim-fsw-hil-workstation.html">Open workstation</a></div>
         </div></div>
-        <div class="slot"><span class="slot__t">Pending &mdash; hardware photograph</span><span class="slot__d">Raspberry Pi target and ground station bench setup.</span></div>
+        <div class="note note--blue">
+        <div class="note__t">Media in progress</div>
+        <p>Plots and hardware photography for this project are being prepared. The source and generated output are in the <a class="u-cyan" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">repository</a>.</p>
+      </div>
       </div>
     </section>
 

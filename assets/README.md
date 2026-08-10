@@ -2,7 +2,7 @@
 
 | Path | What it is | Regenerate with |
 |---|---|---|
-| `css/site.css` | The entire design system — tokens, components, print stylesheet | hand-edited |
+| `css/site.css` | The entire design system, tokens, components, print stylesheet | hand-edited |
 | `js/site.js` | Nav toggle, scroll reveal, stat counters, UTC clock, TOC scroll-spy | hand-edited |
 | `js/github.js` | Live GitHub repository + commit feed (2 unauthenticated API calls, lazy, graceful fallback) | hand-edited |
 | `diagrams/*.svg` | Technical block diagrams used across the case studies | `python3 assets/diagrams/generate.py` |
@@ -28,7 +28,7 @@ forces reveal-animated content visible, and tightens spacing to three pages.
 ```bash
 chromium --headless --window-size=1200,712 --hide-scrollbars \
   --screenshot=/tmp/og_raw.png assets/og-image.src.html
-# crop the top 1200×630 — headless reserves ~80px for window chrome
+# crop the top 1200×630, headless reserves ~80px for window chrome
 ```
 
 ## Adding project media
@@ -41,7 +41,7 @@ Put figures in `assets/img/` and reference them from the case studies. Replace a
   <div class="fig__body">
     <img src="../assets/img/your-figure.png" alt="Descriptive alt text" loading="lazy">
   </div>
-  <figcaption><b>Fig. n</b> — What this shows and what it demonstrates.</figcaption>
+  <figcaption><b>Fig. n</b>What this shows and what it demonstrates.</figcaption>
 </figure>
 ```
 

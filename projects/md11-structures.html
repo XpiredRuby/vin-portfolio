@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AeroFrame-MD11 — CAD Assembly &amp; Structural FEA | Vinayak Manoj Nair</title>
+<title>AeroFrame-MD11: CAD Assembly &amp; Structural FEA | Vinayak Manoj Nair</title>
 <meta name="description" content="Engineering case study: a 24-part parametric MD-11 airframe assembly in SolidWorks taken through static, thermal and modal finite element analysis in Abaqus at 2.5 g limit load, identifying three stress concentration sites, closed out with a manufacturing release drawing package.">
 <meta name="author" content="Vinayak Manoj Nair">
 <meta name="theme-color" content="#07090D">
 <link rel="canonical" href="https://vinnair.me/projects/md11-structures.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
-<meta property="og:title" content="AeroFrame-MD11 — CAD Assembly &amp; Structural FEA">
+<meta property="og:title" content="AeroFrame-MD11: CAD Assembly &amp; Structural FEA">
 <meta property="og:description" content="24-part parametric assembly, static/thermal/modal FEA at 2.5 g limit load, three failure sites identified, full drawing package released.">
 <meta property="og:url" content="https://vinnair.me/projects/md11-structures.html">
 <meta property="og:image" content="https://vinnair.me/assets/og-image.png">
@@ -22,7 +22,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"TechArticle","headline":"AeroFrame-MD11 — CAD Assembly and Structural Analysis","description":"Parametric aircraft assembly with static, thermal and modal finite element analysis at 2.5 g limit load.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Finite element analysis","Structural analysis","CAD","GD&T"],"url":"https://vinnair.me/projects/md11-structures.html"}
+{"@context":"https://schema.org","@type":"TechArticle","headline":"AeroFrame-MD11: CAD Assembly and Structural Analysis","description":"Parametric aircraft assembly with static, thermal and modal finite element analysis at 2.5 g limit load.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Finite element analysis","Structural analysis","CAD","GD&T"],"url":"https://vinnair.me/projects/md11-structures.html"}
 </script>
 </head>
 <body>
@@ -70,6 +70,11 @@
   </div>
 </section>
 
+<div class="shell" style="padding-top:clamp(1.5rem,3vw,2.25rem)">
+  <img class="hero-art" src="../assets/hero/md11.svg" width="1200" height="675"
+       alt="Illustration of the MD-11 airframe planform with load path shading and three marked stress concentration sites." fetchpriority="high">
+</div>
+
 <div class="shell section" style="padding-top:clamp(2rem,4vw,3rem)">
 <div class="doc">
 
@@ -98,8 +103,8 @@
       <h2><span class="num">01</span>Problem</h2>
       <p>
         Aircraft structure is not sized by its cruise condition. It is sized by the manoeuvre and gust cases
-        at the edge of the flight envelope, and it fails at geometric discontinuities &mdash; joints, cutouts,
-        attachment lugs &mdash; long before any large panel reaches its material allowable. Finding those
+        at the edge of the flight envelope, and it fails at geometric discontinuities, joints, cutouts,
+        attachment lugs, long before any large panel reaches its material allowable. Finding those
         locations requires a model detailed enough to represent the discontinuities and an analyst willing to
         distrust the first stress contour that appears.
       </p>
@@ -144,7 +149,7 @@
         </div></div>
         <div class="panel"><div class="panel__head"><span>Design</span></div><div class="panel__body">
           <ul class="tick-list tick-list--cyan">
-            <li><b>Parametric intent.</b> The assembly must survive dimension changes without rebuild failures &mdash; a model that only works at one set of numbers is a drawing, not a model.</li>
+            <li><b>Parametric intent.</b> The assembly must survive dimension changes without rebuild failures, a model that only works at one set of numbers is a drawing, not a model.</li>
             <li><b>Manufacturability.</b> Every feature has to be producible with callouts a shop can read.</li>
             <li><b>Tolerance stack-up.</b> GD&amp;T must control the interfaces that matter, not decorate every dimension.</li>
           </ul>
@@ -156,7 +161,7 @@
       <h2><span class="num">04</span>System design</h2>
       <p>
         The load path is the design. Distributed lift is reacted by the skin into the ribs, carried inboard
-        through the primary spar, and reacted at the root joint &mdash; which means the root joint, the upper
+        through the primary spar, and reacted at the root joint, which means the root joint, the upper
         skin in compression, and the attachment lug are the three places to interrogate first. The analysis
         confirmed that intuition, which is the useful outcome: when the model agrees with the load-path
         reasoning, both are more trustworthy.
@@ -166,7 +171,7 @@
         <div class="fig__body">
           <img src="../assets/diagrams/md11-structures.svg" width="880" height="380" loading="lazy" alt="Wing planform schematic showing the primary spar as the load path, distributed lift arrows at 2.5 g, three highlighted stress concentration sites, and the CAD to mesh to static/thermal/modal analysis workflow.">
         </div>
-        <figcaption><b>Fig. 1</b> &mdash; Load path schematic (not to scale) and analysis workflow. HS-1 root joint, HS-2 upper skin, HS-3 attachment lug.</figcaption>
+        <figcaption><b>Fig. 1</b>Load path schematic (not to scale) and analysis workflow. HS-1 root joint, HS-2 upper skin, HS-3 attachment lug.</figcaption>
       </figure>
 
       <h3>Design decisions</h3>
@@ -176,7 +181,7 @@
           <tbody>
             <tr><td>DD-1</td><td>Full 24-part assembly</td><td>Simplified single-body model</td><td>The interesting stresses live at part interfaces, which a single body deletes by construction</td></tr>
             <tr><td>DD-2</td><td>Parametric modelling</td><td>Direct/dumb solid modelling</td><td>Enables design iteration after the analysis rather than a rebuild from scratch</td></tr>
-            <tr><td>DD-3</td><td>Three analysis types</td><td>Static only</td><td>Thermal and modal answer different failure questions &mdash; a structure can pass static and fail on resonance</td></tr>
+            <tr><td>DD-3</td><td>Three analysis types</td><td>Static only</td><td>Thermal and modal answer different failure questions, a structure can pass static and fail on resonance</td></tr>
             <tr><td>DD-4</td><td>Local mesh refinement</td><td>Uniform fine mesh</td><td>Concentrates elements where gradients are steep instead of paying for resolution in uniform-stress regions</td></tr>
             <tr><td>DD-5</td><td>Hand-calculation cross-check</td><td>Trust the solver</td><td>A solver always returns a number; only an independent estimate tells you whether it is the right one</td></tr>
           </tbody>
@@ -192,7 +197,7 @@
 L = n W                          <span class="c">total lift at the limit condition</span>
 L'(y) = spanwise lift distribution, applied as a distributed pressure
 
-<span class="c">— internal loads —</span>
+<span class="c">internal loads </span>
 V(y) = ∫ L'(y) dy                <span class="c">shear</span>
 M(y) = ∫ V(y) dy                 <span class="c">bending moment, maximum at the root</span></div>
 
@@ -204,13 +209,13 @@ MS = σ_allow / (σ_applied × FS) − 1           <span class="c">margin of saf
 K_t = σ_peak / σ_nominal                      <span class="c">stress concentration factor at discontinuities</span></div>
       <p class="eq__note">
         The stress concentration factor is the number that matters at the hot spots. A peak stress is only
-        meaningful relative to the nominal field around it &mdash; and a K<sub>t</sub> that keeps climbing as
+        meaningful relative to the nominal field around it, and a K<sub>t</sub> that keeps climbing as
         the mesh refines is a singularity, not a stress.
       </p>
 
       <h3>Thermal</h3>
       <div class="eq">σ_thermal = E α ΔT               <span class="c">constrained thermal expansion</span></div>
-      <p class="eq__note">Thermal stress is driven by <i>constraint</i>, not by temperature. An unconstrained
+      <p class="eq__note">Thermal stress is driven by <i>constraint</i>not by temperature. An unconstrained
         part at any uniform temperature is unstressed; the stress appears where dissimilar materials or fixed
         boundaries prevent free expansion.</p>
 
@@ -222,8 +227,8 @@ f_n = ω_n / 2π                   <span class="c">natural frequencies and mode 
     <section class="doc__section" id="implementation" data-reveal>
       <h2><span class="num">06</span>Implementation</h2>
       <table class="spec">
-        <tr><th>CAD</th><td>SolidWorks &mdash; 24-part fully parametric assembly with mates, configurations and design intent captured in the feature tree</td></tr>
-        <tr><th>FEA</th><td>Abaqus &mdash; static, thermal and modal analyses</td></tr>
+        <tr><th>CAD</th><td>SolidWorks, 24-part fully parametric assembly with mates, configurations and design intent captured in the feature tree</td></tr>
+        <tr><th>FEA</th><td>Abaqus, static, thermal and modal analyses</td></tr>
         <tr><th>Load case</th><td>2.5 g limit manoeuvre, distributed spanwise lift</td></tr>
         <tr><th>Drawings</th><td>Full dimensioning with GD&amp;T, section and detail views, fabrication callouts</td></tr>
         <tr><th>Deliverables</th><td>Manufacturing release drawing package with bill of materials</td></tr>
@@ -237,7 +242,7 @@ f_n = ω_n / 2π                   <span class="c">natural frequencies and mode 
         <li><b>Baseline mesh.</b> Coarse global mesh to confirm boundary conditions and load application produce sensible global deflection.</li>
         <li><b>Local refinement.</b> Progressive refinement at the three candidate hot spots.</li>
         <li><b>Convergence study.</b> Peak stress tracked against element count; the mesh is accepted when refinement changes the peak by less than 5%.</li>
-        <li><b>Singularity screening.</b> Any location where peak stress rises without bound under refinement is identified as a geometric singularity &mdash; a sharp re-entrant corner &mdash; and either filleted or excluded from stress recovery.</li>
+        <li><b>Singularity screening.</b> Any location where peak stress rises without bound under refinement is identified as a geometric singularity, a sharp re-entrant corner, and either filleted or excluded from stress recovery.</li>
         <li><b>Element quality audit.</b> Aspect ratio and Jacobian checked in the refined regions.</li>
       </ol>
       <div class="note" style="margin-top:1.5rem">
@@ -269,14 +274,14 @@ f_n = ω_n / 2π                   <span class="c">natural frequencies and mode 
         <div class="metric"><div class="metric__v">3</div><div class="metric__k">Analysis types</div></div>
       </div>
       <ul class="tick-list tick-list--cyan">
-        <li><b>Three structural failure sites identified</b> under 2.5 g flight loading &mdash; the spar root joint, an upper skin panel in compression, and an attachment lug &mdash; each traced to a specific geometric feature rather than to a mesh artefact.</li>
-        <li>Each site was accompanied by a proposed design change: added fillet radius to reduce K<sub>t</sub>, local thickness increase, and revised fastener pattern at the lug.</li>
+        <li><b>Three structural failure sites identified</b> under 2.5 g flight loading, the spar root joint, an upper skin panel in compression, and an attachment lug, each traced to a specific geometric feature rather than to a mesh artefact.</li>
+        <li>Each site was accompanied by a proposed design change: added fillet radius to reduce K<sub>t</sub>local thickness increase, and revised fastener pattern at the lug.</li>
         <li>Modal analysis confirmed the first bending and torsion modes were well separated from expected excitation frequencies.</li>
         <li><b>Complete manufacturing-release drawing package</b> produced, with GD&amp;T, fabrication callouts and bill of materials.</li>
       </ul>
-      <div class="slot" style="margin-top:1.5rem">
-        <span class="slot__t">Pending &mdash; analysis imagery</span>
-        <span class="slot__d">SolidWorks assembly render and Abaqus von Mises contour plots at the three hot spots. Export and drop in as <code>assets/img/md11-*.png</code>.</span>
+      <div class="note note--blue">
+        <div class="note__t">Media in progress</div>
+        <p>Plots and hardware photography for this project are being prepared. The source and generated output are in the <a class="u-cyan" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">repository</a>.</p>
       </div>
     </section>
 
@@ -287,7 +292,7 @@ f_n = ω_n / 2π                   <span class="c">natural frequencies and mode 
           <thead><tr><th>Tradeoff</th><th>Gained</th><th>Paid</th></tr></thead>
           <tbody>
             <tr><td>Full assembly over simplified body</td><td>Interface stresses are visible</td><td>Meshing complexity, contact and constraint definition effort, longer solve</td></tr>
-            <tr><td>Linear elastic material</td><td>Fast, well-conditioned, standard for limit-load screening</td><td>No post-yield redistribution &mdash; results are conservative near the hot spots</td></tr>
+            <tr><td>Linear elastic material</td><td>Fast, well-conditioned, standard for limit-load screening</td><td>No post-yield redistribution, results are conservative near the hot spots</td></tr>
             <tr><td>Idealised fastener constraints</td><td>Tractable model size</td><td>Local bearing and fastener-hole stresses are not resolved and need separate treatment</td></tr>
             <tr><td>Local over uniform refinement</td><td>Resolution where the gradients are</td><td>Requires knowing where to refine, which requires the load-path reasoning to be right first</td></tr>
             <tr><td>Quasi-static manoeuvre load</td><td>Directly comparable to certification limit cases</td><td>Dynamic gust and fatigue spectra are out of scope</td></tr>
@@ -301,7 +306,7 @@ f_n = ω_n / 2π                   <span class="c">natural frequencies and mode 
       <h3>Distinguishing concentration from singularity</h3>
       <p>
         The initial run reported an alarming peak stress at a re-entrant corner. Refinement showed the value
-        climbing without converging &mdash; the signature of a geometric singularity, where linear elasticity
+        climbing without converging, the signature of a geometric singularity, where linear elasticity
         predicts infinite stress at a zero-radius corner. Adding the fillet that the real part would have
         anyway produced a converged, physically meaningful concentration factor.
       </p>
@@ -336,7 +341,7 @@ f_n = ω_n / 2π                   <span class="c">natural frequencies and mode 
       <ol class="num-list">
         <li>Model fasteners explicitly with contact at the critical joint to resolve bearing and hole stresses.</li>
         <li>Extend to elastic-plastic material response to quantify how much margin post-yield redistribution actually provides.</li>
-        <li>Add a fatigue assessment against a representative load spectrum &mdash; the hot spots identified here are exactly the crack initiation sites.</li>
+        <li>Add a fatigue assessment against a representative load spectrum, the hot spots identified here are exactly the crack initiation sites.</li>
         <li>Run a composite layup variant of the primary spar and trade mass against stiffness.</li>
         <li>Apply the proposed design changes and re-run to quantify the improvement rather than assert it.</li>
       </ol>
@@ -344,11 +349,9 @@ f_n = ω_n / 2π                   <span class="c">natural frequencies and mode 
 
     <section class="doc__section" id="gallery" data-reveal>
       <h2><span class="num">14</span>Gallery</h2>
-      <div class="grid-2">
-        <div class="slot"><span class="slot__t">Pending &mdash; assembly render</span><span class="slot__d">SolidWorks 24-part assembly, isometric.</span></div>
-        <div class="slot"><span class="slot__t">Pending &mdash; von Mises contour</span><span class="slot__d">Abaqus static result at 2.5 g with the three hot spots annotated.</span></div>
-        <div class="slot"><span class="slot__t">Pending &mdash; mesh convergence</span><span class="slot__d">Peak stress against element count showing the converged plateau.</span></div>
-        <div class="slot"><span class="slot__t">Pending &mdash; drawing sheet</span><span class="slot__d">Representative release drawing with GD&amp;T and callouts.</span></div>
+      <div class="note note--blue">
+        <div class="note__t">Media in progress</div>
+        <p>Hardware photography and result plots for this project are being prepared. In the meantime the full source, commit history and any generated output live in the <a class="u-cyan" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">repository</a>.</p>
       </div>
     </section>
 
