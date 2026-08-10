@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Autonomous Interception Robot — Sub-100 ms Perception Loop | Vinayak Manoj Nair</title>
+<title>Autonomous Interception Robot: Sub-100 ms Perception Loop | Vinayak Manoj Nair</title>
 <meta name="description" content="Engineering case study: a closed-loop perception-to-actuation pipeline on Raspberry Pi 4 integrating YOLO object detection, Kalman filter state estimation and PID motor control under a 100 ms end-to-end latency budget.">
 <meta name="author" content="Vinayak Manoj Nair">
 <meta name="theme-color" content="#07090D">
 <link rel="canonical" href="https://vinnair.me/projects/interceptor.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
-<meta property="og:title" content="Autonomous Interception Robot — Sub-100 ms Perception Loop">
+<meta property="og:title" content="Autonomous Interception Robot: Sub-100 ms Perception Loop">
 <meta property="og:description" content="YOLO detection, Kalman filtering and PID actuation on embedded Linux, closed under a 100 ms latency budget.">
 <meta property="og:url" content="https://vinnair.me/projects/interceptor.html">
 <meta property="og:image" content="https://vinnair.me/assets/og-image.png">
@@ -60,7 +60,7 @@
     <p class="hero__spec mono" style="margin-top:.9rem">YOLO DETECTION &middot; KALMAN ESTIMATION &middot; PID ACTUATION &middot; &lt;100 ms LOOP</p>
     <p class="lede">
       A complete perception-to-actuation loop on a Raspberry Pi 4: see the target, estimate where it
-      is going, and drive the actuators &mdash; with the entire chain held under a 100 ms latency
+      is going, and drive the actuators, with the entire chain held under a 100 ms latency
       budget, because in a tracking loop latency is indistinguishable from error.
     </p>
     <div class="btn-row" style="margin-top:1.75rem">
@@ -69,6 +69,11 @@
     </div>
   </div>
 </section>
+
+<div class="shell" style="padding-top:clamp(1.5rem,3vw,2.25rem)">
+  <img class="hero-art" src="../assets/hero/interceptor.svg" width="1200" height="675"
+       alt="Illustration of the interception robot: camera field of view, detected target box, predicted position, and latency budget bar." fetchpriority="high">
+</div>
 
 <div class="shell section" style="padding-top:clamp(2rem,4vw,3rem)">
 <div class="doc">
@@ -104,7 +109,7 @@
       </p>
       <p>
         Two mechanisms fix this, and both were needed: shorten the loop, and predict across whatever loop
-        time remains. That is the entire architecture &mdash; a latency budget enforced stage by stage, and a
+        time remains. That is the entire architecture, a latency budget enforced stage by stage, and a
         Kalman filter that produces an estimate at the moment of actuation rather than at the moment of
         detection.
       </p>
@@ -136,7 +141,7 @@
       <div class="grid-2">
         <div class="panel"><div class="panel__head"><span>Platform</span></div><div class="panel__body">
           <ul class="tick-list">
-            <li><b>CPU-only inference.</b> No GPU, no NPU, no accelerator &mdash; the detector runs on the same four cores as everything else.</li>
+            <li><b>CPU-only inference.</b> No GPU, no NPU, no accelerator, the detector runs on the same four cores as everything else.</li>
             <li><b>Single camera</b> at fixed frame rate; the detector cannot run faster than frames arrive.</li>
             <li><b>PWM-driven motors</b> with finite slew rate and mechanical inertia.</li>
             <li><b>Shared OS.</b> Linux is not a real-time kernel, so scheduling jitter is part of the budget.</li>
@@ -165,7 +170,7 @@
         <div class="fig__body">
           <img src="../assets/diagrams/interceptor-pipeline.svg" width="880" height="320" loading="lazy" alt="Five stage pipeline from camera capture through YOLO detection, Kalman filtering, PID error law and PWM drive, with a latency bar showing inference consuming 76 percent of the budget.">
         </div>
-        <figcaption><b>Fig. 1</b> &mdash; Perception-to-actuation pipeline with per-stage latency allocation. Inference dominates; everything else is noise by comparison.</figcaption>
+        <figcaption><b>Fig. 1</b>Perception-to-actuation pipeline with per-stage latency allocation. Inference dominates; everything else is noise by comparison.</figcaption>
       </figure>
 
       <h3>Design decisions</h3>
@@ -197,11 +202,11 @@ F  =  ⎢ 0  1  0  Δt ⎥        <span class="c">constant-velocity transition</
 H  = [ 1 0 0 0 ; 0 1 0 0 ]   <span class="c">the detector measures position only</span></div>
 
       <h3>Predict / update</h3>
-      <div class="eq"><span class="c">— predict, every cycle, detection or not —</span>
+      <div class="eq"><span class="c">predict, every cycle, detection or not </span>
 x⁻ = F x
 P⁻ = F P Fᵀ + Q
 
-<span class="c">— update, only when a detection arrives —</span>
+<span class="c">update, only when a detection arrives </span>
 r  = z − H x⁻
 S  = H P⁻ Hᵀ + R
 K  = P⁻ Hᵀ S⁻¹
@@ -209,7 +214,7 @@ x⁺ = x⁻ + K r
 P⁺ = (I − K H) P⁻</div>
       <p class="eq__note">
         The predict step runs unconditionally. That is what makes a missed detection a graceful degradation
-        &mdash; the covariance grows, the estimate coasts, and the controller keeps receiving a valid state
+       , the covariance grows, the estimate coasts, and the controller keeps receiving a valid state
         instead of a gap.
       </p>
 
@@ -271,8 +276,8 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
       <p>
         The budget breakdown is the most useful artefact this project produced. Capture, filtering, control
         and actuation together account for a small fraction of the loop; inference accounts for the rest.
-        That single measurement determined every optimisation decision that followed &mdash; input resolution,
-        model size, and frame scheduling &mdash; and ruled out a great deal of work that would have felt
+        That single measurement determined every optimisation decision that followed, input resolution,
+        model size, and frame scheduling, and ruled out a great deal of work that would have felt
         productive and changed nothing.
       </p>
     </section>
@@ -285,9 +290,9 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
         <li>Track continuity maintained across missed detections through prediction-only operation.</li>
         <li>Residual latency compensated in the estimator, converting a systematic tracking lag into a bounded error.</li>
       </ul>
-      <div class="slot" style="margin-top:1.5rem">
-        <span class="slot__t">Pending &mdash; media</span>
-        <span class="slot__d">Robot hardware photograph, annotated detection frame, and a tracking-error-versus-target-speed plot.</span>
+      <div class="note note--blue">
+        <div class="note__t">Media in progress</div>
+        <p>Plots and hardware photography for this project are being prepared. The source and generated output are in the <a class="u-cyan" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">repository</a>.</p>
       </div>
     </section>
 
@@ -300,7 +305,7 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
             <tr><td>Neural detector over classical vision</td><td>Robustness to lighting and background</td><td>Roughly three quarters of the latency budget</td></tr>
             <tr><td>Lower input resolution</td><td>Faster inference, shorter loop</td><td>Reduced detection range and small-target sensitivity</td></tr>
             <tr><td>Constant-velocity motion model</td><td>Cheap, stable, easy to tune</td><td>Lags during genuine target acceleration</td></tr>
-            <tr><td>Latency compensation by prediction</td><td>Removes systematic tracking lag</td><td>Amplifies estimate error during manoeuvres &mdash; predicting a wrong velocity forward makes it worse</td></tr>
+            <tr><td>Latency compensation by prediction</td><td>Removes systematic tracking lag</td><td>Amplifies estimate error during manoeuvres, predicting a wrong velocity forward makes it worse</td></tr>
             <tr><td>Independent axis controllers</td><td>Simple tuning and diagnosis</td><td>Ignores whatever cross-axis coupling exists mechanically</td></tr>
           </tbody>
         </table>
@@ -313,7 +318,7 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
       <p>
         The first working version was well over budget, and the instinct was to optimise the control and
         filtering code. Instrumentation showed those stages together accounted for a few milliseconds.
-        All of the achievable saving was in inference &mdash; input resolution and model configuration &mdash;
+        All of the achievable saving was in inference, input resolution and model configuration,
         and that is where the effort went.
       </p>
       <h3>Detection dropouts breaking the loop</h3>
@@ -326,7 +331,7 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
       <h3>Scheduling jitter</h3>
       <p>
         On a non-real-time kernel, the same pipeline can take noticeably different wall-clock time from one
-        cycle to the next. Compensating with a fixed nominal latency was therefore wrong &mdash; the
+        cycle to the next. Compensating with a fixed nominal latency was therefore wrong, the
         compensation interval had to be measured per cycle from actual timestamps.
       </p>
     </section>
@@ -346,7 +351,7 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
       <h2><span class="num">14</span>Future work</h2>
       <ol class="num-list">
         <li>Quantised or distilled detector to cut the dominant latency term further.</li>
-        <li>Interacting-multiple-model tracker so acceleration is handled rather than lagged &mdash; the same upgrade GHOST already implements.</li>
+        <li>Interacting-multiple-model tracker so acceleration is handled rather than lagged, the same upgrade GHOST already implements.</li>
         <li>Multi-target tracking with proper data association instead of single-track nearest neighbour.</li>
         <li>Real-time kernel or CPU isolation to bound scheduling jitter.</li>
         <li>Feed-forward on the estimated target velocity to reduce the residual tracking error further.</li>
@@ -355,11 +360,9 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
 
     <section class="doc__section" id="gallery" data-reveal>
       <h2><span class="num">15</span>Gallery</h2>
-      <div class="grid-2">
-        <div class="slot"><span class="slot__t">Pending &mdash; hardware</span><span class="slot__d">Robot platform with camera and actuator assembly.</span></div>
-        <div class="slot"><span class="slot__t">Pending &mdash; detection frame</span><span class="slot__d">Annotated YOLO bounding box with the Kalman-predicted position overlaid.</span></div>
-        <div class="slot"><span class="slot__t">Pending &mdash; latency histogram</span><span class="slot__d">Per-stage timing distribution over a long run.</span></div>
-        <div class="slot"><span class="slot__t">Pending &mdash; tracking demo</span><span class="slot__d">Video of the closed loop tracking a moving target.</span></div>
+      <div class="note note--blue">
+        <div class="note__t">Media in progress</div>
+        <p>Hardware photography and result plots for this project are being prepared. In the meantime the full source, commit history and any generated output live in the <a class="u-cyan" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">repository</a>.</p>
       </div>
     </section>
 

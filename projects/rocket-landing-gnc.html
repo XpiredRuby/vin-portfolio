@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rocket Landing GNC Simulation — 6-DOF Monte Carlo | Vinayak Manoj Nair</title>
+<title>Rocket Landing GNC Simulation: 6-DOF Monte Carlo | Vinayak Manoj Nair</title>
 <meta name="description" content="Engineering case study: a 6-DOF booster descent simulator with aerodynamic and aerothermal modelling, thrust-vector control and a 500-run Monte Carlo dispersion campaign achieving sub-2.0 m landing accuracy.">
 <meta name="author" content="Vinayak Manoj Nair">
 <meta name="theme-color" content="#07090D">
 <link rel="canonical" href="https://vinnair.me/projects/rocket-landing-gnc.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
-<meta property="og:title" content="Rocket Landing GNC Simulation — 6-DOF Monte Carlo">
+<meta property="og:title" content="Rocket Landing GNC Simulation: 6-DOF Monte Carlo">
 <meta property="og:description" content="6-DOF propulsive landing simulation with TVC control, aerothermal modelling and a 500-trial Monte Carlo dispersion campaign.">
 <meta property="og:url" content="https://vinnair.me/projects/rocket-landing-gnc.html">
 <meta property="og:image" content="https://vinnair.me/assets/og-image.png">
@@ -71,6 +71,11 @@
   </div>
 </section>
 
+<div class="shell" style="padding-top:clamp(1.5rem,3vw,2.25rem)">
+  <img class="hero-art" src="../assets/hero/rocket.svg" width="1200" height="675"
+       alt="Illustration of a booster on propulsive descent above a landing pad with a dispersion footprint." fetchpriority="high">
+</div>
+
 <div class="shell section" style="padding-top:clamp(2rem,4vw,3rem)">
 <div class="doc">
 
@@ -102,7 +107,7 @@
         A controller that lands the booster on the nominal trajectory demonstrates almost nothing. The
         vehicle never flies the nominal trajectory: it separates with attitude and rate errors, it descends
         through a wind field nobody measured, its mass properties shift as propellant depletes, and its
-        navigation solution has bias. The engineering question is not "does it land" &mdash; it is
+        navigation solution has bias. The engineering question is not "does it land", it is
         <i>"across the dispersion envelope, what is the landing accuracy distribution, and which specific
         combination of dispersions produces the tail?"</i>
       </p>
@@ -162,7 +167,7 @@
       <p>
         A conventional GNC decomposition: guidance produces a reference, control produces a command,
         the actuator model applies it with real limits, the plant integrates the physics, and navigation
-        produces an <i>estimate</i> &mdash; not truth &mdash; which is what the controller actually sees.
+        produces an <i>estimate</i>not truth, which is what the controller actually sees.
         Wind and sensor error are injected as separate dispersion channels so their contributions can be
         separated in the analysis.
       </p>
@@ -171,7 +176,7 @@
         <div class="fig__body">
           <img src="../assets/diagrams/gnc-loop.svg" width="880" height="320" loading="lazy" alt="Closed loop with guidance, control, actuator, 6-DOF plant and navigation, plus aerothermal, stochastic wind and sensor noise inputs and state feedback.">
         </div>
-        <figcaption><b>Fig. 1</b> &mdash; GNC loop topology. Note that the feedback path carries the estimated state, not the true state &mdash; the distinction is where most of the tail cases come from.</figcaption>
+        <figcaption><b>Fig. 1</b>GNC loop topology. Note that the feedback path carries the estimated state, not the true state, the distinction is where most of the tail cases come from.</figcaption>
       </figure>
 
       <h3>Design decisions</h3>
@@ -209,7 +214,7 @@ M_aero = q̄ S L_ref [C_l, C_m, C_n]ᵀ</div>
       <div class="eq">q̇_stag ∝ ρ^0.5 V³              <span class="c">stagnation-point convective heating scaling</span>
 Q = ∫ q̇ dt                     <span class="c">integrated heat load along the trajectory</span></div>
       <p class="eq__note">
-        The heating model is not used to size thermal protection here &mdash; it is used to confirm that
+        The heating model is not used to size thermal protection here, it is used to confirm that
         the trajectories the guidance law selects stay inside a sensible heating envelope, rather than
         buying landing accuracy with an unflyable entry.
       </p>
@@ -222,7 +227,7 @@ Q = ∫ q̇ dt                     <span class="c">integrated heat load along th
 δ̇     = clamp(δ̇, ±δ̇_max)                   <span class="c">slew-rate limit</span></div>
 
       <h3>Dispersion model</h3>
-      <div class="eq"><span class="c">per trial, drawn from seeded distributions —</span>
+      <div class="eq"><span class="c">per trial, drawn from seeded distributions </span>
   initial position, velocity, attitude, rate errors
   wind profile: magnitude and shear, altitude dependent
   sensor bias and noise on the navigation solution
@@ -234,10 +239,10 @@ Q = ∫ q̇ dt                     <span class="c">integrated heat load along th
       <ul class="tick-list">
         <li><b>Numerical integration</b> of the coupled translational, rotational and mass states over the descent.</li>
         <li><b>Quaternion attitude propagation</b> with re-normalisation, avoiding the gimbal-lock singularity of an Euler-angle formulation during a high-rate descent.</li>
-        <li><b>PID with anti-windup</b> on the thrust-vector command &mdash; necessary because the actuator saturates, and an unprotected integrator winds up during saturation and overshoots on release.</li>
+        <li><b>PID with anti-windup</b> on the thrust-vector command, necessary because the actuator saturates, and an unprotected integrator winds up during saturation and overshoots on release.</li>
         <li><b>Standard atmosphere model</b> for density and speed of sound versus altitude.</li>
         <li><b>Seeded Monte Carlo sampling</b> across the dispersion channels, with per-trial seeds retained so any outcome is reproducible.</li>
-        <li><b>Dispersion post-processing</b> &mdash; landing scatter, CEP, and correlation of miss distance against each dispersion channel to identify which one drives the tail.</li>
+        <li><b>Dispersion post-processing</b>: landing scatter, CEP, and correlation of miss distance against each dispersion channel to identify which one drives the tail.</li>
       </ul>
     </section>
 
@@ -256,7 +261,7 @@ Q = ∫ q̇ dt                     <span class="c">integrated heat load along th
     <section class="doc__section" id="testing" data-reveal>
       <h2><span class="num">08</span>Testing</h2>
       <ol class="num-list">
-        <li><b>Conservation checks.</b> With thrust, aerodynamics and dissipation disabled, energy and momentum must be conserved to integrator tolerance &mdash; this catches sign and frame errors that a plausible-looking trajectory will hide.</li>
+        <li><b>Conservation checks.</b> With thrust, aerodynamics and dissipation disabled, energy and momentum must be conserved to integrator tolerance, this catches sign and frame errors that a plausible-looking trajectory will hide.</li>
         <li><b>Analytical comparison.</b> Ballistic and constant-thrust sub-cases are compared against closed-form solutions.</li>
         <li><b>Step-size convergence.</b> The integrator step is halved until the solution stops changing, which sets the step actually used.</li>
         <li><b>Open-loop instability check.</b> Without control the vehicle must tumble as expected; a plant that is stable open-loop is not modelling the physics.</li>
@@ -268,7 +273,7 @@ Q = ∫ q̇ dt                     <span class="c">integrated heat load along th
     <section class="doc__section" id="validation" data-reveal>
       <h2><span class="num">09</span>Validation</h2>
       <p>
-        The Monte Carlo campaign validates the <i>system</i>, not just the controller. Three things had to be
+        The Monte Carlo campaign validates the <i>system</i>not just the controller. Three things had to be
         true for the result to mean anything: the dispersions had to be physically justifiable rather than
         chosen to produce a good answer; the sample had to be large enough that the tail was populated; and
         the failures had to be attributable to a mechanism.
@@ -290,13 +295,13 @@ Q = ∫ q̇ dt                     <span class="c">integrated heat load along th
       </div>
       <ul class="tick-list tick-list--cyan">
         <li>GNC robustness validated across 500 stochastic wind runs to <b>sub-2.0 m landing accuracy</b>.</li>
-        <li>The failure tail was traced to a specific combination &mdash; strong low-altitude wind shear arriving after the controller had already committed to a correction &mdash; rather than to insufficient gain margin.</li>
+        <li>The failure tail was traced to a specific combination, strong low-altitude wind shear arriving after the controller had already committed to a correction, rather than to insufficient gain margin.</li>
         <li>Actuator saturation, not control law structure, was the binding constraint in the worst cases: the controller knew what to do and could not physically do it fast enough.</li>
         <li>Trajectories selected by the guidance law stayed inside a sensible aerothermal envelope, confirming accuracy was not bought with an unflyable entry profile.</li>
       </ul>
-      <div class="slot" style="margin-top:1.5rem">
-        <span class="slot__t">Pending &mdash; dispersion plots</span>
-        <span class="slot__d">500-run landing scatter with CEP rings, and representative 6-DOF descent trajectory traces. Export from the campaign post-processor and drop in as <code>assets/img/gnc-dispersion.png</code>.</span>
+      <div class="note note--blue">
+        <div class="note__t">Media in progress</div>
+        <p>Plots and hardware photography for this project are being prepared. The source and generated output are in the <a class="u-cyan" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">repository</a>.</p>
       </div>
     </section>
 
@@ -323,7 +328,7 @@ Q = ∫ q̇ dt                     <span class="c">integrated heat load along th
         Early dispersed runs produced a distinctive failure: the vehicle would track well, saturate the gimbal
         during a gust, and then overshoot dramatically once the gust passed. The integral term had continued
         accumulating during saturation while the actuator was physically unable to respond. Anti-windup on the
-        integrator removed the failure mode entirely &mdash; and it only appeared in the dispersed set, never in
+        integrator removed the failure mode entirely, and it only appeared in the dispersed set, never in
         the nominal run.
       </p>
       <h3>Coupled mass properties</h3>
@@ -364,11 +369,9 @@ Q = ∫ q̇ dt                     <span class="c">integrated heat load along th
 
     <section class="doc__section" id="gallery" data-reveal>
       <h2><span class="num">15</span>Gallery</h2>
-      <div class="grid-2">
-        <div class="slot"><span class="slot__t">Pending &mdash; Monte Carlo dispersion</span><span class="slot__d">500-run landing scatter with CEP rings.</span></div>
-        <div class="slot"><span class="slot__t">Pending &mdash; descent trajectory</span><span class="slot__d">6-DOF altitude, velocity and attitude traces for a representative trial.</span></div>
-        <div class="slot"><span class="slot__t">Pending &mdash; heating profile</span><span class="slot__d">Stagnation-point heat rate and integrated load along the descent.</span></div>
-        <div class="slot"><span class="slot__t">Pending &mdash; saturation trace</span><span class="slot__d">Gimbal deflection against its limit for a tail case.</span></div>
+      <div class="note note--blue">
+        <div class="note__t">Media in progress</div>
+        <p>Hardware photography and result plots for this project are being prepared. In the meantime the full source, commit history and any generated output live in the <a class="u-cyan" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">repository</a>.</p>
       </div>
     </section>
 

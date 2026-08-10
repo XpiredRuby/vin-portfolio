@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GHOST — GPS-Denied Occlusion-Survivable Tracker | Vinayak Manoj Nair</title>
+<title>GHOST: GPS-Denied Occlusion-Survivable Tracker | Vinayak Manoj Nair</title>
 <meta name="description" content="Engineering case study: a 9-state error-state Kalman filter fusing 200 Hz IMU with 30 Hz AprilTag vision, plus an interacting-multiple-model target tracker, running on a Raspberry Pi 4B against PX4 SITL for GPS-denied navigation.">
 <meta name="author" content="Vinayak Manoj Nair">
 <meta name="theme-color" content="#07090D">
 <link rel="canonical" href="https://vinnair.me/projects/ghost.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
-<meta property="og:title" content="GHOST — GPS-Denied Occlusion-Survivable Tracker">
+<meta property="og:title" content="GHOST: GPS-Denied Occlusion-Survivable Tracker">
 <meta property="og:description" content="Dual-filter visual-inertial state estimation for GPS-denied navigation on embedded Linux. ESKF + IMM tracker, PX4 SITL integration, NIS consistency validation.">
 <meta property="og:url" content="https://vinnair.me/projects/ghost.html">
 <meta property="og:image" content="https://vinnair.me/assets/og-image.png">
@@ -22,7 +22,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"TechArticle","headline":"GHOST — GPS-Denied Occlusion-Survivable Tracker","description":"Dual-filter visual-inertial state estimation for GPS-denied navigation on embedded Linux.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["State estimation","Error-state Kalman filter","Sensor fusion","GPS-denied navigation"],"url":"https://vinnair.me/projects/ghost.html"}
+{"@context":"https://schema.org","@type":"TechArticle","headline":"GHOST: GPS-Denied Occlusion-Survivable Tracker","description":"Dual-filter visual-inertial state estimation for GPS-denied navigation on embedded Linux.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["State estimation","Error-state Kalman filter","Sensor fusion","GPS-denied navigation"],"url":"https://vinnair.me/projects/ghost.html"}
 </script>
 </head>
 <body>
@@ -71,6 +71,11 @@
   </div>
 </section>
 
+<div class="shell" style="padding-top:clamp(1.5rem,3vw,2.25rem)">
+  <img class="hero-art" src="../assets/hero/ghost.svg" width="1200" height="675"
+       alt="Illustration of the GHOST vehicle: quadrotor with camera field of view over fiducial tags, with an occlusion zone." fetchpriority="high">
+</div>
+
 <div class="shell section" style="padding-top:clamp(2rem,4vw,3rem)">
 <div class="doc">
 
@@ -99,14 +104,14 @@
     <section class="doc__section" id="problem" data-reveal>
       <h2><span class="num">01</span>Problem</h2>
       <p>
-        GNSS is the first capability an autonomous vehicle loses &mdash; to jamming, to an urban canyon,
+        GNSS is the first capability an autonomous vehicle loses, to jamming, to an urban canyon,
         to a bridge deck, to a warehouse roof. The moment it goes, a vehicle that was fusing GPS into its
         navigation filter has no absolute position reference, and dead reckoning on a consumer-grade MEMS
         IMU drifts on the order of metres within seconds.
       </p>
       <p>
         The harder half of the problem is the second object. A vehicle tracking a moving target through a
-        camera does not lose the target gradually &mdash; it loses it instantly and completely when the target
+        camera does not lose the target gradually, it loses it instantly and completely when the target
         passes behind an obstruction, and it needs to re-acquire the correct target on the far side rather
         than latching onto the nearest blob. A single monolithic filter handling both ego-state and target
         state couples those two failures together: a vision dropout that should only degrade target
@@ -140,7 +145,7 @@
       <div class="note note--blue" style="margin-top:1.25rem">
         <div class="note__t">Requirement status</div>
         <p>GH-001 through GH-006, GH-008 and GH-009 are satisfied and demonstrated in simulation.
-           GH-007 is <b>not yet verified on hardware</b> &mdash; see <a class="u-cyan" href="#challenges">Challenges</a>.</p>
+           GH-007 is <b>not yet verified on hardware</b>: see <a class="u-cyan" href="#challenges">Challenges</a>.</p>
       </div>
     </section>
 
@@ -150,7 +155,7 @@
         <div class="panel"><div class="panel__head"><span>Platform</span></div><div class="panel__body">
           <table class="spec spec--tight">
             <tr><th>Compute</th><td>Raspberry Pi 4B, 4&nbsp;GB, quad Cortex-A72 @ 1.5&nbsp;GHz, no GPU acceleration, no NPU</td></tr>
-            <tr><th>Camera</th><td>IMX296 global shutter &mdash; chosen over rolling shutter so that fast rotation does not skew the projected tag geometry</td></tr>
+            <tr><th>Camera</th><td>IMX296 global shutter, chosen over rolling shutter so that fast rotation does not skew the projected tag geometry</td></tr>
             <tr><th>IMU</th><td>ICM-42688-P, 6-axis, 200&nbsp;Hz sampling</td></tr>
             <tr><th>Autopilot</th><td>PX4 in software-in-the-loop, MAVLink over UDP</td></tr>
             <tr><th>OS</th><td>Ubuntu 22.04 aarch64</td></tr>
@@ -158,7 +163,7 @@
         </div></div>
         <div class="panel"><div class="panel__head"><span>Engineering</span></div><div class="panel__body">
           <ul class="tick-list tick-list--orange">
-            <li><b>No GNSS anywhere in the loop</b> &mdash; including for initialisation or as a sanity reference.</li>
+            <li><b>No GNSS anywhere in the loop</b>: including for initialisation or as a sanity reference.</li>
             <li><b>CPU only.</b> Every algorithm has to close its timing budget on four ARM cores shared with the OS.</li>
             <li><b>Single camera.</b> No stereo baseline, so absolute scale must come from known tag geometry.</li>
             <li><b>Consumer MEMS IMU.</b> Bias instability and random walk are large enough that unaided coasting is measured in seconds, not minutes.</li>
@@ -172,7 +177,7 @@
       <h2><span class="num">04</span>System design</h2>
       <p>
         The central design decision is the split into two filters. A single joint filter over vehicle and
-        target state is statistically defensible and, on paper, slightly more accurate &mdash; the cross
+        target state is statistically defensible and, on paper, slightly more accurate, the cross
         covariance between vehicle and target error carries real information. It was rejected for two reasons:
         it grows the state dimension into a region where the covariance update stops fitting the CPU budget
         at 200 Hz, and it couples the failure modes. In a joint filter, a target occlusion enters the same
@@ -184,7 +189,7 @@
         <div class="fig__body">
           <img src="../assets/diagrams/ghost-architecture.svg" width="880" height="400" loading="lazy" alt="GHOST block diagram: IMX296 camera and ICM-42688-P IMU feed an AprilTag detector, IMU preintegration and a chi-squared gate, which feed a 9-state ESKF and an IMM tracker publishing to PX4 over MAVLink UDP.">
         </div>
-        <figcaption><b>Fig. 1</b> &mdash; System block diagram. Solid lines carry measurements; the dashed orange path is the state feedback that tightens the detector's search window.</figcaption>
+        <figcaption><b>Fig. 1</b>System block diagram. Solid lines carry measurements; the dashed orange path is the state feedback that tightens the detector's search window.</figcaption>
       </figure>
 
       <h3>Design decisions</h3>
@@ -209,8 +214,8 @@
       <h3>Nominal state and error state</h3>
       <p>The filter carries a nominal state that is integrated open-loop from the IMU, and a small error state
          that the vision measurements correct. The true state is the composition of the two.</p>
-      <div class="eq">x  = [ p   v   q ]         <span class="c">nominal state — position, velocity, attitude quaternion</span>
-δx = [ δp  δv  δθ ]        <span class="c">error state — 9 elements, δθ is a minimal rotation vector</span>
+      <div class="eq">x  = [ p   v   q ]         <span class="c">nominal state, position, velocity, attitude quaternion</span>
+δx = [ δp  δv  δθ ]        <span class="c">error state, 9 elements, δθ is a minimal rotation vector</span>
 
 x_true = x ⊕ δx            <span class="c">⊕ is composition: p+δp, v+δv, q ⊗ exp(½δθ)</span></div>
 
@@ -242,7 +247,7 @@ if ε > χ²_0.95(m):  reject and coast
 else:
   K  = P⁻ Hᵀ S⁻¹
   δx̂ = K r
-  P⁺ = (I − K H) P⁻ (I − K H)ᵀ + K R Kᵀ   <span class="c">Joseph form — stays symmetric positive definite</span></div>
+  P⁺ = (I − K H) P⁻ (I − K H)ᵀ + K R Kᵀ   <span class="c">Joseph form, stays symmetric positive definite</span></div>
 
       <h3>Injection and reset</h3>
       <p>The correction is folded into the nominal state and the error state is zeroed, which is what keeps the
@@ -254,36 +259,36 @@ P  ← G P Gᵀ            <span class="c">G accounts for the reset of the attit
       <h3>Target motion models</h3>
       <p>The tracker runs two hypotheses in parallel. Constant velocity is correct most of the time; constant
          turn rate is correct exactly when constant velocity is worst.</p>
-      <div class="eq"><span class="c">CV   —</span> x = [x, y, vx, vy]ᵀ,            ẋ = [vx, vy, 0, 0]ᵀ
-<span class="c">CTRV —</span> x = [x, y, v, ψ, ψ̇]ᵀ,          ẋ = [v cos ψ, v sin ψ, 0, ψ̇, 0]ᵀ
+      <div class="eq"><span class="c">CV   </span> x = [x, y, vx, vy]ᵀ,            ẋ = [vx, vy, 0, 0]ᵀ
+<span class="c">CTRV </span> x = [x, y, v, ψ, ψ̇]ᵀ,          ẋ = [v cos ψ, v sin ψ, 0, ψ̇, 0]ᵀ
 
 μ_k = model probability vector,  Π = Markov model-transition matrix
-x̂ = Σ_i μ_k(i) x̂_i          <span class="c">combined estimate — probability-weighted mixture</span></div>
+x̂ = Σ_i μ_k(i) x̂_i          <span class="c">combined estimate, probability-weighted mixture</span></div>
     </section>
 
     <section class="doc__section" id="algorithms" data-reveal>
       <h2><span class="num">06</span>Algorithms used</h2>
       <ul class="tick-list">
-        <li><b>Error-state Kalman filter (ESKF)</b> &mdash; 9-state ego estimator, 200 Hz propagate / 30 Hz update.</li>
-        <li><b>IMU preintegration</b> &mdash; bias-compensated integration of &Delta;v and &Delta;&theta; between vision frames, so a late frame does not force a re-integration from scratch.</li>
-        <li><b>AprilTag detection and PnP pose solve</b> &mdash; absolute, metrically scaled pose fix from a single camera.</li>
-        <li><b>Interacting multiple model (IMM) filter</b> &mdash; CV/CTRV mixture with Markov switching for the target track.</li>
-        <li><b>&chi;&sup2; innovation gating (NIS)</b> &mdash; outlier rejection at the 95% level, with the gate widened on reacquisition to account for the inflated covariance after a coast.</li>
-        <li><b>Joseph-form covariance update</b> &mdash; numerically stable symmetric update, which matters when a filter runs for hours in single precision on an embedded target.</li>
+        <li><b>Error-state Kalman filter (ESKF)</b>9-state ego estimator, 200 Hz propagate / 30 Hz update.</li>
+        <li><b>IMU preintegration</b>: bias-compensated integration of &Delta;v and &Delta;&theta; between vision frames, so a late frame does not force a re-integration from scratch.</li>
+        <li><b>AprilTag detection and PnP pose solve</b>: absolute, metrically scaled pose fix from a single camera.</li>
+        <li><b>Interacting multiple model (IMM) filter</b>CV/CTRV mixture with Markov switching for the target track.</li>
+        <li><b>&chi;&sup2; innovation gating (NIS)</b>: outlier rejection at the 95% level, with the gate widened on reacquisition to account for the inflated covariance after a coast.</li>
+        <li><b>Joseph-form covariance update</b>: numerically stable symmetric update, which matters when a filter runs for hours in single precision on an embedded target.</li>
       </ul>
       <figure class="fig" style="margin-top:1.5rem">
         <div class="fig__body">
           <img src="../assets/diagrams/eskf-timing.svg" width="880" height="300" loading="lazy" alt="Timing diagram showing 200 Hz IMU propagation ticks above the axis and 30 Hz vision updates below, with an occlusion window where vision updates are absent.">
         </div>
-        <figcaption><b>Fig. 2</b> &mdash; Asynchronous propagate/update schedule. Vision updates are sparse relative to propagation, and disappear entirely inside the occlusion window.</figcaption>
+        <figcaption><b>Fig. 2</b>Asynchronous propagate/update schedule. Vision updates are sparse relative to propagation, and disappear entirely inside the occlusion window.</figcaption>
       </figure>
     </section>
 
     <section class="doc__section" id="implementation" data-reveal>
       <h2><span class="num">07</span>Implementation</h2>
       <table class="spec">
-        <tr><th>Estimation core</th><td>C++ &mdash; fixed-size matrices, no dynamic allocation in the propagate/update path</td></tr>
-        <tr><th>Tooling &amp; analysis</th><td>Python &mdash; scenario generation, NIS analysis, plotting, evidence packaging</td></tr>
+        <tr><th>Estimation core</th><td>C++, fixed-size matrices, no dynamic allocation in the propagate/update path</td></tr>
+        <tr><th>Tooling &amp; analysis</th><td>Python, scenario generation, NIS analysis, plotting, evidence packaging</td></tr>
         <tr><th>Autopilot interface</th><td>MAVLink over UDP into PX4 SITL, publishing vision position estimates</td></tr>
         <tr><th>Target platform</th><td>Raspberry Pi 4B, Ubuntu 22.04 aarch64</td></tr>
         <tr><th>Sensors</th><td>IMX296 global-shutter camera, ICM-42688-P IMU</td></tr>
@@ -295,7 +300,7 @@ x̂ = Σ_i μ_k(i) x̂_i          <span class="c">combined estimate — probabil
             heap allocation inside a 5 ms budget is a latency spike waiting to happen.</li>
         <li>Covariance is only ever updated in Joseph form, and symmetry is re-imposed as
             <code>P = &frac12;(P + P&#7488;)</code> after each update to stop asymmetry accumulating.</li>
-        <li>Timestamps come from the sensor, not from the moment the process happened to read it &mdash;
+        <li>Timestamps come from the sensor, not from the moment the process happened to read it,
             the cause of the first serious divergence found in testing.</li>
       </ul>
     </section>
@@ -348,9 +353,9 @@ E[ε] = m                       <span class="c">m = measurement dimension</span>
         <div class="metric metric--orange"><div class="metric__v">2 s+</div><div class="metric__k">Occlusion coast</div></div>
         <div class="metric metric--green"><div class="metric__v">95%</div><div class="metric__k">&chi;&sup2; gate level</div></div>
       </div>
-      <div class="slot">
-        <span class="slot__t">Pending &mdash; measured performance</span>
-        <span class="slot__d">Hardware timing histogram and NIS-versus-time plots will be published here once the camera driver issue is resolved and a full HIL run is captured.</span>
+      <div class="note note--blue">
+        <div class="note__t">Media in progress</div>
+        <p>Plots and hardware photography for this project are being prepared. The source and generated output are in the <a class="u-cyan" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">repository</a>.</p>
       </div>
     </section>
 
@@ -361,10 +366,10 @@ E[ε] = m                       <span class="c">m = measurement dimension</span>
           <thead><tr><th>Tradeoff</th><th>Gained</th><th>Paid</th></tr></thead>
           <tbody>
             <tr><td>Split filters over joint filter</td><td>Failure containment, lower CPU, simpler tuning</td><td>Cross-correlation information between vehicle and target error is discarded</td></tr>
-            <tr><td>Fiducial tags over visual odometry</td><td>Absolute scale, no drift, unambiguous data association</td><td>Requires prepared environment &mdash; will not generalise to arbitrary scenes</td></tr>
+            <tr><td>Fiducial tags over visual odometry</td><td>Absolute scale, no drift, unambiguous data association</td><td>Requires prepared environment, will not generalise to arbitrary scenes</td></tr>
             <tr><td>IMM over single model</td><td>Turns tracked without lag</td><td>Roughly double the tracker compute and an extra transition matrix to tune</td></tr>
             <tr><td>Aggressive &chi;&sup2; gating</td><td>Immune to bad PnP solutions from partial occlusion</td><td>Legitimate measurements are occasionally rejected during fast reacquisition</td></tr>
-            <tr><td>Global shutter over rolling shutter</td><td>No geometric skew under rotation</td><td>More expensive sensor, less mature driver support &mdash; which became the blocking issue</td></tr>
+            <tr><td>Global shutter over rolling shutter</td><td>No geometric skew under rotation</td><td>More expensive sensor, less mature driver support, which became the blocking issue</td></tr>
           </tbody>
         </table>
       </div>
@@ -383,11 +388,11 @@ E[ε] = m                       <span class="c">m = measurement dimension</span>
         camera frames share a common time base.
       </p>
 
-      <h3>Camera driver &mdash; the current blocker</h3>
+      <h3>Camera driver, the current blocker</h3>
       <p>
         Bring-up is stopped on an IMX296 driver/kernel issue under Ubuntu 22.04 on aarch64. This is stated
-        plainly rather than papered over: the software layer &mdash; ESKF, IMM tracker, NIS validation, CI
-        &mdash; is complete and committed, and the hardware layer is not yet demonstrated. A portfolio that
+        plainly rather than papered over: the software layer, ESKF, IMM tracker, NIS validation, CI
+       , is complete and committed, and the hardware layer is not yet demonstrated. A portfolio that
         hides its blockers is not an engineering document.
       </p>
 
@@ -395,7 +400,7 @@ E[ε] = m                       <span class="c">m = measurement dimension</span>
       <p>
         The design went through <b>10 documented revisions</b> with <b>20 engineering flaws</b> found and fixed
         via external review. Several were frame-convention errors that would have produced a filter that looked
-        stable and was quietly wrong &mdash; the exact failure mode that survives casual testing.
+        stable and was quietly wrong, the exact failure mode that survives casual testing.
       </p>
     </section>
 
@@ -404,7 +409,7 @@ E[ε] = m                       <span class="c">m = measurement dimension</span>
       <ul class="tick-list tick-list--orange">
         <li><b>Time is a sensor measurement.</b> Every timestamp needs a stated origin and a bounded error, and it deserves the same scepticism as any other measurement.</li>
         <li><b>Consistency beats accuracy as an acceptance criterion.</b> Error plots can look excellent while the covariance is a fiction; NIS catches it, RMS error does not.</li>
-        <li><b>Architect for failure containment.</b> The best property of the split-filter design is not its performance &mdash; it is that one subsystem's bad day stays inside that subsystem.</li>
+        <li><b>Architect for failure containment.</b> The best property of the split-filter design is not its performance, it is that one subsystem's bad day stays inside that subsystem.</li>
         <li><b>Pick the component with the boring driver.</b> The global-shutter sensor was the right engineering choice on optics and the wrong one on schedule risk. Supply-chain and software-maturity risk are design parameters.</li>
         <li><b>External review finds what self-review cannot.</b> Twenty flaws found by other people is twenty flaws that would otherwise have shipped.</li>
       </ul>
@@ -423,11 +428,9 @@ E[ε] = m                       <span class="c">m = measurement dimension</span>
 
     <section class="doc__section" id="gallery" data-reveal>
       <h2><span class="num">15</span>Gallery</h2>
-      <div class="grid-2">
-        <div class="slot"><span class="slot__t">Pending &mdash; hardware rig</span><span class="slot__d">Raspberry Pi 4B + IMX296 + ICM-42688-P integration photograph.</span></div>
-        <div class="slot"><span class="slot__t">Pending &mdash; PX4 SITL</span><span class="slot__d">Screen capture of the estimate closing the loop in software-in-the-loop.</span></div>
-        <div class="slot"><span class="slot__t">Pending &mdash; NIS plot</span><span class="slot__d">Normalised innovation squared against the two-sided 95% &chi;&sup2; band.</span></div>
-        <div class="slot"><span class="slot__t">Pending &mdash; occlusion trace</span><span class="slot__d">Covariance growth and recovery across an injected occlusion window.</span></div>
+      <div class="note note--blue">
+        <div class="note__t">Media in progress</div>
+        <p>Hardware photography and result plots for this project are being prepared. In the meantime the full source, commit history and any generated output live in the <a class="u-cyan" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">repository</a>.</p>
       </div>
     </section>
 

@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Project KESTREL — Throw-Launch Precision Landing UAV (Closeout) | Vinayak Manoj Nair</title>
-<meta name="description" content="Programme closeout: a hand-thrown autonomous UAV designed for sub-5 cm CEP vision-only precision landing on a Pixhawk 6C, taken to CDR readiness before being archived — and what carried forward into GHOST.">
+<title>Project KESTREL: Throw-Launch Precision Landing UAV (Closeout) | Vinayak Manoj Nair</title>
+<meta name="description" content="Programme closeout: a hand-thrown autonomous UAV designed for sub-5 cm CEP vision-only precision landing on a Pixhawk 6C, taken to CDR readiness before being archived, and what carried forward into GHOST.">
 <meta name="author" content="Vinayak Manoj Nair">
 <meta name="theme-color" content="#07090D">
 <link rel="canonical" href="https://vinnair.me/projects/kestrel.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
-<meta property="og:title" content="Project KESTREL — Throw-Launch Precision Landing UAV (Closeout)">
+<meta property="og:title" content="Project KESTREL: Throw-Launch Precision Landing UAV (Closeout)">
 <meta property="og:description" content="Vision-only terminal guidance for sub-5 cm CEP precision landing. CDR readiness reached; programme archived. An honest closeout.">
 <meta property="og:url" content="https://vinnair.me/projects/kestrel.html">
 <meta property="og:image" content="https://vinnair.me/assets/og-image.png">
@@ -67,6 +67,11 @@
   </div>
 </section>
 
+<div class="shell" style="padding-top:clamp(1.5rem,3vw,2.25rem)">
+  <img class="hero-art" src="../assets/hero/kestrel.svg" width="1200" height="675"
+       alt="Illustration of the KESTREL hand-launched UAV arc toward a marked landing pad, stamped archived." fetchpriority="high">
+</div>
+
 <div class="shell section" style="padding-top:clamp(2rem,4vw,3rem)">
 <div class="doc">
 
@@ -116,7 +121,7 @@
       <p>
         A vision-only extended Kalman filter provided the terminal position reference, fusing pad-relative
         visual measurements with inertial propagation on a Pixhawk 6C flight controller. The launch
-        transient &mdash; a hand throw imparts a large, poorly characterised initial rate &mdash; was treated
+        transient, a hand throw imparts a large, poorly characterised initial rate, was treated
         as a distinct flight phase with its own detection logic and recovery mode rather than as an edge case
         of normal flight.
       </p>
@@ -136,7 +141,7 @@
         <li>Vehicle configuration and avionics architecture defined and reviewed.</li>
         <li>Vision-only terminal guidance approach designed and analysed.</li>
         <li>Design package advanced to CDR readiness.</li>
-        <li>No flight test campaign executed &mdash; the programme closed before hardware qualification.</li>
+        <li>No flight test campaign executed, the programme closed before hardware qualification.</li>
       </ul>
       <div class="note" style="margin-top:1.25rem">
         <div class="note__t">Stated plainly</div>
@@ -148,8 +153,8 @@
     <section class="doc__section" id="why" data-reveal>
       <h2><span class="num">05</span>Why it stopped</h2>
       <p>
-        KESTREL was archived because its most valuable technical content &mdash; vision-only terminal
-        guidance in the absence of GNSS &mdash; was a strict subset of a more general problem, and pursuing
+        KESTREL was archived because its most valuable technical content, vision-only terminal
+        guidance in the absence of GNSS, was a strict subset of a more general problem, and pursuing
         the more general problem was the better use of the time. GHOST addresses GPS-denied state estimation
         with occlusion tolerance and a target track, on hardware that is easier to iterate on than a
         throw-launched airframe.
@@ -166,7 +171,7 @@
       <ul class="tick-list tick-list--orange">
         <li><b>Separate the hard part from its packaging.</b> The interesting engineering was the estimator; the airframe was a delivery mechanism that carried most of the schedule risk.</li>
         <li><b>A design target is not a result.</b> Numbers that have not been measured should be labelled as requirements every time they are quoted.</li>
-        <li><b>Killing a project is a legitimate engineering decision.</b> The failure mode is not stopping &mdash; it is continuing out of sunk cost.</li>
+        <li><b>Killing a project is a legitimate engineering decision.</b> The failure mode is not stopping, it is continuing out of sunk cost.</li>
         <li><b>Treat transients as phases.</b> Designing an explicit throw-detection and recovery mode was more robust than trying to make the nominal controller tolerate the launch transient.</li>
         <li><b>Write the closeout.</b> A project without a closeout leaves its lessons undocumented and its status ambiguous.</li>
       </ul>

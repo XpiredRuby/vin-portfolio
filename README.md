@@ -1,6 +1,6 @@
 # vin-portfolio
 
-Engineering portfolio for **Vinayak Manoj Nair** — Aerospace Engineering, Texas A&M University (May 2027).
+Engineering portfolio for **Vinayak Manoj Nair**, Aerospace Engineering, Texas A&M University (May 2027).
 Guidance, navigation & control · systems engineering · embedded flight software · autonomous robotics.
 
 Plain HTML, CSS and JavaScript. **No framework, no build step, no dependencies.** Deployed via GitHub Pages
@@ -27,7 +27,7 @@ testing, validation, performance, results, tradeoffs, challenges, lessons learne
 
 ```
 vin-portfolio/
-├── index.html                      # Home — hero, stats, disciplines, stack, featured projects,
+├── index.html                      # Home, hero, stats, disciplines, stack, featured projects,
 │                                   #        experience, live GitHub feed
 ├── projects.html                   # Project register + case-study summaries
 ├── projects/
@@ -39,7 +39,7 @@ vin-portfolio/
 │   ├── spirit-iss.html             # PRJ-06  ISS payload systems engineering
 │   └── kestrel.html                # PRJ-07  Archived programme closeout
 ├── experience.html                 # Timeline with measurable accomplishments
-├── skills.html                     # Skills matrix — every skill linked to its project
+├── skills.html                     # Skills matrix, every skill linked to its project
 ├── resume.html                     # Interactive resume (prints to a clean 3-page PDF)
 ├── about.html                      # Short bio and working principles
 ├── contact.html                    # Contact channels, availability, recruiter quick-facts
@@ -50,7 +50,9 @@ vin-portfolio/
 │   ├── css/site.css                # Entire design system (single stylesheet)
 │   ├── js/site.js                  # Nav, scroll reveal, counters, clock, TOC scroll-spy
 │   ├── js/github.js                # Live GitHub repo + commit feed (2 API calls, cached, graceful)
-│   ├── diagrams/*.svg              # Hand-specified technical block diagrams
+│   ├── hero/*.svg                  # Project hero artwork (illustrations, not data plots)
+│   ├── hero/generate.py            # Regenerates all hero art from one spec file
+│   ├── diagrams/*.svg              # Technical block diagrams used inside case studies
 │   ├── diagrams/generate.py        # Regenerates every diagram from one spec file
 │   ├── headshot.jpg                # Portrait
 │   ├── og-image.png                # 1200×630 social preview
@@ -77,13 +79,17 @@ No build step. Edit the HTML/CSS/JS directly and reload.
 
 ## Regenerating assets
 
-### Diagrams
+### Diagrams and hero art
 
-All block diagrams are generated from one script so they stay visually consistent:
+Both sets of graphics are generated from a single script each, so they stay visually consistent:
 
 ```bash
-python3 assets/diagrams/generate.py
+python3 assets/diagrams/generate.py   # technical block diagrams
+python3 assets/hero/generate.py       # project hero artwork
 ```
+
+The hero artwork is **illustration, not measured data**. Nothing in it is presented as a result;
+real numbers live in the case-study text and in the repositories.
 
 Edit the box/arrow specs at the bottom of that file to change a diagram, then re-run.
 
@@ -97,7 +103,7 @@ chromium --headless --no-pdf-header-footer \
   --print-to-pdf=assets/resume.pdf http://localhost:8000/resume.html
 ```
 
-Or simply open `resume.html` and use **Print / Save as PDF** — the print stylesheet strips navigation,
+Or simply open `resume.html` and use **Print / Save as PDF**, the print stylesheet strips navigation,
 converts to black on white, forces all reveal-animated content visible, and tightens spacing.
 
 ### Open Graph image
@@ -112,7 +118,7 @@ chromium --headless --window-size=1200,712 \
 
 ## Things to fill in
 
-These are deliberately visible as **pending-asset slots** on the live site rather than hidden — a slot is
+These are deliberately visible as **pending-asset slots** on the live site rather than hidden, a slot is
 honest, a missing figure is not. Replace them as media becomes available:
 
 | Where | What to add |
@@ -129,7 +135,7 @@ To replace a slot, swap the `<div class="slot">…</div>` block for:
 ```html
 <figure class="fig">
   <div class="fig__body"><img src="../assets/img/your-figure.png" alt="Descriptive alt text" loading="lazy"></div>
-  <figcaption><b>Fig. n</b> — What the figure shows and what it proves.</figcaption>
+  <figcaption><b>Fig. n</b>What the figure shows and what it proves.</figcaption>
 </figure>
 ```
 
@@ -143,7 +149,7 @@ project result.
 
 ## Adding a new project
 
-1. Copy `projects/ghost.html` as the template — it has the full 16-section structure and TOC.
+1. Copy `projects/ghost.html` as the template, it has the full 16-section structure and TOC.
 2. Update the `<title>`, meta description, canonical URL, JSON-LD, and breadcrumb.
 3. Add a diagram spec to `assets/diagrams/generate.py` and re-run it.
 4. Add a `<article class="case">` block to `projects.html` and a row to the project register table.

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675"
+     role="img" aria-label="Rocket Landing GNC. 6-DOF propulsive descent and Monte Carlo dispersion" font-family="'JetBrains Mono', ui-monospace, monospace">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#0C1219"/><stop offset="100%" stop-color="#070A0F"/>
+  </linearGradient>
+  <radialGradient id="glow" cx="50%" cy="50%">
+    <stop offset="0%" stop-color="#FF7A18" stop-opacity="0.30"/>
+    <stop offset="70%" stop-color="#FF7A18" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="accentFade" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#FF7A18" stop-opacity="0.9"/>
+    <stop offset="100%" stop-color="#FF7A18" stop-opacity="0.05"/>
+  </linearGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#1A2230"/><stop offset="45%" stop-color="#39465C"/>
+    <stop offset="55%" stop-color="#2A3444"/><stop offset="100%" stop-color="#141B26"/>
+  </linearGradient>
+  <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="14"/>
+  </filter>
+  <filter id="soft2" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="4"/>
+  </filter>
+  <pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse">
+    <path d="M30 0H0V30" fill="none" stroke="#FFFFFF" stroke-opacity="0.030" stroke-width="1"/>
+  </pattern>
+  <linearGradient id="vig" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.45"/>
+  </linearGradient>
+</defs>
+<rect width="1200" height="675" fill="url(#sky)"/>
+<rect width="1200" height="675" fill="url(#g)"/><circle cx="620" cy="600" r="420" fill="url(#glow)"/><line x1="0" y1="600" x2="1200" y2="600" stroke="#3E4C60" stroke-opacity="0.7"/><ellipse cx="620" cy="600" rx="230" ry="34" fill="none" stroke="#FF7A18" stroke-opacity="0.30"/><ellipse cx="620" cy="600" rx="140" ry="21" fill="none" stroke="#FF7A18" stroke-opacity="0.45"/><ellipse cx="620" cy="600" rx="58" ry="9" fill="#FF7A18" fill-opacity="0.16" stroke="#FF7A18" stroke-opacity="0.7"/><path d="M170 120 C 330 300, 520 380, 620 520" fill="none" stroke="#FF7A18" stroke-width="2.5" stroke-opacity="0.5" stroke-dasharray="10 7"/><ellipse cx="620" cy="600" rx="210" ry="32" fill="#FF7A18" fill-opacity="0.1"/><ellipse cx="620" cy="600" rx="150" ry="22" fill="#FF7A18" fill-opacity="0.14"/><ellipse cx="620" cy="600" rx="95" ry="14" fill="#FF7A18" fill-opacity="0.2"/><g transform="translate(620,470) rotate(9)"><rect x="-27" y="-190" width="54" height="230" rx="7" fill="url(#metal)" stroke="#3E4C60"/><path d="M-27 -190 L0 -240 L27 -190 Z" fill="url(#metal)" stroke="#3E4C60"/><line x1="-27" y1="-150" x2="27" y2="-150" stroke="#2A3444" stroke-opacity="0.8"/><line x1="-27" y1="-100" x2="27" y2="-100" stroke="#2A3444" stroke-opacity="0.8"/><line x1="-27" y1="-50" x2="27" y2="-50" stroke="#2A3444" stroke-opacity="0.8"/><path d="M-27 20 L-52 62 L-30 62 Z" fill="#1B2432" stroke="#3E4C60"/><path d="M27 20 L52 62 L30 62 Z" fill="#1B2432" stroke="#3E4C60"/><path d="M-20 44 C -34 108, -14 172, 0 214 C 14 172, 34 108, 20 44 Z" fill="#FF7A18" fill-opacity="0.55" filter="url(#soft2)"/><path d="M-10 46 C -16 96, -6 140, 0 166 C 6 140, 16 96, 10 46 Z" fill="#FFD9A8" fill-opacity="0.85"/></g><text x="980" y="200" font-size="12" fill="#4A5768" text-anchor="start" letter-spacing="0.18em" font-weight="400">ALT</text><text x="1150" y="200" font-size="15" fill="#E7ECF3" text-anchor="end" letter-spacing="0.06em" font-weight="500">1 240 m</text><line x1="980" y1="212" x2="1150" y2="212" stroke="#2A3444"/><text x="980" y="244" font-size="12" fill="#4A5768" text-anchor="start" letter-spacing="0.18em" font-weight="400">V</text><text x="1150" y="244" font-size="15" fill="#E7ECF3" text-anchor="end" letter-spacing="0.06em" font-weight="500">84 m/s</text><line x1="980" y1="256" x2="1150" y2="256" stroke="#2A3444"/><text x="980" y="288" font-size="12" fill="#4A5768" text-anchor="start" letter-spacing="0.18em" font-weight="400">GIMBAL</text><text x="1150" y="288" font-size="15" fill="#E7ECF3" text-anchor="end" letter-spacing="0.06em" font-weight="500">3.2 deg</text><line x1="980" y1="300" x2="1150" y2="300" stroke="#2A3444"/><text x="620" y="656" font-size="12" fill="#FF7A18" text-anchor="middle" letter-spacing="0.16em" font-weight="400">500-RUN DISPERSION FOOTPRINT</text>
+<rect width="1200" height="675" fill="url(#vig)"/>
+<rect x="0" y="671" width="1200" height="4" fill="#FF7A18" opacity="0.85"/>
+<text x="48" y="72" font-size="16" fill="#FF7A18" letter-spacing="0.22em">PRJ-03 / ROCKET LANDING GNC</text>
+<text x="48" y="104" font-size="15" fill="#4A5768" letter-spacing="0.14em">6-DOF PROPULSIVE DESCENT, MONTE CARLO CAMPAIGN</text>
+</svg>

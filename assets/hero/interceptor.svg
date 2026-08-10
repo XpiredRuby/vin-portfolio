@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675"
+     role="img" aria-label="Interception Robot. Perception to actuation under a 100 ms budget" font-family="'JetBrains Mono', ui-monospace, monospace">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#0C1219"/><stop offset="100%" stop-color="#070A0F"/>
+  </linearGradient>
+  <radialGradient id="glow" cx="50%" cy="50%">
+    <stop offset="0%" stop-color="#2B7FFF" stop-opacity="0.30"/>
+    <stop offset="70%" stop-color="#2B7FFF" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="accentFade" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#2B7FFF" stop-opacity="0.9"/>
+    <stop offset="100%" stop-color="#2B7FFF" stop-opacity="0.05"/>
+  </linearGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#1A2230"/><stop offset="45%" stop-color="#39465C"/>
+    <stop offset="55%" stop-color="#2A3444"/><stop offset="100%" stop-color="#141B26"/>
+  </linearGradient>
+  <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="14"/>
+  </filter>
+  <filter id="soft2" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="4"/>
+  </filter>
+  <pattern id="g" width="30" height="30" patternUnits="userSpaceOnUse">
+    <path d="M30 0H0V30" fill="none" stroke="#FFFFFF" stroke-opacity="0.030" stroke-width="1"/>
+  </pattern>
+  <linearGradient id="vig" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#000" stop-opacity="0.45"/>
+  </linearGradient>
+</defs>
+<rect width="1200" height="675" fill="url(#sky)"/>
+<rect width="1200" height="675" fill="url(#g)"/><circle cx="380" cy="340" r="300" fill="url(#glow)"/><path d="M300 340 L1100 150 L1100 530 Z" fill="#2B7FFF" fill-opacity="0.06" stroke="#2B7FFF" stroke-opacity="0.25"/><path d="M520 288 A 220 220 0 0 1 520 392" fill="none" stroke="#2B7FFF" stroke-opacity="0.14"/><path d="M680 250 A 380 380 0 0 1 680 430" fill="none" stroke="#2B7FFF" stroke-opacity="0.14"/><path d="M840 211 A 540 540 0 0 1 840 469" fill="none" stroke="#2B7FFF" stroke-opacity="0.14"/><rect x="228" y="392" width="150" height="46" rx="6" fill="url(#metal)" stroke="#3E4C60"/><circle cx="252" cy="438" r="13" fill="#131A25" stroke="#3E4C60"/><circle cx="276" cy="438" r="13" fill="#131A25" stroke="#3E4C60"/><circle cx="300" cy="438" r="13" fill="#131A25" stroke="#3E4C60"/><circle cx="324" cy="438" r="13" fill="#131A25" stroke="#3E4C60"/><circle cx="348" cy="438" r="13" fill="#131A25" stroke="#3E4C60"/><circle cx="372" cy="438" r="13" fill="#131A25" stroke="#3E4C60"/><rect x="268" y="330" width="72" height="64" rx="5" fill="url(#metal)" stroke="#3E4C60"/><rect x="330" y="348" width="86" height="16" rx="4" fill="url(#metal)" stroke="#3E4C60"/><circle cx="304" cy="356" r="14" fill="#0A0F16" stroke="#2B7FFF" stroke-width="2"/><circle cx="304" cy="356" r="5" fill="#2B7FFF"/><rect x="880" y="250" width="150" height="150" fill="none" stroke="#35D08A" stroke-width="2"/><rect x="876" y="246" width="8" height="8" fill="#35D08A"/><rect x="1026" y="246" width="8" height="8" fill="#35D08A"/><rect x="876" y="396" width="8" height="8" fill="#35D08A"/><rect x="1026" y="396" width="8" height="8" fill="#35D08A"/><rect x="880" y="222" width="112" height="22" fill="#35D08A" fill-opacity="0.9"/><text x="886" y="238" font-size="13" fill="#04120B" text-anchor="start" letter-spacing="0.02em" font-weight="600">target 0.94</text><circle cx="955" cy="325" r="30" fill="#35D08A" fill-opacity="0.12"/><rect x="1000" y="270" width="150" height="150" fill="none" stroke="#2B7FFF" stroke-width="2" stroke-dasharray="7 6"/><text x="1075" y="448" font-size="12" fill="#2B7FFF" text-anchor="middle" letter-spacing="0.12em" font-weight="400">PREDICTED @ t+Δ</text><rect x="228" y="560" width="740" height="26" rx="3" fill="#101722" stroke="#2A3444"/><rect x="228" y="560" width="67" height="26" fill="#3E4C60" fill-opacity="0.45"/><rect x="295" y="560" width="533" height="26" fill="#2B7FFF" fill-opacity="0.45"/><text x="561.0" y="578" font-size="12" fill="#E9F1FF" text-anchor="middle" letter-spacing="0.14em" font-weight="400">INFERENCE</text><rect x="827" y="560" width="37" height="26" fill="#22D3EE" fill-opacity="0.45"/><rect x="864" y="560" width="37" height="26" fill="#35D08A" fill-opacity="0.45"/><rect x="901" y="560" width="67" height="26" fill="#FF7A18" fill-opacity="0.45"/><text x="228" y="546" font-size="12" fill="#4A5768" text-anchor="start" letter-spacing="0.16em" font-weight="400">END-TO-END BUDGET</text><text x="968" y="546" font-size="13" fill="#35D08A" text-anchor="end" letter-spacing="0.08em" font-weight="600">&lt; 100 ms</text>
+<rect width="1200" height="675" fill="url(#vig)"/>
+<rect x="0" y="671" width="1200" height="4" fill="#2B7FFF" opacity="0.85"/>
+<text x="48" y="72" font-size="16" fill="#2B7FFF" letter-spacing="0.22em">PRJ-05 / INTERCEPTION ROBOT</text>
+<text x="48" y="104" font-size="15" fill="#4A5768" letter-spacing="0.14em">PERCEPTION TO ACTUATION ON EMBEDDED LINUX</text>
+</svg>

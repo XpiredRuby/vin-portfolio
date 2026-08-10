@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Projects — Engineering Case Studies | Vinayak Manoj Nair</title>
+<title>Projects: Engineering Case Studies | Vinayak Manoj Nair</title>
 <meta name="description" content="Seven aerospace engineering case studies: GPS-denied state estimation, flight-software hardware-in-the-loop verification, 6-DOF rocket landing GNC, aircraft structural FEA, autonomous interception robotics, and ISS payload systems engineering.">
 <meta name="author" content="Vinayak Manoj Nair">
 <meta name="theme-color" content="#07090D">
 <link rel="canonical" href="https://vinnair.me/projects.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
-<meta property="og:title" content="Projects — Engineering Case Studies | Vinayak Manoj Nair">
-<meta property="og:description" content="GNC, flight software verification, structures, and autonomy — each project documented as an engineering report with requirements, architecture, results and tradeoffs.">
+<meta property="og:title" content="Projects: Engineering Case Studies | Vinayak Manoj Nair">
+<meta property="og:description" content="GNC, flight software verification, structures, and autonomy, each project documented as an engineering report with requirements, architecture, results and tradeoffs.">
 <meta property="og:url" content="https://vinnair.me/projects.html">
 <meta property="og:image" content="https://vinnair.me/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -88,16 +88,16 @@
     <article class="case" id="ghost" data-reveal>
       <div class="case__visual">
         <span class="case__id">PRJ-01</span>
-        <img src="assets/diagrams/ghost-architecture.svg" width="880" height="400" loading="lazy" alt="GHOST dual-filter estimation architecture block diagram.">
+        <img src="assets/hero/ghost.svg" width="1200" height="675" loading="lazy" alt="GHOST dual-filter estimation architecture block diagram.">
       </div>
       <div class="case__body">
         <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
-          <span class="pill pill--active"><i class="dot dot--amber"></i>Active development</span><span class="case__sub">2026 &mdash; PRESENT</span>
+          <span class="pill pill--active"><i class="dot dot--amber"></i>Active development</span><span class="case__sub">2026 to PRESENT</span>
         </div>
-        <h2 class="case__title"><a href="projects/ghost.html">GHOST &mdash; GPS-Denied Occlusion-Survivable Tracker</a></h2>
+        <h2 class="case__title"><a href="projects/ghost.html">GHOST: GPS-Denied Occlusion-Survivable Tracker</a></h2>
         <p class="case__sub">Dual-filter visual-inertial estimation on embedded Linux</p>
-        <div class="case__block"><h4>Overview</h4><p>A vehicle that loses GNSS still has to know where it is &mdash; and where a manoeuvring target is &mdash; through seconds-long visual occlusions, on Raspberry Pi-class compute. GHOST separates those two problems into two filters that fail independently.</p></div>
-        <div class="case__block"><h4>Current state</h4><p>Software layer complete and committed: ESKF, IMM tracker, NIS consistency validation and CI. Hardware bring-up is blocked on an IMX296 driver/kernel issue on Ubuntu 22.04 &mdash; documented openly rather than hidden.</p></div>
+        <div class="case__block"><h4>Overview</h4><p>A vehicle that loses GNSS still has to know where it is, and where a manoeuvring target is, through seconds-long visual occlusions, on Raspberry Pi-class compute. GHOST separates those two problems into two filters that fail independently.</p></div>
+        <div class="case__block"><h4>Current state</h4><p>Software layer complete and committed: ESKF, IMM tracker, NIS consistency validation and CI. Hardware bring-up is blocked on an IMX296 driver/kernel issue on Ubuntu 22.04 / documented openly rather than hidden.</p></div>
         <div class="metrics">
           <div class="metric"><div class="metric__v">9</div><div class="metric__k">ESKF states</div></div>
           <div class="metric"><div class="metric__v">200 Hz</div><div class="metric__k">IMU propagate</div></div>
@@ -112,15 +112,15 @@
     <article class="case" id="astrasim" data-reveal>
       <div class="case__visual">
         <span class="case__id">PRJ-02</span>
-        <img src="assets/diagrams/astrasim-architecture.svg" width="880" height="400" loading="lazy" alt="AstraSim-FSW hardware-in-the-loop verification topology.">
+        <img src="assets/hero/astrasim.svg" width="1200" height="675" loading="lazy" alt="AstraSim-FSW hardware-in-the-loop verification topology.">
       </div>
       <div class="case__body">
         <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
           <span class="pill pill--live"><i class="dot"></i>HIL verified</span><span class="case__sub">COMPLETE</span>
         </div>
-        <h2 class="case__title"><a href="projects/astrasim-fsw.html">AstraSim-FSW &mdash; Flight Software HIL Verification Framework</a></h2>
+        <h2 class="case__title"><a href="projects/astrasim-fsw.html">AstraSim-FSW: Flight Software HIL Verification Framework</a></h2>
         <p class="case__sub">C++17 flight segment &middot; Python ground segment &middot; aarch64 Raspberry Pi target</p>
-        <div class="case__block"><h4>Overview</h4><p>A complete command and telemetry stack with the verification apparatus around it: CRC-checked binary packets, command acknowledgement, mode management, health monitoring, watchdog, fault injection, YAML scenarios and seeded Monte Carlo regression &mdash; then run on real hardware and made to produce committed evidence.</p></div>
+        <div class="case__block"><h4>Overview</h4><p>A complete command and telemetry stack with the verification apparatus around it: CRC-checked binary packets, command acknowledgement, mode management, health monitoring, watchdog, fault injection, YAML scenarios and seeded Monte Carlo regression, then run on real hardware and made to produce committed evidence.</p></div>
         <div class="case__block"><h4>Why it matters</h4><p>It is the difference between "I wrote flight software" and "here is the test evidence, the fault-response log, and the target it ran on."</p></div>
         <div class="metrics">
           <div class="metric metric--green"><div class="metric__v">9/9</div><div class="metric__k">CTest suites</div></div>
@@ -136,7 +136,7 @@
     <article class="case" id="gnc" data-reveal>
       <div class="case__visual">
         <span class="case__id">PRJ-03</span>
-        <img src="assets/diagrams/gnc-loop.svg" width="880" height="320" loading="lazy" alt="Rocket landing GNC closed-loop block diagram.">
+        <img src="assets/hero/rocket.svg" width="1200" height="675" loading="lazy" alt="Rocket landing GNC closed-loop block diagram.">
       </div>
       <div class="case__body">
         <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
@@ -144,7 +144,7 @@
         </div>
         <h2 class="case__title"><a href="projects/rocket-landing-gnc.html">Rocket Landing GNC Simulation</a></h2>
         <p class="case__sub">6-DOF booster descent &middot; thrust-vector control &middot; 500-run Monte Carlo campaign</p>
-        <div class="case__block"><h4>Overview</h4><p>A 6-DOF propulsive-landing simulator with rigid-body dynamics, aerodynamic and aerothermal modelling, mass depletion and gimballed thrust &mdash; wrapped in a Monte Carlo harness that dispersed winds, initial state and sensor error across 500 seeded trials.</p></div>
+        <div class="case__block"><h4>Overview</h4><p>A 6-DOF propulsive-landing simulator with rigid-body dynamics, aerodynamic and aerothermal modelling, mass depletion and gimballed thrust, wrapped in a Monte Carlo harness that dispersed winds, initial state and sensor error across 500 seeded trials.</p></div>
         <div class="case__block"><h4>Result</h4><p>Sub-2.0 m landing accuracy across the dispersed set, with the failure tail traced to a specific wind-shear-plus-late-ignition combination rather than to controller gain margin.</p></div>
         <div class="metrics">
           <div class="metric"><div class="metric__v">6-DOF</div><div class="metric__k">Dynamics</div></div>
@@ -160,16 +160,16 @@
     <article class="case" id="md11" data-reveal>
       <div class="case__visual">
         <span class="case__id">PRJ-04</span>
-        <img src="assets/diagrams/md11-structures.svg" width="880" height="380" loading="lazy" alt="MD-11 wing load path schematic with three identified stress concentration sites and the FEA workflow.">
+        <img src="assets/hero/md11.svg" width="1200" height="675" loading="lazy" alt="MD-11 wing load path schematic with three identified stress concentration sites and the FEA workflow.">
       </div>
       <div class="case__body">
         <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
           <span class="pill pill--done">Complete</span><span class="case__sub">JUN 2025</span>
         </div>
-        <h2 class="case__title"><a href="projects/md11-structures.html">AeroFrame-MD11 &mdash; CAD Assembly &amp; Structural Analysis</a></h2>
+        <h2 class="case__title"><a href="projects/md11-structures.html">AeroFrame-MD11: CAD Assembly &amp; Structural Analysis</a></h2>
         <p class="case__sub">24-part parametric assembly &middot; static / thermal / modal FEA &middot; release drawing package</p>
         <div class="case__block"><h4>Overview</h4><p>A full parametric CAD assembly of an MD-11-class airframe section with GD&amp;T, taken through static, thermal and modal finite element analysis at 2.5 g limit manoeuvre loading, and closed out with a manufacturing-release drawing package.</p></div>
-        <div class="case__block"><h4>Result</h4><p>Three stress concentration sites identified &mdash; root joint, upper skin panel and attach lug &mdash; each traced to a geometry decision rather than a mesh artefact, and each with a proposed design change.</p></div>
+        <div class="case__block"><h4>Result</h4><p>Three stress concentration sites identified, root joint, upper skin panel and attach lug, each traced to a geometry decision rather than a mesh artefact, and each with a proposed design change.</p></div>
         <div class="metrics">
           <div class="metric"><div class="metric__v">24</div><div class="metric__k">Parts in assembly</div></div>
           <div class="metric metric--orange"><div class="metric__v">3</div><div class="metric__k">Failure sites</div></div>
@@ -184,7 +184,7 @@
     <article class="case" id="interceptor" data-reveal>
       <div class="case__visual">
         <span class="case__id">PRJ-05</span>
-        <img src="assets/diagrams/interceptor-pipeline.svg" width="880" height="320" loading="lazy" alt="Perception to actuation pipeline with per-stage latency budget.">
+        <img src="assets/hero/interceptor.svg" width="1200" height="675" loading="lazy" alt="Perception to actuation pipeline with per-stage latency budget.">
       </div>
       <div class="case__body">
         <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
@@ -192,7 +192,7 @@
         </div>
         <h2 class="case__title"><a href="projects/interceptor.html">AI-Powered Autonomous Interception Robot</a></h2>
         <p class="case__sub">YOLO detection &middot; Kalman filtering &middot; PID actuation on Raspberry Pi 4</p>
-        <div class="case__block"><h4>Overview</h4><p>A complete perception-to-actuation loop on embedded Linux: camera capture, neural detection, Kalman state estimation, an azimuth/elevation error law, and PWM motor drive &mdash; with the whole chain held under a 100 ms latency budget.</p></div>
+        <div class="case__block"><h4>Overview</h4><p>A complete perception-to-actuation loop on embedded Linux: camera capture, neural detection, Kalman state estimation, an azimuth/elevation error law, and PWM motor drive, with the whole chain held under a 100 ms latency budget.</p></div>
         <div class="case__block"><h4>Result</h4><p>Sub-100 ms closed-loop latency achieved. Profiling showed inference dominating the budget at roughly three quarters of the total, which is where every subsequent optimisation went.</p></div>
         <div class="metrics">
           <div class="metric metric--green"><div class="metric__v">&lt;100 ms</div><div class="metric__k">Closed-loop</div></div>
@@ -208,13 +208,13 @@
     <article class="case" id="spirit" data-reveal>
       <div class="case__visual">
         <span class="case__id">PRJ-06</span>
-        <img src="assets/diagrams/spirit-lifecycle.svg" width="880" height="300" loading="lazy" alt="NASA payload review gate sequence from SCR through flight.">
+        <img src="assets/hero/spirit.svg" width="1200" height="675" loading="lazy" alt="NASA payload review gate sequence from SCR through flight.">
       </div>
       <div class="case__body">
         <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
-          <span class="pill pill--active"><i class="dot dot--amber"></i>Active</span><span class="case__sub">JAN 2026 &mdash; PRESENT</span>
+          <span class="pill pill--active"><i class="dot dot--amber"></i>Active</span><span class="case__sub">JAN 2026 to PRESENT</span>
         </div>
-        <h2 class="case__title"><a href="projects/spirit-iss.html">TAMU-SPIRIT &mdash; ISS Payload Systems Engineering</a></h2>
+        <h2 class="case__title"><a href="projects/spirit-iss.html">TAMU-SPIRIT: ISS Payload Systems Engineering</a></h2>
         <p class="case__sub">4 ISS-bound experiments &middot; Aegis Aerospace &middot; Sep 2028 Dragon manifest</p>
         <div class="case__block"><h4>Overview</h4><p>Systems engineering for a capstone payload program flying to the International Space Station: requirements traceability, engineering change control, NASA compliance tracking, and thermal trades through SCR, SRR and PDR government design reviews.</p></div>
         <div class="case__block"><h4>Result</h4><p>100% milestone compliance maintained across four experiments and an eight-person engineering team, with the DASH payload's thermal design risk reduced through material selection trades across the LEO cycling envelope.</p></div>
@@ -232,18 +232,15 @@
     <article class="case" id="kestrel" data-reveal>
       <div class="case__visual">
         <span class="case__id">PRJ-07</span>
-        <div class="slot" style="width:100%;border:0;background:none">
-          <span class="slot__t">Archived programme</span>
-          <span class="slot__d">Throw-launch autonomous precision-landing UAV. Reached CDR readiness before the programme was closed out.</span>
-        </div>
+        <img src="assets/hero/kestrel.svg" width="1200" height="675" loading="lazy" alt="Illustration of the KESTREL hand-launched UAV arc toward a landing pad, stamped archived.">
       </div>
       <div class="case__body">
         <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
           <span class="pill pill--archive">Archived</span><span class="case__sub">CLOSED AT CDR</span>
         </div>
-        <h2 class="case__title"><a href="projects/kestrel.html">Project KESTREL &mdash; Throw-Launch Precision Landing UAV</a></h2>
+        <h2 class="case__title"><a href="projects/kestrel.html">Project KESTREL: Throw-Launch Precision Landing UAV</a></h2>
         <p class="case__sub">Vision-only EKF &middot; Pixhawk 6C &middot; sub-5 cm CEP design target</p>
-        <div class="case__block"><h4>Overview</h4><p>A hand-thrown fixed-geometry UAV designed to recover to a marked pad with sub-5 cm circular error probable using vision-only terminal guidance &mdash; no GNSS in the landing phase.</p></div>
+        <div class="case__block"><h4>Overview</h4><p>A hand-thrown fixed-geometry UAV designed to recover to a marked pad with sub-5 cm circular error probable using vision-only terminal guidance, no GNSS in the landing phase.</p></div>
         <div class="case__block"><h4>Why it is here</h4><p>Not everything ships. KESTREL is kept in the register because the reason it stopped is itself an engineering result, and the vision-only terminal-guidance work fed directly into GHOST.</p></div>
         <div class="chips"><span class="chip">Vision-only EKF</span><span class="chip">Pixhawk 6C</span><span class="chip">Precision landing</span><span class="chip">CDR package</span></div>
         <div class="btn-row"><a class="btn btn--sm" href="projects/kestrel.html">Read closeout</a></div>
@@ -286,7 +283,7 @@
     </div>
     <div class="footer__bar">
       <span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span>
-      <span>Built from scratch &mdash; no framework, no build step</span>
+      <span>Built from scratch, no framework, no build step</span>
     </div>
   </div>
 </footer>
