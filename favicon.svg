@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="VN">
-  <rect width="32" height="32" fill="#0D0F12"/>
-  <rect x="1" y="1" width="30" height="30" fill="none" stroke="#EF9F27" stroke-width="1" opacity="0.5"/>
-  <text x="16" y="21" font-family="ui-monospace, monospace" font-size="11" font-weight="500" fill="#EF9F27" text-anchor="middle">VN</text>
+  <rect width="32" height="32" fill="#07090D"/>
+  <rect x="2.5" y="2.5" width="27" height="27" fill="none" stroke="#2B7FFF" stroke-width="1.5"/>
+  <path d="M8 10.5L13.5 22L19 10.5" fill="none" stroke="#E7ECF3" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="miter"/>
+  <path d="M20.5 22V10.5L26 22V10.5" fill="none" stroke="#22D3EE" stroke-width="2.2" stroke-linecap="square" stroke-linejoin="miter"/>
 </svg>

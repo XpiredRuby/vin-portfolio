@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rocket Landing GNC Simulation — 6-DOF Monte Carlo | Vinayak Manoj Nair</title>
+<meta name="description" content="Engineering case study: a 6-DOF booster descent simulator with aerodynamic and aerothermal modelling, thrust-vector control and a 500-run Monte Carlo dispersion campaign achieving sub-2.0 m landing accuracy.">
+<meta name="author" content="Vinayak Manoj Nair">
+<meta name="theme-color" content="#07090D">
+<link rel="canonical" href="https://vinnair.me/projects/rocket-landing-gnc.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Vinayak Manoj Nair">
+<meta property="og:title" content="Rocket Landing GNC Simulation — 6-DOF Monte Carlo">
+<meta property="og:description" content="6-DOF propulsive landing simulation with TVC control, aerothermal modelling and a 500-trial Monte Carlo dispersion campaign.">
+<meta property="og:url" content="https://vinnair.me/projects/rocket-landing-gnc.html">
+<meta property="og:image" content="https://vinnair.me/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://vinnair.me/assets/og-image.png">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","headline":"Rocket Landing GNC Simulation","description":"6-DOF booster descent simulation with thrust vector control and a 500-run Monte Carlo dispersion campaign.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Guidance navigation and control","Monte Carlo simulation","Flight dynamics","Thrust vector control"],"url":"https://vinnair.me/projects/rocket-landing-gnc.html"}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__bar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark" aria-hidden="true">VN</span>
+      <span class="brand__name">Vinayak Nair</span>
+      <span class="brand__role">/ AEROSPACE</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="../projects.html" aria-current="page">Projects</a>
+      <a href="../experience.html">Experience</a>
+      <a href="../skills.html">Skills</a>
+      <a href="../index.html#github">GitHub</a>
+      <a href="../contact.html">Contact</a>
+      <a class="nav__cta" href="../resume.html">Resume</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="shell">
+    <p class="crumbs"><a href="../index.html">Home</a> <span>/</span> <a href="../projects.html">Projects</a> <span>/</span> <span>PRJ-03 Rocket Landing GNC</span></p>
+    <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:1.2rem">
+      <span class="pill pill--done">Complete</span>
+      <span class="pill">Dec 2025</span>
+    </div>
+    <h1>Rocket Landing GNC</h1>
+    <p class="hero__spec mono" style="margin-top:.9rem">6-DOF DESCENT &middot; THRUST VECTOR CONTROL &middot; 500-RUN MONTE CARLO</p>
+    <p class="lede">
+      A propulsive landing controller is only as good as its worst case. This project builds the
+      6-DOF simulation that generates the worst cases, and then answers the question a reviewer
+      actually asks: what is the landing dispersion across the full uncertainty envelope?
+    </p>
+    <div class="btn-row" style="margin-top:1.75rem">
+      <a class="btn btn--primary" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+      <a class="btn" href="../contact.html">Request technical report</a>
+      <a class="btn btn--ghost" href="../projects.html">All projects</a>
+    </div>
+  </div>
+</section>
+
+<div class="shell section" style="padding-top:clamp(2rem,4vw,3rem)">
+<div class="doc">
+
+  <nav class="toc" aria-label="Case study contents">
+    <p class="toc__t">Contents</p>
+    <a href="#problem">01 Problem</a>
+    <a href="#requirements">02 Requirements</a>
+    <a href="#constraints">03 Constraints</a>
+    <a href="#design">04 System design</a>
+    <a href="#models">05 Mathematical models</a>
+    <a href="#algorithms">06 Algorithms</a>
+    <a href="#implementation">07 Implementation</a>
+    <a href="#testing">08 Testing</a>
+    <a href="#validation">09 Validation</a>
+    <a href="#results">10 Results</a>
+    <a href="#tradeoffs">11 Tradeoffs</a>
+    <a href="#challenges">12 Challenges</a>
+    <a href="#lessons">13 Lessons learned</a>
+    <a href="#future">14 Future work</a>
+    <a href="#gallery">15 Gallery</a>
+    <a href="#downloads">16 Downloads</a>
+  </nav>
+
+  <div>
+
+    <section class="doc__section" id="problem" data-reveal>
+      <h2><span class="num">01</span>Problem</h2>
+      <p>
+        A controller that lands the booster on the nominal trajectory demonstrates almost nothing. The
+        vehicle never flies the nominal trajectory: it separates with attitude and rate errors, it descends
+        through a wind field nobody measured, its mass properties shift as propellant depletes, and its
+        navigation solution has bias. The engineering question is not "does it land" &mdash; it is
+        <i>"across the dispersion envelope, what is the landing accuracy distribution, and which specific
+        combination of dispersions produces the tail?"</i>
+      </p>
+      <p>
+        Answering that requires two things that are easy to skip: dynamics complete enough that the
+        controller can actually fail in a physical way, and enough dispersed runs that the tail is populated
+        rather than assumed.
+      </p>
+      <p><b class="u-cyan">Problem statement.</b> Build a 6-DOF booster descent simulation with realistic
+        disturbance and sensor modelling, close a thrust-vector control loop around it, and characterise
+        landing accuracy over a statistically meaningful dispersion campaign.</p>
+    </section>
+
+    <section class="doc__section" id="requirements" data-reveal>
+      <h2><span class="num">02</span>Requirements</h2>
+      <div class="table-wrap">
+        <table class="reqs">
+          <thead><tr><th>ID</th><th>Requirement</th><th>Value</th><th>Verification</th></tr></thead>
+          <tbody>
+            <tr><td>RL-001</td><td>Simulation shall model six degrees of freedom</td><td>3 translational + 3 rotational</td><td>Model inspection + energy check</td></tr>
+            <tr><td>RL-002</td><td>Vehicle mass properties shall vary with propellant depletion</td><td>Time-varying m, I</td><td>Mass trace inspection</td></tr>
+            <tr><td>RL-003</td><td>Aerodynamic forces and moments shall be modelled through the descent</td><td>Mach-dependent</td><td>Coefficient sweep</td></tr>
+            <tr><td>RL-004</td><td>Aerothermal heating shall be estimated along the trajectory</td><td>Stagnation-point model</td><td>Heat-rate profile</td></tr>
+            <tr><td>RL-005</td><td>Control shall be exercised through a gimballed thrust vector</td><td>Deflection + rate limits</td><td>Actuator saturation log</td></tr>
+            <tr><td>RL-006</td><td>Wind shall be dispersed stochastically between runs</td><td>Random draw per trial</td><td>Dispersion histogram</td></tr>
+            <tr><td>RL-007</td><td>Navigation error shall be injected, not assumed perfect</td><td>Sensor noise + bias</td><td>Estimate vs. truth trace</td></tr>
+            <tr><td>RL-008</td><td>Landing accuracy shall be characterised statistically</td><td>&ge; 500 trials</td><td>Monte Carlo campaign</td></tr>
+            <tr><td>RL-009</td><td>Landing accuracy shall meet the design target</td><td>&lt; 2.0 m</td><td>Dispersion analysis</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="constraints" data-reveal>
+      <h2><span class="num">03</span>Constraints</h2>
+      <div class="grid-2">
+        <div class="panel"><div class="panel__head"><span>Physical</span></div><div class="panel__body">
+          <ul class="tick-list">
+            <li><b>Gimbal authority is finite.</b> Deflection angle and slew rate are both limited, so the controller can and does saturate.</li>
+            <li><b>Throttle range is bounded.</b> The engine cannot be commanded below its minimum stable thrust.</li>
+            <li><b>Propellant is finite.</b> A controller that lands perfectly on an empty tank has not landed.</li>
+            <li><b>Aerodynamic authority disappears.</b> As dynamic pressure decays near touchdown, the vehicle becomes almost purely thrust-controlled.</li>
+          </ul>
+        </div></div>
+        <div class="panel"><div class="panel__head"><span>Computational</span></div><div class="panel__body">
+          <ul class="tick-list tick-list--cyan">
+            <li><b>500 runs must be affordable.</b> Integrator and step size are chosen so the full campaign completes in a practical wall-clock time.</li>
+            <li><b>Runs must be reproducible.</b> Every trial is seeded so a tail case can be re-run and inspected.</li>
+            <li><b>Pure Python + NumPy/SciPy.</b> No compiled solver, so vectorisation carries the performance.</li>
+          </ul>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="doc__section" id="design" data-reveal>
+      <h2><span class="num">04</span>System design</h2>
+      <p>
+        A conventional GNC decomposition: guidance produces a reference, control produces a command,
+        the actuator model applies it with real limits, the plant integrates the physics, and navigation
+        produces an <i>estimate</i> &mdash; not truth &mdash; which is what the controller actually sees.
+        Wind and sensor error are injected as separate dispersion channels so their contributions can be
+        separated in the analysis.
+      </p>
+
+      <figure class="fig" style="margin:1.5rem 0">
+        <div class="fig__body">
+          <img src="../assets/diagrams/gnc-loop.svg" width="880" height="320" loading="lazy" alt="Closed loop with guidance, control, actuator, 6-DOF plant and navigation, plus aerothermal, stochastic wind and sensor noise inputs and state feedback.">
+        </div>
+        <figcaption><b>Fig. 1</b> &mdash; GNC loop topology. Note that the feedback path carries the estimated state, not the true state &mdash; the distinction is where most of the tail cases come from.</figcaption>
+      </figure>
+
+      <h3>Design decisions</h3>
+      <div class="table-wrap">
+        <table class="reqs">
+          <thead><tr><th>Decision</th><th>Chosen</th><th>Rejected alternative</th><th>Rationale</th></tr></thead>
+          <tbody>
+            <tr><td>DD-1</td><td>6-DOF rigid body</td><td>3-DOF point mass</td><td>3-DOF cannot represent attitude coupling or gimbal saturation, which is where the controller actually fails</td></tr>
+            <tr><td>DD-2</td><td>PID thrust-vector control</td><td>LQR / MPC</td><td>Transparent, tunable and defensible; the objective was to characterise dispersion, not to optimise the control law</td></tr>
+            <tr><td>DD-3</td><td>Estimated state in the loop</td><td>Perfect state feedback</td><td>Perfect feedback removes an entire error source and makes the dispersion result optimistic and meaningless</td></tr>
+            <tr><td>DD-4</td><td>Explicit actuator limits</td><td>Ideal actuator</td><td>Saturation is a real failure mode; without limits the controller solves problems it could not solve in hardware</td></tr>
+            <tr><td>DD-5</td><td>500 seeded trials</td><td>A handful of hand-picked cases</td><td>Hand-picked cases sample the middle of the distribution; the tail is the deliverable</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="models" data-reveal>
+      <h2><span class="num">05</span>Mathematical models</h2>
+
+      <h3>Rigid-body dynamics</h3>
+      <div class="eq">m(t) v̇ = R{q}(T_gimbal) + F_aero + m(t) g − m(t) ω × v
+
+I(t) ω̇ = M_gimbal + M_aero − ω × (I(t) ω)
+
+q̇ = ½ q ⊗ [0, ω]
+ṁ = −T / (I_sp g₀)          <span class="c">mass depletion couples straight back into m(t), I(t)</span></div>
+
+      <h3>Aerodynamics</h3>
+      <div class="eq">q̄  = ½ ρ(h) V²                       <span class="c">dynamic pressure, ρ from atmosphere model</span>
+F_aero = q̄ S [C_D, C_Y, C_L]ᵀ         <span class="c">coefficients functions of Mach and angle of attack</span>
+M_aero = q̄ S L_ref [C_l, C_m, C_n]ᵀ</div>
+
+      <h3>Aerothermal heating</h3>
+      <div class="eq">q̇_stag ∝ ρ^0.5 V³              <span class="c">stagnation-point convective heating scaling</span>
+Q = ∫ q̇ dt                     <span class="c">integrated heat load along the trajectory</span></div>
+      <p class="eq__note">
+        The heating model is not used to size thermal protection here &mdash; it is used to confirm that
+        the trajectories the guidance law selects stay inside a sensible heating envelope, rather than
+        buying landing accuracy with an unflyable entry.
+      </p>
+
+      <h3>Control law</h3>
+      <div class="eq">e     = x_ref − x̂                          <span class="c">error against the estimated state</span>
+δ_cmd = K_p e + K_i ∫e dt + K_d ė
+
+δ     = clamp(δ_cmd, ±δ_max)               <span class="c">deflection limit</span>
+δ̇     = clamp(δ̇, ±δ̇_max)                   <span class="c">slew-rate limit</span></div>
+
+      <h3>Dispersion model</h3>
+      <div class="eq"><span class="c">per trial, drawn from seeded distributions —</span>
+  initial position, velocity, attitude, rate errors
+  wind profile: magnitude and shear, altitude dependent
+  sensor bias and noise on the navigation solution
+  thrust and I_sp variation</div>
+    </section>
+
+    <section class="doc__section" id="algorithms" data-reveal>
+      <h2><span class="num">06</span>Algorithms used</h2>
+      <ul class="tick-list">
+        <li><b>Numerical integration</b> of the coupled translational, rotational and mass states over the descent.</li>
+        <li><b>Quaternion attitude propagation</b> with re-normalisation, avoiding the gimbal-lock singularity of an Euler-angle formulation during a high-rate descent.</li>
+        <li><b>PID with anti-windup</b> on the thrust-vector command &mdash; necessary because the actuator saturates, and an unprotected integrator winds up during saturation and overshoots on release.</li>
+        <li><b>Standard atmosphere model</b> for density and speed of sound versus altitude.</li>
+        <li><b>Seeded Monte Carlo sampling</b> across the dispersion channels, with per-trial seeds retained so any outcome is reproducible.</li>
+        <li><b>Dispersion post-processing</b> &mdash; landing scatter, CEP, and correlation of miss distance against each dispersion channel to identify which one drives the tail.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="implementation" data-reveal>
+      <h2><span class="num">07</span>Implementation</h2>
+      <table class="spec">
+        <tr><th>Language</th><td>Python 3 with NumPy and SciPy</td></tr>
+        <tr><th>Dynamics</th><td>6-DOF rigid body with time-varying mass and inertia</td></tr>
+        <tr><th>Environment</th><td>Standard atmosphere, altitude-dependent stochastic wind field</td></tr>
+        <tr><th>Actuation</th><td>Gimballed thrust with deflection and slew-rate limits, bounded throttle</td></tr>
+        <tr><th>Campaign</th><td>500 seeded trials with per-trial artefact capture</td></tr>
+        <tr><th>Outputs</th><td>Trajectory traces, landing dispersion scatter, heating profiles, saturation logs</td></tr>
+      </table>
+    </section>
+
+    <section class="doc__section" id="testing" data-reveal>
+      <h2><span class="num">08</span>Testing</h2>
+      <ol class="num-list">
+        <li><b>Conservation checks.</b> With thrust, aerodynamics and dissipation disabled, energy and momentum must be conserved to integrator tolerance &mdash; this catches sign and frame errors that a plausible-looking trajectory will hide.</li>
+        <li><b>Analytical comparison.</b> Ballistic and constant-thrust sub-cases are compared against closed-form solutions.</li>
+        <li><b>Step-size convergence.</b> The integrator step is halved until the solution stops changing, which sets the step actually used.</li>
+        <li><b>Open-loop instability check.</b> Without control the vehicle must tumble as expected; a plant that is stable open-loop is not modelling the physics.</li>
+        <li><b>Nominal closed-loop run.</b> Zero dispersion, verifying the controller lands on the pad before any stochastic testing begins.</li>
+        <li><b>Full dispersion campaign.</b> 500 trials, with the tail cases pulled out and re-run individually.</li>
+      </ol>
+    </section>
+
+    <section class="doc__section" id="validation" data-reveal>
+      <h2><span class="num">09</span>Validation</h2>
+      <p>
+        The Monte Carlo campaign validates the <i>system</i>, not just the controller. Three things had to be
+        true for the result to mean anything: the dispersions had to be physically justifiable rather than
+        chosen to produce a good answer; the sample had to be large enough that the tail was populated; and
+        the failures had to be attributable to a mechanism.
+      </p>
+      <ul class="tick-list tick-list--cyan">
+        <li><b>Convergence of the statistic.</b> Landing-accuracy statistics were checked for stability as trial count increased, confirming 500 runs was sufficient rather than assumed sufficient.</li>
+        <li><b>Attribution.</b> Miss distance was correlated against each dispersion channel individually, which is what separated a genuine controller weakness from an unlucky draw.</li>
+        <li><b>Saturation auditing.</b> Every trial logged actuator saturation, so a "successful" landing that only worked because the model let the gimbal exceed its physical limit could not pass unnoticed.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="results" data-reveal>
+      <h2><span class="num">10</span>Results</h2>
+      <div class="metrics" style="margin-bottom:1.5rem">
+        <div class="metric metric--orange"><div class="metric__v">500</div><div class="metric__k">Monte Carlo trials</div></div>
+        <div class="metric metric--green"><div class="metric__v">&lt;2.0 m</div><div class="metric__k">Landing accuracy</div></div>
+        <div class="metric"><div class="metric__v">6-DOF</div><div class="metric__k">Dynamics fidelity</div></div>
+        <div class="metric"><div class="metric__v">4</div><div class="metric__k">Dispersion channels</div></div>
+      </div>
+      <ul class="tick-list tick-list--cyan">
+        <li>GNC robustness validated across 500 stochastic wind runs to <b>sub-2.0 m landing accuracy</b>.</li>
+        <li>The failure tail was traced to a specific combination &mdash; strong low-altitude wind shear arriving after the controller had already committed to a correction &mdash; rather than to insufficient gain margin.</li>
+        <li>Actuator saturation, not control law structure, was the binding constraint in the worst cases: the controller knew what to do and could not physically do it fast enough.</li>
+        <li>Trajectories selected by the guidance law stayed inside a sensible aerothermal envelope, confirming accuracy was not bought with an unflyable entry profile.</li>
+      </ul>
+      <div class="slot" style="margin-top:1.5rem">
+        <span class="slot__t">Pending &mdash; dispersion plots</span>
+        <span class="slot__d">500-run landing scatter with CEP rings, and representative 6-DOF descent trajectory traces. Export from the campaign post-processor and drop in as <code>assets/img/gnc-dispersion.png</code>.</span>
+      </div>
+    </section>
+
+    <section class="doc__section" id="tradeoffs" data-reveal>
+      <h2><span class="num">11</span>Engineering tradeoffs</h2>
+      <div class="table-wrap">
+        <table class="reqs">
+          <thead><tr><th>Tradeoff</th><th>Gained</th><th>Paid</th></tr></thead>
+          <tbody>
+            <tr><td>6-DOF over 3-DOF</td><td>Real attitude coupling and saturation behaviour</td><td>Roughly an order of magnitude more compute per trial and a far larger model surface to validate</td></tr>
+            <tr><td>PID over LQR/MPC</td><td>Transparent, hand-tunable, easy to defend at review</td><td>Leaves performance on the table, particularly in the wind-shear tail cases</td></tr>
+            <tr><td>Estimated state feedback</td><td>Honest, representative dispersion result</td><td>Worse headline accuracy than a perfect-feedback simulation would have reported</td></tr>
+            <tr><td>500 trials</td><td>A populated tail and a converged statistic</td><td>Long campaign runtime and a large artefact set to manage</td></tr>
+            <tr><td>Python over compiled</td><td>Fast iteration on models and analysis</td><td>Runtime that had to be recovered through vectorisation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="challenges" data-reveal>
+      <h2><span class="num">12</span>Challenges</h2>
+      <h3>Integrator windup during saturation</h3>
+      <p>
+        Early dispersed runs produced a distinctive failure: the vehicle would track well, saturate the gimbal
+        during a gust, and then overshoot dramatically once the gust passed. The integral term had continued
+        accumulating during saturation while the actuator was physically unable to respond. Anti-windup on the
+        integrator removed the failure mode entirely &mdash; and it only appeared in the dispersed set, never in
+        the nominal run.
+      </p>
+      <h3>Coupled mass properties</h3>
+      <p>
+        Mass, centre of mass and inertia all change as propellant depletes, which changes the moment arm of
+        the gimballed thrust, which changes the control authority the controller assumes it has. Treating mass
+        as constant made the controller look better than it was in exactly the final seconds that matter most.
+      </p>
+      <h3>Campaign runtime</h3>
+      <p>
+        500 6-DOF trials in interpreted Python is a real cost. Vectorising the environment and
+        atmosphere evaluations, and choosing the integrator step from the convergence study rather than
+        conservatively, brought the campaign into a practical runtime without changing the answer.
+      </p>
+    </section>
+
+    <section class="doc__section" id="lessons" data-reveal>
+      <h2><span class="num">13</span>Lessons learned</h2>
+      <ul class="tick-list tick-list--orange">
+        <li><b>The nominal run is the least informative run.</b> Every interesting failure in this project appeared only under dispersion.</li>
+        <li><b>Simulate what the controller can see.</b> Feeding truth back is the single easiest way to produce an accuracy number that will not survive contact with hardware.</li>
+        <li><b>Actuator limits are part of the control design.</b> Deflection and slew limits determined the achievable accuracy more than any gain did.</li>
+        <li><b>Attribute the tail.</b> "500 runs, sub-2 m" is a result. "500 runs, sub-2 m, and here is the mechanism behind the worst 1%" is engineering.</li>
+        <li><b>Verify the plant before trusting the controller.</b> Energy conservation checks caught frame errors that would have invalidated the entire campaign.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="future" data-reveal>
+      <h2><span class="num">14</span>Future work</h2>
+      <ol class="num-list">
+        <li>Replace the PID law with convex-optimisation-based guidance and compare dispersion directly against the current baseline.</li>
+        <li>Add a proper navigation filter in place of injected estimate error, so navigation and control errors interact realistically.</li>
+        <li>Model engine start transients and minimum-impulse-bit behaviour rather than treating throttle as continuous.</li>
+        <li>Extend the campaign to characterise propellant margin distribution, not only landing accuracy.</li>
+        <li>Port the inner loop to C++ so the campaign can grow to several thousand trials.</li>
+      </ol>
+    </section>
+
+    <section class="doc__section" id="gallery" data-reveal>
+      <h2><span class="num">15</span>Gallery</h2>
+      <div class="grid-2">
+        <div class="slot"><span class="slot__t">Pending &mdash; Monte Carlo dispersion</span><span class="slot__d">500-run landing scatter with CEP rings.</span></div>
+        <div class="slot"><span class="slot__t">Pending &mdash; descent trajectory</span><span class="slot__d">6-DOF altitude, velocity and attitude traces for a representative trial.</span></div>
+        <div class="slot"><span class="slot__t">Pending &mdash; heating profile</span><span class="slot__d">Stagnation-point heat rate and integrated load along the descent.</span></div>
+        <div class="slot"><span class="slot__t">Pending &mdash; saturation trace</span><span class="slot__d">Gimbal deflection against its limit for a tail case.</span></div>
+      </div>
+    </section>
+
+    <section class="doc__section" id="downloads" data-reveal>
+      <h2><span class="num">16</span>Source &amp; downloads</h2>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+        <a class="btn" href="../contact.html">Request technical report</a>
+        <a class="btn btn--ghost" href="md11-structures.html">Next: AeroFrame-MD11 &rarr;</a>
+      </div>
+    </section>
+
+  </div>
+</div>
+</div>
+
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <div><h5>Navigate</h5><ul>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../experience.html">Experience</a></li>
+        <li><a href="../skills.html">Technical skills</a></li>
+        <li><a href="../resume.html">Resume</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul></div>
+      <div><h5>Case studies</h5><ul>
+        <li><a href="ghost.html">GHOST</a></li>
+        <li><a href="astrasim-fsw.html">AstraSim-FSW</a></li>
+        <li><a href="rocket-landing-gnc.html">Rocket Landing GNC</a></li>
+        <li><a href="md11-structures.html">AeroFrame-MD11</a></li>
+        <li><a href="interceptor.html">Interception Robot</a></li>
+      </ul></div>
+      <div><h5>Elsewhere</h5><ul>
+        <li><a href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/Vin2005" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:vinhoustontexas@gmail.com">Email</a></li>
+      </ul></div>
+      <div><h5>Status</h5><ul>
+        <li class="u-dim" style="font-size:.855rem">Texas A&amp;M University</li>
+        <li class="u-dim" style="font-size:.855rem">B.S. Aerospace Engineering</li>
+        <li class="u-dim" style="font-size:.855rem">Expected May 2027</li>
+        <li class="u-green" style="font-size:.855rem">Open to opportunities</li>
+      </ul></div>
+    </div>
+    <div class="footer__bar">
+      <span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span>
+      <span>PRJ-03 &middot; ROCKET LANDING GNC</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autonomous Interception Robot — Sub-100 ms Perception Loop | Vinayak Manoj Nair</title>
+<meta name="description" content="Engineering case study: a closed-loop perception-to-actuation pipeline on Raspberry Pi 4 integrating YOLO object detection, Kalman filter state estimation and PID motor control under a 100 ms end-to-end latency budget.">
+<meta name="author" content="Vinayak Manoj Nair">
+<meta name="theme-color" content="#07090D">
+<link rel="canonical" href="https://vinnair.me/projects/interceptor.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Vinayak Manoj Nair">
+<meta property="og:title" content="Autonomous Interception Robot — Sub-100 ms Perception Loop">
+<meta property="og:description" content="YOLO detection, Kalman filtering and PID actuation on embedded Linux, closed under a 100 ms latency budget.">
+<meta property="og:url" content="https://vinnair.me/projects/interceptor.html">
+<meta property="og:image" content="https://vinnair.me/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://vinnair.me/assets/og-image.png">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"TechArticle","headline":"AI-Powered Autonomous Interception Robot","description":"Closed-loop perception to actuation on embedded Linux with YOLO detection, Kalman filtering and PID control under a 100 ms budget.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Computer vision","Kalman filter","Real-time systems","Embedded control"],"url":"https://vinnair.me/projects/interceptor.html"}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__bar">
+    <a class="brand" href="../index.html">
+      <span class="brand__mark" aria-hidden="true">VN</span>
+      <span class="brand__name">Vinayak Nair</span>
+      <span class="brand__role">/ AEROSPACE</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="../projects.html" aria-current="page">Projects</a>
+      <a href="../experience.html">Experience</a>
+      <a href="../skills.html">Skills</a>
+      <a href="../index.html#github">GitHub</a>
+      <a href="../contact.html">Contact</a>
+      <a class="nav__cta" href="../resume.html">Resume</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-hero">
+  <div class="shell">
+    <p class="crumbs"><a href="../index.html">Home</a> <span>/</span> <a href="../projects.html">Projects</a> <span>/</span> <span>PRJ-05 Interceptor</span></p>
+    <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:1.2rem">
+      <span class="pill pill--done">Complete</span>
+      <span class="pill">Jan 2026</span>
+    </div>
+    <h1>Interception Robot</h1>
+    <p class="hero__spec mono" style="margin-top:.9rem">YOLO DETECTION &middot; KALMAN ESTIMATION &middot; PID ACTUATION &middot; &lt;100 ms LOOP</p>
+    <p class="lede">
+      A complete perception-to-actuation loop on a Raspberry Pi 4: see the target, estimate where it
+      is going, and drive the actuators &mdash; with the entire chain held under a 100 ms latency
+      budget, because in a tracking loop latency is indistinguishable from error.
+    </p>
+    <div class="btn-row" style="margin-top:1.75rem">
+      <a class="btn btn--primary" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+      <a class="btn btn--ghost" href="../projects.html">All projects</a>
+    </div>
+  </div>
+</section>
+
+<div class="shell section" style="padding-top:clamp(2rem,4vw,3rem)">
+<div class="doc">
+
+  <nav class="toc" aria-label="Case study contents">
+    <p class="toc__t">Contents</p>
+    <a href="#problem">01 Problem</a>
+    <a href="#requirements">02 Requirements</a>
+    <a href="#constraints">03 Constraints</a>
+    <a href="#design">04 System design</a>
+    <a href="#models">05 Mathematical models</a>
+    <a href="#algorithms">06 Algorithms</a>
+    <a href="#implementation">07 Implementation</a>
+    <a href="#testing">08 Testing</a>
+    <a href="#performance">09 Performance</a>
+    <a href="#results">10 Results</a>
+    <a href="#tradeoffs">11 Tradeoffs</a>
+    <a href="#challenges">12 Challenges</a>
+    <a href="#lessons">13 Lessons learned</a>
+    <a href="#future">14 Future work</a>
+    <a href="#gallery">15 Gallery</a>
+    <a href="#downloads">16 Downloads</a>
+  </nav>
+
+  <div>
+
+    <section class="doc__section" id="problem" data-reveal>
+      <h2><span class="num">01</span>Problem</h2>
+      <p>
+        A tracking system that reacts to where the target <i>was</i> will always trail it. Every millisecond
+        between photon and motor command becomes an angular lag that scales with target speed, and a neural
+        detector on a CPU-only embedded board is slow enough that the lag dominates the error budget.
+      </p>
+      <p>
+        Two mechanisms fix this, and both were needed: shorten the loop, and predict across whatever loop
+        time remains. That is the entire architecture &mdash; a latency budget enforced stage by stage, and a
+        Kalman filter that produces an estimate at the moment of actuation rather than at the moment of
+        detection.
+      </p>
+      <p><b class="u-cyan">Problem statement.</b> Close a perception-to-actuation loop on Raspberry Pi-class
+        hardware with end-to-end latency under 100 ms, and compensate for the residual latency in the
+        estimator rather than accepting it as tracking error.</p>
+    </section>
+
+    <section class="doc__section" id="requirements" data-reveal>
+      <h2><span class="num">02</span>Requirements</h2>
+      <div class="table-wrap">
+        <table class="reqs">
+          <thead><tr><th>ID</th><th>Requirement</th><th>Value</th><th>Verification</th></tr></thead>
+          <tbody>
+            <tr><td>IN-001</td><td>End-to-end closed-loop latency shall be bounded</td><td>&lt; 100 ms</td><td>Instrumented timing</td></tr>
+            <tr><td>IN-002</td><td>Target shall be detected from a live camera stream</td><td>YOLO detector</td><td>Detection run</td></tr>
+            <tr><td>IN-003</td><td>Target state shall be estimated, not merely detected</td><td>Kalman filter</td><td>Track continuity test</td></tr>
+            <tr><td>IN-004</td><td>Track shall survive missed detections</td><td>Predict-only coast</td><td>Dropout injection</td></tr>
+            <tr><td>IN-005</td><td>Control output shall be smooth and bounded</td><td>PID + limits</td><td>Command trace</td></tr>
+            <tr><td>IN-006</td><td>System shall run entirely on the embedded target</td><td>Raspberry Pi 4, CPU only</td><td>Hardware run</td></tr>
+            <tr><td>IN-007</td><td>Per-stage latency shall be measurable</td><td>Instrumented</td><td>Profiling output</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="constraints" data-reveal>
+      <h2><span class="num">03</span>Constraints</h2>
+      <div class="grid-2">
+        <div class="panel"><div class="panel__head"><span>Platform</span></div><div class="panel__body">
+          <ul class="tick-list">
+            <li><b>CPU-only inference.</b> No GPU, no NPU, no accelerator &mdash; the detector runs on the same four cores as everything else.</li>
+            <li><b>Single camera</b> at fixed frame rate; the detector cannot run faster than frames arrive.</li>
+            <li><b>PWM-driven motors</b> with finite slew rate and mechanical inertia.</li>
+            <li><b>Shared OS.</b> Linux is not a real-time kernel, so scheduling jitter is part of the budget.</li>
+          </ul>
+        </div></div>
+        <div class="panel"><div class="panel__head"><span>Engineering</span></div><div class="panel__body">
+          <ul class="tick-list tick-list--cyan">
+            <li><b>Latency is a requirement, not an outcome.</b> Every stage gets an allocation and is measured against it.</li>
+            <li><b>Detection is unreliable by nature.</b> The system must behave correctly on frames where the detector returns nothing.</li>
+            <li><b>No cloud, no offboard compute.</b> Everything closes on the vehicle.</li>
+          </ul>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="doc__section" id="design" data-reveal>
+      <h2><span class="num">04</span>System design</h2>
+      <p>
+        A strictly staged pipeline with a published budget per stage. Making the budget explicit changed the
+        engineering: once inference was measured at roughly three quarters of the total, every optimisation
+        went there and nowhere else. Without the instrumentation, the natural instinct is to micro-optimise
+        the control code, which occupies about one percent of the loop.
+      </p>
+
+      <figure class="fig" style="margin:1.5rem 0">
+        <div class="fig__body">
+          <img src="../assets/diagrams/interceptor-pipeline.svg" width="880" height="320" loading="lazy" alt="Five stage pipeline from camera capture through YOLO detection, Kalman filtering, PID error law and PWM drive, with a latency bar showing inference consuming 76 percent of the budget.">
+        </div>
+        <figcaption><b>Fig. 1</b> &mdash; Perception-to-actuation pipeline with per-stage latency allocation. Inference dominates; everything else is noise by comparison.</figcaption>
+      </figure>
+
+      <h3>Design decisions</h3>
+      <div class="table-wrap">
+        <table class="reqs">
+          <thead><tr><th>Decision</th><th>Chosen</th><th>Rejected alternative</th><th>Rationale</th></tr></thead>
+          <tbody>
+            <tr><td>DD-1</td><td>Kalman filter between detector and controller</td><td>Drive the controller from raw detections</td><td>Raw detections are noisy, intermittent and already stale; the filter smooths, predicts, and survives dropouts</td></tr>
+            <tr><td>DD-2</td><td>Neural detector</td><td>Classical colour/blob tracking</td><td>Robust to lighting and background variation that defeats threshold-based tracking</td></tr>
+            <tr><td>DD-3</td><td>Predict to actuation time</td><td>Use the estimate at detection time</td><td>The estimate is already tens of milliseconds old when it reaches the motors; propagating it forward removes that lag from the error</td></tr>
+            <tr><td>DD-4</td><td>Per-stage instrumentation</td><td>Measure end-to-end only</td><td>An end-to-end number tells you that you are slow; a per-stage breakdown tells you where</td></tr>
+            <tr><td>DD-5</td><td>Independent azimuth/elevation loops</td><td>Coupled MIMO controller</td><td>The axes are mechanically near-decoupled, so two simple loops are easier to tune and to reason about</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="models" data-reveal>
+      <h2><span class="num">05</span>Mathematical models</h2>
+
+      <h3>Target state model</h3>
+      <div class="eq">x = [x, y, ẋ, ẏ]ᵀ            <span class="c">image-plane position and velocity</span>
+
+      ⎡ 1  0  Δt  0 ⎤
+F  =  ⎢ 0  1  0  Δt ⎥        <span class="c">constant-velocity transition</span>
+      ⎢ 0  0  1   0 ⎥
+      ⎣ 0  0  0   1 ⎦
+
+H  = [ 1 0 0 0 ; 0 1 0 0 ]   <span class="c">the detector measures position only</span></div>
+
+      <h3>Predict / update</h3>
+      <div class="eq"><span class="c">— predict, every cycle, detection or not —</span>
+x⁻ = F x
+P⁻ = F P Fᵀ + Q
+
+<span class="c">— update, only when a detection arrives —</span>
+r  = z − H x⁻
+S  = H P⁻ Hᵀ + R
+K  = P⁻ Hᵀ S⁻¹
+x⁺ = x⁻ + K r
+P⁺ = (I − K H) P⁻</div>
+      <p class="eq__note">
+        The predict step runs unconditionally. That is what makes a missed detection a graceful degradation
+        &mdash; the covariance grows, the estimate coasts, and the controller keeps receiving a valid state
+        instead of a gap.
+      </p>
+
+      <h3>Latency compensation</h3>
+      <div class="eq">Δt_lag = t_actuate − t_capture          <span class="c">measured, not assumed</span>
+x_cmd  = F(Δt_lag) x⁺                   <span class="c">propagate the estimate to the moment of actuation</span></div>
+
+      <h3>Control law</h3>
+      <div class="eq">e_az = x_cmd − x_centre
+e_el = y_cmd − y_centre
+
+u = K_p e + K_i ∫e dt + K_d ė
+u = clamp(u, ±u_max)                    <span class="c">saturation with integrator anti-windup</span></div>
+    </section>
+
+    <section class="doc__section" id="algorithms" data-reveal>
+      <h2><span class="num">06</span>Algorithms used</h2>
+      <ul class="tick-list">
+        <li><b>YOLO single-shot detection</b> with non-maximum suppression to resolve overlapping candidate boxes.</li>
+        <li><b>Linear Kalman filter</b> on a constant-velocity image-plane model, providing smoothing, prediction and dropout tolerance.</li>
+        <li><b>Nearest-neighbour data association</b> gated by predicted position, so a spurious detection elsewhere in the frame cannot capture the track.</li>
+        <li><b>Latency compensation</b> by forward-propagating the state through the measured capture-to-actuation interval.</li>
+        <li><b>PID with anti-windup and output clamping</b> on independent azimuth and elevation axes.</li>
+        <li><b>Per-stage timing instrumentation</b> feeding a live latency breakdown.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="implementation" data-reveal>
+      <h2><span class="num">07</span>Implementation</h2>
+      <table class="spec">
+        <tr><th>Language</th><td>Python with OpenCV and NumPy</td></tr>
+        <tr><th>Detection</th><td>YOLO object detector, CPU inference</td></tr>
+        <tr><th>Estimation</th><td>Linear Kalman filter, constant-velocity model</td></tr>
+        <tr><th>Control</th><td>PID on azimuth and elevation, PWM motor drive</td></tr>
+        <tr><th>Platform</th><td>Raspberry Pi 4, embedded Linux</td></tr>
+        <tr><th>Instrumentation</th><td>Per-stage timestamps with a rolling latency histogram</td></tr>
+      </table>
+    </section>
+
+    <section class="doc__section" id="testing" data-reveal>
+      <h2><span class="num">08</span>Testing</h2>
+      <ol class="num-list">
+        <li><b>Filter unit tests.</b> Known-trajectory inputs verify that the Kalman implementation converges and that the covariance behaves correctly under prediction-only operation.</li>
+        <li><b>Detector characterisation.</b> Detection rate and false-positive behaviour measured across lighting and background conditions.</li>
+        <li><b>Dropout injection.</b> Detections deliberately withheld for several consecutive frames to confirm the track coasts and re-acquires rather than resetting.</li>
+        <li><b>Latency profiling.</b> Each stage timestamped over long runs so the budget is characterised by distribution, not by a single lucky measurement.</li>
+        <li><b>Closed-loop tracking.</b> End-to-end runs against a moving target, with tracking error recorded against target speed.</li>
+      </ol>
+    </section>
+
+    <section class="doc__section" id="performance" data-reveal>
+      <h2><span class="num">09</span>Performance</h2>
+      <div class="metrics" style="margin-bottom:1.25rem">
+        <div class="metric metric--green"><div class="metric__v">&lt;100 ms</div><div class="metric__k">End-to-end</div></div>
+        <div class="metric metric--orange"><div class="metric__v">~76%</div><div class="metric__k">Spent in inference</div></div>
+        <div class="metric"><div class="metric__v">5</div><div class="metric__k">Instrumented stages</div></div>
+        <div class="metric"><div class="metric__v">CPU</div><div class="metric__k">No accelerator</div></div>
+      </div>
+      <p>
+        The budget breakdown is the most useful artefact this project produced. Capture, filtering, control
+        and actuation together account for a small fraction of the loop; inference accounts for the rest.
+        That single measurement determined every optimisation decision that followed &mdash; input resolution,
+        model size, and frame scheduling &mdash; and ruled out a great deal of work that would have felt
+        productive and changed nothing.
+      </p>
+    </section>
+
+    <section class="doc__section" id="results" data-reveal>
+      <h2><span class="num">10</span>Results</h2>
+      <ul class="tick-list tick-list--cyan">
+        <li><b>Sub-100 ms closed-loop latency achieved</b> on Raspberry Pi 4 with CPU-only inference.</li>
+        <li>YOLO detection, Kalman state estimation and PWM motor control integrated into a single continuously running loop.</li>
+        <li>Track continuity maintained across missed detections through prediction-only operation.</li>
+        <li>Residual latency compensated in the estimator, converting a systematic tracking lag into a bounded error.</li>
+      </ul>
+      <div class="slot" style="margin-top:1.5rem">
+        <span class="slot__t">Pending &mdash; media</span>
+        <span class="slot__d">Robot hardware photograph, annotated detection frame, and a tracking-error-versus-target-speed plot.</span>
+      </div>
+    </section>
+
+    <section class="doc__section" id="tradeoffs" data-reveal>
+      <h2><span class="num">11</span>Engineering tradeoffs</h2>
+      <div class="table-wrap">
+        <table class="reqs">
+          <thead><tr><th>Tradeoff</th><th>Gained</th><th>Paid</th></tr></thead>
+          <tbody>
+            <tr><td>Neural detector over classical vision</td><td>Robustness to lighting and background</td><td>Roughly three quarters of the latency budget</td></tr>
+            <tr><td>Lower input resolution</td><td>Faster inference, shorter loop</td><td>Reduced detection range and small-target sensitivity</td></tr>
+            <tr><td>Constant-velocity motion model</td><td>Cheap, stable, easy to tune</td><td>Lags during genuine target acceleration</td></tr>
+            <tr><td>Latency compensation by prediction</td><td>Removes systematic tracking lag</td><td>Amplifies estimate error during manoeuvres &mdash; predicting a wrong velocity forward makes it worse</td></tr>
+            <tr><td>Independent axis controllers</td><td>Simple tuning and diagnosis</td><td>Ignores whatever cross-axis coupling exists mechanically</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="challenges" data-reveal>
+      <h2><span class="num">12</span>Challenges</h2>
+      <h3>Inference dominating the loop</h3>
+      <p>
+        The first working version was well over budget, and the instinct was to optimise the control and
+        filtering code. Instrumentation showed those stages together accounted for a few milliseconds.
+        All of the achievable saving was in inference &mdash; input resolution and model configuration &mdash;
+        and that is where the effort went.
+      </p>
+      <h3>Detection dropouts breaking the loop</h3>
+      <p>
+        Driving the controller directly from detections produced visible stutter whenever the detector
+        missed a frame: the controller received no update, held its last command, and jerked when the
+        detection returned. Placing the Kalman filter between detector and controller, with the predict step
+        running unconditionally, turned a discontinuity into a smooth coast.
+      </p>
+      <h3>Scheduling jitter</h3>
+      <p>
+        On a non-real-time kernel, the same pipeline can take noticeably different wall-clock time from one
+        cycle to the next. Compensating with a fixed nominal latency was therefore wrong &mdash; the
+        compensation interval had to be measured per cycle from actual timestamps.
+      </p>
+    </section>
+
+    <section class="doc__section" id="lessons" data-reveal>
+      <h2><span class="num">13</span>Lessons learned</h2>
+      <ul class="tick-list tick-list--orange">
+        <li><b>Measure before optimising.</b> Intuition about where time goes in a perception pipeline is reliably wrong.</li>
+        <li><b>Latency is error.</b> In a tracking loop, delay and inaccuracy are the same quantity expressed in different units.</li>
+        <li><b>Put an estimator between perception and control.</b> It decouples an unreliable, intermittent sensor from a controller that needs a continuous input.</li>
+        <li><b>Compensate with measured time, not assumed time.</b> On a general-purpose OS, nominal timing is a fiction.</li>
+        <li><b>The budget is the design document.</b> Publishing per-stage allocations made every subsequent decision obvious.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="future" data-reveal>
+      <h2><span class="num">14</span>Future work</h2>
+      <ol class="num-list">
+        <li>Quantised or distilled detector to cut the dominant latency term further.</li>
+        <li>Interacting-multiple-model tracker so acceleration is handled rather than lagged &mdash; the same upgrade GHOST already implements.</li>
+        <li>Multi-target tracking with proper data association instead of single-track nearest neighbour.</li>
+        <li>Real-time kernel or CPU isolation to bound scheduling jitter.</li>
+        <li>Feed-forward on the estimated target velocity to reduce the residual tracking error further.</li>
+      </ol>
+    </section>
+
+    <section class="doc__section" id="gallery" data-reveal>
+      <h2><span class="num">15</span>Gallery</h2>
+      <div class="grid-2">
+        <div class="slot"><span class="slot__t">Pending &mdash; hardware</span><span class="slot__d">Robot platform with camera and actuator assembly.</span></div>
+        <div class="slot"><span class="slot__t">Pending &mdash; detection frame</span><span class="slot__d">Annotated YOLO bounding box with the Kalman-predicted position overlaid.</span></div>
+        <div class="slot"><span class="slot__t">Pending &mdash; latency histogram</span><span class="slot__d">Per-stage timing distribution over a long run.</span></div>
+        <div class="slot"><span class="slot__t">Pending &mdash; tracking demo</span><span class="slot__d">Video of the closed loop tracking a moving target.</span></div>
+      </div>
+    </section>
+
+    <section class="doc__section" id="downloads" data-reveal>
+      <h2><span class="num">16</span>Source &amp; downloads</h2>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub repository</a>
+        <a class="btn" href="../contact.html">Request technical report</a>
+        <a class="btn btn--ghost" href="spirit-iss.html">Next: TAMU-SPIRIT &rarr;</a>
+      </div>
+    </section>
+
+  </div>
+</div>
+</div>
+
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <div><h5>Navigate</h5><ul>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../experience.html">Experience</a></li>
+        <li><a href="../skills.html">Technical skills</a></li>
+        <li><a href="../resume.html">Resume</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul></div>
+      <div><h5>Case studies</h5><ul>
+        <li><a href="ghost.html">GHOST</a></li>
+        <li><a href="astrasim-fsw.html">AstraSim-FSW</a></li>
+        <li><a href="rocket-landing-gnc.html">Rocket Landing GNC</a></li>
+        <li><a href="md11-structures.html">AeroFrame-MD11</a></li>
+        <li><a href="interceptor.html">Interception Robot</a></li>
+      </ul></div>
+      <div><h5>Elsewhere</h5><ul>
+        <li><a href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/Vin2005" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:vinhoustontexas@gmail.com">Email</a></li>
+      </ul></div>
+      <div><h5>Status</h5><ul>
+        <li class="u-dim" style="font-size:.855rem">Texas A&amp;M University</li>
+        <li class="u-dim" style="font-size:.855rem">B.S. Aerospace Engineering</li>
+        <li class="u-dim" style="font-size:.855rem">Expected May 2027</li>
+        <li class="u-green" style="font-size:.855rem">Open to opportunities</li>
+      </ul></div>
+    </div>
+    <div class="footer__bar">
+      <span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span>
+      <span>PRJ-05 &middot; INTERCEPTION ROBOT</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>
