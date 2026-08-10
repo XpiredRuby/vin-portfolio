@@ -15,6 +15,9 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SKIP_SCHEMES = {"http", "https", "mailto", "tel", "data", "javascript"}
+# HTML used as an asset-generation source is not a navigable site page. We still
+# parse its local links and JSON-LD, but do not require SEO/page metadata.
+NON_PUBLIC_HTML = {Path("assets/og-image.src.html")}
 REQUIRED_ROOT_FILES = [
     ROOT / "index.html",
     ROOT / "projects.html",
@@ -82,13 +85,14 @@ def check_html(page: Path) -> list[str]:
     parser = PageParser()
     try:
         parser.feed(page.read_text(encoding="utf-8"))
-    except Exception as exc:  # parser/encoding failures must be visible
+    except Exception as exc:
         return [f"{page.relative_to(ROOT)}: cannot parse: {exc}"]
 
     rel = page.relative_to(ROOT)
-    if not parser.title.strip():
+    is_public_page = rel not in NON_PUBLIC_HTML
+    if is_public_page and not parser.title.strip():
         errors.append(f"{rel}: missing <title>")
-    if page.name != "404.html":
+    if is_public_page and page.name != "404.html":
         if not parser.meta_description:
             errors.append(f"{rel}: missing meta description")
         if not parser.canonical:
@@ -139,7 +143,7 @@ def main() -> int:
         errors.extend(check_html(page))
         errors.extend(check_json_ld(page))
 
-    # Explicit regression checks for presentation claims that should not return.
+    # Presentation regressions that should not quietly return to the homepage.
     index = (ROOT / "index.html").read_text(encoding="utf-8") if (ROOT / "index.html").exists() else ""
     stale = {
         "Summer 2026 internships": "availability window is stale",
@@ -156,7 +160,11 @@ def main() -> int:
             print(f" - {error}")
         return 1
 
-    print(f"Portfolio validation PASS: {len(pages)} HTML pages checked; local links and metadata resolved.")
+    public_count = sum(1 for p in pages if p.relative_to(ROOT) not in NON_PUBLIC_HTML)
+    print(
+        "Portfolio validation PASS: "
+        f"{public_count} public HTML pages checked; local links, assets, metadata and JSON-LD resolved."
+    )
     return 0
 
 
