@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Projects: Engineering Case Studies | Vinayak Manoj Nair</title>
-<meta name="description" content="Seven aerospace engineering case studies: GPS-denied state estimation, flight-software hardware-in-the-loop verification, 6-DOF rocket landing GNC, aircraft structural FEA, autonomous interception robotics, and ISS payload systems engineering.">
+<title>Engineering Case Studies | Vinayak Manoj Nair</title>
+<meta name="description" content="Aerospace engineering case studies in GNC, flight software verification, structural analysis, autonomous robotics and systems engineering, with public source linked where available.">
 <meta name="author" content="Vinayak Manoj Nair">
 <meta name="theme-color" content="#07090D">
 <link rel="canonical" href="https://vinnair.me/projects.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
-<meta property="og:title" content="Projects: Engineering Case Studies | Vinayak Manoj Nair">
-<meta property="og:description" content="GNC, flight software verification, structures, and autonomy, each project documented as an engineering report with requirements, architecture, results and tradeoffs.">
+<meta property="og:title" content="Engineering Case Studies | Vinayak Manoj Nair">
+<meta property="og:description" content="GNC, flight software, structures and systems engineering documented as evidence-backed case studies.">
 <meta property="og:url" content="https://vinnair.me/projects.html">
 <meta property="og:image" content="https://vinnair.me/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -21,273 +21,44 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"CollectionPage","name":"Engineering Case Studies","url":"https://vinnair.me/projects.html","author":{"@type":"Person","name":"Vinayak Manoj Nair"}}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Engineering Case Studies","url":"https://vinnair.me/projects.html","author":{"@type":"Person","name":"Vinayak Manoj Nair"}}</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-
-<header class="masthead">
-  <div class="shell masthead__bar">
-    <a class="brand" href="index.html">
-      <span class="brand__mark" aria-hidden="true">VN</span>
-      <span class="brand__name">Vinayak Nair</span>
-      <span class="brand__role">/ AEROSPACE</span>
-    </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
-    <nav class="nav" id="primary-nav" aria-label="Primary">
-      <a href="projects.html" aria-current="page">Projects</a>
-      <a href="experience.html">Experience</a>
-      <a href="skills.html">Skills</a>
-      <a href="index.html#github">GitHub</a>
-      <a href="contact.html">Contact</a>
-      <a class="nav__cta" href="resume.html">Resume</a>
-    </nav>
-  </div>
-</header>
-
+<header class="masthead"><div class="shell masthead__bar"><a class="brand" href="index.html"><span class="brand__mark" aria-hidden="true">VN</span><span class="brand__name">Vinayak Nair</span><span class="brand__role">/ AEROSPACE</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation"><span></span><span></span><span></span></button><nav class="nav" id="primary-nav" aria-label="Primary"><a href="projects.html" aria-current="page">Projects</a><a href="experience.html">Experience</a><a href="skills.html">Skills</a><a href="index.html#github">GitHub</a><a href="contact.html">Contact</a><a class="nav__cta" href="resume.html">Resume</a></nav></div></header>
 <main id="main">
-
-<section class="page-hero">
-  <div class="shell">
-    <p class="crumbs"><a href="index.html">Home</a> <span>/</span> <span>Projects</span></p>
-    <p class="eyebrow" style="margin-top:1.1rem">Engineering case studies &middot; 07 entries</p>
-    <h1>Projects</h1>
-    <p class="lede">
-      Every entry below is written the way an engineering report is written: what problem it solved,
-      what the requirements and constraints were, how the system was designed, what the numbers came
-      out to, what the tradeoffs cost, and what I would do differently. Depth is on the individual pages.
-    </p>
-  </div>
-</section>
+<section class="page-hero"><div class="shell"><p class="crumbs"><a href="index.html">Home</a> <span>/</span> <span>Projects</span></p><p class="eyebrow" style="margin-top:1.1rem">Engineering case studies</p><h1>Projects</h1><p class="lede">The strongest entries are not selected because they have the most features. They are selected because a reviewer can trace the problem, design, implementation, test evidence, limitations and source. Public repositories are linked directly; case-study-only work is labeled rather than implied to be open source.</p></div></section>
 
 <section class="shell section--tight" style="padding-top:1.5rem">
-  <div class="table-wrap panel" data-reveal>
-    <div class="panel__head"><span>Project register</span><span class="mono">STATUS BOARD</span></div>
-    <table class="reqs">
-      <thead>
-        <tr><th>ID</th><th>Project</th><th>Domain</th><th>Key result</th><th>Status</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>PRJ-01</td><td><a class="u-cyan" href="projects/ghost.html">GHOST</a></td><td>GNC / state estimation</td><td>9-state ESKF + IMM tracker on Pi 4B</td><td><span class="pill pill--active">Active</span></td></tr>
-        <tr><td>PRJ-02</td><td><a class="u-cyan" href="projects/astrasim-fsw.html">AstraSim-FSW</a></td><td>Flight software / V&amp;V</td><td>9/9 tests, 25/25 MC trials on hardware</td><td><span class="pill pill--live">HIL verified</span></td></tr>
-        <tr><td>PRJ-03</td><td><a class="u-cyan" href="projects/rocket-landing-gnc.html">Rocket Landing GNC</a></td><td>GNC / simulation</td><td>&lt;2.0 m landing accuracy, 500 MC runs</td><td><span class="pill pill--done">Complete</span></td></tr>
-        <tr><td>PRJ-04</td><td><a class="u-cyan" href="projects/md11-structures.html">AeroFrame-MD11</a></td><td>Structures / FEA</td><td>3 failure sites found at 2.5 g limit load</td><td><span class="pill pill--done">Complete</span></td></tr>
-        <tr><td>PRJ-05</td><td><a class="u-cyan" href="projects/interceptor.html">Interception Robot</a></td><td>Autonomy / embedded</td><td>&lt;100 ms closed-loop latency</td><td><span class="pill pill--done">Complete</span></td></tr>
-        <tr><td>PRJ-06</td><td><a class="u-cyan" href="projects/spirit-iss.html">TAMU-SPIRIT ISS Payload</a></td><td>Systems engineering</td><td>100% milestone compliance through PDR</td><td><span class="pill pill--active">Active</span></td></tr>
-        <tr><td>PRJ-07</td><td><a class="u-cyan" href="projects/kestrel.html">Project KESTREL</a></td><td>UAV / precision landing</td><td>CDR readiness, sub-5 cm CEP target</td><td><span class="pill pill--archive">Archived</span></td></tr>
-      </tbody>
-    </table>
-  </div>
+  <div class="table-wrap panel" data-reveal><div class="panel__head"><span>Project register</span><span class="mono">CURRENT EVIDENCE</span></div><table class="reqs"><thead><tr><th>ID</th><th>Project</th><th>Domain</th><th>Evidence snapshot</th><th>Source</th></tr></thead><tbody>
+    <tr><td>PRJ-01</td><td><a class="u-cyan" href="projects/ghost.html">GHOST-X</a></td><td>GNC / estimation</td><td>Hardware dropout evidence + deterministic estimator/SIL validation</td><td><a class="u-cyan" href="https://github.com/XpiredRuby/ghost-vins-eskf" target="_blank" rel="noopener noreferrer">Public</a></td></tr>
+    <tr><td>PRJ-02</td><td><a class="u-cyan" href="projects/astrasim-fsw.html">ASTRA-OS</a></td><td>Flight software / V&amp;V</td><td>20/20 CTest · 8/8 scenarios · 10/10 FDIR · 25/25 seeded MC</td><td><a class="u-cyan" href="https://github.com/XpiredRuby/AstraSim-FSW" target="_blank" rel="noopener noreferrer">Public</a></td></tr>
+    <tr><td>PRJ-03</td><td><a class="u-cyan" href="projects/rocket-landing-gnc.html">Rocket Landing GNC</a></td><td>GNC / simulation</td><td>6-DOF descent case study + 500-run dispersed campaign</td><td>Case study</td></tr>
+    <tr><td>PRJ-04</td><td><a class="u-cyan" href="projects/md11-structures.html">AeroFrame-DT</a></td><td>Structures / stress</td><td>MS +0.151 · 18/18 requirements · negative method-scatter case retained</td><td><a class="u-cyan" href="https://github.com/XpiredRuby/aeroframe-dt" target="_blank" rel="noopener noreferrer">Public</a></td></tr>
+    <tr><td>PRJ-05</td><td><a class="u-cyan" href="projects/interceptor.html">Interception Robot</a></td><td>Autonomy / embedded</td><td>Perception-to-actuation integration and latency-budget case study</td><td>Case study</td></tr>
+    <tr><td>PRJ-06</td><td><a class="u-cyan" href="projects/spirit-iss.html">TAMU-SPIRIT</a></td><td>Systems engineering</td><td>Requirements, change control, thermal trades and review support</td><td>Program work</td></tr>
+    <tr><td>PRJ-07</td><td><a class="u-cyan" href="projects/kestrel.html">Project KESTREL</a></td><td>UAV / precision landing</td><td>Archived design closeout; retained because the stop decision is part of the engineering record</td><td>Case study</td></tr>
+  </tbody></table></div>
 </section>
 
-<section class="shell section">
-  <div class="stack" style="gap:1.5rem">
+<section class="shell section"><div class="section-head"><div><p class="eyebrow">01 / Flagship</p><h2>Start here</h2><p>These three projects best demonstrate the engineering behaviors current aerospace roles repeatedly ask for: modeling, implementation, integration, test, uncertainty, verification and technical communication.</p></div></div><div class="stack" style="gap:1.5rem">
+  <article class="case" id="ghost" data-reveal><div class="case__visual"><span class="case__id">PRJ-01</span><img src="assets/hero/ghost.svg" width="1200" height="675" loading="lazy" alt="GHOST-X target-estimation system illustration."></div><div class="case__body"><span class="pill pill--active"><i class="dot dot--amber"></i>Active</span><h2 class="case__title"><a href="projects/ghost.html">GHOST-X: Occlusion-Tolerant Target State Estimation</a></h2><p class="case__sub">ROS 2 · Raspberry Pi · IMM estimation · uncertainty-aware dropout behavior</p><div class="case__block"><h4>Why it is flagship work</h4><p>It combines estimation architecture, embedded execution, hardware measurement loss, deterministic software truth, closed-loop GNC and explicit claim boundaries. The current target-estimation path centers on a formal IMM estimator with a bounded GHOST-MH comparison; the portable attitude ESKF is a supporting component, not the headline tracker.</p></div><div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/ghost.html">Read case study</a><a class="btn btn--sm" href="https://github.com/XpiredRuby/ghost-vins-eskf" target="_blank" rel="noopener noreferrer">Repository</a><a class="btn btn--sm btn--cyan" href="https://xpiredruby.github.io/ghost-vins-eskf/" target="_blank" rel="noopener noreferrer">Evidence site</a></div></div></article>
 
-    <article class="case" id="ghost" data-reveal>
-      <div class="case__visual">
-        <span class="case__id">PRJ-01</span>
-        <img src="assets/hero/ghost.svg" width="1200" height="675" loading="lazy" alt="GHOST dual-filter estimation architecture block diagram.">
-      </div>
-      <div class="case__body">
-        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
-          <span class="pill pill--active"><i class="dot dot--amber"></i>Active development</span><span class="case__sub">2026 to PRESENT</span>
-        </div>
-        <h2 class="case__title"><a href="projects/ghost.html">GHOST: GPS-Denied Occlusion-Survivable Tracker</a></h2>
-        <p class="case__sub">Dual-filter visual-inertial estimation on embedded Linux</p>
-        <div class="case__block"><h4>Overview</h4><p>A vehicle that loses GNSS still has to know where it is, and where a manoeuvring target is, through seconds-long visual occlusions, on Raspberry Pi-class compute. GHOST separates those two problems into two filters that fail independently.</p></div>
-        <div class="case__block"><h4>Current state</h4><p>Software layer complete and committed: ESKF, IMM tracker, NIS consistency validation and CI. Hardware bring-up is blocked on an IMX296 driver/kernel issue on Ubuntu 22.04 / documented openly rather than hidden.</p></div>
-        <div class="metrics">
-          <div class="metric"><div class="metric__v">9</div><div class="metric__k">ESKF states</div></div>
-          <div class="metric"><div class="metric__v">200 Hz</div><div class="metric__k">IMU propagate</div></div>
-          <div class="metric"><div class="metric__v">30 Hz</div><div class="metric__k">Vision update</div></div>
-          <div class="metric metric--orange"><div class="metric__v">20</div><div class="metric__k">Flaws found &amp; fixed</div></div>
-        </div>
-        <div class="chips"><span class="chip chip--accent">C++</span><span class="chip chip--accent">Python</span><span class="chip">ESKF</span><span class="chip">IMM / CTRV</span><span class="chip">PX4 SITL</span><span class="chip">MAVLink</span><span class="chip">Raspberry Pi 4B</span></div>
-        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/ghost.html">Read case study</a><a class="btn btn--sm" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></div>
-      </div>
-    </article>
+  <article class="case" id="astrasim" data-reveal><div class="case__visual"><span class="case__id">PRJ-02</span><img src="assets/hero/astrasim.svg" width="1200" height="675" loading="lazy" alt="ASTRA-OS command, telemetry and verification topology illustration."></div><div class="case__body"><span class="pill pill--live"><i class="dot"></i>Verified baseline</span><h2 class="case__title"><a href="projects/astrasim-fsw.html">ASTRA-OS: Flight Software Assurance</a></h2><p class="case__sub">C++17 flight core · Python ground tooling · command/telemetry · FDIR</p><div class="case__block"><h4>Why it is flagship work</h4><p>The project treats verification as architecture rather than cleanup: deterministic modes, command integrity, watchdog/health monitoring, FDIR, fault injection, Monte Carlo, sanitizer/static-analysis gates and requirement-to-test traceability.</p></div><div class="metrics"><div class="metric metric--green"><div class="metric__v">20/20</div><div class="metric__k">CTest</div></div><div class="metric metric--green"><div class="metric__v">8/8</div><div class="metric__k">Scenarios</div></div><div class="metric metric--green"><div class="metric__v">10/10</div><div class="metric__k">FDIR</div></div><div class="metric metric--green"><div class="metric__v">25/25</div><div class="metric__k">Seeded MC</div></div></div><div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/astrasim-fsw.html">Read case study</a><a class="btn btn--sm" href="https://github.com/XpiredRuby/AstraSim-FSW" target="_blank" rel="noopener noreferrer">Repository</a><a class="btn btn--sm btn--cyan" href="https://xpiredruby.github.io/AstraSim-FSW/" target="_blank" rel="noopener noreferrer">Interactive console</a></div></div></article>
 
-    <article class="case" id="astrasim" data-reveal>
-      <div class="case__visual">
-        <span class="case__id">PRJ-02</span>
-        <img src="assets/hero/astrasim.svg" width="1200" height="675" loading="lazy" alt="AstraSim-FSW hardware-in-the-loop verification topology.">
-      </div>
-      <div class="case__body">
-        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
-          <span class="pill pill--live"><i class="dot"></i>HIL verified</span><span class="case__sub">COMPLETE</span>
-        </div>
-        <h2 class="case__title"><a href="projects/astrasim-fsw.html">AstraSim-FSW: Flight Software HIL Verification Framework</a></h2>
-        <p class="case__sub">C++17 flight segment &middot; Python ground segment &middot; aarch64 Raspberry Pi target</p>
-        <div class="case__block"><h4>Overview</h4><p>A complete command and telemetry stack with the verification apparatus around it: CRC-checked binary packets, command acknowledgement, mode management, health monitoring, watchdog, fault injection, YAML scenarios and seeded Monte Carlo regression, then run on real hardware and made to produce committed evidence.</p></div>
-        <div class="case__block"><h4>Why it matters</h4><p>It is the difference between "I wrote flight software" and "here is the test evidence, the fault-response log, and the target it ran on."</p></div>
-        <div class="metrics">
-          <div class="metric metric--green"><div class="metric__v">9/9</div><div class="metric__k">CTest suites</div></div>
-          <div class="metric metric--green"><div class="metric__v">5/5</div><div class="metric__k">Scenarios</div></div>
-          <div class="metric metric--green"><div class="metric__v">25/25</div><div class="metric__k">MC regressions</div></div>
-          <div class="metric"><div class="metric__v">40%</div><div class="metric__k">CRC overhead cut</div></div>
-        </div>
-        <div class="chips"><span class="chip chip--accent">C++17</span><span class="chip chip--accent">Python</span><span class="chip">CMake / CTest</span><span class="chip">UDP</span><span class="chip">CRC-16-CCITT</span><span class="chip">FDIR</span><span class="chip">aarch64</span></div>
-        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/astrasim-fsw.html">Read case study</a><a class="btn btn--sm btn--cyan" href="demos/astrasim-fsw-hil-workstation.html">Live demo</a><a class="btn btn--sm" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></div>
-      </div>
-    </article>
+  <article class="case" id="structures" data-reveal><div class="case__visual"><span class="case__id">PRJ-04</span><img src="assets/hero/md11.svg" width="1200" height="675" loading="lazy" alt="Aircraft fitting load path and structural substantiation illustration."></div><div class="case__body"><span class="pill pill--done">Complete baseline</span><h2 class="case__title"><a href="projects/md11-structures.html">AeroFrame-DT: Aircraft Fitting Stress Substantiation</a></h2><p class="case__sub">Hand methods · FE correlation · allowables · fatigue · damage tolerance · digital thread</p><div class="case__block"><h4>Why it is flagship work</h4><p>It carries one synthetic, non-OEM aircraft fitting from load basis through margins, FE verification, fatigue/damage tolerance, manufacturing and change control. The project keeps the cases where its own assumptions failed instead of burying them.</p></div><div class="metrics"><div class="metric metric--green"><div class="metric__v">+0.151</div><div class="metric__k">Governing MS</div></div><div class="metric metric--green"><div class="metric__v">18/18</div><div class="metric__k">Requirements</div></div><div class="metric"><div class="metric__v">3.51 mm</div><div class="metric__k">Critical crack</div></div><div class="metric metric--orange"><div class="metric__v">-0.037</div><div class="metric__k">Scatter case</div></div></div><div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/md11-structures.html">Read case study</a><a class="btn btn--sm" href="https://github.com/XpiredRuby/aeroframe-dt" target="_blank" rel="noopener noreferrer">Repository</a></div></div></article>
+</div></section>
 
-    <article class="case" id="gnc" data-reveal>
-      <div class="case__visual">
-        <span class="case__id">PRJ-03</span>
-        <img src="assets/hero/rocket.svg" width="1200" height="675" loading="lazy" alt="Rocket landing GNC closed-loop block diagram.">
-      </div>
-      <div class="case__body">
-        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
-          <span class="pill pill--done">Complete</span><span class="case__sub">DEC 2025</span>
-        </div>
-        <h2 class="case__title"><a href="projects/rocket-landing-gnc.html">Rocket Landing GNC Simulation</a></h2>
-        <p class="case__sub">6-DOF booster descent &middot; thrust-vector control &middot; 500-run Monte Carlo campaign</p>
-        <div class="case__block"><h4>Overview</h4><p>A 6-DOF propulsive-landing simulator with rigid-body dynamics, aerodynamic and aerothermal modelling, mass depletion and gimballed thrust, wrapped in a Monte Carlo harness that dispersed winds, initial state and sensor error across 500 seeded trials.</p></div>
-        <div class="case__block"><h4>Result</h4><p>Sub-2.0 m landing accuracy across the dispersed set, with the failure tail traced to a specific wind-shear-plus-late-ignition combination rather than to controller gain margin.</p></div>
-        <div class="metrics">
-          <div class="metric"><div class="metric__v">6-DOF</div><div class="metric__k">Dynamics</div></div>
-          <div class="metric metric--orange"><div class="metric__v">500</div><div class="metric__k">MC trials</div></div>
-          <div class="metric metric--green"><div class="metric__v">&lt;2.0 m</div><div class="metric__k">Landing accuracy</div></div>
-          <div class="metric"><div class="metric__v">PID</div><div class="metric__k">TVC law</div></div>
-        </div>
-        <div class="chips"><span class="chip chip--accent">Python</span><span class="chip">NumPy / SciPy</span><span class="chip">Monte Carlo</span><span class="chip">TVC</span><span class="chip">Aerothermodynamics</span></div>
-        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/rocket-landing-gnc.html">Read case study</a><a class="btn btn--sm" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></div>
-      </div>
-    </article>
+<section class="shell section"><div class="section-head"><div><p class="eyebrow">02 / Additional work</p><h2>More breadth, less homepage weight</h2><p>These projects remain useful interview material, but they do not need to compete with the three flagship case studies for the first two minutes of a recruiter visit.</p></div></div><div class="grid-4">
+  <div class="panel"><div class="panel__head"><span>Rocket Landing GNC</span></div><div class="panel__body"><p>6-DOF propulsive-landing simulation and a 500-run dispersed campaign.</p><p><a class="u-cyan" href="projects/rocket-landing-gnc.html">Case study</a></p></div></div>
+  <div class="panel"><div class="panel__head"><span>Interception Robot</span></div><div class="panel__body"><p>Embedded perception, estimation and actuation with an explicit latency budget.</p><p><a class="u-cyan" href="projects/interceptor.html">Case study</a></p></div></div>
+  <div class="panel"><div class="panel__head"><span>TAMU-SPIRIT</span></div><div class="panel__body"><p>ISS payload systems engineering: requirements, reviews, changes and thermal trades.</p><p><a class="u-cyan" href="projects/spirit-iss.html">Case study</a></p></div></div>
+  <div class="panel"><div class="panel__head"><span>Project KESTREL</span></div><div class="panel__body"><p>Archived precision-landing UAV design retained as an engineering closeout rather than presented as a shipped result.</p><p><a class="u-cyan" href="projects/kestrel.html">Closeout</a></p></div></div>
+</div></section>
 
-    <article class="case" id="md11" data-reveal>
-      <div class="case__visual">
-        <span class="case__id">PRJ-04</span>
-        <img src="assets/hero/md11.svg" width="1200" height="675" loading="lazy" alt="MD-11 wing load path schematic with three identified stress concentration sites and the FEA workflow.">
-      </div>
-      <div class="case__body">
-        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
-          <span class="pill pill--done">Complete</span><span class="case__sub">JUN 2025</span>
-        </div>
-        <h2 class="case__title"><a href="projects/md11-structures.html">AeroFrame-MD11: CAD Assembly &amp; Structural Analysis</a></h2>
-        <p class="case__sub">24-part parametric assembly &middot; static / thermal / modal FEA &middot; release drawing package</p>
-        <div class="case__block"><h4>Overview</h4><p>A full parametric CAD assembly of an MD-11-class airframe section with GD&amp;T, taken through static, thermal and modal finite element analysis at 2.5 g limit manoeuvre loading, and closed out with a manufacturing-release drawing package.</p></div>
-        <div class="case__block"><h4>Result</h4><p>Three stress concentration sites identified, root joint, upper skin panel and attach lug, each traced to a geometry decision rather than a mesh artefact, and each with a proposed design change.</p></div>
-        <div class="metrics">
-          <div class="metric"><div class="metric__v">24</div><div class="metric__k">Parts in assembly</div></div>
-          <div class="metric metric--orange"><div class="metric__v">3</div><div class="metric__k">Failure sites</div></div>
-          <div class="metric"><div class="metric__v">2.5 g</div><div class="metric__k">Limit load case</div></div>
-          <div class="metric"><div class="metric__v">3</div><div class="metric__k">Analysis types</div></div>
-        </div>
-        <div class="chips"><span class="chip chip--accent">SolidWorks</span><span class="chip chip--accent">Abaqus</span><span class="chip">Static FEA</span><span class="chip">Thermal</span><span class="chip">Modal</span><span class="chip">GD&amp;T</span></div>
-        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/md11-structures.html">Read case study</a></div>
-      </div>
-    </article>
-
-    <article class="case" id="interceptor" data-reveal>
-      <div class="case__visual">
-        <span class="case__id">PRJ-05</span>
-        <img src="assets/hero/interceptor.svg" width="1200" height="675" loading="lazy" alt="Perception to actuation pipeline with per-stage latency budget.">
-      </div>
-      <div class="case__body">
-        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
-          <span class="pill pill--done">Complete</span><span class="case__sub">JAN 2026</span>
-        </div>
-        <h2 class="case__title"><a href="projects/interceptor.html">AI-Powered Autonomous Interception Robot</a></h2>
-        <p class="case__sub">YOLO detection &middot; Kalman filtering &middot; PID actuation on Raspberry Pi 4</p>
-        <div class="case__block"><h4>Overview</h4><p>A complete perception-to-actuation loop on embedded Linux: camera capture, neural detection, Kalman state estimation, an azimuth/elevation error law, and PWM motor drive, with the whole chain held under a 100 ms latency budget.</p></div>
-        <div class="case__block"><h4>Result</h4><p>Sub-100 ms closed-loop latency achieved. Profiling showed inference dominating the budget at roughly three quarters of the total, which is where every subsequent optimisation went.</p></div>
-        <div class="metrics">
-          <div class="metric metric--green"><div class="metric__v">&lt;100 ms</div><div class="metric__k">Closed-loop</div></div>
-          <div class="metric"><div class="metric__v">76%</div><div class="metric__k">Budget in inference</div></div>
-          <div class="metric"><div class="metric__v">4</div><div class="metric__k">Pipeline stages</div></div>
-          <div class="metric"><div class="metric__v">Pi 4</div><div class="metric__k">Target</div></div>
-        </div>
-        <div class="chips"><span class="chip chip--accent">Python</span><span class="chip">YOLO</span><span class="chip">Kalman Filter</span><span class="chip">PID</span><span class="chip">Raspberry Pi</span><span class="chip">OpenCV</span></div>
-        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/interceptor.html">Read case study</a><a class="btn btn--sm" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></div>
-      </div>
-    </article>
-
-    <article class="case" id="spirit" data-reveal>
-      <div class="case__visual">
-        <span class="case__id">PRJ-06</span>
-        <img src="assets/hero/spirit.svg" width="1200" height="675" loading="lazy" alt="NASA payload review gate sequence from SCR through flight.">
-      </div>
-      <div class="case__body">
-        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
-          <span class="pill pill--active"><i class="dot dot--amber"></i>Active</span><span class="case__sub">JAN 2026 to PRESENT</span>
-        </div>
-        <h2 class="case__title"><a href="projects/spirit-iss.html">TAMU-SPIRIT: ISS Payload Systems Engineering</a></h2>
-        <p class="case__sub">4 ISS-bound experiments &middot; Aegis Aerospace &middot; Sep 2028 Dragon manifest</p>
-        <div class="case__block"><h4>Overview</h4><p>Systems engineering for a capstone payload program flying to the International Space Station: requirements traceability, engineering change control, NASA compliance tracking, and thermal trades through SCR, SRR and PDR government design reviews.</p></div>
-        <div class="case__block"><h4>Result</h4><p>100% milestone compliance maintained across four experiments and an eight-person engineering team, with the DASH payload's thermal design risk reduced through material selection trades across the LEO cycling envelope.</p></div>
-        <div class="metrics">
-          <div class="metric metric--green"><div class="metric__v">100%</div><div class="metric__k">Milestone compliance</div></div>
-          <div class="metric"><div class="metric__v">4</div><div class="metric__k">ISS experiments</div></div>
-          <div class="metric"><div class="metric__v">3</div><div class="metric__k">Reviews passed</div></div>
-          <div class="metric metric--orange"><div class="metric__v">240 &deg;C</div><div class="metric__k">Thermal band</div></div>
-        </div>
-        <div class="chips"><span class="chip chip--accent">Systems Engineering</span><span class="chip">SCR / SRR / PDR</span><span class="chip">Requirements</span><span class="chip">Thermal trades</span><span class="chip">Configuration control</span></div>
-        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/spirit-iss.html">Read case study</a></div>
-      </div>
-    </article>
-
-    <article class="case" id="kestrel" data-reveal>
-      <div class="case__visual">
-        <span class="case__id">PRJ-07</span>
-        <img src="assets/hero/kestrel.svg" width="1200" height="675" loading="lazy" alt="Illustration of the KESTREL hand-launched UAV arc toward a landing pad, stamped archived.">
-      </div>
-      <div class="case__body">
-        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
-          <span class="pill pill--archive">Archived</span><span class="case__sub">CLOSED AT CDR</span>
-        </div>
-        <h2 class="case__title"><a href="projects/kestrel.html">Project KESTREL: Throw-Launch Precision Landing UAV</a></h2>
-        <p class="case__sub">Vision-only EKF &middot; Pixhawk 6C &middot; sub-5 cm CEP design target</p>
-        <div class="case__block"><h4>Overview</h4><p>A hand-thrown fixed-geometry UAV designed to recover to a marked pad with sub-5 cm circular error probable using vision-only terminal guidance, no GNSS in the landing phase.</p></div>
-        <div class="case__block"><h4>Why it is here</h4><p>Not everything ships. KESTREL is kept in the register because the reason it stopped is itself an engineering result, and the vision-only terminal-guidance work fed directly into GHOST.</p></div>
-        <div class="chips"><span class="chip">Vision-only EKF</span><span class="chip">Pixhawk 6C</span><span class="chip">Precision landing</span><span class="chip">CDR package</span></div>
-        <div class="btn-row"><a class="btn btn--sm" href="projects/kestrel.html">Read closeout</a></div>
-      </div>
-    </article>
-
-  </div>
-</section>
-
+<section class="shell section"><div class="panel"><div class="panel__head"><span>Current public side project</span><span class="mono">CONTROLS SIL</span></div><div class="panel__body"><h2>F-16-inspired flight-controls simulation</h2><p>A representative educational fixed-wing dynamics/autopilot framework with bounded actuators, seeded sensor errors and a 50-run uncertainty campaign. It is explicitly scoped as software-in-the-loop practice, not validated F-16 performance.</p><div class="btn-row"><a class="btn btn--sm" href="https://github.com/XpiredRuby/f16-flight-sim" target="_blank" rel="noopener noreferrer">Repository</a></div></div></div></section>
 </main>
-
-<footer class="footer">
-  <div class="shell">
-    <div class="footer__grid">
-      <div><h5>Navigate</h5><ul>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="experience.html">Experience</a></li>
-        <li><a href="skills.html">Technical skills</a></li>
-        <li><a href="resume.html">Resume</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul></div>
-      <div><h5>Case studies</h5><ul>
-        <li><a href="projects/ghost.html">GHOST</a></li>
-        <li><a href="projects/astrasim-fsw.html">AstraSim-FSW</a></li>
-        <li><a href="projects/rocket-landing-gnc.html">Rocket Landing GNC</a></li>
-        <li><a href="projects/md11-structures.html">AeroFrame-MD11</a></li>
-        <li><a href="projects/interceptor.html">Interception Robot</a></li>
-      </ul></div>
-      <div><h5>Elsewhere</h5><ul>
-        <li><a href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-        <li><a href="https://linkedin.com/in/Vin2005" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-        <li><a href="mailto:vinhoustontexas@gmail.com">Email</a></li>
-      </ul></div>
-      <div><h5>Status</h5><ul>
-        <li class="u-dim" style="font-size:.855rem">Texas A&amp;M University</li>
-        <li class="u-dim" style="font-size:.855rem">B.S. Aerospace Engineering</li>
-        <li class="u-dim" style="font-size:.855rem">Expected May 2027</li>
-        <li class="u-green" style="font-size:.855rem">Open to opportunities</li>
-      </ul></div>
-    </div>
-    <div class="footer__bar">
-      <span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span>
-      <span>Built from scratch, no framework, no build step</span>
-    </div>
-  </div>
-</footer>
-
+<footer class="footer"><div class="shell"><div class="footer__grid"><div><h5>Navigate</h5><ul><li><a href="projects.html">Projects</a></li><li><a href="experience.html">Experience</a></li><li><a href="skills.html">Technical skills</a></li><li><a href="resume.html">Resume</a></li><li><a href="contact.html">Contact</a></li></ul></div><div><h5>Flagship work</h5><ul><li><a href="projects/ghost.html">GHOST-X</a></li><li><a href="projects/astrasim-fsw.html">ASTRA-OS</a></li><li><a href="projects/md11-structures.html">AeroFrame-DT</a></li></ul></div><div><h5>Elsewhere</h5><ul><li><a href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://linkedin.com/in/Vin2005" target="_blank" rel="noopener noreferrer">LinkedIn</a></li><li><a href="mailto:vinhoustontexas@gmail.com">Email</a></li></ul></div><div><h5>Status</h5><ul><li class="u-dim">Texas A&amp;M University</li><li class="u-dim">B.S. Aerospace Engineering</li><li class="u-dim">Expected May 2027</li></ul></div></div><div class="footer__bar"><span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span><span>Evidence-first engineering portfolio</span></div></div></footer>
 <script src="assets/js/site.js" defer></script>
 </body>
 </html>
