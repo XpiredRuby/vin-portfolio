@@ -1,29 +1,17 @@
 /* ============================================================
    site.js — minimal, dependency-free interaction layer
-   Everything degrades gracefully with JS disabled.
+   Content and presentation remain usable with JavaScript disabled.
    ============================================================ */
 (function () {
   'use strict';
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- Presentation layer ---------- */
-  function resolveSiteScript() {
-    if (document.currentScript && document.currentScript.src) { return document.currentScript.src; }
-    var scripts = document.scripts;
-    for (var i = scripts.length - 1; i >= 0; i -= 1) {
-      if (/\/assets\/js\/site\.js(?:\?|$)/.test(scripts[i].src || '')) { return scripts[i].src; }
-    }
-    return new URL('assets/js/site.js', window.location.href).href;
-  }
-
-  var siteScriptSrc = resolveSiteScript();
-  var assetsRoot = new URL('../', siteScriptSrc);
   var path = window.location.pathname.replace(/\/+$/, '');
   var isHome = path === '' || path === '/' || /\/index\.html$/.test(path);
   var isProjects = /\/projects\.html$/.test(path);
   var isProjectDetail = /\/projects\/[^/]+\.html$/.test(path);
   var isResume = /\/resume\.html$/.test(path);
+  var isAbout = /\/about\.html$/.test(path);
 
   if (!isResume) {
     document.body.classList.add('aero-ui');
@@ -33,61 +21,14 @@
     else { document.body.classList.add('page-standard'); }
   }
 
-  /* ASTRA presentation artwork. Technical architecture diagrams remain unchanged. */
-  if (!isResume) {
-    var astraArtwork = new URL('hero/astrasim-ai.jpg', assetsRoot).href;
-    document.querySelectorAll('img').forEach(function (img) {
-      if (/\/assets\/hero\/astrasim\.svg(?:\?|$)/.test(img.src)) {
-        img.src = astraArtwork;
-        img.alt = 'Concept artwork representing ASTRA-OS spacecraft-style flight-software assurance; technical diagrams and evidence are provided in the case study.';
-      }
-    });
-  }
-
-  /* Homepage hero: use the generated concept-art layout as a coded design system. */
-  if (isHome) {
-    var hero = document.querySelector('.hero');
-    if (hero) {
-      var eyebrow = hero.querySelector('.eyebrow');
-      var heroTitle = hero.querySelector('h1');
-      var heroSpec = hero.querySelector('.hero__spec');
-      var heroButtons = hero.querySelector('.btn-row');
-      var portrait = hero.querySelector('.portrait');
-
-      if (eyebrow) {
-        eyebrow.innerHTML = 'Vinayak Manoj Nair &middot; Texas A&amp;M Aerospace Engineering &middot; May 2027';
-      }
-      if (heroTitle) {
-        heroTitle.innerHTML = 'Aerospace Engineer.<br>Building <span class="hero-accent">Reliable</span> Systems.<br>Proving Them in Reality.';
-      }
-      if (heroSpec) {
-        heroSpec.innerHTML = '<b>GNC / STATE ESTIMATION</b> &nbsp;&middot;&nbsp; <b>FLIGHT SOFTWARE / ASSURANCE</b> &nbsp;&middot;&nbsp; <b>STRUCTURES / STRESS</b>';
-      }
-      if (heroButtons) {
-        var buttonLinks = heroButtons.querySelectorAll('a');
-        if (buttonLinks[0]) { buttonLinks[0].textContent = 'View Resume'; }
-        if (buttonLinks[1]) { buttonLinks[1].textContent = 'View Projects'; }
-        if (buttonLinks[2]) { buttonLinks[2].textContent = 'GitHub'; }
-        if (buttonLinks[3]) { buttonLinks[3].textContent = 'Contact Me'; }
-      }
-
-      if (portrait) {
-        portrait.setAttribute('role', 'img');
-        portrait.setAttribute('aria-label', 'Systems map linking state estimation, guidance and control, flight software assurance, and structural substantiation.');
-        portrait.innerHTML = '' +
-          '<div class="mission-map" aria-hidden="true">' +
-            '<span class="mission-link mission-link--1"></span>' +
-            '<span class="mission-link mission-link--2"></span>' +
-            '<span class="mission-link mission-link--3"></span>' +
-            '<span class="mission-link mission-link--4"></span>' +
-            '<div class="mission-core"><b>VIN</b><span>Build &middot; Verify &middot; Explain</span></div>' +
-            '<div class="mission-node mission-node--estimation"><h3>State Estimation</h3><p>IMM / covariance / dropout handling / hardware tracking evidence</p></div>' +
-            '<div class="mission-node mission-node--controls"><h3>Guidance &amp; Control</h3><p>Closed-loop simulation / uncertainty / bounded recovery behavior</p></div>' +
-            '<div class="mission-node mission-node--fsw"><h3>Flight Software</h3><p>Command &amp; telemetry / FDIR / deterministic assurance / traceability</p></div>' +
-            '<div class="mission-node mission-node--structures"><h3>Structures</h3><p>Loads / FE verification / margins / fatigue / damage tolerance</p></div>' +
-          '</div>';
-      }
-    }
+  /* Keep About discoverable from legacy pages without rewriting every file. */
+  var primaryNav = document.getElementById('primary-nav');
+  if (primaryNav && !primaryNav.querySelector('a[href$="about.html"]')) {
+    var aboutLink = document.createElement('a');
+    aboutLink.href = isProjectDetail ? '../about.html' : 'about.html';
+    aboutLink.textContent = 'About';
+    if (isAbout) { aboutLink.setAttribute('aria-current', 'page'); }
+    primaryNav.insertBefore(aboutLink, primaryNav.firstChild);
   }
 
   /* ---------- Mobile navigation ---------- */
@@ -109,19 +50,20 @@
 
   /* ---------- Scroll reveal ---------- */
   var revealables = document.querySelectorAll('[data-reveal]');
-  if (!revealables.length) { /* no-op */ }
-  else if (reduceMotion || !('IntersectionObserver' in window)) {
-    revealables.forEach(function (el) { el.classList.add('is-in'); });
-  } else {
-    var revealObserver = new IntersectionObserver(function (entries, obs) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-in');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
-    revealables.forEach(function (el) { revealObserver.observe(el); });
+  if (revealables.length) {
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      revealables.forEach(function (el) { el.classList.add('is-in'); });
+    } else {
+      var revealObserver = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+      revealables.forEach(function (el) { revealObserver.observe(el); });
+    }
   }
 
   /* ---------- Counting statistics ---------- */
@@ -173,7 +115,7 @@
     setInterval(tick, 1000);
   }
 
-  /* ---------- Countdown to graduation (May 2027) ---------- */
+  /* ---------- Countdown to graduation ---------- */
   var grad = document.getElementById('grad-countdown');
   if (grad) {
     var gradDate = new Date('2027-05-14T00:00:00Z').getTime();
@@ -204,12 +146,10 @@
     sections.forEach(function (s) { spy.observe(s); });
   }
 
-  /* ---------- Current year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = String(new Date().getFullYear());
   });
 
-  /* ---------- Print resume ---------- */
   var printBtn = document.getElementById('print-resume');
   if (printBtn) {
     printBtn.addEventListener('click', function () { window.print(); });
