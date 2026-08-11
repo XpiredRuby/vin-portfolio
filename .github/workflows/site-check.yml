@@ -28,6 +28,9 @@ jobs:
       - name: Validate static site
         run: python tools/validate_site.py
 
+      - name: Validate recruiter-facing surface
+        run: python tools/validate_hiring_surface.py
+
       - name: Validate JavaScript syntax
         run: |
           node --check assets/js/site.js
