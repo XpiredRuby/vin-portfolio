@@ -2,15 +2,24 @@
 
 | Path | What it is | Regenerate with |
 |---|---|---|
-| `css/site.css` | The entire design system, tokens, components, print stylesheet | hand-edited |
-| `js/site.js` | Nav toggle, scroll reveal, stat counters, UTC clock, TOC scroll-spy | hand-edited |
+| `css/site.css` | Stylesheet entrypoint for the report, profile, and technical-product layers | hand-edited |
+| `css/technical-product.css` | Command palette, project filtering, technical-diagram presentation, and View Transition enhancements | hand-edited |
+| `js/site.js` | Core progressive-enhancement loader, nav, reveal, counters, clock, and TOC scroll-spy | hand-edited |
+| `js/command-palette.js` | Accessible Cmd/Ctrl-K quick navigation backed by the local search index | hand-edited |
+| `js/project-filter.js` | URL-synced search and domain filtering for `projects.html` | hand-edited |
 | `js/github.js` | Live GitHub repository + commit feed (2 unauthenticated API calls, lazy, graceful fallback) | hand-edited |
-| `diagrams/*.svg` | Technical block diagrams used across the case studies | `python3 assets/diagrams/generate.py` |
-| `diagrams/generate.py` | The single source of truth for every diagram | hand-edited |
-| `headshot.jpg` | Portrait, 400×400 | **replace with a professional headshot** |
+| `data/search-index.json` | Local command-palette index for pages, projects, and public repositories | hand-edited |
+| `diagrams/*.svg` | Primary technical visuals used across the case studies | `python3 assets/diagrams/generate.py` |
+| `diagrams/generate.py` | Single source of truth for generated technical diagrams | hand-edited |
+| `headshot.jpg` | Web-optimized professional portrait | replace from the approved source photo |
+| `hero/*-ai.jpg` | Optional concept artwork retained as decorative assets, not technical evidence and not the default project visual | image source + manual optimization |
 | `og-image.png` | 1200×630 social preview card | render `og-image.src.html` (see below) |
 | `og-image.src.html` | Source page for the OG image | hand-edited |
 | `resume.pdf` | Generated from `resume.html` via the print stylesheet | see below |
+
+## Visual hierarchy
+
+Technical diagrams, plots, real screenshots, and test evidence are the primary project visuals. Concept artwork may be retained as decorative material, but it should never replace or be presented as engineering evidence.
 
 ## Regenerating the resume PDF
 
@@ -20,8 +29,7 @@ chromium --headless --no-pdf-header-footer \
   --print-to-pdf=assets/resume.pdf http://localhost:8000/resume.html
 ```
 
-The print stylesheet in `css/site.css` strips navigation and footers, converts to black on white,
-forces reveal-animated content visible, and tightens spacing to three pages.
+The print stylesheet strips navigation and footers, converts to black on white, forces reveal-animated content visible, and tightens spacing to three pages.
 
 ## Regenerating the OG image
 
@@ -33,8 +41,7 @@ chromium --headless --window-size=1200,712 --hide-scrollbars \
 
 ## Adding project media
 
-Put figures in `assets/img/` and reference them from the case studies. Replace a
-`<div class="slot">…</div>` placeholder with:
+Put figures in `assets/img/` and reference them from the case studies. Prefer real engineering media: hardware photos, plots, architecture diagrams, FEA contours with context, test screenshots, or annotated results.
 
 ```html
 <figure class="fig">

@@ -32,6 +32,11 @@ jobs:
         run: |
           node --check assets/js/site.js
           node --check assets/js/github.js
+          node --check assets/js/command-palette.js
+          node --check assets/js/project-filter.js
+
+      - name: Validate local search index
+        run: python -m json.tool assets/data/search-index.json > /dev/null
 
       - name: Validate generated-asset scripts compile
         run: |
