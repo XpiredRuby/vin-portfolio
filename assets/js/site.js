@@ -99,6 +99,58 @@
     grad.textContent = 'T-' + days + 'd';
   }
 
+  /* ---------- ASTRA-OS current-evidence normalization ---------- */
+  var astraImages = document.querySelectorAll('img[src$="assets/hero/astrasim.svg"], img[src$="../assets/hero/astrasim.svg"]');
+  astraImages.forEach(function (img) {
+    var prefix = img.getAttribute('src').indexOf('../') === 0 ? '../' : '';
+    img.setAttribute('src', prefix + 'assets/hero/astrasim-ai.jpg');
+    img.setAttribute('width', '768');
+    img.setAttribute('height', '432');
+    img.setAttribute('alt', 'AI-generated ASTRA-OS aerospace systems artwork representing spacecraft flight software, command and telemetry, FDIR, verification evidence, and native target execution.');
+  });
+
+  function replaceText(root, replacements) {
+    if (!root) { return; }
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    var node;
+    while ((node = walker.nextNode())) {
+      var text = node.nodeValue;
+      replacements.forEach(function (pair) { text = text.split(pair[0]).join(pair[1]); });
+      node.nodeValue = text;
+    }
+  }
+
+  var astraReplacements = [
+    ['Flight Software HIL Verification Framework', 'Flight Software Assurance & Native Target Verification'],
+    ['hardware-in-the-loop verification', 'native-target verification'],
+    ['Hardware-in-the-loop verification', 'Native-target verification'],
+    ['HIL VERIFICATION', 'ASSURANCE & TARGET VERIFICATION'],
+    ['HIL verified', 'Native target verified'],
+    ['HIL verification', 'target verification'],
+    ['hardware-in-the-loop evidence', 'native Raspberry Pi/aarch64 execution evidence'],
+    ['hardware-in-the-loop', 'native-target'],
+    ['9/9 tests, 25/25 MC trials on hardware', '20/20 CTest, 25/25 MC trials, native Pi evidence'],
+    ['9/9', '20/20'],
+    ['5/5', '8/8']
+  ];
+
+  var astraCards = [];
+  document.querySelectorAll('a[href*="astrasim-fsw.html"]').forEach(function (link) {
+    var scope = link.closest('article, tr, .panel, .card, .project-card');
+    if (scope && astraCards.indexOf(scope) === -1) { astraCards.push(scope); }
+  });
+  astraCards.forEach(function (scope) { replaceText(scope, astraReplacements); });
+
+  if (/\/projects\/astrasim-fsw\.html$/.test(window.location.pathname)) {
+    replaceText(document.body, astraReplacements);
+    document.title = 'AstraSim-FSW: Flight Software Assurance & Native Target Verification | Vinayak Manoj Nair';
+    var description = 'Engineering case study: C++17 spacecraft-style flight software with command and telemetry, FDIR, deterministic scenarios, Monte Carlo regression, requirement traceability, assurance CI, and preserved Raspberry Pi aarch64 execution evidence.';
+    var metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) { metaDescription.setAttribute('content', description); }
+    var ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) { ogDescription.setAttribute('content', description); }
+  }
+
   /* ---------- Table-of-contents scroll spy ---------- */
   var tocLinks = document.querySelectorAll('.toc a[href^="#"]');
   if (tocLinks.length && 'IntersectionObserver' in window) {
