@@ -1,0 +1,133 @@
+[
+  {
+    "title": "About",
+    "subtitle": "Engineering identity, working principles, and current focus",
+    "href": "about.html",
+    "kind": "Page",
+    "tags": ["about", "bio", "profile", "engineering"]
+  },
+  {
+    "title": "Projects",
+    "subtitle": "Evidence-backed aerospace engineering case studies",
+    "href": "projects.html",
+    "kind": "Page",
+    "tags": ["projects", "portfolio", "case studies", "evidence"]
+  },
+  {
+    "title": "Experience",
+    "subtitle": "Spacecraft systems, controls, and research experience",
+    "href": "experience.html",
+    "kind": "Page",
+    "tags": ["experience", "work", "systems", "controls"]
+  },
+  {
+    "title": "Technical skills",
+    "subtitle": "Evidence-linked GNC, software, structures, and systems capabilities",
+    "href": "skills.html",
+    "kind": "Page",
+    "tags": ["skills", "cpp", "python", "ros2", "fea", "gnc"]
+  },
+  {
+    "title": "Resume",
+    "subtitle": "Current recruiter-facing resume",
+    "href": "resume.html",
+    "kind": "Page",
+    "tags": ["resume", "cv"]
+  },
+  {
+    "title": "Contact",
+    "subtitle": "Email, LinkedIn, GitHub, and availability",
+    "href": "contact.html",
+    "kind": "Page",
+    "tags": ["contact", "email", "linkedin", "availability"]
+  },
+  {
+    "title": "GHOST-X",
+    "subtitle": "Occlusion-tolerant target estimation · ROS 2 · Raspberry Pi · IMM",
+    "href": "projects/ghost.html",
+    "kind": "Project",
+    "key": "ghost",
+    "tags": ["gnc", "state estimation", "imm", "kalman", "ros2", "raspberry pi", "tracking"]
+  },
+  {
+    "title": "ASTRA-OS",
+    "subtitle": "Spacecraft-style flight software assurance · C++17 · FDIR · verification",
+    "href": "projects/astrasim-fsw.html",
+    "kind": "Project",
+    "key": "astra",
+    "tags": ["flight software", "cpp", "fdir", "verification", "telemetry", "spacecraft"]
+  },
+  {
+    "title": "AeroFrame-DT",
+    "subtitle": "Aircraft fitting substantiation · stress · FE verification · fatigue",
+    "href": "projects/md11-structures.html",
+    "kind": "Project",
+    "key": "aeroframe",
+    "tags": ["structures", "stress", "fea", "fatigue", "damage tolerance", "allowables"]
+  },
+  {
+    "title": "Rocket Landing GNC",
+    "subtitle": "6-DOF propulsive landing simulation and dispersed campaign",
+    "href": "projects/rocket-landing-gnc.html",
+    "kind": "Project",
+    "key": "rocket",
+    "tags": ["gnc", "6dof", "simulation", "controls", "monte carlo", "rocket"]
+  },
+  {
+    "title": "Interception Robot",
+    "subtitle": "Embedded perception-to-actuation autonomy with latency budgeting",
+    "href": "projects/interceptor.html",
+    "kind": "Project",
+    "key": "interceptor",
+    "tags": ["autonomy", "embedded", "perception", "controls", "robotics"]
+  },
+  {
+    "title": "TAMU-SPIRIT",
+    "subtitle": "ISS payload systems engineering · requirements · thermal trades",
+    "href": "projects/spirit-iss.html",
+    "kind": "Project",
+    "key": "spirit",
+    "tags": ["systems", "spacecraft", "iss", "requirements", "thermal", "reviews"]
+  },
+  {
+    "title": "Project KESTREL",
+    "subtitle": "Precision-landing UAV design closeout and engineering stop decision",
+    "href": "projects/kestrel.html",
+    "kind": "Project",
+    "key": "kestrel",
+    "tags": ["uav", "landing", "autonomy", "closeout", "systems"]
+  },
+  {
+    "title": "F-16-inspired flight-controls SIL",
+    "subtitle": "Educational fixed-wing controls, actuator limits, and seeded uncertainty",
+    "href": "https://github.com/XpiredRuby/f16-flight-sim",
+    "kind": "Repository",
+    "key": "f16",
+    "external": true,
+    "tags": ["controls", "flight dynamics", "sil", "monte carlo", "python"]
+  },
+  {
+    "title": "GHOST-X source",
+    "subtitle": "Open the public estimator repository",
+    "href": "https://github.com/XpiredRuby/ghost-vins-eskf",
+    "kind": "Repository",
+    "external": true,
+    "tags": ["github", "ghost", "source"]
+  },
+  {
+    "title": "ASTRA-OS source",
+    "subtitle": "Open the public flight-software repository",
+    "href": "https://github.com/XpiredRuby/AstraSim-FSW",
+    "kind": "Repository",
+    "external": true,
+    "tags": ["github", "astra", "source"]
+  },
+  {
+    "title": "AeroFrame-DT source",
+    "subtitle": "Open the public structural-substantiation repository",
+    "href": "https://github.com/XpiredRuby/aeroframe-dt",
+    "kind": "Repository",
+    "external": true,
+    "tags": ["github", "aeroframe", "source"]
+  }
+]
