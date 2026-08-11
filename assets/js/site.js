@@ -6,6 +6,7 @@
   'use strict';
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var scriptUrl = document.currentScript && document.currentScript.src ? new URL(document.currentScript.src) : null;
   var path = window.location.pathname.replace(/\/+$/, '');
   var isHome = path === '' || path === '/' || /\/index\.html$/.test(path);
   var isProjects = /\/projects\.html$/.test(path);
@@ -154,4 +155,16 @@
   if (printBtn) {
     printBtn.addEventListener('click', function () { window.print(); });
   }
+
+  /* ---------- Optional product-grade enhancements ---------- */
+  function loadEnhancement(filename) {
+    if (!scriptUrl) { return; }
+    var script = document.createElement('script');
+    script.src = new URL(filename, scriptUrl).href;
+    script.async = true;
+    document.head.appendChild(script);
+  }
+
+  if (!isResume) { loadEnhancement('command-palette.js'); }
+  if (isProjects) { loadEnhancement('project-filter.js'); }
 })();
