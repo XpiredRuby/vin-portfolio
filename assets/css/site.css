@@ -1,3 +1,4 @@
-/* Portfolio stylesheet entrypoint. Keep the original engineering-report base, then apply the cinematic aerospace presentation layer. */
+/* Portfolio stylesheet entrypoint. Keep the engineering-report base, then apply the cinematic aerospace presentation layers. */
 @import url("./site-base.css");
 @import url("./aerospace-ui.css");
+@import url("./aerospace-static.css");
