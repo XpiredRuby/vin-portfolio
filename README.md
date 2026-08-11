@@ -1,180 +1,133 @@
 # vin-portfolio
 
-Engineering portfolio for **Vinayak Manoj Nair**, Aerospace Engineering, Texas A&M University (May 2027).
-Guidance, navigation & control · systems engineering · embedded flight software · autonomous robotics.
+Recruiter-facing engineering portfolio for **Vinayak Manoj Nair**, B.S. Aerospace Engineering at Texas A&M University, expected May 2027.
 
-Plain HTML, CSS and JavaScript. **No framework, no build step, no dependencies.** Deployed via GitHub Pages
-at [vinnair.me](https://vinnair.me/).
+**Focus:** guidance, navigation & control · flight software verification · structural analysis · systems engineering.
 
----
+Live site: [vinnair.me](https://vinnair.me/)
 
-## Design intent
+## Portfolio rule
 
-The site is built to read like a **mission dashboard crossed with an engineering report**, not like a
-developer portfolio. Every project is documented the way an internal engineering report is written:
-problem, requirements, constraints, system design, mathematical models, algorithms, implementation,
-testing, validation, performance, results, tradeoffs, challenges, lessons learned, future work.
+The site is not intended to prove that I know front-end frameworks. It is intended to let an aerospace reviewer answer, quickly:
 
-- Very dark graphite surfaces, hairline borders, no glassmorphism, no decorative shadows
-- Electric blue and cyan accents; orange used sparingly for highlights and risk
-- Space Grotesk (headings) / Inter (body) / JetBrains Mono (technical labels and code)
-- Motion is purposeful only: one scroll-reveal, one counter, one orbit. All disabled under
-  `prefers-reduced-motion`
+1. What engineering problems has this candidate worked on?
+2. What did they personally design or implement?
+3. What evidence shows that it works?
+4. What failed, changed, or remains unverified?
+5. Where can I inspect the source or deeper technical record?
 
----
+For that reason the site uses plain HTML, CSS and JavaScript with no framework or build step. Complexity is added only when it improves the engineering story, accessibility, reliability or reproducibility.
+
+## Recruiter reading path
+
+The homepage is deliberately ordered for a short technical screen:
+
+1. identity, degree, target roles and direct resume link;
+2. four proof points spanning GNC, flight software, stress and flight-controls SIL;
+3. capability areas;
+4. three flagship case studies;
+5. applied engineering experience;
+6. selected public repositories and contact.
+
+The detailed project register keeps broader work available without giving every project equal visual weight.
+
+## Flagship public work
+
+| Project | Primary signal | Public evidence |
+|---|---|---|
+| **GHOST-X** | state estimation, uncertainty, dropout/reacquisition, GNC integration | [`XpiredRuby/ghost-vins-eskf`](https://github.com/XpiredRuby/ghost-vins-eskf) |
+| **ASTRA-OS** | flight software architecture, FDIR, command/telemetry, assurance | [`XpiredRuby/AstraSim-FSW`](https://github.com/XpiredRuby/AstraSim-FSW) |
+| **AeroFrame-DT** | stress substantiation, FE verification, fatigue/damage tolerance, configuration control | [`XpiredRuby/aeroframe-dt`](https://github.com/XpiredRuby/aeroframe-dt) |
+| **F-16-inspired SIL** | flight dynamics, controls, seeded uncertainty and explicit model limits | [`XpiredRuby/f16-flight-sim`](https://github.com/XpiredRuby/f16-flight-sim) |
+
+Case-study-only or program work is labeled as such rather than being presented as public source.
+
+## Evidence discipline
+
+Portfolio summaries should be downstream of the authoritative project repositories, not independent marketing claims.
+
+- Do not add a metric because it sounds impressive.
+- Do not turn a design target into an achieved result.
+- Keep hardware evidence, controlled software truth and SIL results distinguishable.
+- Preserve negative findings when they materially change the engineering conclusion.
+- Link directly to the relevant repository or evidence page instead of a generic GitHub profile when public source exists.
+- If a repository evolves, update the portfolio summary or make it less specific; stale precision is worse than a concise current description.
 
 ## Structure
 
-```
+```text
 vin-portfolio/
-├── index.html                      # Home, hero, stats, disciplines, stack, featured projects,
-│                                   #        experience, live GitHub feed
-├── projects.html                   # Project register + case-study summaries
-├── projects/
-│   ├── ghost.html                  # PRJ-01  GPS-denied dual-filter state estimation
-│   ├── astrasim-fsw.html           # PRJ-02  Flight software HIL verification framework
-│   ├── rocket-landing-gnc.html     # PRJ-03  6-DOF booster descent GNC + Monte Carlo
-│   ├── md11-structures.html        # PRJ-04  CAD assembly + static/thermal/modal FEA
-│   ├── interceptor.html            # PRJ-05  Sub-100 ms perception-to-actuation loop
-│   ├── spirit-iss.html             # PRJ-06  ISS payload systems engineering
-│   └── kestrel.html                # PRJ-07  Archived programme closeout
-├── experience.html                 # Timeline with measurable accomplishments
-├── skills.html                     # Skills matrix, every skill linked to its project
-├── resume.html                     # Interactive resume (prints to a clean 3-page PDF)
-├── about.html                      # Short bio and working principles
-├── contact.html                    # Contact channels, availability, recruiter quick-facts
-├── 404.html                        # Custom not-found page
-├── demos/
-│   └── astrasim-fsw-hil-workstation.html   # Standalone HIL evidence replay workstation
+├── index.html                  recruiter-first landing page
+├── projects.html               project register + evidence/source status
+├── projects/                   detailed engineering case studies
+├── experience.html             applied engineering timeline
+├── skills.html                 skills matrix linked to project evidence
+├── resume.html                 web resume
+├── assets/resume.pdf           direct downloadable/printable resume
+├── about.html
+├── contact.html
+├── demos/                      recruiter-friendly demonstrations
 ├── assets/
-│   ├── css/site.css                # Entire design system (single stylesheet)
-│   ├── js/site.js                  # Nav, scroll reveal, counters, clock, TOC scroll-spy
-│   ├── js/github.js                # Live GitHub repo + commit feed (2 API calls, cached, graceful)
-│   ├── hero/*.svg                  # Project hero artwork (illustrations, not data plots)
-│   ├── hero/generate.py            # Regenerates all hero art from one spec file
-│   ├── diagrams/*.svg              # Technical block diagrams used inside case studies
-│   ├── diagrams/generate.py        # Regenerates every diagram from one spec file
-│   ├── headshot.jpg                # Portrait
-│   ├── og-image.png                # 1200×630 social preview
-│   ├── og-image.src.html           # Source used to render the OG image
-│   └── resume.pdf                  # Generated from resume.html via the print stylesheet
-├── favicon.svg
+│   ├── css/site.css
+│   ├── js/site.js
+│   ├── js/github.js            selected live public-repository feed
+│   ├── hero/                   generated project illustrations
+│   └── diagrams/               generated technical diagrams
+├── tools/validate_site.py      zero-dependency integrity gate
+├── .github/workflows/site-check.yml
 ├── robots.txt
 ├── sitemap.xml
 └── CNAME
 ```
 
----
-
 ## Local preview
 
 ```bash
 python3 -m http.server 8000
-# http://localhost:8000
+# open http://localhost:8000
 ```
 
-No build step. Edit the HTML/CSS/JS directly and reload.
-
----
-
-## Regenerating assets
-
-### Diagrams and hero art
-
-Both sets of graphics are generated from a single script each, so they stay visually consistent:
+## Validate before publishing
 
 ```bash
-python3 assets/diagrams/generate.py   # technical block diagrams
-python3 assets/hero/generate.py       # project hero artwork
+python tools/validate_site.py
+node --check assets/js/site.js
+node --check assets/js/github.js
+python -m py_compile assets/hero/generate.py assets/diagrams/generate.py
 ```
 
-The hero artwork is **illustration, not measured data**. Nothing in it is presented as a result;
-real numbers live in the case-study text and in the repositories.
+GitHub Actions runs the same checks on pull requests. The validator fails on broken local links/assets, missing page metadata, malformed JSON-LD, and a small set of known presentation regressions.
 
-Edit the box/arrow specs at the bottom of that file to change a diagram, then re-run.
+## Graphics policy
 
-### Resume PDF
+Project hero graphics are **illustrations, not engineering data**. They help a reviewer understand the system quickly but are never presented as measured results. Quantitative results belong in project text and, when public, in the underlying repository evidence.
 
-The PDF is the print stylesheet, rendered. Regenerate after editing `resume.html`:
+Regenerate project illustrations with:
 
 ```bash
-python3 -m http.server 8000 &
-chromium --headless --no-pdf-header-footer \
-  --print-to-pdf=assets/resume.pdf http://localhost:8000/resume.html
+python assets/hero/generate.py
+python assets/diagrams/generate.py
 ```
 
-Or simply open `resume.html` and use **Print / Save as PDF**, the print stylesheet strips navigation,
-converts to black on white, forces all reveal-animated content visible, and tightens spacing.
+## Resume PDF
 
-### Open Graph image
+`assets/resume.pdf` is generated from the print stylesheet of `resume.html`. After changing the web resume, regenerate the PDF and verify both versions before publishing.
 
-```bash
-chromium --headless --window-size=1200,712 \
-  --screenshot=/tmp/og.png assets/og-image.src.html
-# then crop the top 1200×630 (headless reserves ~80px of chrome height)
-```
+## Accessibility and performance
 
----
+The site intentionally keeps the delivery model small:
 
-## Things to fill in
-
-These are deliberately visible as **pending-asset slots** on the live site rather than hidden, a slot is
-honest, a missing figure is not. Replace them as media becomes available:
-
-| Where | What to add |
-|---|---|
-| `assets/headshot.jpg` | A professional headshot (current image is a casual photo, 400×400) |
-| GHOST → Gallery | Hardware rig photo, PX4 SITL capture, NIS plot, occlusion trace |
-| Rocket GNC → Results | 500-run Monte Carlo dispersion scatter, 6-DOF trajectory traces |
-| AeroFrame-MD11 → Gallery | SolidWorks render, Abaqus von Mises contours, convergence plot, drawing sheet |
-| Interceptor → Gallery | Robot photo, annotated detection frame, latency histogram, demo video |
-| AstraSim-FSW → Gallery | Bench photograph of the Pi target and ground station |
-
-To replace a slot, swap the `<div class="slot">…</div>` block for:
-
-```html
-<figure class="fig">
-  <div class="fig__body"><img src="../assets/img/your-figure.png" alt="Descriptive alt text" loading="lazy"></div>
-  <figcaption><b>Fig. n</b>What the figure shows and what it proves.</figcaption>
-</figure>
-```
-
-### Numbers to verify before sharing widely
-
-Two homepage statistics are estimates and are flagged with an HTML comment in `index.html`:
-**simulation hours** and **years engineering**. Every other figure on the site traces to a specific
-project result.
-
----
-
-## Adding a new project
-
-1. Copy `projects/ghost.html` as the template, it has the full 16-section structure and TOC.
-2. Update the `<title>`, meta description, canonical URL, JSON-LD, and breadcrumb.
-3. Add a diagram spec to `assets/diagrams/generate.py` and re-run it.
-4. Add a `<article class="case">` block to `projects.html` and a row to the project register table.
-5. Add the URL to `sitemap.xml`.
-6. Optionally feature it on `index.html`.
-
----
-
-## GitHub feed
-
-`assets/js/github.js` calls the public GitHub API twice (repositories, then public events) when the
-GitHub section scrolls into view. Unauthenticated, so it is subject to a 60 requests/hour/IP limit; on
-failure or rate limit it degrades to a static message with a profile link. Pinned repositories are listed
-in the `PINNED` array at the top of that file.
-
----
+- semantic landmarks and a skip link;
+- keyboard focus styles and active-navigation state;
+- reduced-motion support;
+- deferred JavaScript;
+- SVG project illustrations;
+- responsive CSS with no application framework;
+- canonical URLs, Open Graph/Twitter metadata and JSON-LD;
+- graceful fallback if the unauthenticated GitHub API feed is unavailable.
 
 ## Deployment
 
-GitHub Pages, `main` branch, `/ (root)`. `CNAME` points at `vinnair.me`.
+GitHub Pages from `main`, repository root. `CNAME` points to `vinnair.me`.
 
-## Accessibility & performance
-
-- Semantic landmarks, skip link, visible focus rings, `aria-current` on the active nav item
-- All motion suppressed under `prefers-reduced-motion: reduce`
-- No render-blocking JavaScript; both scripts are `defer`
-- Diagrams are SVG; the only raster assets are the headshot and the OG image
-- Full metadata, Open Graph, Twitter cards and JSON-LD schema on every page
+The repository settings should also keep the GitHub homepage field pointed to `https://vinnair.me/` and use topics that describe the actual engineering portfolio rather than front-end implementation details.

@@ -6,7 +6,16 @@
   'use strict';
 
   var USER = 'XpiredRuby';
-  var PINNED = ['astrasim-fsw', 'ghost', 'rocket-landing-gnc', 'interceptor'];
+  // Recruiter-facing order: strongest current public engineering evidence first.
+  // Keep these names synchronized with the actual public repositories.
+  var PINNED = [
+    'ghost-vins-eskf',
+    'astrasim-fsw',
+    'aeroframe-dt',
+    'f16-flight-sim',
+    'pact-controls',
+    'vin-portfolio'
+  ];
   var MAX = 6;
 
   var mount = document.getElementById('gh-list');
@@ -31,7 +40,6 @@
     });
   }
 
-  // GitHub writes "Updated 3 days ago" / "Updated on 12 Mar 2025".
   function updated(iso) {
     var then = new Date(iso);
     var days = Math.floor((Date.now() - then.getTime()) / 86400000);
@@ -60,14 +68,12 @@
       .slice(0, MAX);
 
     if (!list.length) { return fallback(); }
-
-    if (countEl) { countEl.textContent = repos.length; }
+    if (countEl) { countEl.textContent = list.length; }
 
     mount.innerHTML = list.map(function (r) {
       var topics = (r.topics || []).slice(0, 5).map(function (t) {
         return '<span class="gh__topic">' + esc(t) + '</span>';
       }).join('');
-
       var meta = [];
       if (r.language) {
         meta.push('<span><i class="gh__lang" style="background:' + (LANG[r.language] || '#4493f8') + '"></i>' + esc(r.language) + '</span>');
@@ -90,7 +96,7 @@
 
   function fallback() {
     mount.innerHTML = '<p class="gh__empty">Repository list could not be loaded right now. ' +
-      'Browse everything at <a href="https://github.com/' + USER + '" target="_blank" rel="noopener noreferrer">github.com/' + USER + '</a>.</p>';
+      'Browse public source at <a href="https://github.com/' + USER + '" target="_blank" rel="noopener noreferrer">github.com/' + USER + '</a>.</p>';
     if (countEl) { countEl.textContent = ''; }
   }
 
