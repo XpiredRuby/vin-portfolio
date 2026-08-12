@@ -154,6 +154,32 @@ def main() -> int:
         if needle in index:
             errors.append(f"index.html: {reason}: {needle!r}")
 
+    # Recruiting facts and project labels are repeated across several pages.
+    # Keep one stale occurrence from silently surviving a content refresh.
+    public_text = "\n".join(
+        page.read_text(encoding="utf-8")
+        for page in pages
+        if page.relative_to(ROOT) not in NON_PUBLIC_HTML
+    )
+    banned_sitewide = {
+        "linkedin.com/in/Vin2005": "obsolete LinkedIn profile",
+        "Fall 2026": "stale availability window",
+        "Spring 2027": "stale availability window",
+        "full-time roles": "stale availability window",
+        "Open to opportunities": "stale availability claim",
+        "+0.151": "obsolete AeroFrame margin",
+        "18/18": "obsolete AeroFrame requirement count",
+        "18 / 18": "obsolete AeroFrame requirement count",
+        ">AstraSim-FSW<": "obsolete project display name",
+        ">AeroFrame-MD11<": "obsolete project display name",
+        ">GHOST<": "obsolete project display name",
+        "AeroFrame-MD11": "obsolete project display name",
+        "GHOST case study": "obsolete project display name",
+    }
+    for needle, reason in banned_sitewide.items():
+        if needle.lower() in public_text.lower():
+            errors.append(f"sitewide: {reason}: {needle!r}")
+
     if errors:
         print(f"Portfolio validation FAILED with {len(errors)} issue(s):")
         for error in errors:
