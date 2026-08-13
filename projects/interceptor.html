@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Autonomous Interception Robot: Sub-100 ms Perception Loop | Vinayak Manoj Nair</title>
-<meta name="description" content="Engineering case study: a closed-loop perception-to-actuation pipeline on Raspberry Pi 4 integrating YOLO object detection, Kalman filter state estimation and PID motor control under a 100 ms end-to-end latency budget.">
+<title>Autonomous Interception Robot: Reported Prototype | Vinayak Manoj Nair</title>
+<meta name="description" content="Portfolio account of an embedded perception-to-actuation prototype using object detection, Kalman estimation, and PID control; public source and measurement artifacts are not currently available.">
 <meta name="author" content="Vinayak Manoj Nair">
 <meta name="theme-color" content="#07090D">
 <link rel="canonical" href="https://vinnair.me/projects/interceptor.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
-<meta property="og:title" content="Autonomous Interception Robot: Sub-100 ms Perception Loop">
-<meta property="og:description" content="YOLO detection, Kalman filtering and PID actuation on embedded Linux, closed under a 100 ms latency budget.">
+<meta property="og:title" content="Autonomous Interception Robot: Reported Prototype">
+<meta property="og:description" content="Embedded perception, estimation, and control architecture with reported prototype performance clearly separated from public evidence.">
 <meta property="og:url" content="https://vinnair.me/projects/interceptor.html">
 <meta property="og:image" content="https://vinnair.me/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -22,7 +22,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"TechArticle","headline":"AI-Powered Autonomous Interception Robot","description":"Closed-loop perception to actuation on embedded Linux with YOLO detection, Kalman filtering and PID control under a 100 ms budget.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Computer vision","Kalman filter","Real-time systems","Embedded control"],"url":"https://vinnair.me/projects/interceptor.html"}
+{"@context":"https://schema.org","@type":"TechArticle","headline":"AI-Powered Autonomous Interception Robot","description":"Portfolio account of an embedded perception, estimation, and control prototype with public evidence limits stated explicitly.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Computer vision","Kalman filter","Embedded systems","Control architecture"],"url":"https://vinnair.me/projects/interceptor.html"}
 </script>
 </head>
 <body>
@@ -51,20 +51,20 @@
 
 <section class="page-hero">
   <div class="shell">
-    <p class="crumbs"><a href="../index.html">Home</a> <span>/</span> <a href="../projects.html">Projects</a> <span>/</span> <span>PRJ-05 Interceptor</span></p>
+    <p class="crumbs"><a href="../index.html">Home</a> <span>/</span> <a href="../projects.html">Projects</a> <span>/</span> <span>PRJ-07 Interceptor</span></p>
     <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:1.2rem">
-      <span class="pill pill--done">Complete</span>
+      <span class="pill pill--active"><i class="dot dot--amber"></i>Reported prototype</span>
       <span class="pill">Jan 2026</span>
     </div>
     <h1>Interception Robot</h1>
-    <p class="hero__spec mono" style="margin-top:.9rem">YOLO DETECTION &middot; KALMAN ESTIMATION &middot; PID ACTUATION &middot; &lt;100 ms LOOP</p>
+    <p class="hero__spec mono" style="margin-top:.9rem">OBJECT DETECTION &middot; KALMAN ESTIMATION &middot; PID ACTUATION &middot; ARTIFACTS UNAVAILABLE</p>
     <p class="lede">
-      A complete perception-to-actuation loop on a Raspberry Pi 4: see the target, estimate where it
-      is going, and drive the actuators, with the entire chain held under a 100 ms latency
-      budget, because in a tracking loop latency is indistinguishable from error.
+      A portfolio account of a Raspberry Pi-class perception-to-actuation prototype: detect a target,
+      estimate its motion, and drive bounded commands. Sub-100 ms operation is a reported prototype result;
+      the source, raw timing traces, and hardware media are not currently available for public review.
     </p>
     <div class="btn-row" style="margin-top:1.75rem">
-      <a class="btn btn--primary" href="../contact.html">Request technical report</a>
+      <a class="btn btn--primary" href="#evidence">Review evidence status</a>
       <a class="btn btn--ghost" href="../projects.html">All projects</a>
     </div>
   </div>
@@ -80,25 +80,34 @@
 
   <nav class="toc" aria-label="Case study contents">
     <p class="toc__t">Contents</p>
+    <a href="#evidence">00 Evidence status</a>
     <a href="#problem">01 Problem</a>
-    <a href="#requirements">02 Requirements</a>
-    <a href="#constraints">03 Constraints</a>
-    <a href="#design">04 System design</a>
-    <a href="#models">05 Mathematical models</a>
-    <a href="#algorithms">06 Algorithms</a>
-    <a href="#implementation">07 Implementation</a>
-    <a href="#testing">08 Testing</a>
-    <a href="#performance">09 Performance</a>
-    <a href="#results">10 Results</a>
-    <a href="#tradeoffs">11 Tradeoffs</a>
-    <a href="#challenges">12 Challenges</a>
-    <a href="#lessons">13 Lessons learned</a>
-    <a href="#future">14 Future work</a>
-    <a href="#gallery">15 Gallery</a>
-    <a href="#downloads">16 Downloads</a>
+    <a href="#design">02 Architecture</a>
+    <a href="#models">03 Estimation &amp; control</a>
+    <a href="#implementation">04 Reported implementation</a>
+    <a href="#testing">05 Reported test approach</a>
+    <a href="#performance">06 Reported performance</a>
+    <a href="#tradeoffs">07 Tradeoffs</a>
+    <a href="#future">08 Next evidence gates</a>
+    <a href="#source">09 Source status</a>
   </nav>
 
   <div>
+
+    <section class="doc__section" id="evidence" data-reveal>
+      <h2><span class="num">00</span>Evidence status</h2>
+      <div class="evidence-status">
+        <div class="claim-strip" role="group" aria-label="Project evidence summary">
+          <span class="evidence-tag evidence-tag--unverified">Reported prototype</span>
+          <span class="evidence-tag evidence-tag--open">No public source</span>
+          <span class="evidence-tag evidence-tag--open">No raw timing data</span>
+          <span class="evidence-tag evidence-tag--open">No hardware media</span>
+        </div>
+        <p><b>Portfolio claim:</b> the prototype reportedly integrated object detection, Kalman filtering, and PID actuation on Raspberry Pi 4-class hardware, with a reported end-to-end latency below 100 ms.</p>
+        <p><b>Review boundary:</b> no discoverable repository, test log, timing histogram, result plot, hardware photograph, or technical report was available during this portfolio audit. The architecture discussion is retained, while performance figures are explicitly labeled as reported rather than independently reproducible.</p>
+        <p class="evidence-source"><b>Evidence source:</b> project narrative supplied for this portfolio. Public verification artifacts are unavailable.</p>
+      </div>
+    </section>
 
     <section class="doc__section" id="problem" data-reveal>
       <h2><span class="num">01</span>Problem</h2>
@@ -108,21 +117,21 @@
         detector on a CPU-only embedded board is slow enough that the lag dominates the error budget.
       </p>
       <p>
-        Two mechanisms fix this, and both were needed: shorten the loop, and predict across whatever loop
-        time remains. That is the entire architecture, a latency budget enforced stage by stage, and a
-        Kalman filter that produces an estimate at the moment of actuation rather than at the moment of
-        detection.
+        The proposed architecture addresses that lag in two ways: shorten the loop, and predict across the
+        measured delay that remains. A stage-by-stage latency budget makes the bottleneck visible, while a
+        Kalman filter can propagate the estimate to the expected moment of actuation.
       </p>
-      <p><b class="u-cyan">Problem statement.</b> Close a perception-to-actuation loop on Raspberry Pi-class
-        hardware with end-to-end latency under 100 ms, and compensate for the residual latency in the
-        estimator rather than accepting it as tracking error.</p>
+      <p><b class="u-cyan">Design target.</b> Close a perception-to-actuation loop on Raspberry Pi-class
+        hardware under a 100 ms end-to-end budget, then preserve the instrumented evidence needed to show
+        that the target was met across more than one favorable run.</p>
     </section>
 
     <section class="doc__section" id="requirements" data-reveal>
-      <h2><span class="num">02</span>Requirements</h2>
+      <h2><span class="num">01A</span>Design requirements</h2>
+      <p>These are the reported prototype requirements. The intended verification method is shown, but the corresponding public test artifacts are not available.</p>
       <div class="table-wrap">
         <table class="reqs">
-          <thead><tr><th>ID</th><th>Requirement</th><th>Value</th><th>Verification</th></tr></thead>
+          <thead><tr><th>ID</th><th>Requirement</th><th>Target</th><th>Intended verification</th></tr></thead>
           <tbody>
             <tr><td>IN-001</td><td>End-to-end closed-loop latency shall be bounded</td><td>&lt; 100 ms</td><td>Instrumented timing</td></tr>
             <tr><td>IN-002</td><td>Target shall be detected from a live camera stream</td><td>YOLO detector</td><td>Detection run</td></tr>
@@ -137,7 +146,7 @@
     </section>
 
     <section class="doc__section" id="constraints" data-reveal>
-      <h2><span class="num">03</span>Constraints</h2>
+      <h2><span class="num">01B</span>Reported constraints</h2>
       <div class="grid-2">
         <div class="panel"><div class="panel__head"><span>Platform</span></div><div class="panel__body">
           <ul class="tick-list">
@@ -158,19 +167,18 @@
     </section>
 
     <section class="doc__section" id="design" data-reveal>
-      <h2><span class="num">04</span>System design</h2>
+      <h2><span class="num">02</span>Architecture</h2>
       <p>
-        A strictly staged pipeline with a published budget per stage. Making the budget explicit changed the
-        engineering: once inference was measured at roughly three quarters of the total, every optimisation
-        went there and nowhere else. Without the instrumentation, the natural instinct is to micro-optimise
-        the control code, which occupies about one percent of the loop.
+        The reported design uses a staged pipeline and a budget per stage. The project narrative identifies
+        inference as roughly three quarters of the total loop time, which would correctly focus optimization
+        on model size, input resolution, and frame scheduling. The underlying timing trace is not public.
       </p>
 
       <figure class="fig" style="margin:1.5rem 0">
         <div class="fig__body">
-          <img src="../assets/diagrams/interceptor-pipeline.svg" width="880" height="320" loading="lazy" alt="Five stage pipeline from camera capture through YOLO detection, Kalman filtering, PID error law and PWM drive, with a latency bar showing inference consuming 76 percent of the budget.">
+          <img src="../assets/diagrams/interceptor-pipeline.svg" width="880" height="320" loading="lazy" alt="Architecture illustration of camera capture, object detection, Kalman filtering, PID error law, and motor drive, with the reported latency allocation.">
         </div>
-        <figcaption><b>Fig. 1</b>Perception-to-actuation pipeline with per-stage latency allocation. Inference dominates; everything else is noise by comparison.</figcaption>
+        <figcaption><b>Fig. 1</b>Architecture illustration based on the project narrative. The latency allocation is reported, not a plot generated from an attached timing dataset.</figcaption>
       </figure>
 
       <h3>Design decisions</h3>
@@ -189,7 +197,11 @@
     </section>
 
     <section class="doc__section" id="models" data-reveal>
-      <h2><span class="num">05</span>Mathematical models</h2>
+      <h2><span class="num">03</span>Estimation &amp; control design</h2>
+      <div class="evidence-status">
+        <div class="claim-strip"><span class="evidence-tag">Design record</span><span class="evidence-tag evidence-tag--open">Source unavailable</span></div>
+        <p>The equations document the reported estimator and controller structure. They are not a substitute for executable source, tuning files, or test traces.</p>
+      </div>
 
       <h3>Target state model</h3>
       <div class="eq">x = [x, y, ẋ, ẏ]ᵀ            <span class="c">image-plane position and velocity</span>
@@ -219,7 +231,7 @@ P⁺ = (I − K H) P⁻</div>
       </p>
 
       <h3>Latency compensation</h3>
-      <div class="eq">Δt_lag = t_actuate − t_capture          <span class="c">measured, not assumed</span>
+      <div class="eq">Δt_lag = t_actuate − t_capture          <span class="c">must be measured in a future instrumented campaign</span>
 x_cmd  = F(Δt_lag) x⁺                   <span class="c">propagate the estimate to the moment of actuation</span></div>
 
       <h3>Control law</h3>
@@ -231,7 +243,7 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
     </section>
 
     <section class="doc__section" id="algorithms" data-reveal>
-      <h2><span class="num">06</span>Algorithms used</h2>
+      <h2><span class="num">03A</span>Reported algorithms</h2>
       <ul class="tick-list">
         <li><b>YOLO single-shot detection</b> with non-maximum suppression to resolve overlapping candidate boxes.</li>
         <li><b>Linear Kalman filter</b> on a constant-velocity image-plane model, providing smoothing, prediction and dropout tolerance.</li>
@@ -243,7 +255,8 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
     </section>
 
     <section class="doc__section" id="implementation" data-reveal>
-      <h2><span class="num">07</span>Implementation</h2>
+      <h2><span class="num">04</span>Reported implementation</h2>
+      <p>The stack below is drawn from the project narrative; no public dependency lockfile, source tree, or hardware configuration record is linked.</p>
       <table class="spec">
         <tr><th>Language</th><td>Python with OpenCV and NumPy</td></tr>
         <tr><th>Detection</th><td>YOLO object detector, CPU inference</td></tr>
@@ -255,54 +268,52 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
     </section>
 
     <section class="doc__section" id="testing" data-reveal>
-      <h2><span class="num">08</span>Testing</h2>
+      <h2><span class="num">05</span>Reported test approach</h2>
+      <p>The portfolio record describes the following checks. Test code, logs, sample counts, acceptance thresholds, and failure records were not available during the audit.</p>
       <ol class="num-list">
-        <li><b>Filter unit tests.</b> Known-trajectory inputs verify that the Kalman implementation converges and that the covariance behaves correctly under prediction-only operation.</li>
-        <li><b>Detector characterisation.</b> Detection rate and false-positive behaviour measured across lighting and background conditions.</li>
-        <li><b>Dropout injection.</b> Detections deliberately withheld for several consecutive frames to confirm the track coasts and re-acquires rather than resetting.</li>
-        <li><b>Latency profiling.</b> Each stage timestamped over long runs so the budget is characterised by distribution, not by a single lucky measurement.</li>
-        <li><b>Closed-loop tracking.</b> End-to-end runs against a moving target, with tracking error recorded against target speed.</li>
+        <li><b>Filter checks:</b> known-trajectory inputs and prediction-only behavior during withheld detections.</li>
+        <li><b>Detector characterization:</b> detection and false-positive behavior across changing scenes.</li>
+        <li><b>Latency profiling:</b> timestamps at each pipeline boundary rather than only one end-to-end value.</li>
+        <li><b>Closed-loop tracking:</b> moving-target runs with target speed and tracking error recorded together.</li>
       </ol>
     </section>
 
     <section class="doc__section" id="performance" data-reveal>
-      <h2><span class="num">09</span>Performance</h2>
+      <h2><span class="num">06</span>Reported performance</h2>
       <div class="metrics" style="margin-bottom:1.25rem">
-        <div class="metric metric--green"><div class="metric__v">&lt;100 ms</div><div class="metric__k">End-to-end</div></div>
-        <div class="metric metric--orange"><div class="metric__v">~76%</div><div class="metric__k">Spent in inference</div></div>
-        <div class="metric"><div class="metric__v">5</div><div class="metric__k">Instrumented stages</div></div>
-        <div class="metric"><div class="metric__v">CPU</div><div class="metric__k">No accelerator</div></div>
+        <div class="metric metric--green"><div class="metric__v">&lt;100 ms</div><div class="metric__k">Reported end-to-end</div></div>
+        <div class="metric metric--orange"><div class="metric__v">~76%</div><div class="metric__k">Reported inference share</div></div>
+        <div class="metric"><div class="metric__v">5</div><div class="metric__k">Described stages</div></div>
+        <div class="metric"><div class="metric__v">CPU</div><div class="metric__k">Reported platform mode</div></div>
       </div>
       <p>
-        The budget breakdown is the most useful artefact this project produced. Capture, filtering, control
-        and actuation together account for a small fraction of the loop; inference accounts for the rest.
-        That single measurement determined every optimisation decision that followed, input resolution,
-        model size, and frame scheduling, and ruled out a great deal of work that would have felt
-        productive and changed nothing.
+        If reproduced, the stage breakdown would be the most decision-useful artifact: it would show whether
+        capture, inference, filtering, control, or actuation dominates the loop. The current portfolio can
+        report the original figures, but cannot show their distribution, run count, or worst-case behavior.
       </p>
     </section>
 
     <section class="doc__section" id="results" data-reveal>
-      <h2><span class="num">10</span>Results</h2>
+      <h2><span class="num">06A</span>Reported outcomes</h2>
       <ul class="tick-list tick-list--cyan">
-        <li><b>Sub-100 ms closed-loop latency achieved</b> on Raspberry Pi 4 with CPU-only inference.</li>
-        <li>YOLO detection, Kalman state estimation and PWM motor control integrated into a single continuously running loop.</li>
-        <li>Track continuity maintained across missed detections through prediction-only operation.</li>
-        <li>Residual latency compensated in the estimator, converting a systematic tracking lag into a bounded error.</li>
+        <li><b>Reported:</b> sub-100 ms closed-loop latency on Raspberry Pi 4 with CPU-only inference.</li>
+        <li><b>Reported:</b> detection, Kalman estimation, and PWM motor control integrated into one loop.</li>
+        <li><b>Reported:</b> prediction-only operation maintained a command input during missed detections.</li>
+        <li><b>Not publicly demonstrated:</b> timing distribution, tracking-error reduction, or dropout-recovery traces.</li>
       </ul>
-      <div class="note note--blue">
-        <div class="note__t">Media in progress</div>
-        <p>Plots and hardware photography for this project are being prepared. Result plots and the technical report are available on request.</p>
+      <div class="evidence-status">
+        <div class="claim-strip"><span class="evidence-tag evidence-tag--limited">Narrative only</span><span class="evidence-tag evidence-tag--open">Reproduction unavailable</span></div>
+        <p class="evidence-source">No chart is shown because no raw measurement series was available from which to generate one honestly.</p>
       </div>
     </section>
 
     <section class="doc__section" id="tradeoffs" data-reveal>
-      <h2><span class="num">11</span>Engineering tradeoffs</h2>
+      <h2><span class="num">07</span>Engineering tradeoffs</h2>
       <div class="table-wrap">
         <table class="reqs">
           <thead><tr><th>Tradeoff</th><th>Gained</th><th>Paid</th></tr></thead>
           <tbody>
-            <tr><td>Neural detector over classical vision</td><td>Robustness to lighting and background</td><td>Roughly three quarters of the latency budget</td></tr>
+            <tr><td>Neural detector over classical vision</td><td>Potential robustness to lighting and background</td><td>Reported to consume roughly three quarters of the latency budget</td></tr>
             <tr><td>Lower input resolution</td><td>Faster inference, shorter loop</td><td>Reduced detection range and small-target sensitivity</td></tr>
             <tr><td>Constant-velocity motion model</td><td>Cheap, stable, easy to tune</td><td>Lags during genuine target acceleration</td></tr>
             <tr><td>Latency compensation by prediction</td><td>Removes systematic tracking lag</td><td>Amplifies estimate error during manoeuvres, predicting a wrong velocity forward makes it worse</td></tr>
@@ -313,31 +324,28 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
     </section>
 
     <section class="doc__section" id="challenges" data-reveal>
-      <h2><span class="num">12</span>Challenges</h2>
+      <h2><span class="num">07A</span>Design challenges</h2>
       <h3>Inference dominating the loop</h3>
       <p>
-        The first working version was well over budget, and the instinct was to optimise the control and
-        filtering code. Instrumentation showed those stages together accounted for a few milliseconds.
-        All of the achievable saving was in inference, input resolution and model configuration,
-        and that is where the effort went.
+        The project narrative reports that inference dominated the loop. Reproducing this result requires
+        per-stage timestamp logs, device configuration, model identity, input resolution, and enough cycles
+        to expose scheduling tails rather than only an average.
       </p>
       <h3>Detection dropouts breaking the loop</h3>
       <p>
-        Driving the controller directly from detections produced visible stutter whenever the detector
-        missed a frame: the controller received no update, held its last command, and jerked when the
-        detection returned. Placing the Kalman filter between detector and controller, with the predict step
-        running unconditionally, turned a discontinuity into a smooth coast.
+        A controller driven directly from intermittent detections can stutter or hold stale commands. The
+        reported design places a continuously predicting Kalman filter between perception and control; a
+        public dropout trace is still needed to quantify coast duration and reacquisition behavior.
       </p>
       <h3>Scheduling jitter</h3>
       <p>
-        On a non-real-time kernel, the same pipeline can take noticeably different wall-clock time from one
-        cycle to the next. Compensating with a fixed nominal latency was therefore wrong, the
-        compensation interval had to be measured per cycle from actual timestamps.
+        On a non-real-time kernel, wall-clock time can vary from cycle to cycle. A credible latency claim
+        therefore needs percentile and maximum timing, not just a nominal or mean value.
       </p>
     </section>
 
     <section class="doc__section" id="lessons" data-reveal>
-      <h2><span class="num">13</span>Lessons learned</h2>
+      <h2><span class="num">07B</span>Lessons learned</h2>
       <ul class="tick-list tick-list--orange">
         <li><b>Measure before optimising.</b> Intuition about where time goes in a perception pipeline is reliably wrong.</li>
         <li><b>Latency is error.</b> In a tracking loop, delay and inaccuracy are the same quantity expressed in different units.</li>
@@ -348,28 +356,24 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
     </section>
 
     <section class="doc__section" id="future" data-reveal>
-      <h2><span class="num">14</span>Future work</h2>
+      <h2><span class="num">08</span>Next evidence gates</h2>
       <ol class="num-list">
-        <li>Quantised or distilled detector to cut the dominant latency term further.</li>
-        <li>Interacting-multiple-model tracker so acceleration is handled rather than lagged, the same upgrade GHOST-X already implements.</li>
-        <li>Multi-target tracking with proper data association instead of single-track nearest neighbour.</li>
-        <li>Real-time kernel or CPU isolation to bound scheduling jitter.</li>
-        <li>Feed-forward on the estimated target velocity to reduce the residual tracking error further.</li>
+        <li>Publish source, locked dependencies, model identity, hardware configuration, and run instructions.</li>
+        <li>Publish raw per-stage timestamps with sample count, mean, percentiles, and maximum.</li>
+        <li>Publish tracking-error and dropout-recovery traces tied to repeatable test inputs.</li>
+        <li>Then evaluate quantized detection, a maneuvering-target model, and tighter scheduling controls.</li>
       </ol>
     </section>
 
-    <section class="doc__section" id="gallery" data-reveal>
-      <h2><span class="num">15</span>Gallery</h2>
-      <div class="note note--blue">
-        <div class="note__t">Media in progress</div>
-        <p>Hardware photography and result plots for this project are being prepared. In the meantime the result plots and the full technical report are available on request.</p>
+    <section class="doc__section" id="source" data-reveal>
+      <h2><span class="num">09</span>Source status</h2>
+      <div class="evidence-status">
+        <div class="claim-strip"><span class="evidence-tag evidence-tag--open">No public repository</span><span class="evidence-tag evidence-tag--open">No report linked</span><span class="evidence-tag evidence-tag--open">No media set</span></div>
+        <p>No discoverable public project artifact supports a source or download link here. This replaces the previous empty gallery and report-request placeholders with the actual evidence state.</p>
+        <p class="evidence-source">When source and measurement artifacts are available, this section should link directly to immutable revisions and raw data rather than an availability promise.</p>
       </div>
-    </section>
-
-    <section class="doc__section" id="downloads" data-reveal>
-      <h2><span class="num">16</span>Source &amp; downloads</h2>
       <div class="btn-row">
-        <a class="btn btn--primary" href="../contact.html">Request technical report</a>
+        <a class="btn btn--primary" href="../projects.html">All projects</a>
         <a class="btn btn--ghost" href="spirit-iss.html">Next: TAMU-SPIRIT &rarr;</a>
       </div>
     </section>
@@ -410,7 +414,7 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
     </div>
     <div class="footer__bar">
       <span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span>
-      <span>PRJ-05 &middot; INTERCEPTION ROBOT</span>
+      <span>PRJ-07 &middot; INTERCEPTION ROBOT</span>
     </div>
   </div>
 </footer>

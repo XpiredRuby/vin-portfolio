@@ -311,6 +311,29 @@ code, .code {
   .nav__cta { margin: 0.75rem 0 0; text-align: center; padding: 0.7rem !important; }
 }
 
+@media (max-width: 900px) {
+  html:not(.js) .masthead__bar {
+    height: auto;
+    min-height: 62px;
+    flex-wrap: wrap;
+    padding-block: .5rem;
+  }
+  html:not(.js) .nav-toggle { display: none; }
+  html:not(.js) .nav {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    flex: 1 0 100%;
+    order: 2;
+  }
+  html:not(.js) .nav a { border: 0; padding: .45rem .55rem; }
+  html:not(.js) .nav__cta { margin: 0; padding: .42rem .7rem !important; }
+}
+
 /* Status strip under nav */
 .statusbar {
   border-bottom: 1px solid var(--line);

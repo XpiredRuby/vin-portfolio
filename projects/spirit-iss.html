@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TAMU-SPIRIT: ISS Payload Systems Engineering | Vinayak Manoj Nair</title>
-<meta name="description" content="Engineering case study: systems engineering for four ISS-bound experiments with Aegis Aerospace, requirements traceability, engineering change control, NASA SCR/SRR/PDR design reviews, and thermal trades across the LEO cycling envelope.">
+<meta name="description" content="Professional experience case study: internal-program systems engineering for four ISS-bound experiments, with public disclosure limited to approved process, scope, and milestone information.">
 <meta name="author" content="Vinayak Manoj Nair">
 <meta name="theme-color" content="#07090D">
 <link rel="canonical" href="https://vinnair.me/projects/spirit-iss.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
 <meta property="og:title" content="TAMU-SPIRIT: ISS Payload Systems Engineering">
-<meta property="og:description" content="Four ISS-bound experiments through SCR, SRR and PDR government design reviews with 100% milestone compliance.">
+<meta property="og:description" content="Internal-program systems engineering for four ISS-bound experiments, with proprietary artifacts and the public evidence boundary stated clearly.">
 <meta property="og:url" content="https://vinnair.me/projects/spirit-iss.html">
 <meta property="og:image" content="https://vinnair.me/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -22,7 +22,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"TechArticle","headline":"TAMU-SPIRIT: ISS Payload Systems Engineering","description":"Systems engineering for four ISS-bound experiments through NASA design review gates.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Systems engineering","Requirements management","Design reviews","Thermal analysis"],"url":"https://vinnair.me/projects/spirit-iss.html"}
+{"@context":"https://schema.org","@type":"TechArticle","headline":"TAMU-SPIRIT: ISS Payload Systems Engineering","description":"Professional internal-program systems engineering experience for four ISS-bound experiments, presented at an approved public level.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Systems engineering","Requirements management","Design reviews","Thermal analysis"],"url":"https://vinnair.me/projects/spirit-iss.html"}
 </script>
 </head>
 <body>
@@ -54,15 +54,14 @@
     <p class="crumbs"><a href="../index.html">Home</a> <span>/</span> <a href="../projects.html">Projects</a> <span>/</span> <span>PRJ-06 TAMU-SPIRIT</span></p>
     <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:1.2rem">
       <span class="pill pill--active"><i class="dot dot--amber"></i>Active</span>
-      <span class="pill">SCR / SRR / PDR complete</span>
+      <span class="pill">Professional / internal programme</span>
     </div>
     <h1>TAMU-SPIRIT</h1>
     <p class="hero__spec mono" style="margin-top:.9rem">ISS PAYLOAD &middot; SYSTEMS ENGINEERING &middot; NASA DESIGN REVIEWS</p>
     <p class="lede">
-      Four experiments manifested for the International Space Station, taken through government design
-      reviews with an eight-person engineering team. The technical work here is not an algorithm,
-      it is requirements, traceability, change control, and the discipline that keeps a real launch date
-      from slipping.
+      Systems-engineering work performed for four experiments targeting a September 2028 International Space Station launch,
+      within an internal professional programme. This case study focuses on approved process, responsibilities,
+      and milestone context; proprietary analyses, review packages, and hardware records are not public.
     </p>
     <div class="btn-row" style="margin-top:1.75rem">
       <a class="btn btn--primary" href="../experience.html">Experience record</a>
@@ -81,23 +80,33 @@
 
   <nav class="toc" aria-label="Case study contents">
     <p class="toc__t">Contents</p>
+    <a href="#evidence">00 Evidence boundary</a>
     <a href="#problem">01 Problem</a>
-    <a href="#requirements">02 Requirements</a>
-    <a href="#constraints">03 Constraints</a>
     <a href="#design">04 Review lifecycle</a>
     <a href="#process">05 Systems process</a>
     <a href="#thermal">06 Thermal trade</a>
     <a href="#implementation">07 My contribution</a>
-    <a href="#validation">08 V&amp;V approach</a>
     <a href="#results">09 Results</a>
-    <a href="#tradeoffs">10 Tradeoffs</a>
-    <a href="#challenges">11 Challenges</a>
-    <a href="#lessons">12 Lessons learned</a>
     <a href="#future">13 Forward work</a>
-    <a href="#gallery">14 Gallery</a>
+    <a href="#public-evidence">14 Public evidence</a>
   </nav>
 
   <div>
+
+    <section class="doc__section" id="evidence" data-reveal>
+      <h2><span class="num">00</span>Evidence boundary</h2>
+      <div class="evidence-status">
+        <div class="claim-strip" role="group" aria-label="Project evidence summary">
+          <span class="evidence-tag">Professional experience</span>
+          <span class="evidence-tag evidence-tag--internal">Internal programme</span>
+          <span class="evidence-tag evidence-tag--internal">Proprietary artifacts</span>
+          <span class="evidence-tag">Approved public summary</span>
+        </div>
+        <p><b>What can be shown:</b> role scope, systems-engineering methods, review-gate sequence, and approved milestone information.</p>
+        <p><b>What cannot be shown:</b> internal requirements matrices, ECR logs, thermal models, review packages, hardware imagery, and programme-specific result data.</p>
+        <p class="evidence-source"><b>Evidence source:</b> professional programme record and approved portfolio language. There is no public project repository. The public <a href="https://github.com/XpiredRuby/PACT-Controls" target="_blank" rel="noopener noreferrer">PACT-Controls repository</a> is a separate academic controls project and is not evidence for TAMU-SPIRIT.</p>
+      </div>
+    </section>
 
     <section class="doc__section" id="problem" data-reveal>
       <h2><span class="num">01</span>Problem</h2>
@@ -111,7 +120,7 @@
         A student team can build competent hardware and still fail that bar entirely, because the failure
         mode is not technical, it is a requirement nobody owns, a change nobody recorded, or an
         analysis whose assumptions nobody wrote down. With four experiments, eight engineers, and a
-        Sep 2028 SpaceX Dragon manifest, the coordination problem is the engineering problem.
+        target of a Sep 2028 SpaceX Dragon launch, the coordination problem is the engineering problem.
       </p>
       <p><b class="u-cyan">Problem statement.</b> Carry four ISS-bound experiments through NASA design review
         gates with complete requirement traceability and change control, while closing the thermal design
@@ -119,7 +128,8 @@
     </section>
 
     <section class="doc__section" id="requirements" data-reveal>
-      <h2><span class="num">02</span>Programme requirements</h2>
+      <h2><span class="num">02</span>Public-level requirement themes</h2>
+      <p>This table summarizes requirement categories at a portfolio-safe level; it is not the internal programme requirements matrix.</p>
       <div class="table-wrap">
         <table class="reqs">
           <thead><tr><th>ID</th><th>Requirement</th><th>Driver</th><th>Verification</th></tr></thead>
@@ -136,7 +146,7 @@
     </section>
 
     <section class="doc__section" id="constraints" data-reveal>
-      <h2><span class="num">03</span>Constraints</h2>
+      <h2><span class="num">03</span>Publicly describable constraints</h2>
       <div class="grid-2">
         <div class="panel"><div class="panel__head"><span>Environment</span></div><div class="panel__body">
           <ul class="tick-list">
@@ -168,7 +178,7 @@
         <div class="fig__body">
           <img src="../assets/diagrams/spirit-lifecycle.svg" width="880" height="300" loading="lazy" alt="Review gate sequence from system concept review through requirements, preliminary design and critical design review to Dragon flight in September 2028.">
         </div>
-        <figcaption><b>Fig. 1</b>Review gate sequence. SCR, SRR and PDR complete; CDR in work against the Sep 2028 manifest.</figcaption>
+        <figcaption><b>Fig. 1</b>Programme lifecycle illustration based on the approved public milestone record. Internal review artifacts are not displayed.</figcaption>
       </figure>
       <div class="table-wrap">
         <table class="reqs">
@@ -239,8 +249,9 @@ inspection or demonstration. no orphans in either direction.</span></div>
 
     <section class="doc__section" id="implementation" data-reveal>
       <h2><span class="num">07</span>My contribution</h2>
+      <p>The statements below are the approved public summary of professional responsibilities and programme status.</p>
       <ul class="tick-list">
-        <li><b>Maintained 100% milestone compliance</b> for four ISS-bound experiments targeting the Sep 2028 SpaceX Dragon launch.</li>
+        <li><b>Maintained the programme's reported 100% milestone compliance</b> for four ISS-bound experiments targeting the Sep 2028 SpaceX Dragon launch.</li>
         <li><b>Managed engineering change requests</b> and NASA compliance tracking through SCR, SRR and PDR government design reviews.</li>
         <li><b>Reduced thermal design risk for DASH</b> by performing material selection trades and thermal analysis across the &minus;120 &deg;C to +120 &deg;C LEO cycling environment.</li>
         <li><b>Coordinated quality documentation</b> across an eight-person engineering team, advancing the project toward late-2026 hardware manufacturing.</li>
@@ -265,12 +276,12 @@ inspection or demonstration. no orphans in either direction.</span></div>
     </section>
 
     <section class="doc__section" id="results" data-reveal>
-      <h2><span class="num">09</span>Results</h2>
+      <h2><span class="num">09</span>Approved programme status</h2>
       <div class="metrics" style="margin-bottom:1.5rem">
-        <div class="metric metric--green"><div class="metric__v">100%</div><div class="metric__k">Milestone compliance</div></div>
+        <div class="metric metric--green"><div class="metric__v">100%</div><div class="metric__k">Reported milestone compliance</div></div>
         <div class="metric"><div class="metric__v">4</div><div class="metric__k">ISS experiments</div></div>
-        <div class="metric"><div class="metric__v">3</div><div class="metric__k">Review gates passed</div></div>
-        <div class="metric metric--orange"><div class="metric__v">240 &deg;C</div><div class="metric__k">Thermal band closed</div></div>
+        <div class="metric"><div class="metric__v">3</div><div class="metric__k">Recorded review gates</div></div>
+        <div class="metric metric--orange"><div class="metric__v">240 &deg;C</div><div class="metric__k">Design environment span</div></div>
       </div>
       <ul class="tick-list tick-list--cyan">
         <li>SCR, SRR and PDR government design reviews satisfied on schedule, with CDR in work.</li>
@@ -278,6 +289,7 @@ inspection or demonstration. no orphans in either direction.</span></div>
         <li>Configuration baseline maintained across four experiments with a complete, auditable change history.</li>
         <li>Programme advanced toward late-2026 hardware manufacturing.</li>
       </ul>
+      <p class="evidence-source">These status statements come from the internal programme record. The underlying board dispositions, matrices, and analysis files are proprietary and are not linked from this site.</p>
     </section>
 
     <section class="doc__section" id="tradeoffs" data-reveal>
@@ -339,16 +351,16 @@ inspection or demonstration. no orphans in either direction.</span></div>
       </ol>
     </section>
 
-    <section class="doc__section" id="gallery" data-reveal>
-      <h2><span class="num">14</span>Gallery</h2>
-      <div class="note note--blue">
-        <div class="note__t">Media in progress</div>
-        <p>Hardware photography and result plots for this project are being prepared. In the meantime the result plots and the full technical report are available on request.</p>
+    <section class="doc__section" id="public-evidence" data-reveal>
+      <h2><span class="num">14</span>Public evidence</h2>
+      <div class="evidence-status">
+        <div class="claim-strip"><span class="evidence-tag evidence-tag--open">No public repository</span><span class="evidence-tag evidence-tag--internal">No internal downloads</span><span class="evidence-tag evidence-tag--internal">Release-controlled</span></div>
+        <p>Programme-specific design detail and artifacts are withheld under the internal release boundary. The illustrations on this page explain process and lifecycle only; they are not programme drawings or result plots.</p>
+        <p class="evidence-source">Nothing on this page should be interpreted as a public release of partner, NASA, DCMA, experiment-team, or launch-provider documentation.</p>
       </div>
-      <div class="note note--blue" style="margin-top:1.25rem">
-        <div class="note__t">Release note</div>
-        <p>Programme-specific design detail is withheld pending release approval. Everything described here
-           is at the level of process, method and publicly stated results.</p>
+      <div class="btn-row" style="margin-top:1.5rem">
+        <a class="btn btn--primary" href="../experience.html">Experience record</a>
+        <a class="btn btn--ghost" href="kestrel.html">Next: Project KESTREL &rarr;</a>
       </div>
     </section>
 

@@ -4,42 +4,72 @@
     "subtitle": "Engineering identity, working principles, and current focus",
     "href": "about.html",
     "kind": "Page",
-    "tags": ["about", "bio", "profile", "engineering"]
+    "tags": [
+      "about",
+      "bio",
+      "profile",
+      "engineering"
+    ]
   },
   {
     "title": "Projects",
     "subtitle": "Evidence-backed aerospace engineering case studies",
     "href": "projects.html",
     "kind": "Page",
-    "tags": ["projects", "portfolio", "case studies", "evidence"]
+    "tags": [
+      "projects",
+      "portfolio",
+      "case studies",
+      "evidence"
+    ]
   },
   {
     "title": "Experience",
     "subtitle": "Spacecraft systems, controls, and research experience",
     "href": "experience.html",
     "kind": "Page",
-    "tags": ["experience", "work", "systems", "controls"]
+    "tags": [
+      "experience",
+      "work",
+      "systems",
+      "controls"
+    ]
   },
   {
     "title": "Technical skills",
     "subtitle": "Evidence-linked GNC, software, structures, and systems capabilities",
     "href": "skills.html",
     "kind": "Page",
-    "tags": ["skills", "cpp", "python", "ros2", "fea", "gnc"]
+    "tags": [
+      "skills",
+      "cpp",
+      "python",
+      "ros2",
+      "fea",
+      "gnc"
+    ]
   },
   {
     "title": "Resume",
     "subtitle": "Current recruiter-facing resume",
     "href": "resume.html",
     "kind": "Page",
-    "tags": ["resume", "cv"]
+    "tags": [
+      "resume",
+      "cv"
+    ]
   },
   {
     "title": "Contact",
     "subtitle": "Email, LinkedIn, GitHub, and availability",
     "href": "contact.html",
     "kind": "Page",
-    "tags": ["contact", "email", "linkedin", "availability"]
+    "tags": [
+      "contact",
+      "email",
+      "linkedin",
+      "availability"
+    ]
   },
   {
     "title": "GHOST-X",
@@ -47,7 +77,15 @@
     "href": "projects/ghost.html",
     "kind": "Project",
     "key": "ghost",
-    "tags": ["gnc", "state estimation", "imm", "kalman", "ros2", "raspberry pi", "tracking"]
+    "tags": [
+      "gnc",
+      "state estimation",
+      "imm",
+      "kalman",
+      "ros2",
+      "raspberry pi",
+      "tracking"
+    ]
   },
   {
     "title": "ASTRA-OS",
@@ -55,7 +93,14 @@
     "href": "projects/astrasim-fsw.html",
     "kind": "Project",
     "key": "astra",
-    "tags": ["flight software", "cpp", "fdir", "verification", "telemetry", "spacecraft"]
+    "tags": [
+      "flight software",
+      "cpp",
+      "fdir",
+      "verification",
+      "telemetry",
+      "spacecraft"
+    ]
   },
   {
     "title": "AeroFrame-DT",
@@ -63,48 +108,103 @@
     "href": "projects/md11-structures.html",
     "kind": "Project",
     "key": "aeroframe",
-    "tags": ["structures", "stress", "fea", "fatigue", "damage tolerance", "allowables"]
+    "tags": [
+      "structures",
+      "stress",
+      "fea",
+      "fatigue",
+      "damage tolerance",
+      "allowables"
+    ]
   },
   {
     "title": "Rocket Landing GNC",
-    "subtitle": "6-DOF propulsive landing simulation and dispersed campaign",
+    "subtitle": "Exploratory point-mass descent prototype · verification gates pending",
     "href": "projects/rocket-landing-gnc.html",
     "kind": "Project",
     "key": "rocket",
-    "tags": ["gnc", "6dof", "simulation", "controls", "monte carlo", "rocket"]
+    "tags": [
+      "gnc",
+      "point mass",
+      "prototype",
+      "controls",
+      "evidence pending",
+      "rocket"
+    ]
   },
   {
     "title": "Interception Robot",
-    "subtitle": "Embedded perception-to-actuation autonomy with latency budgeting",
+    "subtitle": "Reported perception-to-actuation prototype - public timing and test artifacts unavailable",
     "href": "projects/interceptor.html",
     "kind": "Project",
     "key": "interceptor",
-    "tags": ["autonomy", "embedded", "perception", "controls", "robotics"]
+    "tags": [
+      "autonomy",
+      "embedded",
+      "perception",
+      "controls",
+      "robotics"
+    ]
   },
   {
     "title": "TAMU-SPIRIT",
-    "subtitle": "ISS payload systems engineering · requirements · thermal trades",
+    "subtitle": "Internal-program ISS payload systems engineering - public artifacts limited",
     "href": "projects/spirit-iss.html",
     "kind": "Project",
     "key": "spirit",
-    "tags": ["systems", "spacecraft", "iss", "requirements", "thermal", "reviews"]
+    "tags": [
+      "systems",
+      "spacecraft",
+      "iss",
+      "requirements",
+      "thermal",
+      "reviews"
+    ]
   },
   {
     "title": "Project KESTREL",
-    "subtitle": "Precision-landing UAV design closeout and engineering stop decision",
+    "subtitle": "Archived UAV design - CDR readiness and precision target not publicly verified",
     "href": "projects/kestrel.html",
     "kind": "Project",
     "key": "kestrel",
-    "tags": ["uav", "landing", "autonomy", "closeout", "systems"]
+    "tags": [
+      "uav",
+      "landing",
+      "autonomy",
+      "closeout",
+      "systems"
+    ]
   },
   {
     "title": "F-16-inspired flight-controls SIL",
-    "subtitle": "Educational fixed-wing controls, actuator limits, and seeded uncertainty",
-    "href": "https://github.com/XpiredRuby/f16-flight-sim",
-    "kind": "Repository",
+    "subtitle": "Representative fixed-wing controls SIL · response plots · seeded 50-run uncertainty",
+    "href": "projects/f16-flight-controls.html",
+    "kind": "Project",
     "key": "f16",
+    "tags": [
+      "controls",
+      "flight dynamics",
+      "sil",
+      "monte carlo",
+      "python",
+      "evidence"
+    ]
+  },
+  {
+    "title": "Project CHASER",
+    "subtitle": "Pre-hardware spacecraft relative-navigation reference implementation",
+    "href": "https://github.com/XpiredRuby/project-chaser",
+    "kind": "Repository",
+    "key": "chaser",
     "external": true,
-    "tags": ["controls", "flight dynamics", "sil", "monte carlo", "python"]
+    "tags": [
+      "relative navigation",
+      "ukf",
+      "fdir",
+      "replay",
+      "spacecraft",
+      "pre-hardware"
+    ]
   },
   {
     "title": "GHOST-X source",
@@ -112,7 +212,11 @@
     "href": "https://github.com/XpiredRuby/ghost-vins-eskf",
     "kind": "Repository",
     "external": true,
-    "tags": ["github", "ghost", "source"]
+    "tags": [
+      "github",
+      "ghost",
+      "source"
+    ]
   },
   {
     "title": "ASTRA-OS source",
@@ -120,7 +224,11 @@
     "href": "https://github.com/XpiredRuby/AstraSim-FSW",
     "kind": "Repository",
     "external": true,
-    "tags": ["github", "astra", "source"]
+    "tags": [
+      "github",
+      "astra",
+      "source"
+    ]
   },
   {
     "title": "AeroFrame-DT source",
@@ -128,6 +236,10 @@
     "href": "https://github.com/XpiredRuby/aeroframe-dt",
     "kind": "Repository",
     "external": true,
-    "tags": ["github", "aeroframe", "source"]
+    "tags": [
+      "github",
+      "aeroframe",
+      "source"
+    ]
   }
 ]

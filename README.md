@@ -24,10 +24,9 @@ The homepage is deliberately ordered for a short technical screen:
 
 1. identity, degree, target roles and direct resume link;
 2. four proof points spanning GNC, flight software, stress and flight-controls SIL;
-3. capability areas;
-4. three flagship case studies;
-5. applied engineering experience;
-6. selected public repositories and contact.
+3. four evidence-backed flagship case studies;
+4. an at-a-glance proof gallery with evidence boundaries;
+5. applied engineering experience and contact.
 
 The detailed project register keeps broader work available without giving every project equal visual weight.
 
@@ -71,6 +70,7 @@ vin-portfolio/
 │   ├── css/site.css
 │   ├── js/site.js
 │   ├── js/github.js            selected live public-repository feed
+│   ├── evidence/               pinned source-backed plots + provenance manifest
 │   ├── hero/                   generated project illustrations
 │   └── diagrams/               generated technical diagrams
 ├── tools/validate_site.py      zero-dependency integrity gate
@@ -100,7 +100,7 @@ GitHub Actions runs the same checks on pull requests. The validator fails on bro
 
 ## Graphics policy
 
-Project hero graphics are **illustrations, not engineering data**. They help a reviewer understand the system quickly but are never presented as measured results. Quantitative results belong in project text and, when public, in the underlying repository evidence.
+Project hero graphics are **illustrations, not engineering data**. They remain only where they help explain a system that has no publishable media. Public repository-backed plots are copied from pinned source or rendered from pinned code/config into `assets/evidence/`, documented in the manifest, captioned with their evidence class, and displayed without cropping.
 
 Regenerate project illustrations with:
 

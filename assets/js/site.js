@@ -5,6 +5,8 @@
 (function () {
   'use strict';
 
+  document.documentElement.classList.add('js');
+
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var scriptUrl = document.currentScript && document.currentScript.src ? new URL(document.currentScript.src) : null;
   var path = window.location.pathname.replace(/\/+$/, '');

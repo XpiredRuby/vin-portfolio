@@ -1,5 +1,12 @@
 # Assets
 
+## Evidence figures
+
+`evidence/` contains source-backed plots and diagrams displayed in the project
+case studies. `evidence/manifest.json` pins each group to a repository commit,
+records the upstream path or generation basis, and states the claim boundary.
+These figures are engineering evidence, not decorative concept art.
+
 | Path | What it is | Regenerate with |
 |---|---|---|
 | `css/site.css` | Stylesheet entrypoint for the report, profile, and technical-product layers | hand-edited |
@@ -29,7 +36,7 @@ chromium --headless --no-pdf-header-footer \
   --print-to-pdf=assets/resume.pdf http://localhost:8000/resume.html
 ```
 
-The print stylesheet strips navigation and footers, converts to black on white, forces reveal-animated content visible, and tightens spacing to three pages.
+The print stylesheet strips navigation and footers, converts to black on white, forces reveal-animated content visible, and tightens spacing to a compact two-page resume.
 
 ## Regenerating the OG image
 

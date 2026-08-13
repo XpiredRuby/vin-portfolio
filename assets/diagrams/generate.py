@@ -77,7 +77,7 @@ def caption(w, h, left, right):
 
 
 def write(name, body):
-    with open(os.path.join(OUT, name), "w") as f:
+    with open(os.path.join(OUT, name), "w", encoding="utf-8", newline="\n") as f:
         f.write(body + "\n</svg>\n")
     print("wrote", name)
 
@@ -122,10 +122,10 @@ s += txt(500, 258, "OCCLUSION → MEASUREMENT DROPOUT → DEAD-RECKON ON IMU, IN
 s += caption(w, h, "FIG. 1 — SYSTEM BLOCK DIAGRAM", "TARGET: RASPBERRY PI 4B / AARCH64")
 write("ghost-architecture.svg", s)
 
-# ---------------------------------------------------------------- AstraSim
+# ---------------------------------------------------------------- ASTRA-OS
 w, h = 880, 400
-s = head(w, h, "AstraSim-FSW hardware-in-the-loop verification architecture")
-s += txt(16, 26, "ASTRASIM-FSW // HIL VERIFICATION ARCHITECTURE", 10, C["cyan"], anchor="start", ls="0.16em")
+s = head(w, h, "ASTRA-OS native target execution and software assurance architecture")
+s += txt(16, 26, "ASTRA-OS // NATIVE TARGET + ASSURANCE ARCHITECTURE", 10, C["cyan"], anchor="start", ls="0.16em")
 # ground segment
 s += f'<rect x="20" y="52" width="290" height="270" rx="2" fill="none" stroke="{C["line"]}" stroke-dasharray="4 3"/>'
 s += txt(165, 70, "GROUND SEGMENT — PYTHON", 8.5, C["faint"], ls="0.14em")
@@ -161,40 +161,41 @@ s += path("M567 176L567 184", "line2")
 s += path("M752 176L752 184", "line2")
 s += path("M567 228L567 236", "green", "a")
 s += path("M752 228L752 236", "green", "a")
-s += caption(w, h, "FIG. 1 — HIL VERIFICATION TOPOLOGY", "EVIDENCE CLASS: HARDWARE TARGET RUN")
+s += caption(w, h, "FIG. 1 - TARGET EXECUTION TOPOLOGY", "NATIVE RASPBERRY PI EXECUTION / NOT HIL")
 write("astrasim-architecture.svg", s)
 
 # ---------------------------------------------------------------- Rocket GNC
 w, h = 880, 320
-s = head(w, h, "Booster descent guidance navigation and control loop")
-s += txt(16, 26, "ROCKET LANDING GNC // 6-DOF CLOSED LOOP", 10, C["cyan"], anchor="start", ls="0.16em")
+s = head(w, h, "Planned rocket landing GNC architecture; current evidence is a point-mass prototype")
+s += txt(16, 26, "ROCKET LANDING GNC // PLANNED ARCHITECTURE", 10, C["cyan"], anchor="start", ls="0.16em")
+s += txt(440, 45, "FUTURE-FIDELITY BLOCKS / NOT THE IMPLEMENTED BASELINE", 8.5, C["orange"], w=500, ls="0.12em")
 s += box(20, 150, 130, 52, "GUIDANCE", "REF. TRAJECTORY", "cyan")
 s += box(185, 150, 130, 52, "CONTROL", "PID → TVC CMD", "blue")
-s += box(350, 150, 130, 52, "ACTUATOR", "GIMBAL + THROTTLE", "blue")
-s += box(515, 150, 150, 52, "6-DOF PLANT", "RIGID BODY + AERO", "orange")
-s += box(700, 150, 150, 52, "NAVIGATION", "STATE ESTIMATE", "cyan")
+s += box(350, 150, 130, 52, "ACTUATOR", "PLANNED GIMBAL", "line", dash=True)
+s += box(515, 150, 150, 52, "6-DOF PLANT", "PLANNED RIGID BODY", "orange", dash=True)
+s += box(700, 150, 150, 52, "NAVIGATION", "PLANNED ESTIMATE", "line", dash=True)
 for x in (150, 315, 480, 665):
     s += arrow(x, 176, x + 33, 176)
 # disturbances
-s += box(515, 60, 150, 42, "STOCHASTIC WIND", "MONTE CARLO DRAW", "orange", dash=True)
+s += box(515, 60, 150, 42, "WIND (PLANNED)", "SEEDED DRAW / N TBD", "orange", dash=True)
 s += path("M590 102L590 148", "orange", "ao")
-s += box(700, 60, 150, 42, "SENSOR NOISE", "IMU + ALT BIAS", "orange", dash=True)
+s += box(700, 60, 150, 42, "SENSORS (PLANNED)", "NOISE + BIAS", "orange", dash=True)
 s += path("M775 102L775 148", "orange", "ao")
 # feedback
 s += path("M775 202L775 260L85 260L85 204", "cyan", "ac")
 s += txt(430, 254, "FEEDBACK — ESTIMATED STATE x̂ = [r, v, q, ω, m]", 9, C["mute"])
 # aero heating branch
-s += box(350, 60, 130, 42, "AEROTHERMAL", "q̇ = ½ρV³ Cₕ", "line", dash=True)
+s += box(350, 60, 130, 42, "AERO (PLANNED)", "SCREENING MODEL", "line", dash=True)
 s += path("M415 102L415 148", "line2", dash=True)
 s += box(20, 60, 130, 42, "MISSION PROFILE", "ENTRY → LANDING", "line")
 s += path("M85 102L85 148", "line2")
-s += caption(w, h, "FIG. 1 — GNC LOOP TOPOLOGY", "500 MONTE CARLO TRIALS / DISPERSED INITIAL STATE")
+s += caption(w, h, "FIG. 1 — PLANNED GNC ARCHITECTURE", "CURRENT EVIDENCE: POINT MASS / 1 NOMINAL RUN")
 write("gnc-loop.svg", s)
 
 # ---------------------------------------------------------------- Interceptor
 w, h = 880, 320
-s = head(w, h, "Autonomous interception perception to actuation pipeline")
-s += txt(16, 26, "INTERCEPTOR // PERCEPTION-TO-ACTUATION PIPELINE", 10, C["cyan"], anchor="start", ls="0.16em")
+s = head(w, h, "Reported interception pipeline timing allocation; no public raw timing trace")
+s += txt(16, 26, "INTERCEPTOR // REPORTED PIPELINE ALLOCATION", 10, C["cyan"], anchor="start", ls="0.16em")
 stages = [
     (20, "CAMERA", "FRAME CAPTURE", "line", "8 ms"),
     (190, "YOLO", "DETECT + NMS", "cyan", "52 ms"),
@@ -207,23 +208,24 @@ for x, a, b, col, t in stages:
     s += txt(x + 75, 188, t, 9, C["orange"])
     if x > 20:
         s += arrow(x - 20, 138, x - 3, 138)
-s += txt(440, 80, "END-TO-END BUDGET: &lt; 100 ms CLOSED-LOOP LATENCY", 10, C["txt"], w=500)
+s += txt(440, 68, "REPORTED VALUES / NO PUBLIC RAW TIMING TRACE", 9, C["orange"], w=500, ls="0.10em")
+s += txt(440, 86, "END-TO-END DESIGN TARGET: &lt; 100 ms", 9.5, C["txt"], w=500)
 s += f'<rect x="20" y="205" width="830" height="26" rx="2" fill="{C["panel"]}" stroke="{C["line"]}"/>'
 xc = 20
-for frac, col, lbl in [(0.12, "line2", ""), (0.76, "cyan", "INFERENCE 76%"), (0.03, "blue", ""), (0.03, "blue", ""), (0.06, "green", "")]:
+for frac, col, lbl in [(0.12, "line2", ""), (0.76, "cyan", "INFERENCE ~76% / REPORTED"), (0.03, "blue", ""), (0.03, "blue", ""), (0.06, "green", "")]:
     wpx = 830 * frac
     s += f'<rect x="{xc:.1f}" y="205" width="{wpx:.1f}" height="26" fill="{C[col]}" fill-opacity="0.28"/>'
     if lbl:
         s += txt(xc + wpx / 2, 222, lbl, 9, C["cyan"])
     xc += wpx
-s += txt(435, 253, "INFERENCE DOMINATES THE BUDGET — OPTIMISATION EFFORT TARGETED THERE FIRST", 8.5, C["faint"])
-s += caption(w, h, "FIG. 1 — PIPELINE + LATENCY BUDGET", "PLATFORM: RASPBERRY PI 4 / EMBEDDED LINUX")
+s += txt(435, 253, "REPORTED NARRATIVE: INFERENCE DOMINATED THE BUDGET", 8.5, C["faint"])
+s += caption(w, h, "FIG. 1 — REPORTED TIMING ALLOCATION", "PUBLIC SOURCE + RAW TRACE UNAVAILABLE")
 write("interceptor-pipeline.svg", s)
 
-# ---------------------------------------------------------------- MD-11 structures
+# ---------------------------------------------------------------- AeroFrame-DT
 w, h = 880, 380
-s = head(w, h, "MD-11 wing box load path and finite element analysis workflow")
-s += txt(16, 26, "AEROFRAME-MD11 // LOAD PATH + FEA WORKFLOW", 10, C["cyan"], anchor="start", ls="0.16em")
+s = head(w, h, "AeroFrame-DT synthetic fitting analysis workflow")
+s += txt(16, 26, "AEROFRAME-DT // SYNTHETIC LOAD PATH + FEA WORKFLOW", 10, C["cyan"], anchor="start", ls="0.16em")
 # fuselage / wing wireframe
 s += f'<ellipse cx="440" cy="120" rx="300" ry="26" fill="none" stroke="{C["line2"]}"/>'
 s += f'<path d="M200 120L440 62L680 120L440 178Z" fill="none" stroke="{C["line2"]}" stroke-dasharray="3 3"/>'
@@ -248,7 +250,7 @@ for i, (x, lbl) in enumerate([(20, "CAD ASSEMBLY"), (190, "MESH + BC"), (360, "S
     s += box(x, y, 150, 34, lbl, None, "blue" if i in (2, 3, 4) else "line")
     if x > 20:
         s += arrow(x - 20, y + 17, x - 3, y + 17)
-s += caption(w, h, "FIG. 1 — LOAD PATH SCHEMATIC (NOT TO SCALE)", "24-PART PARAMETRIC ASSEMBLY / SOLIDWORKS + ABAQUS")
+s += caption(w, h, "FIG. 1 — LOAD PATH SCHEMATIC (NOT TO SCALE)", "SYNTHETIC FITTING / EDUCATIONAL NON-OEM")
 write("md11-structures.svg", s)
 
 # ---------------------------------------------------------------- SPIRIT lifecycle
