@@ -20,7 +20,9 @@
 
   var mount = document.getElementById('gh-list');
   var countEl = document.getElementById('gh-count');
+  var statusEl = document.getElementById('gh-status');
   if (!mount) { return; }
+  var fallbackMarkup = mount.innerHTML;
 
   // GitHub's own linguist colours for the languages this profile uses.
   var LANG = {
@@ -92,15 +94,24 @@
           '<span class="gh__meta">' + meta.join('') + '</span>' +
         '</a>';
     }).join('');
+    mount.setAttribute('aria-busy', 'false');
+    if (statusEl) { statusEl.textContent = 'Live data from GitHub'; }
   }
 
   function fallback() {
-    mount.innerHTML = '<p class="gh__empty">Repository list could not be loaded right now. ' +
-      'Browse public source at <a href="https://github.com/' + USER + '" target="_blank" rel="noopener noreferrer">github.com/' + USER + '</a>.</p>';
-    if (countEl) { countEl.textContent = ''; }
+    if (fallbackMarkup.trim()) {
+      mount.innerHTML = fallbackMarkup;
+    } else {
+      mount.innerHTML = '<p class="gh__empty">Repository data could not be loaded right now. ' +
+        'Browse public source at <a href="https://github.com/' + USER + '" target="_blank" rel="noopener noreferrer">github.com/' + USER + '</a>.</p>';
+    }
+    mount.setAttribute('aria-busy', 'false');
+    if (statusEl) { statusEl.textContent = 'GitHub unavailable - showing saved public links'; }
   }
 
   function load() {
+    mount.setAttribute('aria-busy', 'true');
+    if (statusEl) { statusEl.textContent = 'Loading current repository data...'; }
     var timeout = new Promise(function (_, reject) {
       setTimeout(function () { reject(new Error('timeout')); }, 8000);
     });

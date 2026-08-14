@@ -575,8 +575,6 @@ body.aero-ui figcaption { color: #aebed1; font-size: .78rem; line-height: 1.55; 
   body.aero-ui.page-project-detail li {
     color: #1f2937 !important;
   }
-  .resume-entry { margin-bottom: .52rem !important; break-inside: avoid; }
-  .resume-entry h3 + p { margin-bottom: .28rem !important; }
   .tick-list { gap: .12rem !important; }
   .tick-list li { padding-left: .9rem !important; font-size: 8.1pt !important; line-height: 1.25 !important; }
   .spec { font-size: 7.8pt !important; }

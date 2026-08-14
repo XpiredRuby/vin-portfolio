@@ -10,41 +10,23 @@ These figures are engineering evidence, not decorative concept art.
 | Path | What it is | Regenerate with |
 |---|---|---|
 | `css/site.css` | Stylesheet entrypoint for the report, profile, and technical-product layers | hand-edited |
+| `css/portfolio-refresh.css` | Cohesive layouts for Home, About, Projects, Experience, Skills, and Contact | hand-edited |
 | `css/technical-product.css` | Command palette, project filtering, technical-diagram presentation, and View Transition enhancements | hand-edited |
 | `js/site.js` | Core progressive-enhancement loader, nav, reveal, counters, clock, and TOC scroll-spy | hand-edited |
 | `js/command-palette.js` | Accessible Cmd/Ctrl-K quick navigation backed by the local search index | hand-edited |
 | `js/project-filter.js` | URL-synced search and domain filtering for `projects.html` | hand-edited |
-| `js/github.js` | Live GitHub repository + commit feed (2 unauthenticated API calls, lazy, graceful fallback) | hand-edited |
+| `js/github.js` | Live public GitHub repository feed (one unauthenticated API call, lazy, graceful fallback) | hand-edited |
 | `data/search-index.json` | Local command-palette index for pages, projects, and public repositories | hand-edited |
 | `diagrams/*.svg` | Primary technical visuals used across the case studies | `python3 assets/diagrams/generate.py` |
 | `diagrams/generate.py` | Single source of truth for generated technical diagrams | hand-edited |
-| `headshot.jpg` | Web-optimized professional portrait | replace from the approved source photo |
+| `headshot-about.webp` | Web-optimized professional portrait used only on About | replace from the approved source photo |
 | `hero/*-ai.jpg` | Optional concept artwork retained as decorative assets, not technical evidence and not the default project visual | image source + manual optimization |
-| `og-image.png` | 1200×630 social preview card | render `og-image.src.html` (see below) |
-| `og-image.src.html` | Source page for the OG image | hand-edited |
-| `resume.pdf` | Generated from `resume.html` via the print stylesheet | see below |
+| `og-image.png` | 1200×630 social preview card for the current portfolio identity | generated from the approved portfolio social-card brief |
+| `og-image.src.html` | Historical code-rendered preview retained for reference | hand-edited |
 
 ## Visual hierarchy
 
 Technical diagrams, plots, real screenshots, and test evidence are the primary project visuals. Concept artwork may be retained as decorative material, but it should never replace or be presented as engineering evidence.
-
-## Regenerating the resume PDF
-
-```bash
-python3 -m http.server 8000 &
-chromium --headless --no-pdf-header-footer \
-  --print-to-pdf=assets/resume.pdf http://localhost:8000/resume.html
-```
-
-The print stylesheet strips navigation and footers, converts to black on white, forces reveal-animated content visible, and tightens spacing to a compact two-page resume.
-
-## Regenerating the OG image
-
-```bash
-chromium --headless --window-size=1200,712 --hide-scrollbars \
-  --screenshot=/tmp/og_raw.png assets/og-image.src.html
-# crop the top 1200×630, headless reserves ~80px for window chrome
-```
 
 ## Adding project media
 

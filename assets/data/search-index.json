@@ -50,25 +50,15 @@
     ]
   },
   {
-    "title": "Resume",
-    "subtitle": "Current recruiter-facing resume",
-    "href": "resume.html",
-    "kind": "Page",
-    "tags": [
-      "resume",
-      "cv"
-    ]
-  },
-  {
     "title": "Contact",
-    "subtitle": "Email, LinkedIn, GitHub, and availability",
+    "subtitle": "Email, LinkedIn, and GitHub",
     "href": "contact.html",
     "kind": "Page",
     "tags": [
       "contact",
       "email",
       "linkedin",
-      "availability"
+      "github"
     ]
   },
   {

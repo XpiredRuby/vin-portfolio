@@ -13,25 +13,21 @@
   var isHome = path === '' || path === '/' || /\/index\.html$/.test(path);
   var isProjects = /\/projects\.html$/.test(path);
   var isProjectDetail = /\/projects\/[^/]+\.html$/.test(path);
-  var isResume = /\/resume\.html$/.test(path);
   var isAbout = /\/about\.html$/.test(path);
+  var isExperience = /\/experience\.html$/.test(path);
+  var isSkills = /\/skills\.html$/.test(path);
+  var isContact = /\/contact\.html$/.test(path);
 
-  if (!isResume) {
-    document.body.classList.add('aero-ui');
-    if (isHome) { document.body.classList.add('page-home'); }
-    else if (isProjects) { document.body.classList.add('page-projects'); }
-    else if (isProjectDetail) { document.body.classList.add('page-project-detail'); }
-    else { document.body.classList.add('page-standard'); }
-  }
-
-  /* Keep About discoverable from legacy pages without rewriting every file. */
-  var primaryNav = document.getElementById('primary-nav');
-  if (primaryNav && !primaryNav.querySelector('a[href$="about.html"]')) {
-    var aboutLink = document.createElement('a');
-    aboutLink.href = isProjectDetail ? '../about.html' : 'about.html';
-    aboutLink.textContent = 'About';
-    if (isAbout) { aboutLink.setAttribute('aria-current', 'page'); }
-    primaryNav.insertBefore(aboutLink, primaryNav.firstChild);
+  document.body.classList.add('aero-ui');
+  if (isHome) { document.body.classList.add('page-home'); }
+  else if (isProjects) { document.body.classList.add('page-projects'); }
+  else if (isProjectDetail) { document.body.classList.add('page-project-detail'); }
+  else {
+    document.body.classList.add('page-standard');
+    if (isAbout) { document.body.classList.add('page-about'); }
+    else if (isExperience) { document.body.classList.add('page-experience'); }
+    else if (isSkills) { document.body.classList.add('page-skills'); }
+    else if (isContact) { document.body.classList.add('page-contact'); }
   }
 
   /* ---------- Mobile navigation ---------- */
@@ -153,10 +149,14 @@
     el.textContent = String(new Date().getFullYear());
   });
 
-  var printBtn = document.getElementById('print-resume');
-  if (printBtn) {
-    printBtn.addEventListener('click', function () { window.print(); });
-  }
+  /* Native details stay fully usable without JS; this only opens a role before
+     an in-page jump so the destination content is immediately visible. */
+  document.querySelectorAll('.experience-jump a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      var target = document.querySelector(link.getAttribute('href'));
+      if (target && target.tagName === 'DETAILS') { target.open = true; }
+    });
+  });
 
   /* ---------- Optional product-grade enhancements ---------- */
   function loadEnhancement(filename) {
@@ -167,6 +167,6 @@
     document.head.appendChild(script);
   }
 
-  if (!isResume) { loadEnhancement('command-palette.js'); }
+  loadEnhancement('command-palette.js');
   if (isProjects) { loadEnhancement('project-filter.js'); }
 })();

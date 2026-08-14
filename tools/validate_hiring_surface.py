@@ -1,61 +1,63 @@
 #!/usr/bin/env python3
-"""Guard the recruiter-facing surface against visual and positioning regressions."""
+"""Guard the recruiter-facing information architecture and contact surface."""
 from pathlib import Path
+import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-index = (ROOT / "index.html").read_text(encoding="utf-8")
-projects = (ROOT / "projects.html").read_text(encoding="utf-8")
-site_css = (ROOT / "assets" / "css" / "site.css").read_text(encoding="utf-8")
+
+
+def read(relative: str) -> str:
+    return (ROOT / relative).read_text(encoding="utf-8")
+
+
+index = read("index.html")
+about = read("about.html")
+projects = read("projects.html")
+experience = read("experience.html")
+skills = read("skills.html")
+contact = read("contact.html")
+ghost = read("projects/ghost.html")
+aeroframe = read("projects/md11-structures.html")
+site_css = read("assets/css/site.css")
+github_js = read("assets/js/github.js")
+
+public_pages = sorted(ROOT.rglob("*.html"))
 public_html = "\n".join(
     page.read_text(encoding="utf-8")
-    for page in sorted(ROOT.rglob("*.html"))
+    for page in public_pages
     if page != ROOT / "assets" / "og-image.src.html"
 )
-no_repo_pages = "\n".join(
-    (ROOT / "projects" / name).read_text(encoding="utf-8")
-    for name in ("rocket-landing-gnc.html", "interceptor.html", "spirit-iss.html")
-)
 
-stale_availability = (
-    "Fall 2026",
-    "Spring 2027",
-    "full-time roles",
-    "Open to opportunities",
-)
-
-checks = {
-    "homepage professional headshot": 'assets/headshot-about.webp' in index,
-    "GHOST real evidence shown": 'assets/evidence/ghost/estimator-rmse.png' in index and 'assets/evidence/ghost/estimator-rmse.png' in projects,
-    "ASTRA architecture shown": 'assets/evidence/astra/architecture.svg' in index and 'assets/evidence/astra/architecture.svg' in projects,
-    "AeroFrame FE evidence shown": 'assets/evidence/aeroframe/fe-response.png' in index and 'assets/evidence/aeroframe/fe-response.png' in projects,
-    "F16 Monte Carlo evidence shown": 'assets/evidence/f16/monte-carlo-altitude.png' in index and 'assets/evidence/f16/monte-carlo-altitude.png' in projects,
-    "SPIRIT concept banner": 'assets/hero/spirit.svg' in projects,
-    "plain-English project framing": '<strong>Problem:</strong>' in projects,
-    "primary GNC positioning": 'focused on GNC, state estimation and flight software' in index,
-    "availability windows removed": not any(term.lower() in public_html.lower() for term in stale_availability),
-    "canonical LinkedIn profile": "https://www.linkedin.com/in/vinayakmnair/" in public_html and "Vin2005" not in public_html,
-    "four homepage flagship cards": index.count('class="case case--conversion"') == 4,
-    "four project flagship cards": projects.count('class="case case--conversion"') == 4,
-    "Rocket Landing listed once": projects.count('data-project-key="rocket"') == 1,
-    "AeroFrame claims are current": "+0.151" in index and "+0.151" in projects and "18/18" in index and "18/18" in projects,
-    "F16 case study linked": 'projects/f16-flight-controls.html' in index and 'projects/f16-flight-controls.html' in projects,
-    "Rocket prototype boundary visible": "Exploratory prototype" in projects and "500 runs" not in index,
-    "evidence presentation layer active": 'evidence-first.css' in site_css,
-    "unsupported repository claims removed": "GitHub repository" not in no_repo_pages and "full source, commit history" not in no_repo_pages,
-    "legacy banner swap disabled": 'project-banners.css' not in site_css,
-    "conversion layer active": 'hiring-conversion.css' in site_css,
+project_keys = re.findall(r'data-project-key="([^"]+)"', projects)
+expected_keys = {
+    "ghost", "astra", "aeroframe", "f16", "rocket",
+    "spirit", "interceptor", "kestrel", "chaser",
 }
 
-old_low_res = (
-    'assets/hero/ghost-ai.jpg',
-    'assets/hero/astra-ai.jpg',
-    'assets/hero/aeroframe-ai.jpg',
-    'assets/hero/f16-ai.jpg',
-)
-checks["old low-resolution recruiter images removed"] = not any(
-    old in index or old in projects for old in old_low_res
-)
+checks = {
+    "About owns the professional headshot": about.count('<img src="assets/headshot-about.webp"') == 1 and '<img src="assets/headshot-about.webp"' not in index,
+    "About owns education": "Fast Track BS/MS" in about and "Expected May 2027" in about,
+    "Experience does not duplicate education": "Fast Track BS/MS" not in experience and "Expected May 2027" not in experience,
+    "homepage is a section directory": all(f'href="{page}.html"' in index for page in ("about", "projects", "experience", "skills", "contact")),
+    "homepage does not duplicate project cards": "data-project-key=" not in index and "case--conversion" not in index,
+    "all nine projects appear once": set(project_keys) == expected_keys and len(project_keys) == len(expected_keys),
+    "GHOST live project site promoted": "https://xpiredruby.github.io/ghost-vins-eskf/" in projects and "https://xpiredruby.github.io/ghost-vins-eskf/" in ghost,
+    "GHOST project evidence shown": "assets/evidence/ghost/estimator-rmse.png" in projects,
+    "ASTRA project evidence shown": "assets/evidence/astra/architecture.svg" in projects,
+    "AeroFrame project evidence shown": "assets/evidence/aeroframe/fe-response.png" in projects,
+    "F16 project evidence shown": "assets/evidence/f16/monte-carlo-altitude.png" in projects,
+    "AeroFrame current claims retained": "+0.151" in aeroframe and "18 / 18" in aeroframe,
+    "Experience uses accessible role disclosure": experience.count("<details") == 3 and experience.count("<summary") == 3,
+    "Skills use six concrete icon cards": skills.count('class="skill-card panel"') == 6 and skills.count('class="skill-card__icon"') == 6,
+    "Skills mount a live GitHub feed": 'id="gh-list"' in skills and 'id="gh-count"' in skills and 'assets/js/github.js' in skills,
+    "GitHub feed uses the public API with fallback": "https://api.github.com/users/" in github_js and "fallbackMarkup" in github_js,
+    "correct email is public": "Vin.manoj.nair@gmail.com" in contact and "mailto:Vin.manoj.nair@gmail.com" in public_html,
+    "old email removed": "vinhoustontexas@gmail.com" not in public_html.lower(),
+    "resume surface removed": not (ROOT / "resume.html").exists() and not (ROOT / "assets" / "resume.pdf").exists() and "resume.html" not in public_html.lower() and "resume.pdf" not in public_html.lower(),
+    "new visual layer active": "portfolio-refresh.css" in site_css,
+    "project cards keep evidence boundaries": projects.count("Evidence boundary:") == 9,
+}
 
 failed = [name for name, ok in checks.items() if not ok]
 if failed:
@@ -63,4 +65,5 @@ if failed:
     for name in failed:
         print(f" - {name}")
     sys.exit(1)
+
 print(f"Hiring-surface validation PASS: {len(checks)} recruiter-facing checks.")

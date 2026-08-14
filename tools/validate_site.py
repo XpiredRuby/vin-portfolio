@@ -22,9 +22,7 @@ NON_PUBLIC_HTML = {Path("assets/og-image.src.html")}
 REQUIRED_ROOT_FILES = [
     ROOT / "index.html",
     ROOT / "projects.html",
-    ROOT / "resume.html",
-    ROOT / "assets" / "resume.pdf",
-    ROOT / "assets" / "headshot.jpg",
+    ROOT / "assets" / "headshot-about.webp",
     ROOT / "assets" / "og-image.png",
     ROOT / "robots.txt",
     ROOT / "sitemap.xml",
@@ -191,11 +189,30 @@ def check_webp_integrity(path: Path) -> list[str]:
     return []
 
 
+def check_og_image(path: Path) -> list[str]:
+    """Keep the social card valid and synchronized with its declared metadata."""
+    try:
+        data = path.read_bytes()
+    except OSError as exc:
+        return [f"{path.relative_to(ROOT)}: cannot read PNG: {exc}"]
+    if len(data) < 24 or data[:8] != b"\x89PNG\r\n\x1a\n" or data[12:16] != b"IHDR":
+        return [f"{path.relative_to(ROOT)}: invalid PNG header"]
+    width, height = struct.unpack(">II", data[16:24])
+    if (width, height) != (1200, 630):
+        return [
+            f"{path.relative_to(ROOT)}: expected 1200x630, found {width}x{height}"
+        ]
+    return []
+
+
 def main() -> int:
     errors: list[str] = []
     for required in REQUIRED_ROOT_FILES:
         if not required.exists():
             errors.append(f"missing required portfolio asset: {required.relative_to(ROOT)}")
+    og_image = ROOT / "assets" / "og-image.png"
+    if og_image.exists():
+        errors.extend(check_og_image(og_image))
 
     pages = sorted(ROOT.rglob("*.html"))
     if not pages:
@@ -256,6 +273,19 @@ def main() -> int:
         if needle.lower() in public_text.lower():
             errors.append(f"sitewide: {reason}: {needle!r}")
 
+    # Keep private recruiting details off every public HTML surface.
+    privacy_patterns = {
+        r"\bgpa\b": "GPA should not be public",
+        r"\btel:": "telephone link should not be public",
+        r"(?<!\d)(?:\+?1[ .-]?)?(?:\(\d{3}\)|\d{3})[ .-]\d{3}[ .-]\d{4}(?!\d)":
+            "phone number should not be public",
+        r"(?<![0-9A-Fa-f])\d{10}(?![0-9A-Fa-f])":
+            "compact phone number should not be public",
+    }
+    for pattern, reason in privacy_patterns.items():
+        if re.search(pattern, public_text, flags=re.IGNORECASE):
+            errors.append(f"sitewide: {reason}")
+
     # Evidence-first pages must keep the inspected artifacts and their stated
     # boundaries attached to the public presentation.
     required_evidence = [
@@ -270,15 +300,17 @@ def main() -> int:
             errors.append(f"missing evidence-first artifact: {evidence.relative_to(ROOT)}")
 
     project_index = (ROOT / "projects.html").read_text(encoding="utf-8")
+    aeroframe_detail = (ROOT / "projects" / "md11-structures.html").read_text(encoding="utf-8")
     evidence_checks = {
         "Rocket prototype boundary": "Exploratory prototype" in project_index,
-        "AeroFrame current margin": "+0.151" in project_index,
-        "AeroFrame current requirements": "18/18" in project_index,
+        # Exact AeroFrame results belong on its case study, not the project index.
+        "AeroFrame current margin": "+0.151" in aeroframe_detail,
+        "AeroFrame current requirements": "18 / 18" in aeroframe_detail,
         "F16 representative boundary": "Representative SIL" in project_index,
     }
     for label, ok in evidence_checks.items():
         if not ok:
-            errors.append(f"projects.html: missing evidence boundary: {label}")
+            errors.append(f"missing evidence boundary: {label}")
 
     if errors:
         print(f"Portfolio validation FAILED with {len(errors)} issue(s):")

@@ -1247,7 +1247,7 @@ code, .code {
   [data-reveal] { opacity: 1; transform: none; }
 }
 
-/* ---------- 21. PRINT (resume → PDF) ---------- */
+/* ---------- 21. PRINT ---------- */
 @media print {
   @page { margin: 14mm 13mm; }
   :root { --txt: #000; --txt-2: #1c1c1c; --txt-3: #444; --txt-4: #555; --line: #ccc; --line-2: #bbb; }
@@ -1268,12 +1268,11 @@ code, .code {
   .tick-list li { padding-left: 1.1rem; font-size: 9.6pt; }
   .tick-list li::before { width: 5px; height: 5px; top: .55em; }
   .spec th, .spec td { padding: 0.32rem 0.5rem; }
-  .resume-entry { margin-bottom: 0.9rem !important; }
   .doc__section p { max-width: none; }
   a { color: #000; text-decoration: none; }
   .panel, .fig, .contact-card { border: 1px solid #ccc; background: #fff; }
   .panel__head, .reqs thead th, .metric { background: #f4f4f4; color: #333; }
   h1, h2, h3, h4 { color: #000; page-break-after: avoid; }
-  .tl, .resume-entry { page-break-inside: avoid; }
+  .tl { page-break-inside: avoid; }
   .chip { border-color: #bbb; color: #333; background: #fff; }
 }

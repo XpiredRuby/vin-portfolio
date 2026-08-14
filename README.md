@@ -18,17 +18,15 @@ The site is not intended to prove that I know front-end frameworks. It is intend
 
 For that reason the site uses plain HTML, CSS and JavaScript with no framework or build step. Complexity is added only when it improves the engineering story, accessibility, reliability or reproducibility.
 
-## Recruiter reading path
+## Site structure
 
-The homepage is deliberately ordered for a short technical screen:
+The homepage is a concise directory rather than a second copy of the portfolio. Each section owns one type of information:
 
-1. identity, degree, target roles and direct resume link;
-2. four proof points spanning GNC, flight software, stress and flight-controls SIL;
-3. four evidence-backed flagship case studies;
-4. an at-a-glance proof gallery with evidence boundaries;
-5. applied engineering experience and contact.
-
-The detailed project register keeps broader work available without giving every project equal visual weight.
+1. About contains the personal introduction, headshot, education and engineering approach.
+2. Projects contains one aligned card per project; exact methods and results live in the case studies.
+3. Experience contains professional roles and outcomes in an expandable timeline.
+4. Skills contains capability groups and live public GitHub repository data.
+5. Contact contains the current email and external profiles.
 
 ## Flagship public work
 
@@ -56,14 +54,12 @@ Portfolio summaries should be downstream of the authoritative project repositori
 
 ```text
 vin-portfolio/
-├── index.html                  recruiter-first landing page
-├── projects.html               project register + evidence/source status
+├── index.html                  concise portfolio directory
+├── about.html                  profile, headshot, education and approach
+├── projects.html               one-card-per-project register
 ├── projects/                   detailed engineering case studies
-├── experience.html             applied engineering timeline
-├── skills.html                 skills matrix linked to project evidence
-├── resume.html                 web resume
-├── assets/resume.pdf           direct downloadable/printable resume
-├── about.html
+├── experience.html             expandable engineering role archive
+├── skills.html                 capability map + live GitHub repositories
 ├── contact.html
 ├── demos/                      recruiter-friendly demonstrations
 ├── assets/
@@ -108,10 +104,6 @@ Regenerate project illustrations with:
 python assets/hero/generate.py
 python assets/diagrams/generate.py
 ```
-
-## Resume PDF
-
-`assets/resume.pdf` is generated from the print stylesheet of `resume.html`. After changing the web resume, regenerate the PDF and verify both versions before publishing.
 
 ## Accessibility and performance
 

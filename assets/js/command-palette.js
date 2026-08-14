@@ -60,8 +60,7 @@
 
   var nav = document.getElementById('primary-nav');
   if (nav) {
-    var resume = nav.querySelector('.nav__cta');
-    nav.insertBefore(trigger, resume || null);
+    nav.appendChild(trigger);
   } else {
     document.body.appendChild(trigger);
   }
@@ -184,9 +183,10 @@
     })
     .catch(function () {
       entries = [
-        { title: 'Projects', subtitle: 'Engineering case studies', href: 'projects.html', kind: 'Page', tags: ['projects'] },
         { title: 'About', subtitle: 'Engineering identity', href: 'about.html', kind: 'Page', tags: ['about'] },
-        { title: 'Resume', subtitle: 'Current resume', href: 'resume.html', kind: 'Page', tags: ['resume'] },
+        { title: 'Projects', subtitle: 'Engineering case studies', href: 'projects.html', kind: 'Page', tags: ['projects'] },
+        { title: 'Experience', subtitle: 'Professional engineering roles', href: 'experience.html', kind: 'Page', tags: ['experience'] },
+        { title: 'Skills', subtitle: 'Capabilities and live GitHub repositories', href: 'skills.html', kind: 'Page', tags: ['skills', 'github'] },
         { title: 'Contact', subtitle: 'Get in touch', href: 'contact.html', kind: 'Page', tags: ['contact'] }
       ];
       render('');
