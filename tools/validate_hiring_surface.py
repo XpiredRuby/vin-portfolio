@@ -30,9 +30,9 @@ public_html = "\n".join(
 )
 
 checks = {
-    "warm whole-vehicle hero is active": "portfolio-hero" in index and "whole vehicle" in index.lower(),
-    "homepage represents four engineering lanes": all(
-        lane in index for lane in ("Mechanical", "GNC", "Systems", "Software")
+    "professional cross-disciplinary hero is active": "portfolio-hero" in index and "structure to software" in index.lower(),
+    "homepage represents four engineering areas": all(
+        area in index for area in ("Mechanical", "Controls", "Systems", "Software")
     ),
     "homepage routes to core recruiter sections": all(
         f'href="{page}.html"' in index
@@ -54,7 +54,7 @@ checks = {
     "old contact details are removed": "vinhoustontexas@gmail.com" not in public_html.lower() and "linkedin.com/in/Vin2005" not in public_html,
     "GPA is not public": re.search(r"\bGPA\b", public_html) is None,
     "resume surface remains removed": not (ROOT / "resume.html").exists() and not (ROOT / "assets" / "resume.pdf").exists() and "resume.html" not in public_html.lower() and "resume.pdf" not in public_html.lower(),
-    "warm palette is retained": "#F2F0E8" in site_css and "#D34F2F" in site_css,
+    "professional mid-tone palette is retained": "#E4E1D8" in site_css and "#A9432F" in site_css,
     "evidence components remain styled": '@import url("./evidence-first.css")' in site_css,
     "GitHub feed keeps a public fallback": "https://api.github.com/users/" in github_js and "fallbackMarkup" in github_js,
 }
