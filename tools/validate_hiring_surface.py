@@ -15,6 +15,7 @@ index = read("index.html")
 about = read("about.html")
 projects = read("projects.html")
 contact = read("contact.html")
+skills = read("skills.html")
 ghost = read("projects/ghost.html")
 astra = read("projects/astrasim-fsw.html")
 aeroframe = read("projects/md11-structures.html")
@@ -39,7 +40,15 @@ checks = {
         for page in ("about", "projects", "experience", "skills", "contact")
     ),
     "education remains available without GPA": "Fast Track BS/MS" in about and "May 2027" in about,
-    "project catalog remains substantial": projects.count('<article class="case"') >= 8,
+    "M.S. focus remains undecided": "focus yet to be decided" in about.lower(),
+    "stale internship date is removed": "Summer 2026" not in public_html,
+    "project catalog remains substantial": projects.count('<article class="case"') >= 7,
+    "Kestrel is removed from the portfolio": not (ROOT / "projects" / "kestrel.html").exists() and "kestrel" not in public_html.lower(),
+    "skills use recognizable tool icons": all(
+        f"assets/icons/tools/{name}.svg" in skills
+        for name in ("cplusplus", "python", "ros", "matlab", "ansys", "opencv", "raspberrypi", "cmake", "linux", "git")
+    ),
+    "quick navigation is styled": ".command-trigger" in site_css and ".command-palette" in site_css,
     "mechanical evidence is current": "+0.151" in aeroframe and "18 / 18" in aeroframe,
     "GHOST-X evidence site is promoted": "https://xpiredruby.github.io/ghost-vins-eskf/" in ghost,
     "ASTRA-OS assurance evidence is current": "20/20" in astra and "25/25" in astra,

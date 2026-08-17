@@ -16,7 +16,6 @@
     aeroframe: { domain: 'structures', text: 'aeroframe dt structures stress fea finite element fatigue damage tolerance allowables margins' },
     interceptor: { domain: 'autonomy', text: 'interception robot autonomy embedded perception actuation latency robotics controls' },
     spirit: { domain: 'systems', text: 'tamu spirit systems engineering iss spacecraft requirements thermal reviews change control' },
-    kestrel: { domain: 'autonomy', text: 'kestrel uav precision landing autonomy systems closeout archived design' },
     f16: { domain: 'gnc', text: 'f16 inspired flight controls sil dynamics autopilot uncertainty monte carlo python' },
     chaser: { domain: 'gnc', text: 'project chaser relative navigation pose estimation ukf fdir replay pre hardware spacecraft' }
   };
