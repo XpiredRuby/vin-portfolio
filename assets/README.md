@@ -19,7 +19,7 @@ These figures are engineering evidence, not decorative concept art.
 | `data/search-index.json` | Local command-palette index for pages, projects, and public repositories | hand-edited |
 | `diagrams/*.svg` | Primary technical visuals used across the case studies | `python3 assets/diagrams/generate.py` |
 | `diagrams/generate.py` | Single source of truth for generated technical diagrams | hand-edited |
-| `headshot-about.webp` | Web-optimized professional portrait used only on About | replace from the approved source photo |
+| `headshot.png` | Full-resolution professional portrait used on Home and About | replace only from the approved source photo |
 | `hero/*-ai.jpg` | Optional concept artwork retained as decorative assets, not technical evidence and not the default project visual | image source + manual optimization |
 | `og-image.png` | 1200×630 social preview card for the current portfolio identity | generated from the approved portfolio social-card brief |
 | `og-image.src.html` | Historical code-rendered preview retained for reference | hand-edited |
