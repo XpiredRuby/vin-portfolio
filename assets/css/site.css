@@ -22,7 +22,7 @@
   --txt:       #1F2421;
   --txt-2:     #404A45;
   --txt-3:     #58635E;
-  --txt-4:     #6B756F;
+  --txt-4:     #5E6862;
 
   /* Accents */
   --blue:      #335E68;
@@ -1620,6 +1620,22 @@ code, .code {
   background: linear-gradient(120deg, rgba(51, 94, 104, 0.10), rgba(182, 75, 52, 0.05)), var(--bg-panel);
 }
 .demo-card p { color: var(--txt-2) !important; }
+
+/* ---------- WARM EDITORIAL PAGE SURFACES ----------
+   Evidence-first.css supplies the dark technical-report canvas. All other
+   pages use the warm portfolio system so dark typography always sits on a
+   light, readable surface. */
+body.aero-ui:not(.page-project-detail) {
+  background:
+    radial-gradient(circle at 8% 5%, rgba(182, 75, 52, 0.09), transparent 30rem),
+    radial-gradient(circle at 92% 22%, rgba(51, 94, 104, 0.09), transparent 34rem),
+    linear-gradient(180deg, #ECE8DF 0%, #E4E0D6 48%, #DDD8CD 100%);
+  color: var(--txt);
+}
+body.aero-ui:not(.page-project-detail)::before { opacity: 0.78; }
+body.aero-ui:not(.page-project-detail) .section + .section {
+  border-top-color: rgba(31, 38, 35, 0.16);
+}
 
 /* ---------- DARK TECHNICAL SURFACES: ACCESSIBLE CONTRAST ----------
    The evidence/report layer intentionally uses dark surfaces. Keep warm-theme
