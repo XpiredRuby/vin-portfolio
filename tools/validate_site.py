@@ -22,7 +22,7 @@ NON_PUBLIC_HTML = {Path("assets/og-image.src.html")}
 REQUIRED_ROOT_FILES = [
     ROOT / "index.html",
     ROOT / "projects.html",
-    ROOT / "assets" / "headshot-about.webp",
+    ROOT / "assets" / "headshot.png",
     ROOT / "assets" / "og-image.png",
     ROOT / "robots.txt",
     ROOT / "sitemap.xml",
