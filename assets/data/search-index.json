@@ -37,7 +37,7 @@
   },
   {
     "title": "Technical skills",
-    "subtitle": "Evidence-linked GNC, software, structures, and systems capabilities",
+    "subtitle": "Mechanical, controls, software, structures, and systems capabilities",
     "href": "skills.html",
     "kind": "Page",
     "tags": [
@@ -46,7 +46,7 @@
       "python",
       "ros2",
       "fea",
-      "gnc"
+      "controls"
     ]
   },
   {
@@ -149,20 +149,6 @@
       "requirements",
       "thermal",
       "reviews"
-    ]
-  },
-  {
-    "title": "Project KESTREL",
-    "subtitle": "Archived UAV design - CDR readiness and precision target not publicly verified",
-    "href": "projects/kestrel.html",
-    "kind": "Project",
-    "key": "kestrel",
-    "tags": [
-      "uav",
-      "landing",
-      "autonomy",
-      "closeout",
-      "systems"
     ]
   },
   {

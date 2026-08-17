@@ -10,7 +10,14 @@
 
   var siteRoot = new URL('../../', scriptSrc);
   var indexUrl = new URL('../data/search-index.json', scriptSrc);
-  var entries = [];
+  var fallbackEntries = [
+    { title: 'About', subtitle: 'Engineering identity', href: 'about.html', kind: 'Page', tags: ['about'] },
+    { title: 'Projects', subtitle: 'Engineering case studies', href: 'projects.html', kind: 'Page', tags: ['projects'] },
+    { title: 'Experience', subtitle: 'Professional engineering roles', href: 'experience.html', kind: 'Page', tags: ['experience'] },
+    { title: 'Skills', subtitle: 'Technical capabilities and tools', href: 'skills.html', kind: 'Page', tags: ['skills'] },
+    { title: 'Contact', subtitle: 'Get in touch', href: 'contact.html', kind: 'Page', tags: ['contact'] }
+  ];
+  var entries = fallbackEntries;
   var activeIndex = 0;
   var lastTrigger = null;
 
@@ -55,6 +62,7 @@
   trigger.type = 'button';
   trigger.className = 'command-trigger';
   trigger.setAttribute('aria-haspopup', 'dialog');
+  trigger.setAttribute('aria-expanded', 'false');
   trigger.setAttribute('aria-label', 'Open quick navigation');
   trigger.innerHTML = '<span>Quick jump</span><kbd>' + (/Mac|iPhone|iPad/.test(navigator.platform) ? '⌘K' : 'Ctrl K') + '</kbd>';
 
@@ -133,6 +141,7 @@
   function openPalette(origin) {
     lastTrigger = origin || document.activeElement;
     if (!dialog.open) { dialog.showModal(); }
+    trigger.setAttribute('aria-expanded', 'true');
     input.value = '';
     render('');
     requestAnimationFrame(function () { input.focus(); });
@@ -142,11 +151,13 @@
   closeButton.addEventListener('click', function () { dialog.close(); });
 
   dialog.addEventListener('close', function () {
+    trigger.setAttribute('aria-expanded', 'false');
     if (lastTrigger && typeof lastTrigger.focus === 'function') { lastTrigger.focus(); }
   });
 
   dialog.addEventListener('click', function (event) {
     if (event.target === dialog) { dialog.close(); }
+    else if (event.target.closest && event.target.closest('.command-result')) { dialog.close(); }
   });
 
   input.addEventListener('input', function () { render(input.value); });
@@ -182,13 +193,7 @@
       render('');
     })
     .catch(function () {
-      entries = [
-        { title: 'About', subtitle: 'Engineering identity', href: 'about.html', kind: 'Page', tags: ['about'] },
-        { title: 'Projects', subtitle: 'Engineering case studies', href: 'projects.html', kind: 'Page', tags: ['projects'] },
-        { title: 'Experience', subtitle: 'Professional engineering roles', href: 'experience.html', kind: 'Page', tags: ['experience'] },
-        { title: 'Skills', subtitle: 'Capabilities and live GitHub repositories', href: 'skills.html', kind: 'Page', tags: ['skills', 'github'] },
-        { title: 'Contact', subtitle: 'Get in touch', href: 'contact.html', kind: 'Page', tags: ['contact'] }
-      ];
+      entries = fallbackEntries;
       render('');
     });
 })();

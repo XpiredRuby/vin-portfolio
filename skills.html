@@ -66,6 +66,28 @@
   </div>
 </section>
 
+<section class="shell section--tight toolchain" aria-labelledby="toolchain-title">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Core software</p>
+      <h2 id="toolchain-title">Tools I use in project work</h2>
+      <p>Recognizable engineering software and platforms, with detailed applications in the matrix below.</p>
+    </div>
+  </div>
+  <div class="tool-logo-grid">
+    <article class="tool-logo-card" data-reveal><img src="assets/icons/tools/cplusplus.svg" width="52" height="52" alt="" aria-hidden="true"><div><strong>C++17</strong><span>Embedded and flight software</span></div></article>
+    <article class="tool-logo-card" data-reveal data-delay="1"><img src="assets/icons/tools/python.svg" width="52" height="52" alt="" aria-hidden="true"><div><strong>Python</strong><span>Simulation and analysis</span></div></article>
+    <article class="tool-logo-card" data-reveal data-delay="2"><img src="assets/icons/tools/ros.svg" width="52" height="52" alt="" aria-hidden="true"><div><strong>ROS 2</strong><span>Robotics middleware</span></div></article>
+    <article class="tool-logo-card" data-reveal data-delay="3"><img src="assets/icons/tools/matlab.svg" width="52" height="52" alt="" aria-hidden="true"><div><strong>MATLAB</strong><span>Controls and numerical work</span></div></article>
+    <article class="tool-logo-card" data-reveal><img src="assets/icons/tools/ansys.svg" width="52" height="52" alt="" aria-hidden="true"><div><strong>ANSYS</strong><span>Structural finite elements</span></div></article>
+    <article class="tool-logo-card" data-reveal data-delay="1"><img src="assets/icons/tools/opencv.svg" width="52" height="52" alt="" aria-hidden="true"><div><strong>OpenCV</strong><span>Vision pipelines</span></div></article>
+    <article class="tool-logo-card" data-reveal data-delay="2"><img src="assets/icons/tools/raspberrypi.svg" width="52" height="52" alt="" aria-hidden="true"><div><strong>Raspberry Pi</strong><span>Embedded target hardware</span></div></article>
+    <article class="tool-logo-card" data-reveal data-delay="3"><img src="assets/icons/tools/cmake.svg" width="52" height="52" alt="" aria-hidden="true"><div><strong>CMake</strong><span>Cross-platform builds</span></div></article>
+    <article class="tool-logo-card" data-reveal><img src="assets/icons/tools/linux.svg" width="52" height="52" alt="" aria-hidden="true"><div><strong>Linux</strong><span>Development and deployment</span></div></article>
+    <article class="tool-logo-card" data-reveal data-delay="1"><img src="assets/icons/tools/git.svg" width="52" height="52" alt="" aria-hidden="true"><div><strong>Git</strong><span>Version control and review</span></div></article>
+  </div>
+</section>
+
 <section class="shell section--tight" style="padding-top:2rem">
   <div class="table-wrap panel" data-reveal>
     <div class="panel__head"><span>Skills matrix</span><span class="mono">DEMONSTRATED IN</span></div>
@@ -94,7 +116,7 @@
         <tr><td>EMBD</td><td>Sensor integration, IMU, global-shutter camera, hardware timestamping</td><td><a class="u-cyan" href="projects/ghost.html">GHOST-X</a></td></tr>
         <tr><td>EMBD</td><td>Real-time latency budgeting and per-stage instrumentation</td><td><a class="u-cyan" href="projects/interceptor.html">Interception Robot</a></td></tr>
         <tr><td>CTRL</td><td>Error-state Kalman filter (ESKF), 9-state visual-inertial</td><td><a class="u-cyan" href="projects/ghost.html">GHOST-X</a></td></tr>
-        <tr><td>CTRL</td><td>Extended / linear Kalman filtering and sensor fusion</td><td><a class="u-cyan" href="projects/interceptor.html">Interceptor</a><a class="u-cyan" href="projects/kestrel.html">KESTREL</a></td></tr>
+        <tr><td>CTRL</td><td>Extended / linear Kalman filtering and sensor fusion</td><td><a class="u-cyan" href="projects/interceptor.html">Interception Robot</a></td></tr>
         <tr><td>CTRL</td><td>Interacting multiple model (IMM) tracking, CV / CTRV</td><td><a class="u-cyan" href="projects/ghost.html">GHOST-X</a></td></tr>
         <tr><td>CTRL</td><td>PID and cascaded PID with anti-windup and saturation handling</td><td>BLNC rover, <a class="u-cyan" href="projects/rocket-landing-gnc.html">Rocket GNC</a></td></tr>
         <tr><td>CTRL</td><td>Thrust-vector control with actuator rate and deflection limits</td><td><a class="u-cyan" href="projects/rocket-landing-gnc.html">Rocket Landing GNC</a></td></tr>
@@ -117,65 +139,6 @@
         <tr><td>VCS</td><td>Continuous integration, automated build and test on commit</td><td><a class="u-cyan" href="projects/ghost.html">GHOST-X</a><a class="u-cyan" href="projects/astrasim-fsw.html">ASTRA-OS</a></td></tr>
       </tbody>
     </table>
-  </div>
-</section>
-
-<section class="shell section">
-  <div class="section-head">
-    <div>
-      <p class="eyebrow">By category</p>
-      <h2>Grouped view</h2>
-    </div>
-  </div>
-
-  <div class="grid-3">
-    <div class="panel" data-reveal><div class="panel__head"><span>Programming</span><span class="mono">PROG</span></div><div class="panel__body"><div class="chips">
-      <span class="chip chip--accent">C++17</span><span class="chip chip--accent">Python</span><span class="chip">MATLAB</span><span class="chip">LabVIEW</span><span class="chip">Bash</span><span class="chip">NumPy / SciPy</span><span class="chip">OpenCV</span><span class="chip">CMake</span>
-    </div></div></div>
-
-    <div class="panel" data-reveal data-delay="1"><div class="panel__head"><span>Simulation</span><span class="mono">SIM</span></div><div class="panel__body"><div class="chips">
-      <span class="chip chip--accent">6-DOF dynamics</span><span class="chip chip--accent">Monte Carlo</span><span class="chip">PX4 SITL</span><span class="chip">Gazebo</span><span class="chip">MAVLink</span><span class="chip">Aerothermodynamics</span><span class="chip">Atmosphere models</span>
-    </div></div></div>
-
-    <div class="panel" data-reveal data-delay="2"><div class="panel__head"><span>CAD</span><span class="mono">CAD</span></div><div class="panel__body"><div class="chips">
-      <span class="chip chip--accent">SolidWorks</span><span class="chip">Parametric assemblies</span><span class="chip">Parametric geometry</span><span class="chip">GD&amp;T</span><span class="chip">Drawing release</span><span class="chip">BOM</span>
-    </div></div></div>
-
-    <div class="panel" data-reveal><div class="panel__head"><span>FEA</span><span class="mono">FEA</span></div><div class="panel__body"><div class="chips">
-      <span class="chip chip--accent">ANSYS Mechanical</span><span class="chip chip--accent">Abaqus</span><span class="chip">Nonlinear solids</span><span class="chip">Contact</span><span class="chip">Static analysis</span><span class="chip">Thermal analysis</span><span class="chip">Modal analysis</span><span class="chip">Mesh convergence</span><span class="chip">Margin of safety</span>
-    </div></div></div>
-
-    <div class="panel" data-reveal data-delay="1"><div class="panel__head"><span>Embedded systems</span><span class="mono">EMBD</span></div><div class="panel__body"><div class="chips">
-      <span class="chip chip--accent">Embedded Linux</span><span class="chip chip--accent">Raspberry Pi</span><span class="chip">aarch64</span><span class="chip">Binary protocols</span><span class="chip">CRC-16</span><span class="chip">Watchdog / FDIR</span><span class="chip">IMU integration</span><span class="chip">PWM control</span>
-    </div></div></div>
-
-    <div class="panel" data-reveal data-delay="2"><div class="panel__head"><span>Controls &amp; estimation</span><span class="mono">CTRL</span></div><div class="panel__body"><div class="chips">
-      <span class="chip chip--accent">ESKF</span><span class="chip chip--accent">Kalman filter</span><span class="chip">IMM / CTRV</span><span class="chip">PID</span><span class="chip">Cascaded PID</span><span class="chip">Anti-windup</span><span class="chip">TVC</span><span class="chip">ProNav</span><span class="chip">Sensor fusion</span>
-    </div></div></div>
-
-    <div class="panel" data-reveal><div class="panel__head"><span>Testing &amp; V&amp;V</span><span class="mono">TEST</span></div><div class="panel__body"><div class="chips">
-      <span class="chip chip--accent">Hardware-in-the-loop</span><span class="chip chip--accent">Fault injection</span><span class="chip">CTest</span><span class="chip">Regression</span><span class="chip">NIS validation</span><span class="chip">Evidence capture</span><span class="chip">Bench procedures</span>
-    </div></div></div>
-
-    <div class="panel" data-reveal data-delay="1"><div class="panel__head"><span>Manufacturing</span><span class="mono">MFG</span></div><div class="panel__body"><div class="chips">
-      <span class="chip">Hardware build</span><span class="chip">Integration</span><span class="chip">Fabrication callouts</span><span class="chip">Tolerance stack-up</span><span class="chip">Material selection</span>
-    </div></div></div>
-
-    <div class="panel" data-reveal data-delay="2"><div class="panel__head"><span>Systems engineering</span><span class="mono">SE</span></div><div class="panel__body"><div class="chips">
-      <span class="chip chip--accent">Requirements</span><span class="chip chip--accent">Traceability</span><span class="chip">SCR / SRR / PDR</span><span class="chip">ECR / config control</span><span class="chip">ICD</span><span class="chip">Trade studies</span><span class="chip">V&amp;V planning</span><span class="chip">Risk register</span>
-    </div></div></div>
-
-    <div class="panel" data-reveal><div class="panel__head"><span>Operating systems</span><span class="mono">OS</span></div><div class="panel__body"><div class="chips">
-      <span class="chip chip--accent">Linux</span><span class="chip">Ubuntu</span><span class="chip">SSH / remote targets</span><span class="chip">Cross-architecture builds</span>
-    </div></div></div>
-
-    <div class="panel" data-reveal data-delay="1"><div class="panel__head"><span>Version control</span><span class="mono">VCS</span></div><div class="panel__body"><div class="chips">
-      <span class="chip chip--accent">Git</span><span class="chip">GitHub</span><span class="chip">Continuous integration</span><span class="chip">Code review</span>
-    </div></div></div>
-
-    <div class="panel" data-reveal data-delay="2"><div class="panel__head"><span>Domain</span><span class="mono">AERO</span></div><div class="panel__body"><div class="chips">
-      <span class="chip">Orbital mechanics</span><span class="chip">Flight dynamics</span><span class="chip">Structures</span><span class="chip">Thermal</span><span class="chip">Propulsion basics</span><span class="chip">Spacecraft systems</span><span class="chip">Human spaceflight</span>
-    </div></div></div>
   </div>
 </section>
 

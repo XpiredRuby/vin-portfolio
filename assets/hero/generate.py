@@ -295,33 +295,3 @@ s += f'<defs><linearGradient id="tband" x1="0" y1="0" x2="1" y2="0">' \
 s += f'<rect x="880" y="304" width="270" height="8" rx="4" fill="url(#tband)" fill-opacity="0.8"/>'
 s += foot(a, "PRJ-06 / TAMU-SPIRIT", "ISS PAYLOAD SYSTEMS ENGINEERING")
 write("spirit.svg", s)
-
-# ------------------------------------------------------------------ KESTREL
-a = C["faint"]
-s = head(C["dim"], "Project KESTREL", "Archived design study; reported CDR readiness")
-s += f'<circle cx="600" cy="360" r="330" fill="url(#glow)"/>'
-s += f'<line x1="0" y1="580" x2="{W}" y2="580" stroke="{C["line2"]}" stroke-opacity="0.6"/>'
-# launch arc
-s += f'<path d="M150 520 C 380 210, 700 210, 940 470" fill="none" stroke="{C["line2"]}" stroke-width="2" stroke-dasharray="9 7"/>'
-s += f'<circle cx="150" cy="520" r="7" fill="{C["dim"]}"/>'
-s += txt(150, 552, "HAND LAUNCH", 12, C["faint"], anchor="middle", ls="0.14em")
-# pad
-s += f'<ellipse cx="960" cy="520" rx="120" ry="20" fill="none" stroke="{C["dim"]}" stroke-opacity="0.5"/>'
-s += f'<ellipse cx="960" cy="520" rx="58" ry="10" fill="none" stroke="{C["dim"]}" stroke-opacity="0.7"/>'
-s += f'<rect x="944" y="512" width="32" height="16" fill="none" stroke="{C["dim"]}" stroke-opacity="0.8"/>'
-s += txt(960, 560, "&lt; 5 cm CEP DESIGN TARGET", 12, C["faint"], anchor="middle", ls="0.14em")
-# airframe
-s += f'<g transform="translate(560,262) rotate(-8)">'
-s += f'<path d="M-104 0 L74 0 L104 12 L74 24 L-104 24 Z" fill="url(#metal)" stroke="{C["line2"]}"/>'
-s += f'<path d="M-24 2 L-70 -74 L-40 -74 L10 2 Z" fill="url(#metal)" stroke="{C["line2"]}"/>'
-s += f'<path d="M-24 22 L-70 96 L-40 96 L10 22 Z" fill="url(#metal)" stroke="{C["line2"]}"/>'
-s += f'<path d="M-104 2 L-128 -34 L-108 -34 L-86 2 Z" fill="url(#metal)" stroke="{C["line2"]}"/>'
-s += f'<circle cx="86" cy="12" r="6" fill="#0A0F16" stroke="{C["dim"]}"/>'
-s += '</g>'
-# archived stamp
-s += f'<g transform="translate(1010,150) rotate(-9)">'
-s += f'<rect x="-118" y="-30" width="236" height="60" rx="5" fill="none" stroke="{C["faint"]}" stroke-width="3"/>'
-s += txt(0, 10, "ARCHIVED", 30, C["faint"], anchor="middle", ls="0.14em", w=700)
-s += '</g>'
-s += foot(C["dim"], "ARCHIVED / KESTREL", "REPORTED CDR READINESS / NO FLIGHT TEST")
-write("kestrel.svg", s)
