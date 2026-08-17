@@ -283,7 +283,10 @@ def main() -> int:
             "compact phone number should not be public",
     }
     for pattern, reason in privacy_patterns.items():
-        if re.search(pattern, public_text, flags=re.IGNORECASE):
+        # Academic GPA is intentionally checked case-sensitively so the
+        # engineering pressure unit GPa does not trigger a privacy failure.
+        flags = 0 if pattern == r"\bgpa\b" else re.IGNORECASE
+        if re.search(pattern, public_text, flags=flags):
             errors.append(f"sitewide: {reason}")
 
     # Evidence-first pages must keep the inspected artifacts and their stated
