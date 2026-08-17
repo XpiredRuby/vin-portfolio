@@ -300,7 +300,7 @@
       <p>Each project is documented as an engineering report: problem, requirements, architecture,
          design decisions, results, tradeoffs, and what I would change.</p>
     </div>
-    <a class="link-arrow" href="projects.html">All 7 projects</a>
+    <a class="link-arrow" href="projects.html">All 8 projects</a>
   </div>
 
   <div class="stack" style="gap:1.5rem">
@@ -445,6 +445,31 @@
       </div>
     </article>
 
+    <article class="case" data-reveal>
+      <div class="case__visual case__visual--evidence">
+        <span class="case__id">PRJ-08</span>
+        <img src="assets/img/aeroframe-dt/equivalent-stress.png" width="1193" height="506" loading="lazy" alt="ANSYS equivalent-stress contour for the AeroFrame-DT pylon attachment fitting.">
+      </div>
+      <div class="case__body">
+        <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
+          <span class="pill pill--done">Study documented</span>
+          <span class="case__sub">JUL 2026</span>
+        </div>
+        <h3 class="case__title"><a href="projects/aeroframe-dt.html">AeroFrame-DT: Pylon Attachment Trade Study</a></h3>
+        <p class="case__sub">Parametric CAD &middot; lug hand calculations &middot; nonlinear solid FEA</p>
+        <div class="case__block"><h4>Engineering challenge</h4><p>Determine which geometry variable controls an attachment lug, then keep every load assumption, solver output and unresolved limit traceable.</p></div>
+        <div class="case__block"><h4>Evidence</h4><p>A five-variant e/D study located the mode crossover near 1.35, correlated elastic response within 1.7%, and retained a plastic-strain inconsistency as an open finding.</p></div>
+        <div class="metrics">
+          <div class="metric metric--orange"><div class="metric__v">529.7 kN</div><div class="metric__k">Load envelope</div></div>
+          <div class="metric"><div class="metric__v">5</div><div class="metric__k">e/D variants</div></div>
+          <div class="metric metric--green"><div class="metric__v">1.7%</div><div class="metric__k">Scaling deviation</div></div>
+          <div class="metric"><div class="metric__v">10</div><div class="metric__k">Frozen variables</div></div>
+        </div>
+        <div class="chips"><span class="chip chip--accent">ANSYS Mechanical</span><span class="chip chip--accent">Python</span><span class="chip">Parametric CAD</span><span class="chip">Lug analysis</span><span class="chip">APDL</span></div>
+        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/aeroframe-dt.html">Read case study</a></div>
+      </div>
+    </article>
+
   </div>
 </section>
 
@@ -557,6 +582,7 @@
           <li><a href="projects/astrasim-fsw.html">AstraSim-FSW</a></li>
           <li><a href="projects/rocket-landing-gnc.html">Rocket Landing GNC</a></li>
           <li><a href="projects/md11-structures.html">AeroFrame-MD11</a></li>
+          <li><a href="projects/aeroframe-dt.html">AeroFrame-DT</a></li>
           <li><a href="projects/interceptor.html">Interception Robot</a></li>
         </ul>
       </div>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AeroFrame-DT: Pylon Attachment Trade Study | Vinayak Manoj Nair</title>
+<meta name="description" content="A proof-led structural engineering case study covering parametric lug geometry, synthetic load definition, ANSYS finite-element analysis, and recorded design decisions.">
+<meta name="author" content="Vinayak Manoj Nair">
+<meta name="theme-color" content="#07090D">
+<link rel="canonical" href="https://vinnair.me/projects/aeroframe-dt.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Vinayak Manoj Nair">
+<meta property="og:title" content="AeroFrame-DT: Pylon Attachment Trade Study">
+<meta property="og:description" content="Parametric CAD, lug calculations, nonlinear solid FEA, and the evidence chain behind the engineering decision.">
+<meta property="og:url" content="https://vinnair.me/projects/aeroframe-dt.html">
+<meta property="og:image" content="https://vinnair.me/assets/img/aeroframe-dt/equivalent-stress.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AeroFrame-DT: Pylon Attachment Trade Study">
+<meta name="twitter:description" content="Parametric CAD, lug calculations, nonlinear solid FEA, and the evidence chain behind the engineering decision.">
+<meta name="twitter:image" content="https://vinnair.me/assets/img/aeroframe-dt/equivalent-stress.png">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CreativeWork","name":"AeroFrame-DT: Pylon Attachment Trade Study","author":{"@type":"Person","name":"Vinayak Manoj Nair"},"url":"https://vinnair.me/projects/aeroframe-dt.html","description":"A structural engineering portfolio case study covering parametric CAD, lug calculations, and finite-element evidence.","image":"https://vinnair.me/assets/img/aeroframe-dt/equivalent-stress.png"}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="shell masthead__bar">
+    <a class="brand" href="../index.html"><span class="brand__mark" aria-hidden="true">VN</span><span class="brand__name">Vinayak Nair</span><span class="brand__role">/ AEROSPACE</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="../projects.html" aria-current="page">Projects</a><a href="../experience.html">Experience</a><a href="../skills.html">Skills</a><a href="../index.html#github">GitHub</a><a href="../contact.html">Contact</a><a class="nav__cta" href="../resume.html">Resume</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="page-hero">
+  <div class="shell">
+    <p class="crumbs"><a href="../index.html">Home</a><span>/</span><a href="../projects.html">Projects</a><span>/</span><span>AeroFrame-DT</span></p>
+    <p class="eyebrow" style="margin-top:1.1rem">PRJ-08 &middot; Structures / nonlinear FEA &middot; documented study</p>
+    <h1>AeroFrame-DT</h1>
+    <p class="lede">A traceable design study for a forward pylon-to-wingbox attachment fitting, from parametric geometry and synthetic load definition to nonlinear finite-element evidence.</p>
+    <div class="metrics" style="margin-top:1.5rem">
+      <div class="metric metric--orange"><div class="metric__v">529.7 kN</div><div class="metric__k">System load envelope</div></div>
+      <div class="metric"><div class="metric__v">5</div><div class="metric__k">e/D variants</div></div>
+      <div class="metric metric--green"><div class="metric__v">1.7%</div><div class="metric__k">Scaling deviation</div></div>
+      <div class="metric"><div class="metric__v">10</div><div class="metric__k">Frozen variables</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="shell section--tight" style="padding-top:1.5rem">
+  <div class="afdt-hero" data-reveal>
+    <span class="afdt-hero__label">AF-DT-1000 / PARAMETRIC GEOMETRY</span>
+    <img src="../assets/img/aeroframe-dt/pylon-fitting.png" width="790" height="600" alt="Wireframe view of the AeroFrame-DT pylon-to-wingbox attachment fitting and fastener pattern.">
+    <span class="afdt-hero__datum afdt-hero__datum--a">DATUM A / WINGBOX INTERFACE</span>
+    <span class="afdt-hero__datum afdt-hero__datum--b">DATUM B / PIN AXIS</span>
+  </div>
+</div>
+
+<div class="shell section">
+<div class="doc">
+  <aside class="toc" aria-label="Page contents">
+    <p class="toc__t">Contents</p>
+    <a href="#problem">01 / Question</a>
+    <a href="#requirements">02 / Requirements</a>
+    <a href="#loads">03 / Load basis</a>
+    <a href="#geometry">04 / Geometry</a>
+    <a href="#models">05 / Models</a>
+    <a href="#implementation">06 / FE setup</a>
+    <a href="#validation">07 / Validation</a>
+    <a href="#results">08 / Results</a>
+    <a href="#decision">09 / Decision</a>
+    <a href="#traceability">10 / Proof stack</a>
+    <a href="#limits">11 / Limits</a>
+    <a href="#lessons">12 / Lessons</a>
+    <a href="#gallery">13 / Gallery</a>
+    <a href="#next">14 / Next work</a>
+  </aside>
+
+  <div class="stack">
+    <section class="doc__section" id="problem" data-reveal>
+      <h2><span class="num">01</span>Engineering question</h2>
+      <p>A pylon attachment fitting has several plausible failure paths: bearing at the pin, net-section tension, shear-out through the free edge, local plasticity at the bore, and global compliance through the web and flange. A solver contour alone does not identify which model is trustworthy.</p>
+      <p>The project question was narrower and more useful: <b class="u-cyan">which geometric ratio actually controls the response, and which attractive-looking outputs should be rejected before they become claims?</b></p>
+      <div class="note" style="margin-top:1.5rem"><div class="note__t">Claim boundary</div><p>All loads and geometry in this study are synthetic, educational, non-OEM, and non-certified. The evidence demonstrates engineering process and judgment, not aircraft substantiation.</p></div>
+    </section>
+
+    <section class="doc__section" id="requirements" data-reveal>
+      <h2><span class="num">02</span>Requirements</h2>
+      <div class="table-wrap">
+        <table class="reqs">
+          <thead><tr><th>ID</th><th>Requirement</th><th>Verification</th></tr></thead>
+          <tbody>
+            <tr><td>DT-001</td><td>Geometry inputs shall be frozen and source-traceable before comparison</td><td>Parameter schema + decision record</td></tr>
+            <tr><td>DT-002</td><td>The design load shall be applied through the pin bore, not as a point load</td><td>FE model review</td></tr>
+            <tr><td>DT-003</td><td>Hand calculations shall screen bearing, net section and shear-out</td><td>Independent calculation sweep</td></tr>
+            <tr><td>DT-004</td><td>The edge-distance trade shall cover the mode transition</td><td>Five e/D configurations</td></tr>
+            <tr><td>DT-005</td><td>Elastic cases shall track a simple stiffness estimate</td><td>Deformation correlation</td></tr>
+            <tr><td>DT-006</td><td>Plastic results shall be checked against the material-card implication</td><td>Equivalent plastic strain audit</td></tr>
+            <tr><td>DT-007</td><td>Unresolved assumptions shall remain visible</td><td>Open-item register</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="loads" data-reveal>
+      <h2><span class="num">03</span>Load basis</h2>
+      <p>The Rev A screening envelope used representative transport-category conditions as rationale while keeping every magnitude explicitly synthetic. The propulsion-system load was distributed between forward and aft attachment stations for the first fitting-level estimate.</p>
+      <div class="table-wrap" style="margin:1.2rem 0">
+        <table class="reqs">
+          <thead><tr><th>Case</th><th>Direction</th><th>Factor</th><th>Ultimate</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td>LC-01</td><td>Vertical +Z</td><td>2.5 g &times; 1.5</td><td>220.7 kN</td><td>Manoeuvre screening</td></tr>
+            <tr><td>LC-02</td><td>Forward +X</td><td>9.0 g</td><td><b>529.7 kN</b></td><td>Governing system envelope</td></tr>
+            <tr><td>LC-03</td><td>Lateral +Y</td><td>3.0 g &times; 1.5</td><td>264.9 kN</td><td>Side-load screening</td></tr>
+            <tr><td>LC-04</td><td>Combined transient</td><td>Dynamic</td><td>Deferred</td><td>Future analysis</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="eq">P<sub>fwd, Rev A</sub> = 0.50 &times; 529.7 kN = 264.9 kN
+
+<span class="c">later Rev D geometry sweep shown in the plots:</span>
+P<sub>sweep</sub> = 284.686 kN</div>
+      <p class="eq__note">The two values belong to different analysis configurations and are kept separate. The 50/50 split omits the pitching couple from propulsion-system CG offset, so it is a lower-bound screening assumption.</p>
+    </section>
+
+    <section class="doc__section" id="geometry" data-reveal>
+      <h2><span class="num">04</span>Parametric geometry</h2>
+      <p>Ten controlled variables tied the approved design envelope to the Python geometry, STEP deliverables, drawing package and FE variants. The baseline was authored in inches and converted to SI for calculation.</p>
+      <div class="grid-2" style="margin-top:1.2rem">
+        <div class="panel"><div class="panel__head"><span>Primary lug</span><span class="mono">REV A</span></div><div class="panel__body"><table class="spec">
+          <tr><th>Pin diameter</th><td>2.000 in / 50.800 mm</td></tr>
+          <tr><th>Lug thickness</th><td>1.500 in / 38.100 mm</td></tr>
+          <tr><th>Lug width</th><td>4.000 in / 101.600 mm</td></tr>
+          <tr><th>Edge distance</th><td>2.500 in / 63.500 mm</td></tr>
+        </table></div></div>
+        <div class="panel"><div class="panel__head"><span>Interface + ratios</span><span class="mono">CONTROLLED</span></div><div class="panel__body"><table class="spec">
+          <tr><th>Flange / web</th><td>25.400 / 19.050 mm</td></tr>
+          <tr><th>Blend radius</th><td>12.700 mm minimum</td></tr>
+          <tr><th>Fastener pattern</th><td>4 &times; 2, nominal 0.250 in</td></tr>
+          <tr><th>Ratios</th><td>e/D 1.25 &middot; W/D 2.00 &middot; t/D 0.75</td></tr>
+        </table></div></div>
+      </div>
+    </section>
+
+    <section class="doc__section" id="models" data-reveal>
+      <h2><span class="num">05</span>Analysis models</h2>
+      <h3>Independent lug checks</h3>
+      <div class="eq">&sigma;<sub>bearing</sub> = P / (D t)
+&sigma;<sub>net</sub> = P / [(W - D)t]
+&tau;<sub>shear-out</sub> = P / [2(e - D/2)t]
+MS = allowable / applied - 1</div>
+      <p class="eq__note">The two-plane shear-out expression is screening-only below the failure-regime transition. It does not capture the full shear-out / hoop-tension interaction.</p>
+      <h3>FE correlation checks</h3>
+      <div class="eq">&delta;<sub>shank</sub> = P L / (A E)
+&epsilon;<sub>p, implied</sub> = (&sigma;<sub>vm</sub> - 469 MPa) / 760 MPa
+
+<span class="c">acceptance logic:</span>
+elastic deformation trend &harr; simple axial stiffness
+plastic strain field &harr; material-card implication</div>
+      <div class="note note--blue" style="margin-top:1.2rem"><div class="note__t">Configuration control</div><p>The Rev A decision record names representative 7075-T7351. The later sweep plot identifies 7075-T651 with F<sub>tu</sub> = 517 MPa and F<sub>su</sub> = 303 MPa. They are not blended into one certified allowable basis; the material-basis distinction remains explicit.</p></div>
+    </section>
+
+    <section class="doc__section" id="implementation" data-reveal>
+      <h2><span class="num">06</span>Finite-element setup</h2>
+      <div class="grid-2">
+        <figure class="fig"><div class="fig__body" style="padding:0"><img src="../assets/img/aeroframe-dt/mesh.png" width="1193" height="748" loading="lazy" alt="ANSYS finite-element mesh of the pylon fitting, pin and wingbox interface with local bore refinement."></div><figcaption><b>Fig. 1</b>Solid mesh and pin interface. Local element density increases at the bore and web transition.</figcaption></figure>
+        <div class="panel"><div class="panel__head"><span>Model controls</span></div><div class="panel__body"><ul class="tick-list tick-list--cyan">
+          <li><b>Load introduction.</b> Bearing load transferred through the modeled pin and bore instead of a concentrated point force.</li>
+          <li><b>Critical region.</b> Mesh refinement follows the bore, ligament and web-to-flange blend where gradients are expected.</li>
+          <li><b>Variant control.</b> The e/D parameter changes while load, diameter and thickness remain controlled within the sweep.</li>
+          <li><b>Nonlinear evidence.</b> Stress and plastic-strain outputs are evaluated together rather than treating peak stress as an elastic margin.</li>
+        </ul></div></div>
+      </div>
+    </section>
+
+    <section class="doc__section" id="validation" data-reveal>
+      <h2><span class="num">07</span>Validation</h2>
+      <figure class="fig" style="margin-bottom:1.25rem"><div class="fig__body" style="padding:0"><img src="../assets/img/aeroframe-dt/fe-response.png" width="2060" height="868" loading="lazy" alt="Two-panel plot comparing total deformation and peak von Mises stress across five edge-distance ratios."></div><figcaption><b>Fig. 2</b>FE response across the e/D sweep. Elastic configurations follow the expected stiffness trend; the e/D 1.0 case is discarded for exceeding the ductility model.</figcaption></figure>
+      <div class="metrics">
+        <div class="metric metric--green"><div class="metric__v">1.7%</div><div class="metric__k">Elastic trend deviation</div></div>
+        <div class="metric"><div class="metric__v">490–522</div><div class="metric__k">MPa, e/D 1.2–2.0</div></div>
+        <div class="metric metric--orange"><div class="metric__v">1</div><div class="metric__k">Variant discarded</div></div>
+      </div>
+      <ul class="tick-list tick-list--cyan" style="margin-top:1.25rem">
+        <li>Elastic deformation follows 1.97 times the simple shank-stretch estimate to within 1.7%.</li>
+        <li>Peak von Mises response remains comparatively flat from e/D 1.2 through 2.0 even as the simplified shear-out margin changes strongly.</li>
+        <li>The e/D 1.0 point is not used as a design result because the response exceeds the material model&apos;s ductility range.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="results" data-reveal>
+      <h2><span class="num">08</span>Results</h2>
+      <figure class="fig" style="margin-bottom:1.25rem"><div class="fig__body" style="padding:0"><img src="../assets/img/aeroframe-dt/margin-vs-ed.png" width="1256" height="917" loading="lazy" alt="Margin-of-safety curves for shear-out, bearing and net section plotted against lug edge-distance ratio."></div><figcaption><b>Fig. 3</b>Hand-calculation sweep. Simplified shear-out crosses zero near e/D 1.201; the mode crossover occurs near e/D 1.353.</figcaption></figure>
+      <div class="grid-3">
+        <div class="panel"><div class="panel__head"><span>Zero margin</span></div><div class="panel__body"><div class="metric__v">e/D 1.201</div><p>Below this point, the screening shear-out expression predicts failure.</p></div></div>
+        <div class="panel"><div class="panel__head"><span>Mode crossover</span></div><div class="panel__body"><div class="metric__v">e/D 1.353</div><p>Above the crossover, added edge distance no longer improves the governing bearing mode.</p></div></div>
+        <div class="panel"><div class="panel__head"><span>Bearing margin</span></div><div class="panel__body"><div class="metric__v">~ +0.22</div><p>Approximately constant across the sweep because projected bearing area does not depend on e.</p></div></div>
+      </div>
+      <div class="note" style="margin-top:1.25rem"><div class="note__t">What the result changed</div><p>The edge-distance rule stopped being treated as a binary geometry-validity test. It became a failure-regime flag that determines which analysis method can govern.</p></div>
+    </section>
+
+    <section class="doc__section" id="decision" data-reveal>
+      <h2><span class="num">09</span>Recorded engineering decision</h2>
+      <h3>Retain the Rev A baseline at e/D = 1.25</h3>
+      <p>The original constraint logic rejected any geometry below 1.5D. Review of the lug method showed that 1.5D is approximately a boundary between failure regimes, not a universal physical-validity floor. The actual physical floor is a positive ligament, e &gt; D/2.</p>
+      <div class="table-wrap" style="margin:1.2rem 0">
+        <table class="reqs">
+          <thead><tr><th>Question</th><th>Decision</th><th>Consequence</th></tr></thead>
+          <tbody>
+            <tr><td>Increase edge distance?</td><td>No, retain 2.500 in / e/D 1.25</td><td>Avoid mass and drawing rework that do not improve the limiting mode</td></tr>
+            <tr><td>Keep 1.5D as a hard failure?</td><td>No, convert it to a regime flag</td><td>Automation reports analysis-method risk instead of rejecting valid geometry</td></tr>
+            <tr><td>Allow simple shear-out to govern?</td><td>No, screening only below the transition</td><td>K-coefficient lug analysis plus solid FEA required</td></tr>
+            <tr><td>Fatigue-critical location?</td><td>Pin bore retained</td><td>Reduced edge distance carried into fatigue follow-on work</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="traceability" data-reveal>
+      <h2><span class="num">10</span>Proof stack</h2>
+      <p>The portfolio page is downstream of the project evidence. The artifacts below existed before this presentation and carry the assumptions, configuration and solver state.</p>
+      <div class="table-wrap" style="margin-top:1.2rem">
+        <table class="reqs">
+          <thead><tr><th>Artifact</th><th>What it proves</th><th>State</th></tr></thead>
+          <tbody>
+            <tr><td>PARAMETER_SCHEMA.csv</td><td>Ten controlled geometry values with decision-source IDs</td><td><span class="pill pill--done">Set</span></td></tr>
+            <tr><td>LOAD_BASIS_AF-DT-1000_revA.md</td><td>Four-case envelope, load split, claim boundary and open load-path item</td><td><span class="pill pill--done">Approved</span></td></tr>
+            <tr><td>DECISIONS_AF-DT-1000_revA.md</td><td>e/D decision, analytical limits and binding follow-on work</td><td><span class="pill pill--done">Recorded</span></td></tr>
+            <tr><td>AF-DT-1000_fitting_revD_mm.step</td><td>Released parametric solid in analysis units</td><td><span class="pill pill--done">Rev D</span></td></tr>
+            <tr><td>revdconverged.wbpz</td><td>Archived ANSYS model and solver state</td><td><span class="pill pill--done">Archived</span></td></tr>
+            <tr><td>fig1 / fig2 / fig3</td><td>Hand-check sweep, FE trend correlation and plastic-strain audit</td><td><span class="pill pill--done">Evidence</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="doc__section" id="limits" data-reveal>
+      <h2><span class="num">11</span>Limits and open findings</h2>
+      <div class="grid-2">
+        <div class="panel"><div class="panel__head"><span>Load path</span><span class="u-orange">Highest priority</span></div><div class="panel__body"><p>The 50/50 station split excludes the pitching couple from propulsion-system CG offset. The fitting load is therefore a screening lower bound, not a final substantiation load.</p></div></div>
+        <div class="panel"><div class="panel__head"><span>Plastic strain</span><span class="u-orange">Open</span></div><div class="panel__body"><p>Measured nodal plastic strain agrees with the material-card implication when the plastic zone is large, then falls to roughly 0.18 times the implied value as the zone shrinks.</p></div></div>
+        <div class="panel"><div class="panel__head"><span>Allowables</span><span class="u-orange">Open</span></div><div class="panel__body"><p>No certified basis is frozen for material product form, thickness or grain direction. T651 and T7351 references remain configuration-specific.</p></div></div>
+        <div class="panel"><div class="panel__head"><span>Peak contour</span><span class="u-orange">Diagnostic</span></div><div class="panel__body"><p>The separate contact-model screenshot reports a 1.05 GPa maximum. Because that exceeds yield and is hotspot-sensitive, it is shown as load-path evidence, not quoted as a final margin.</p></div></div>
+      </div>
+      <figure class="fig" style="margin-top:1.25rem"><div class="fig__body" style="padding:0"><img src="../assets/img/aeroframe-dt/plastic-strain.png" width="1356" height="887" loading="lazy" alt="Equivalent plastic-strain consistency plot comparing measured nodal values with values implied by the material card."></div><figcaption><b>Fig. 4</b>Open plastic-strain consistency finding. Agreement degrades as the plastic zone becomes small.</figcaption></figure>
+    </section>
+
+    <section class="doc__section" id="lessons" data-reveal>
+      <h2><span class="num">12</span>Lessons learned</h2>
+      <ul class="tick-list tick-list--orange">
+        <li><b>A screening rule is not a law of physics.</b> The 1.5D threshold became useful only after it was reframed as a failure-regime transition.</li>
+        <li><b>Trend agreement is stronger than one contour.</b> Five controlled variants revealed what stayed flat, what scaled, and what became nonphysical.</li>
+        <li><b>Configuration differences belong in the result.</b> Loads, materials and geometry revisions are kept separate rather than blended into a cleaner story.</li>
+        <li><b>An unresolved inconsistency is evidence too.</b> The plastic-strain mismatch is visible because it changes what can be claimed.</li>
+        <li><b>Traceability makes the portfolio credible.</b> Every headline number maps to a calculation, solver artifact or recorded decision.</li>
+      </ul>
+    </section>
+
+    <section class="doc__section" id="gallery" data-reveal>
+      <h2><span class="num">13</span>Model evidence</h2>
+      <div class="grid-2">
+        <figure class="fig"><div class="fig__body" style="padding:0"><img src="../assets/img/aeroframe-dt/equivalent-stress.png" width="1193" height="506" loading="lazy" alt="Equivalent-stress contour showing the hotspot and stress flow through the fitting web."></div><figcaption><b>Fig. 5</b>Equivalent stress. Diagnostic hotspot and load-path location.</figcaption></figure>
+        <figure class="fig"><div class="fig__body" style="padding:0"><img src="../assets/img/aeroframe-dt/total-deformation.png" width="1193" height="506" loading="lazy" alt="Total-deformation contour showing the global response shape of the fitting assembly."></div><figcaption><b>Fig. 6</b>Total deformation. Global response shape and constraint sense-check.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="doc__section" id="next" data-reveal>
+      <h2><span class="num">14</span>Next work</h2>
+      <ol class="num-list">
+        <li>Define the actual forward/aft station geometry and propulsion CG offset, then replace the 50/50 split with a free-body solution including the pitching couple.</li>
+        <li>Freeze one material allowable basis with product form, thickness, grain direction and statistical basis.</li>
+        <li>Resolve the nodal averaging and integration-point recovery behind the small-zone plastic-strain mismatch.</li>
+        <li>Run a formal bore-region mesh-convergence study and separate structural stress from contact singularity.</li>
+        <li>Carry the accepted geometry into fatigue and tolerance-stack assessments at the pin bore.</li>
+      </ol>
+      <div class="btn-row" style="margin-top:1.5rem"><a class="btn btn--primary" href="../projects.html">Back to all projects</a><a class="btn btn--ghost" href="md11-structures.html">AeroFrame-MD11 &rarr;</a></div>
+    </section>
+  </div>
+</div>
+</div>
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <div><h5>Navigate</h5><ul><li><a href="../projects.html">Projects</a></li><li><a href="../experience.html">Experience</a></li><li><a href="../skills.html">Technical skills</a></li><li><a href="../resume.html">Resume</a></li><li><a href="../contact.html">Contact</a></li></ul></div>
+      <div><h5>Case studies</h5><ul><li><a href="ghost.html">GHOST</a></li><li><a href="astrasim-fsw.html">AstraSim-FSW</a></li><li><a href="rocket-landing-gnc.html">Rocket Landing GNC</a></li><li><a href="md11-structures.html">AeroFrame-MD11</a></li><li><a href="aeroframe-dt.html">AeroFrame-DT</a></li></ul></div>
+      <div><h5>Elsewhere</h5><ul><li><a href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://www.linkedin.com/in/vinayakmnair/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="footer__bar"><span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span><span>vinnair.me</span></div>
+  </div>
+</footer>
+<script src="../assets/js/site.js" defer></script>
+</body>
+</html>

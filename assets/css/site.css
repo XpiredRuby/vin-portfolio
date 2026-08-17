@@ -628,6 +628,14 @@ code, .code {
 }
 @media (max-width: 900px) { .case__visual { border-right: 0; border-bottom: 1px solid var(--line); } }
 .case__visual svg, .case__visual img { width: 100%; height: auto; }
+.case__visual--evidence { padding: 0; overflow: hidden; }
+.case__visual--evidence img {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  object-fit: cover;
+  object-position: 50% 8%;
+}
 
 .case__id {
   position: absolute;
@@ -890,6 +898,60 @@ code, .code {
   border: 1px solid var(--line);
   border-radius: var(--r);
   display: block;
+}
+
+/* AeroFrame-DT evidence hero uses the project wireframe, not decorative art. */
+.afdt-hero {
+  position: relative;
+  min-height: clamp(360px, 58vw, 620px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background:
+    linear-gradient(rgba(90, 169, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(90, 169, 255, 0.07) 1px, transparent 1px),
+    var(--bg-sunken);
+  background-size: 54px 54px;
+}
+.afdt-hero::before,
+.afdt-hero::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  background: rgba(34, 211, 238, 0.28);
+}
+.afdt-hero::before { width: 1px; height: 100%; left: 50%; }
+.afdt-hero::after { width: 100%; height: 1px; top: 50%; }
+.afdt-hero img {
+  position: relative;
+  z-index: 2;
+  width: min(86%, 820px);
+  height: auto;
+  mix-blend-mode: screen;
+}
+.afdt-hero__label,
+.afdt-hero__datum {
+  position: absolute;
+  z-index: 3;
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--txt-3);
+}
+.afdt-hero__label { top: 1rem; left: 1.1rem; }
+.afdt-hero__datum {
+  color: var(--orange);
+  border-top: 1px solid var(--orange);
+  padding-top: 0.42rem;
+}
+.afdt-hero__datum--a { left: 6%; top: 31%; width: 22%; }
+.afdt-hero__datum--b { right: 6%; bottom: 27%; width: 24%; text-align: right; }
+@media (max-width: 620px) {
+  .afdt-hero { min-height: 390px; background-size: 38px 38px; }
+  .afdt-hero img { width: 110%; max-width: none; }
+  .afdt-hero__datum { font-size: 0.52rem; }
 }
 
 /* ---------- 15. GRIDS ---------- */

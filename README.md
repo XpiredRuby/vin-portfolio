@@ -35,6 +35,7 @@ vin-portfolio/
 │   ├── astrasim-fsw.html           # PRJ-02  Flight software HIL verification framework
 │   ├── rocket-landing-gnc.html     # PRJ-03  6-DOF booster descent GNC + Monte Carlo
 │   ├── md11-structures.html        # PRJ-04  CAD assembly + static/thermal/modal FEA
+│   ├── aeroframe-dt.html           # PRJ-08  Pylon fitting parametric trade study + nonlinear FEA
 │   ├── interceptor.html            # PRJ-05  Sub-100 ms perception-to-actuation loop
 │   ├── spirit-iss.html             # PRJ-06  ISS payload systems engineering
 │   └── kestrel.html                # PRJ-07  Archived programme closeout
@@ -55,6 +56,7 @@ vin-portfolio/
 │   ├── diagrams/*.svg              # Technical block diagrams used inside case studies
 │   ├── diagrams/generate.py        # Regenerates every diagram from one spec file
 │   ├── headshot.jpg                # Portrait
+│   ├── img/aeroframe-dt/*.png      # AeroFrame-DT geometry, mesh, result and correlation evidence
 │   ├── og-image.png                # 1200×630 social preview
 │   ├── og-image.src.html           # Source used to render the OG image
 │   └── resume.pdf                  # Generated from resume.html via the print stylesheet
