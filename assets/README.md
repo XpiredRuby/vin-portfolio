@@ -8,8 +8,9 @@
 | `diagrams/*.svg` | Technical block diagrams used across the case studies | `python3 assets/diagrams/generate.py` |
 | `diagrams/generate.py` | The single source of truth for every diagram | hand-edited |
 | `headshot.jpg` | Portrait, 400×400 | **replace with a professional headshot** |
-| `og-image.png` | 1200×630 social preview card | render `og-image.src.html` (see below) |
-| `og-image.src.html` | Source page for the OG image | hand-edited |
+| `og-image-light.png` | Current multidisciplinary social preview card | generated to match the light editorial portfolio |
+| `og-image.png` | Legacy 1200×630 dark social preview card | retained for history |
+| `og-image.src.html` | Legacy source page for `og-image.png` | hand-edited |
 | `resume.pdf` | Generated from `resume.html` via the print stylesheet | see below |
 
 ## Regenerating the resume PDF

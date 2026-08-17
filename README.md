@@ -15,7 +15,8 @@ developer portfolio. Every project is documented the way an internal engineering
 problem, requirements, constraints, system design, mathematical models, algorithms, implementation,
 testing, validation, performance, results, tradeoffs, challenges, lessons learned, future work.
 
-- Very dark graphite surfaces, hairline borders, no glassmorphism, no decorative shadows
+- Warm paper surfaces, charcoal typography, restrained vermilion and technical-blue accents
+- Editorial hierarchy that presents mechanical/FEA, GNC, systems, and flight software as equal lanes
 - Electric blue and cyan accents; orange used sparingly for highlights and risk
 - Space Grotesk (headings) / Inter (body) / JetBrains Mono (technical labels and code)
 - Motion is purposeful only: one scroll-reveal, one counter, one orbit. All disabled under
@@ -57,8 +58,9 @@ vin-portfolio/
 │   ├── diagrams/generate.py        # Regenerates every diagram from one spec file
 │   ├── headshot.jpg                # Portrait
 │   ├── img/aeroframe-dt/*.png      # AeroFrame-DT geometry, mesh, result and correlation evidence
-│   ├── og-image.png                # 1200×630 social preview
-│   ├── og-image.src.html           # Source used to render the OG image
+│   ├── og-image-light.png          # Current multidisciplinary social preview
+│   ├── og-image.png                # Legacy dark social preview
+│   ├── og-image.src.html           # Legacy source used to render og-image.png
 │   └── resume.pdf                  # Generated from resume.html via the print stylesheet
 ├── favicon.svg
 ├── robots.txt

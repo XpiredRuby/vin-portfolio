@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects: Engineering Case Studies | Vinayak Manoj Nair</title>
-<meta name="description" content="Eight aerospace engineering case studies: GPS-denied state estimation, flight-software hardware-in-the-loop verification, rocket landing GNC, aircraft structural FEA, autonomous robotics, and ISS payload systems engineering.">
+<meta name="description" content="Eight aerospace engineering case studies spanning mechanical design and FEA, guidance navigation and control, flight-software verification, autonomous hardware, and ISS payload systems engineering.">
 <meta name="author" content="Vinayak Manoj Nair">
-<meta name="theme-color" content="#07090D">
+<meta name="theme-color" content="#F2F0E8">
 <link rel="canonical" href="https://vinnair.me/projects.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
 <meta property="og:title" content="Projects: Engineering Case Studies | Vinayak Manoj Nair">
-<meta property="og:description" content="GNC, flight software verification, structures, and autonomy, each project documented as an engineering report with requirements, architecture, results and tradeoffs.">
+<meta property="og:description" content="Mechanical design and FEA, GNC, flight software verification, and systems engineering, each documented with requirements, results and tradeoffs.">
 <meta property="og:url" content="https://vinnair.me/projects.html">
-<meta property="og:image" content="https://vinnair.me/assets/og-image.png">
+<meta property="og:image" content="https://vinnair.me/assets/og-image-light.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://vinnair.me/assets/og-image.png">
+<meta name="twitter:image" content="https://vinnair.me/assets/og-image-light.png">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,10 +55,37 @@
     <p class="eyebrow" style="margin-top:1.1rem">Engineering case studies &middot; 08 entries</p>
     <h1>Projects</h1>
     <p class="lede">
-      Every entry below is written the way an engineering report is written: what problem it solved,
-      what the requirements and constraints were, how the system was designed, what the numbers came
-      out to, what the tradeoffs cost, and what I would do differently. Depth is on the individual pages.
+      Browse the work by engineering discipline, then open any case study for the requirements,
+      geometry or architecture, analysis method, results, tradeoffs, and unresolved limits. The
+      portfolio is intentionally broader than a single specialty.
     </p>
+  </div>
+</section>
+
+<section class="shell section--tight discipline-overview" aria-labelledby="discipline-overview-h">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Choose a discipline</p>
+      <h2 id="discipline-overview-h">One engineer, four ways into the work</h2>
+    </div>
+  </div>
+  <div class="grid-4">
+    <a class="panel discipline-card" href="#aeroframe-dt" data-reveal>
+      <div class="panel__head"><span>01 / Mechanical</span><span class="u-orange">&#9679;</span></div>
+      <div class="panel__body"><h3>CAD &amp; structural analysis</h3><p>Parametric assemblies, GD&amp;T, hand checks, load paths, ANSYS and Abaqus FEA.</p><span class="link-arrow">View structural work</span></div>
+    </a>
+    <a class="panel discipline-card" href="#ghost" data-reveal data-delay="1">
+      <div class="panel__head"><span>02 / GNC</span><span class="u-blue">&#9679;</span></div>
+      <div class="panel__body"><h3>Estimation &amp; control</h3><p>Kalman filtering, target tracking, 6-DOF dynamics, closed-loop control and dispersion analysis.</p><span class="link-arrow">View GNC work</span></div>
+    </a>
+    <a class="panel discipline-card" href="#spirit" data-reveal data-delay="2">
+      <div class="panel__head"><span>03 / Systems</span><span class="u-cyan">&#9679;</span></div>
+      <div class="panel__body"><h3>Requirements &amp; trades</h3><p>Traceability, interfaces, change control, risk reduction, review gates and V&amp;V planning.</p><span class="link-arrow">View systems work</span></div>
+    </a>
+    <a class="panel discipline-card" href="#astrasim" data-reveal data-delay="3">
+      <div class="panel__head"><span>04 / Software</span><span class="u-green">&#9679;</span></div>
+      <div class="panel__body"><h3>Flight software &amp; test</h3><p>Embedded C++, command and telemetry, fault injection, HIL verification and regression evidence.</p><span class="link-arrow">View software work</span></div>
+    </a>
   </div>
 </section>
 
@@ -70,21 +97,21 @@
         <tr><th>ID</th><th>Project</th><th>Domain</th><th>Key result</th><th>Status</th></tr>
       </thead>
       <tbody>
+        <tr><td>PRJ-08</td><td><a class="u-cyan" href="projects/aeroframe-dt.html">AeroFrame-DT</a></td><td>Structures / nonlinear FEA</td><td>5-variant lug trade study with traceable evidence</td><td><span class="pill pill--done">Documented</span></td></tr>
+        <tr><td>PRJ-04</td><td><a class="u-cyan" href="projects/md11-structures.html">AeroFrame-MD11</a></td><td>Mechanical design / FEA</td><td>3 failure sites found at 2.5 g limit load</td><td><span class="pill pill--done">Complete</span></td></tr>
         <tr><td>PRJ-01</td><td><a class="u-cyan" href="projects/ghost.html">GHOST</a></td><td>GNC / state estimation</td><td>9-state ESKF + IMM tracker on Pi 4B</td><td><span class="pill pill--active">Active</span></td></tr>
+        <tr><td>PRJ-06</td><td><a class="u-cyan" href="projects/spirit-iss.html">TAMU-SPIRIT ISS Payload</a></td><td>Systems engineering</td><td>100% milestone compliance through PDR</td><td><span class="pill pill--active">Active</span></td></tr>
         <tr><td>PRJ-02</td><td><a class="u-cyan" href="projects/astrasim-fsw.html">AstraSim-FSW</a></td><td>Flight software / V&amp;V</td><td>9/9 tests, 25/25 MC trials on hardware</td><td><span class="pill pill--live">HIL verified</span></td></tr>
         <tr><td>PRJ-03</td><td><a class="u-cyan" href="projects/rocket-landing-gnc.html">Rocket Landing GNC</a></td><td>GNC / simulation</td><td>&lt;2.0 m landing accuracy, 500 MC runs</td><td><span class="pill pill--done">Complete</span></td></tr>
-        <tr><td>PRJ-04</td><td><a class="u-cyan" href="projects/md11-structures.html">AeroFrame-MD11</a></td><td>Structures / FEA</td><td>3 failure sites found at 2.5 g limit load</td><td><span class="pill pill--done">Complete</span></td></tr>
         <tr><td>PRJ-05</td><td><a class="u-cyan" href="projects/interceptor.html">Interception Robot</a></td><td>Autonomy / embedded</td><td>&lt;100 ms closed-loop latency</td><td><span class="pill pill--done">Complete</span></td></tr>
-        <tr><td>PRJ-06</td><td><a class="u-cyan" href="projects/spirit-iss.html">TAMU-SPIRIT ISS Payload</a></td><td>Systems engineering</td><td>100% milestone compliance through PDR</td><td><span class="pill pill--active">Active</span></td></tr>
         <tr><td>PRJ-07</td><td><a class="u-cyan" href="projects/kestrel.html">Project KESTREL</a></td><td>UAV / precision landing</td><td>CDR readiness, sub-5 cm CEP target</td><td><span class="pill pill--archive">Archived</span></td></tr>
-        <tr><td>PRJ-08</td><td><a class="u-cyan" href="projects/aeroframe-dt.html">AeroFrame-DT</a></td><td>Structures / nonlinear FEA</td><td>5-variant lug trade study with traceable evidence</td><td><span class="pill pill--done">Documented</span></td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
 <section class="shell section">
-  <div class="stack" style="gap:1.5rem">
+  <div class="stack project-catalog" style="gap:1.5rem">
 
     <article class="case" id="ghost" data-reveal>
       <div class="case__visual">
