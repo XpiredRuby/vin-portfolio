@@ -1621,6 +1621,190 @@ code, .code {
 }
 .demo-card p { color: var(--txt-2) !important; }
 
+/* ---------- DARK TECHNICAL SURFACES: ACCESSIBLE CONTRAST ----------
+   The evidence/report layer intentionally uses dark surfaces. Keep warm-theme
+   heading and utility colors from leaking into those surfaces. */
+body.aero-ui .page-hero h1,
+body.aero-ui .page-hero h2,
+body.aero-ui .page-hero h3,
+body.aero-ui .page-hero h4 {
+  color: #F7FAFF;
+}
+body.aero-ui .page-hero .eyebrow { color: #8FC8FF; }
+body.aero-ui .page-hero .lede { color: #D3DFED; }
+body.aero-ui .page-hero .crumbs,
+body.aero-ui .page-hero .crumbs a { color: #B9C8D9; }
+body.aero-ui .page-hero .crumbs a:hover { color: #FFFFFF; }
+
+body.aero-ui.page-project-detail .doc__section {
+  color: #DCE7F5;
+}
+body.aero-ui.page-project-detail .doc__section > h2,
+body.aero-ui.page-project-detail .doc__section > h3,
+body.aero-ui.page-project-detail .doc__section > h4,
+body.aero-ui.page-project-detail .doc__section > h5,
+body.aero-ui.page-project-detail .doc__section .panel__head,
+body.aero-ui.page-project-detail .doc__section .note__t,
+body.aero-ui.page-project-detail .doc__section .evidence-card h3,
+body.aero-ui.page-project-detail .doc__section .evidence-card__title,
+body.aero-ui.page-project-detail .doc__section .evidence-status h3,
+body.aero-ui.page-project-detail .doc__section .demo-card h3 {
+  color: #F7FAFF;
+}
+body.aero-ui.page-project-detail .doc__section > h3,
+body.aero-ui.page-project-detail .doc__section > h4,
+body.aero-ui.page-project-detail .doc__section > h5 {
+  color: #E8F0FA;
+}
+body.aero-ui.page-project-detail .doc__section p,
+body.aero-ui.page-project-detail .doc__section li,
+body.aero-ui.page-project-detail .doc__section td,
+body.aero-ui.page-project-detail .doc__section dd {
+  color: #DCE7F5;
+}
+body.aero-ui.page-project-detail .doc__section strong,
+body.aero-ui.page-project-detail .doc__section b,
+body.aero-ui.page-project-detail .doc__section dt {
+  color: #F7FAFF;
+}
+body.aero-ui.page-project-detail .doc__section .u-dim,
+body.aero-ui.page-project-detail .doc__section .u-mute,
+body.aero-ui.page-project-detail .doc__section small,
+body.aero-ui.page-project-detail .doc__section figcaption,
+body.aero-ui.page-project-detail .doc__section .metric__k {
+  color: #B9C8D9 !important;
+}
+body.aero-ui.page-project-detail .doc__section .u-blue,
+body.aero-ui.page-project-detail .doc__section .evidence-source,
+body.aero-ui.page-project-detail .doc__section .metric__v {
+  color: #8FC8FF;
+}
+body.aero-ui.page-project-detail .doc__section .u-cyan { color: #8EEBF4; }
+body.aero-ui.page-project-detail .doc__section .u-orange,
+body.aero-ui.page-project-detail .doc__section .metric--orange .metric__v { color: #FFD08F; }
+body.aero-ui.page-project-detail .doc__section .u-green,
+body.aero-ui.page-project-detail .doc__section .metric--green .metric__v { color: #98E8BE; }
+body.aero-ui.page-project-detail .doc__section .eq .c,
+body.aero-ui.page-project-detail .doc__section .spec th { color: #B9C8D9; }
+body.aero-ui.page-project-detail .doc__section .num-list li::before { color: #8FC8FF; }
+body.aero-ui.page-project-detail .doc__section code {
+  border-color: rgba(255, 172, 154, 0.28);
+  background: rgba(255, 118, 86, 0.10);
+  color: #FFAC9A;
+}
+body.aero-ui.page-project-detail .doc__section pre code {
+  border: 0;
+  background: transparent;
+  color: #DCE7F5;
+}
+
+body.aero-ui.page-project-detail .doc__section .panel,
+body.aero-ui.page-project-detail .doc__section .note,
+body.aero-ui.page-project-detail .doc__section .eq,
+body.aero-ui.page-project-detail .doc__section .metric,
+body.aero-ui.page-project-detail .doc__section .claim-card,
+body.aero-ui.page-project-detail .doc__section .claim-strip > div:not(.claim-card),
+body.aero-ui.page-project-detail .doc__section .evidence-card,
+body.aero-ui.page-project-detail .doc__section .provenance-note,
+body.aero-ui.page-project-detail .doc__section .demo-card {
+  border-color: rgba(151, 184, 224, 0.24);
+  background: #0B1725;
+  color: #DCE7F5;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+}
+body.aero-ui.page-project-detail .doc__section .panel__head {
+  border-color: rgba(151, 184, 224, 0.20);
+  background: #132338;
+}
+body.aero-ui.page-project-detail .doc__section .claim-card p,
+body.aero-ui.page-project-detail .doc__section .claim-card__label,
+body.aero-ui.page-project-detail .doc__section .claim-strip > div:not(.claim-card) span,
+body.aero-ui.page-project-detail .doc__section .evidence-card p,
+body.aero-ui.page-project-detail .doc__section .demo-card p {
+  color: #B9C8D9 !important;
+}
+body.aero-ui.page-project-detail .doc__section .fig {
+  border-color: rgba(151, 184, 224, 0.24);
+  background: #091522;
+}
+body.aero-ui.page-project-detail .doc__section .fig figcaption {
+  border-color: rgba(151, 184, 224, 0.20);
+  background: #101F31;
+}
+body.aero-ui.page-project-detail .doc__section .reqs thead th {
+  background: #132338;
+  color: #E9F1FB;
+}
+body.aero-ui.page-project-detail .doc__section .reqs td:first-child { color: #C7D8EA; }
+body.aero-ui.page-project-detail .doc__section .reqs tbody tr:hover { background: rgba(143, 200, 255, 0.06); }
+
+body.aero-ui.page-project-detail .doc__section .pill {
+  border-color: rgba(185, 200, 217, 0.34);
+  background: rgba(185, 200, 217, 0.08);
+  color: #C9D5E3;
+}
+body.aero-ui.page-project-detail .doc__section .pill--done {
+  border-color: rgba(255, 156, 135, 0.42);
+  background: rgba(255, 118, 86, 0.12);
+  color: #FFAC9A;
+}
+body.aero-ui.page-project-detail .doc__section .pill--live {
+  border-color: rgba(152, 232, 190, 0.38);
+  background: rgba(71, 196, 132, 0.10);
+  color: #A8EEC9;
+}
+body.aero-ui.page-project-detail .doc__section .pill--active {
+  border-color: rgba(255, 208, 143, 0.40);
+  background: rgba(224, 151, 61, 0.11);
+  color: #FFD9A4;
+}
+body.aero-ui.page-project-detail .doc__section .pill--archive { color: #B9C8D9; }
+
+body.aero-ui.page-project-detail .doc__section .btn--ghost {
+  border-color: rgba(185, 200, 217, 0.34);
+  background: rgba(185, 200, 217, 0.06);
+  color: #DCE7F5;
+}
+body.aero-ui.page-project-detail .doc__section .btn--ghost:hover {
+  border-color: rgba(143, 200, 255, 0.58);
+  background: rgba(143, 200, 255, 0.12);
+  color: #FFFFFF;
+}
+body.aero-ui.page-project-detail .doc__section .btn--cyan { color: #FFD0C5; }
+
+body.aero-ui.page-project-detail .doc__section .evidence-tag {
+  border-color: rgba(142, 235, 244, 0.34);
+  background: rgba(67, 207, 221, 0.10);
+  color: #A9F0F7;
+}
+body.aero-ui.page-project-detail .doc__section .evidence-tag--hardware,
+body.aero-ui.page-project-detail .doc__section .evidence-tag--public,
+body.aero-ui.page-project-detail .doc__section .evidence-tag--verified {
+  border-color: rgba(152, 232, 190, 0.36);
+  background: rgba(71, 196, 132, 0.10);
+  color: #A8EEC9;
+}
+body.aero-ui.page-project-detail .doc__section .evidence-tag--simulation,
+body.aero-ui.page-project-detail .doc__section .evidence-tag--software {
+  border-color: rgba(143, 200, 255, 0.38);
+  background: rgba(62, 145, 228, 0.12);
+  color: #A9D5FF;
+}
+body.aero-ui.page-project-detail .doc__section .evidence-tag--internal,
+body.aero-ui.page-project-detail .doc__section .evidence-tag--target,
+body.aero-ui.page-project-detail .doc__section .evidence-tag--limited {
+  border-color: rgba(255, 208, 143, 0.40);
+  background: rgba(224, 151, 61, 0.11);
+  color: #FFD9A4;
+}
+body.aero-ui.page-project-detail .doc__section .evidence-tag--open,
+body.aero-ui.page-project-detail .doc__section .evidence-tag--unverified,
+body.aero-ui.page-project-detail .doc__section .evidence-tag--limit {
+  border-color: rgba(255, 166, 166, 0.40);
+  background: rgba(222, 89, 89, 0.11);
+  color: #FFBABA;
+}
+
 .afdt-hero {
   background:
     linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
