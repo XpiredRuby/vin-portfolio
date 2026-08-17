@@ -6,12 +6,23 @@
   'use strict';
 
   var USER = 'XpiredRuby';
-  var PINNED = ['astrasim-fsw', 'ghost', 'rocket-landing-gnc', 'interceptor'];
+  // Recruiter-facing order: strongest current public engineering evidence first.
+  // Keep these names synchronized with the actual public repositories.
+  var PINNED = [
+    'ghost-vins-eskf',
+    'astrasim-fsw',
+    'aeroframe-dt',
+    'f16-flight-sim',
+    'pact-controls',
+    'vin-portfolio'
+  ];
   var MAX = 6;
 
   var mount = document.getElementById('gh-list');
   var countEl = document.getElementById('gh-count');
+  var statusEl = document.getElementById('gh-status');
   if (!mount) { return; }
+  var fallbackMarkup = mount.innerHTML;
 
   // GitHub's own linguist colours for the languages this profile uses.
   var LANG = {
@@ -31,7 +42,6 @@
     });
   }
 
-  // GitHub writes "Updated 3 days ago" / "Updated on 12 Mar 2025".
   function updated(iso) {
     var then = new Date(iso);
     var days = Math.floor((Date.now() - then.getTime()) / 86400000);
@@ -60,14 +70,12 @@
       .slice(0, MAX);
 
     if (!list.length) { return fallback(); }
-
-    if (countEl) { countEl.textContent = repos.length; }
+    if (countEl) { countEl.textContent = list.length; }
 
     mount.innerHTML = list.map(function (r) {
       var topics = (r.topics || []).slice(0, 5).map(function (t) {
         return '<span class="gh__topic">' + esc(t) + '</span>';
       }).join('');
-
       var meta = [];
       if (r.language) {
         meta.push('<span><i class="gh__lang" style="background:' + (LANG[r.language] || '#4493f8') + '"></i>' + esc(r.language) + '</span>');
@@ -86,15 +94,24 @@
           '<span class="gh__meta">' + meta.join('') + '</span>' +
         '</a>';
     }).join('');
+    mount.setAttribute('aria-busy', 'false');
+    if (statusEl) { statusEl.textContent = 'Live data from GitHub'; }
   }
 
   function fallback() {
-    mount.innerHTML = '<p class="gh__empty">Repository list could not be loaded right now. ' +
-      'Browse everything at <a href="https://github.com/' + USER + '" target="_blank" rel="noopener noreferrer">github.com/' + USER + '</a>.</p>';
-    if (countEl) { countEl.textContent = ''; }
+    if (fallbackMarkup.trim()) {
+      mount.innerHTML = fallbackMarkup;
+    } else {
+      mount.innerHTML = '<p class="gh__empty">Repository data could not be loaded right now. ' +
+        'Browse public source at <a href="https://github.com/' + USER + '" target="_blank" rel="noopener noreferrer">github.com/' + USER + '</a>.</p>';
+    }
+    mount.setAttribute('aria-busy', 'false');
+    if (statusEl) { statusEl.textContent = 'GitHub unavailable - showing saved public links'; }
   }
 
   function load() {
+    mount.setAttribute('aria-busy', 'true');
+    if (statusEl) { statusEl.textContent = 'Loading current repository data...'; }
     var timeout = new Promise(function (_, reject) {
       setTimeout(function () { reject(new Error('timeout')); }, 8000);
     });

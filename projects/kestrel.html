@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Project KESTREL: Throw-Launch Precision Landing UAV (Closeout) | Vinayak Manoj Nair</title>
-<meta name="description" content="Programme closeout: a hand-thrown autonomous UAV designed for sub-5 cm CEP vision-only precision landing on a Pixhawk 6C, taken to CDR readiness before being archived, and what carried forward into GHOST.">
+<meta name="description" content="Honest programme closeout for an archived throw-launch UAV concept: sub-5 cm CEP remained a design target, no flight campaign was completed, and no public repository is available.">
 <meta name="author" content="Vinayak Manoj Nair">
 <meta name="theme-color" content="#F2F0E8">
 <link rel="canonical" href="https://vinnair.me/projects/kestrel.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
 <meta property="og:title" content="Project KESTREL: Throw-Launch Precision Landing UAV (Closeout)">
-<meta property="og:description" content="Vision-only terminal guidance for sub-5 cm CEP precision landing. CDR readiness reached; programme archived. An honest closeout.">
+<meta property="og:description" content="Archived UAV design study: CDR-readiness recorded, sub-5 cm CEP remained unverified, and no flight result is claimed.">
 <meta property="og:url" content="https://vinnair.me/projects/kestrel.html">
 <meta property="og:image" content="https://vinnair.me/assets/og-image-light.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,14 +33,7 @@
       <span class="brand__role">/ AEROSPACE</span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
-    <nav class="nav" id="primary-nav" aria-label="Primary">
-      <a href="../projects.html" aria-current="page">Projects</a>
-      <a href="../experience.html">Experience</a>
-      <a href="../skills.html">Skills</a>
-      <a href="../index.html#github">GitHub</a>
-      <a href="../contact.html">Contact</a>
-      <a class="nav__cta" href="../resume.html">Resume</a>
-    </nav>
+    <nav class="nav" id="primary-nav" aria-label="Primary"><a href="../about.html">About</a><a href="../projects.html" aria-current="page">Projects</a><a href="../experience.html">Experience</a><a href="../skills.html">Skills</a><a href="../contact.html">Contact</a></nav>
   </div>
 </header>
 
@@ -48,17 +41,18 @@
 
 <section class="page-hero">
   <div class="shell">
-    <p class="crumbs"><a href="../index.html">Home</a> <span>/</span> <a href="../projects.html">Projects</a> <span>/</span> <span>PRJ-07 KESTREL</span></p>
+    <p class="crumbs"><a href="../index.html">Home</a> <span>/</span> <a href="../projects.html">Projects</a> <span>/</span> <span>PRJ-08 KESTREL</span></p>
     <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:1.2rem">
       <span class="pill pill--archive">Archived</span>
-      <span class="pill">Closed at CDR readiness</span>
+      <span class="pill">Reported CDR readiness</span>
+      <span class="pill">No flight campaign</span>
     </div>
     <h1>Project KESTREL</h1>
     <p class="hero__spec mono" style="margin-top:.9rem">THROW-LAUNCH UAV &middot; VISION-ONLY TERMINAL GUIDANCE &middot; SUB-5 cm CEP TARGET</p>
     <p class="lede">
-      A hand-thrown autonomous UAV designed to recover to a marked pad with sub-5 cm circular error
-      probable using vision-only terminal guidance. It reached CDR readiness and was then closed out.
-      This page is the closeout, not a highlight reel.
+      A hand-thrown autonomous UAV concept targeting recovery to a marked pad with sub-5 cm circular error
+      probable using vision-only terminal guidance. The closeout record reached CDR readiness, but no
+      hardware qualification or flight campaign followed. This page separates design intent from evidence.
     </p>
     <div class="btn-row" style="margin-top:1.75rem">
       <a class="btn btn--primary" href="ghost.html">See what carried forward &rarr;</a>
@@ -77,6 +71,7 @@
 
   <nav class="toc" aria-label="Case study contents">
     <p class="toc__t">Contents</p>
+    <a href="#evidence">00 Evidence ledger</a>
     <a href="#problem">01 Problem</a>
     <a href="#requirements">02 Requirements</a>
     <a href="#design">03 Design approach</a>
@@ -87,6 +82,32 @@
   </nav>
 
   <div>
+
+    <section class="doc__section" id="evidence" data-reveal>
+      <h2><span class="num">00</span>Maturity &amp; evidence ledger</h2>
+      <div class="evidence-status">
+        <div class="claim-strip" role="group" aria-label="Project evidence summary">
+          <span class="evidence-tag evidence-tag--limited">Archived</span>
+          <span class="evidence-tag evidence-tag--target">Design-stage</span>
+          <span class="evidence-tag evidence-tag--open">No flight test</span>
+          <span class="evidence-tag evidence-tag--open">No public repository</span>
+        </div>
+        <p><b>Claim boundary:</b> KESTREL produced a requirements and architecture record that was closed out at reported CDR readiness. It did not produce a qualified airframe, flight-test dataset, or demonstrated landing-accuracy result.</p>
+        <p class="evidence-source"><b>Evidence source:</b> programme closeout narrative. No source repository, CDR package, bench log, or flight artifact is publicly linked.</p>
+      </div>
+      <div class="table-wrap" style="margin-top:1.25rem">
+        <table class="reqs">
+          <thead><tr><th>Evidence layer</th><th>Recorded outcome</th><th>Public artifact</th><th>Claim allowed</th></tr></thead>
+          <tbody>
+            <tr><td>Requirements</td><td>Targets and intended verification methods defined</td><td>Portfolio summary only</td><td>Design intent</td></tr>
+            <tr><td>Architecture</td><td>Vehicle, avionics, and terminal-guidance concept recorded</td><td>No public design package</td><td>Design approach</td></tr>
+            <tr><td>Readiness review</td><td>Closeout record states CDR readiness</td><td>No public board record</td><td>Reported maturity</td></tr>
+            <tr><td>Hardware qualification</td><td>Not completed</td><td>None</td><td>No qualification claim</td></tr>
+            <tr><td>Flight performance</td><td>Not tested</td><td>None</td><td>No accuracy claim</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
     <section class="doc__section" id="problem" data-reveal>
       <h2><span class="num">01</span>Problem</h2>
@@ -119,7 +140,7 @@
     <section class="doc__section" id="design" data-reveal>
       <h2><span class="num">03</span>Design approach</h2>
       <p>
-        A vision-only extended Kalman filter provided the terminal position reference, fusing pad-relative
+        The recorded design specified a vision-only extended Kalman filter as the intended terminal position reference, fusing pad-relative
         visual measurements with inertial propagation on a Pixhawk 6C flight controller. The launch
         transient, a hand throw imparts a large, poorly characterised initial rate, was treated
         as a distinct flight phase with its own detection logic and recovery mode rather than as an edge case
@@ -137,14 +158,14 @@
     <section class="doc__section" id="status" data-reveal>
       <h2><span class="num">04</span>Status at closeout</h2>
       <ul class="tick-list">
-        <li>Requirements set defined with verification methods assigned.</li>
-        <li>Vehicle configuration and avionics architecture defined and reviewed.</li>
-        <li>Vision-only terminal guidance approach designed and analysed.</li>
-        <li>Design package advanced to CDR readiness.</li>
+        <li>The closeout narrative records a requirements set with verification methods assigned; the source package is not public.</li>
+        <li>The recorded design specified a vehicle configuration and avionics architecture; no public review package is available.</li>
+        <li>The narrative describes a vision-only terminal-guidance concept; no public analysis artifact is available.</li>
+        <li>The closeout record reports CDR readiness; no public board disposition is available.</li>
         <li>No flight test campaign executed, the programme closed before hardware qualification.</li>
       </ul>
-      <div class="note" style="margin-top:1.25rem">
-        <div class="note__t">Stated plainly</div>
+      <div class="evidence-status" style="margin-top:1.25rem">
+        <div class="claim-strip"><span class="evidence-tag evidence-tag--target">Target, not result</span><span class="evidence-tag evidence-tag--open">Flight evidence: none</span></div>
         <p>The sub-5 cm CEP figure is a <b>design target</b> that was never flight-demonstrated. It is
            reported here as a requirement, not as a result, and it should not be read as one.</p>
       </div>
@@ -155,7 +176,7 @@
       <p>
         KESTREL was archived because its most valuable technical content, vision-only terminal
         guidance in the absence of GNSS, was a strict subset of a more general problem, and pursuing
-        the more general problem was the better use of the time. GHOST addresses GPS-denied state estimation
+        the more general problem was the better use of the time. GHOST-X addresses GPS-denied state estimation
         with occlusion tolerance and a target track, on hardware that is easier to iterate on than a
         throw-launched airframe.
       </p>
@@ -180,14 +201,13 @@
     <section class="doc__section" id="carried" data-reveal>
       <h2><span class="num">07</span>What carried forward</h2>
       <p>
-        The vision-only navigation work went directly into <a class="u-cyan" href="ghost.html">GHOST</a>:
-        the same problem of maintaining an accurate position estimate without GNSS, using a single camera and
-        an IMU, with the pad-relative fiducial approach generalised into AprilTag-based absolute pose fixes.
-        The error-state formulation, the &chi;&sup2; gating discipline, and the insistence on filter
-        consistency rather than raw accuracy all originated here.
+        KESTREL's central question&mdash;how to maintain useful position information without GNSS&mdash;helped
+        motivate the narrower, more testable estimator work in <a class="u-cyan" href="ghost.html">GHOST-X</a>.
+        GHOST-X owns the public implementation and test evidence; KESTREL is presented only as the archived
+        design context that helped shape that direction.
       </p>
       <div class="btn-row" style="margin-top:1.5rem">
-        <a class="btn btn--primary" href="ghost.html">GHOST case study</a>
+        <a class="btn btn--primary" href="ghost.html">GHOST-X case study</a>
         <a class="btn btn--ghost" href="../projects.html">All projects</a>
       </div>
     </section>
@@ -198,41 +218,7 @@
 
 </main>
 
-<footer class="footer">
-  <div class="shell">
-    <div class="footer__grid">
-      <div><h5>Navigate</h5><ul>
-        <li><a href="../projects.html">Projects</a></li>
-        <li><a href="../experience.html">Experience</a></li>
-        <li><a href="../skills.html">Technical skills</a></li>
-        <li><a href="../resume.html">Resume</a></li>
-        <li><a href="../contact.html">Contact</a></li>
-      </ul></div>
-      <div><h5>Case studies</h5><ul>
-        <li><a href="ghost.html">GHOST</a></li>
-        <li><a href="astrasim-fsw.html">AstraSim-FSW</a></li>
-        <li><a href="rocket-landing-gnc.html">Rocket Landing GNC</a></li>
-        <li><a href="md11-structures.html">AeroFrame-MD11</a></li>
-        <li><a href="interceptor.html">Interception Robot</a></li>
-      </ul></div>
-      <div><h5>Elsewhere</h5><ul>
-        <li><a href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-        <li><a href="https://linkedin.com/in/Vin2005" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-        <li><a href="mailto:vinhoustontexas@gmail.com">Email</a></li>
-      </ul></div>
-      <div><h5>Status</h5><ul>
-        <li class="u-dim" style="font-size:.855rem">Texas A&amp;M University</li>
-        <li class="u-dim" style="font-size:.855rem">B.S. Aerospace Engineering</li>
-        <li class="u-dim" style="font-size:.855rem">Expected May 2027</li>
-        <li class="u-green" style="font-size:.855rem">Open to opportunities</li>
-      </ul></div>
-    </div>
-    <div class="footer__bar">
-      <span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span>
-      <span>PRJ-07 &middot; KESTREL (ARCHIVED)</span>
-    </div>
-  </div>
-</footer>
+<footer class="footer"><div class="shell"><div class="footer__bar"><span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span><span>vinnair.me</span></div></div></footer>
 
 <script src="../assets/js/site.js" defer></script>
 </body>

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675"
-     role="img" aria-label="Project KESTREL. Throw-launch precision landing UAV, archived" font-family="'JetBrains Mono', ui-monospace, monospace">
+     role="img" aria-label="Project KESTREL. Archived design study; reported CDR readiness" font-family="'JetBrains Mono', ui-monospace, monospace">
 <defs>
   <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0%" stop-color="#0C1219"/><stop offset="100%" stop-color="#070A0F"/>
@@ -34,6 +34,6 @@
 <rect width="1200" height="675" fill="url(#g)"/><circle cx="600" cy="360" r="330" fill="url(#glow)"/><line x1="0" y1="580" x2="1200" y2="580" stroke="#3E4C60" stroke-opacity="0.6"/><path d="M150 520 C 380 210, 700 210, 940 470" fill="none" stroke="#3E4C60" stroke-width="2" stroke-dasharray="9 7"/><circle cx="150" cy="520" r="7" fill="#8895AA"/><text x="150" y="552" font-size="12" fill="#4A5768" text-anchor="middle" letter-spacing="0.14em" font-weight="400">HAND LAUNCH</text><ellipse cx="960" cy="520" rx="120" ry="20" fill="none" stroke="#8895AA" stroke-opacity="0.5"/><ellipse cx="960" cy="520" rx="58" ry="10" fill="none" stroke="#8895AA" stroke-opacity="0.7"/><rect x="944" y="512" width="32" height="16" fill="none" stroke="#8895AA" stroke-opacity="0.8"/><text x="960" y="560" font-size="12" fill="#4A5768" text-anchor="middle" letter-spacing="0.14em" font-weight="400">&lt; 5 cm CEP DESIGN TARGET</text><g transform="translate(560,262) rotate(-8)"><path d="M-104 0 L74 0 L104 12 L74 24 L-104 24 Z" fill="url(#metal)" stroke="#3E4C60"/><path d="M-24 2 L-70 -74 L-40 -74 L10 2 Z" fill="url(#metal)" stroke="#3E4C60"/><path d="M-24 22 L-70 96 L-40 96 L10 22 Z" fill="url(#metal)" stroke="#3E4C60"/><path d="M-104 2 L-128 -34 L-108 -34 L-86 2 Z" fill="url(#metal)" stroke="#3E4C60"/><circle cx="86" cy="12" r="6" fill="#0A0F16" stroke="#8895AA"/></g><g transform="translate(1010,150) rotate(-9)"><rect x="-118" y="-30" width="236" height="60" rx="5" fill="none" stroke="#4A5768" stroke-width="3"/><text x="0" y="10" font-size="30" fill="#4A5768" text-anchor="middle" letter-spacing="0.14em" font-weight="700">ARCHIVED</text></g>
 <rect width="1200" height="675" fill="url(#vig)"/>
 <rect x="0" y="671" width="1200" height="4" fill="#8895AA" opacity="0.85"/>
-<text x="48" y="72" font-size="16" fill="#8895AA" letter-spacing="0.22em">PRJ-07 / KESTREL</text>
-<text x="48" y="104" font-size="15" fill="#4A5768" letter-spacing="0.14em">THROW-LAUNCH PRECISION LANDING UAV, CLOSED AT CDR</text>
+<text x="48" y="72" font-size="16" fill="#8895AA" letter-spacing="0.22em">ARCHIVED / KESTREL</text>
+<text x="48" y="104" font-size="15" fill="#4A5768" letter-spacing="0.14em">REPORTED CDR READINESS / NO FLIGHT TEST</text>
 </svg>

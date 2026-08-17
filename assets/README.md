@@ -1,41 +1,36 @@
 # Assets
 
+## Evidence figures
+
+`evidence/` contains source-backed plots and diagrams displayed in the project
+case studies. `evidence/manifest.json` pins each group to a repository commit,
+records the upstream path or generation basis, and states the claim boundary.
+These figures are engineering evidence, not decorative concept art.
+
 | Path | What it is | Regenerate with |
 |---|---|---|
-| `css/site.css` | The entire design system, tokens, components, print stylesheet | hand-edited |
-| `js/site.js` | Nav toggle, scroll reveal, stat counters, UTC clock, TOC scroll-spy | hand-edited |
-| `js/github.js` | Live GitHub repository + commit feed (2 unauthenticated API calls, lazy, graceful fallback) | hand-edited |
-| `diagrams/*.svg` | Technical block diagrams used across the case studies | `python3 assets/diagrams/generate.py` |
-| `diagrams/generate.py` | The single source of truth for every diagram | hand-edited |
-| `headshot.jpg` | Portrait, 400×400 | **replace with a professional headshot** |
-| `og-image-light.png` | Current multidisciplinary social preview card | generated to match the light editorial portfolio |
-| `og-image.png` | Legacy 1200×630 dark social preview card | retained for history |
-| `og-image.src.html` | Legacy source page for `og-image.png` | hand-edited |
-| `resume.pdf` | Generated from `resume.html` via the print stylesheet | see below |
+| `css/site.css` | Stylesheet entrypoint for the report, profile, and technical-product layers | hand-edited |
+| `css/portfolio-refresh.css` | Cohesive layouts for Home, About, Projects, Experience, Skills, and Contact | hand-edited |
+| `css/technical-product.css` | Command palette, project filtering, technical-diagram presentation, and View Transition enhancements | hand-edited |
+| `js/site.js` | Core progressive-enhancement loader, nav, reveal, counters, clock, and TOC scroll-spy | hand-edited |
+| `js/command-palette.js` | Accessible Cmd/Ctrl-K quick navigation backed by the local search index | hand-edited |
+| `js/project-filter.js` | URL-synced search and domain filtering for `projects.html` | hand-edited |
+| `js/github.js` | Live public GitHub repository feed (one unauthenticated API call, lazy, graceful fallback) | hand-edited |
+| `data/search-index.json` | Local command-palette index for pages, projects, and public repositories | hand-edited |
+| `diagrams/*.svg` | Primary technical visuals used across the case studies | `python3 assets/diagrams/generate.py` |
+| `diagrams/generate.py` | Single source of truth for generated technical diagrams | hand-edited |
+| `headshot-about.webp` | Web-optimized professional portrait used only on About | replace from the approved source photo |
+| `hero/*-ai.jpg` | Optional concept artwork retained as decorative assets, not technical evidence and not the default project visual | image source + manual optimization |
+| `og-image.png` | 1200×630 social preview card for the current portfolio identity | generated from the approved portfolio social-card brief |
+| `og-image.src.html` | Historical code-rendered preview retained for reference | hand-edited |
 
-## Regenerating the resume PDF
+## Visual hierarchy
 
-```bash
-python3 -m http.server 8000 &
-chromium --headless --no-pdf-header-footer \
-  --print-to-pdf=assets/resume.pdf http://localhost:8000/resume.html
-```
-
-The print stylesheet in `css/site.css` strips navigation and footers, converts to black on white,
-forces reveal-animated content visible, and tightens spacing to three pages.
-
-## Regenerating the OG image
-
-```bash
-chromium --headless --window-size=1200,712 --hide-scrollbars \
-  --screenshot=/tmp/og_raw.png assets/og-image.src.html
-# crop the top 1200×630, headless reserves ~80px for window chrome
-```
+Technical diagrams, plots, real screenshots, and test evidence are the primary project visuals. Concept artwork may be retained as decorative material, but it should never replace or be presented as engineering evidence.
 
 ## Adding project media
 
-Put figures in `assets/img/` and reference them from the case studies. Replace a
-`<div class="slot">…</div>` placeholder with:
+Put figures in `assets/img/` and reference them from the case studies. Prefer real engineering media: hardware photos, plots, architecture diagrams, FEA contours with context, test screenshots, or annotated results.
 
 ```html
 <figure class="fig">

@@ -1,0 +1,50 @@
+{
+  "generated": "2026-08-13",
+  "purpose": "Provenance for repository-backed figures displayed in the portfolio",
+  "projects": {
+    "GHOST-X": {
+      "repository": "https://github.com/XpiredRuby/ghost-vins-eskf",
+      "commit": "178454824c643c61ea2d530ed3bbc085e2f41d85",
+      "boundary": "Hardware behavior, deterministic analytic software truth and runtime characterization are separate evidence classes; no metrology, universal-superiority or hard-real-time claim.",
+      "presentation": "Regenerated from the pinned repository data with ghost_sim_ros2/tools/generate_public_results.py; presentation-only changes add title spacing, plot headroom and remove an overlapping annotation. Values, inputs and evidence boundaries are unchanged.",
+      "files": {
+        "ghost/hardware-range-response.png": "ghost_sim_ros2/docs/assets/results/hardware_range_response.png",
+        "ghost/hardware-dropout-error.png": "ghost_sim_ros2/docs/assets/results/hardware_dropout_error.png",
+        "ghost/estimator-rmse.png": "ghost_sim_ros2/docs/assets/results/synthetic_estimator_rmse.png",
+        "ghost/fault-recovery.png": "ghost_sim_ros2/docs/assets/results/fault_recovery_times.png",
+        "ghost/runtime-evidence.png": "ghost_sim_ros2/docs/assets/results/runtime_deadline_evidence.png",
+        "ghost/cpp-python-equivalence.png": "ghost_sim_ros2/docs/assets/results/cpp_python_equivalence.png"
+      }
+    },
+    "ASTRA-OS": {
+      "repository": "https://github.com/XpiredRuby/AstraSim-FSW",
+      "commit": "4150e97a71002ac61d421354239af200389702dc",
+      "boundary": "Software assurance and Raspberry Pi execution evidence; the browser console is a behavior model, not the native executable or a real-time qualification.",
+      "presentation": "Mode and fault timelines were regenerated from pinned command telemetry with the upstream generator after a presentation-only left-margin and label-spacing adjustment; telemetry values are unchanged.",
+      "files": {
+        "astra/architecture.svg": "docs/assets/astra_os_architecture.svg",
+        "astra/mode-timeline.svg": "media/plots/mode_timeline.svg",
+        "astra/fault-timeline.svg": "media/plots/fault_timeline.svg"
+      }
+    },
+    "AeroFrame-DT": {
+      "repository": "https://github.com/XpiredRuby/aeroframe-dt",
+      "commit": "22c7740189a7f4b66758c2aea93e70f00436b8ad",
+      "boundary": "Educational, synthetic, non-OEM and non-certified. Correlation figures use a 7075-T651 specimen and are not the released 7050-T7451 fitting result.",
+      "files": {
+        "aeroframe/margin-vs-edge-distance.png": "figures/fig1_margin_vs_eD.png",
+        "aeroframe/fe-response.png": "figures/fig2_fe_response.png",
+        "aeroframe/plastic-strain-check.png": "figures/fig3_plastic_strain_check.png"
+      }
+    },
+    "Fixed-Wing Flight Controls SIL": {
+      "repository": "https://github.com/XpiredRuby/f16-flight-sim",
+      "commit": "f3827134817f3dd988eff9aeba33c6e7a77b0f76",
+      "boundary": "Representative, low-order, F-16-inspired software-in-the-loop model; not validated aerodynamic performance or flight readiness.",
+      "files": {
+        "f16/longitudinal-response.png": "Rendered from committed run_autopilot default configuration by the portfolio audit",
+        "f16/monte-carlo-altitude.png": "Rendered from committed run_monte_carlo default configuration and seed 42 by the portfolio audit"
+      }
+    }
+  }
+}

@@ -42,7 +42,6 @@
       <a href="skills.html">Skills</a>
       <a href="index.html#github">GitHub</a>
       <a href="contact.html">Contact</a>
-      <a class="nav__cta" href="resume.html">Resume</a>
     </nav>
   </div>
 </header>
@@ -98,11 +97,12 @@
       </thead>
       <tbody>
         <tr><td>PRJ-08</td><td><a class="u-cyan" href="projects/aeroframe-dt.html">AeroFrame-DT</a></td><td>Structures / nonlinear FEA</td><td>5-variant lug trade study with traceable evidence</td><td><span class="pill pill--done">Documented</span></td></tr>
-        <tr><td>PRJ-04</td><td><a class="u-cyan" href="projects/md11-structures.html">AeroFrame-MD11</a></td><td>Mechanical design / FEA</td><td>3 failure sites found at 2.5 g limit load</td><td><span class="pill pill--done">Complete</span></td></tr>
-        <tr><td>PRJ-01</td><td><a class="u-cyan" href="projects/ghost.html">GHOST</a></td><td>GNC / state estimation</td><td>9-state ESKF + IMM tracker on Pi 4B</td><td><span class="pill pill--active">Active</span></td></tr>
+        <tr><td>PRJ-04</td><td><a class="u-cyan" href="projects/md11-structures.html">AeroFrame-DT</a></td><td>Stress substantiation / FEA</td><td>+0.151 governing margin; 18 / 18 requirements</td><td><span class="pill pill--done">Verified record</span></td></tr>
+        <tr><td>PRJ-01</td><td><a class="u-cyan" href="projects/ghost.html">GHOST-X</a></td><td>GNC / state estimation</td><td>9-state ESKF + IMM tracker on Pi 4B</td><td><span class="pill pill--active">Active</span></td></tr>
         <tr><td>PRJ-06</td><td><a class="u-cyan" href="projects/spirit-iss.html">TAMU-SPIRIT ISS Payload</a></td><td>Systems engineering</td><td>100% milestone compliance through PDR</td><td><span class="pill pill--active">Active</span></td></tr>
-        <tr><td>PRJ-02</td><td><a class="u-cyan" href="projects/astrasim-fsw.html">AstraSim-FSW</a></td><td>Flight software / V&amp;V</td><td>9/9 tests, 25/25 MC trials on hardware</td><td><span class="pill pill--live">HIL verified</span></td></tr>
-        <tr><td>PRJ-03</td><td><a class="u-cyan" href="projects/rocket-landing-gnc.html">Rocket Landing GNC</a></td><td>GNC / simulation</td><td>&lt;2.0 m landing accuracy, 500 MC runs</td><td><span class="pill pill--done">Complete</span></td></tr>
+        <tr><td>PRJ-02</td><td><a class="u-cyan" href="projects/astrasim-fsw.html">ASTRA-OS</a></td><td>Flight software / V&amp;V</td><td>9/9 tests, 25/25 MC trials on hardware</td><td><span class="pill pill--live">HIL verified</span></td></tr>
+        <tr><td>PRJ-03</td><td><a class="u-cyan" href="projects/rocket-landing-gnc.html">Rocket Landing GNC</a></td><td>GNC / simulation</td><td>Exploratory prototype; one representative run</td><td><span class="pill pill--archive">Prototype</span></td></tr>
+        <tr><td>PRJ-09</td><td><a class="u-cyan" href="projects/f16-flight-controls.html">Fixed-Wing Flight Controls SIL</a></td><td>GNC / verification</td><td>Representative SIL; 50 / 50 finite seeded runs</td><td><span class="pill pill--done">Verified software</span></td></tr>
         <tr><td>PRJ-05</td><td><a class="u-cyan" href="projects/interceptor.html">Interception Robot</a></td><td>Autonomy / embedded</td><td>&lt;100 ms closed-loop latency</td><td><span class="pill pill--done">Complete</span></td></tr>
         <tr><td>PRJ-07</td><td><a class="u-cyan" href="projects/kestrel.html">Project KESTREL</a></td><td>UAV / precision landing</td><td>CDR readiness, sub-5 cm CEP target</td><td><span class="pill pill--archive">Archived</span></td></tr>
       </tbody>
@@ -170,17 +170,17 @@
       </div>
       <div class="case__body">
         <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
-          <span class="pill pill--done">Complete</span><span class="case__sub">DEC 2025</span>
+          <span class="pill pill--archive">Exploratory prototype</span><span class="case__sub">DEC 2025</span>
         </div>
         <h2 class="case__title"><a href="projects/rocket-landing-gnc.html">Rocket Landing GNC Simulation</a></h2>
-        <p class="case__sub">6-DOF booster descent &middot; thrust-vector control &middot; 500-run Monte Carlo campaign</p>
-        <div class="case__block"><h4>Overview</h4><p>A 6-DOF propulsive-landing simulator with rigid-body dynamics, aerodynamic and aerothermal modelling, mass depletion and gimballed thrust, wrapped in a Monte Carlo harness that dispersed winds, initial state and sensor error across 500 seeded trials.</p></div>
-        <div class="case__block"><h4>Result</h4><p>Sub-2.0 m landing accuracy across the dispersed set, with the failure tail traced to a specific wind-shear-plus-late-ignition combination rather than to controller gain margin.</p></div>
+        <p class="case__sub">Point-mass landing simulation &middot; guidance and control exploration</p>
+        <div class="case__block"><h4>Overview</h4><p>An early propulsive-landing prototype used to structure the dynamics, guidance, control, and verification work that a credible landing study would require.</p></div>
+        <div class="case__block"><h4>Evidence boundary</h4><p>The current public source supports one representative run, not a statistical landing campaign or a flight-performance claim.</p></div>
         <div class="metrics">
-          <div class="metric"><div class="metric__v">6-DOF</div><div class="metric__k">Dynamics</div></div>
-          <div class="metric metric--orange"><div class="metric__v">500</div><div class="metric__k">MC trials</div></div>
-          <div class="metric metric--green"><div class="metric__v">&lt;2.0 m</div><div class="metric__k">Landing accuracy</div></div>
-          <div class="metric"><div class="metric__v">PID</div><div class="metric__k">TVC law</div></div>
+          <div class="metric"><div class="metric__v">1</div><div class="metric__k">Representative run</div></div>
+          <div class="metric metric--orange"><div class="metric__v">Open</div><div class="metric__k">Dispersion campaign</div></div>
+          <div class="metric"><div class="metric__v">PID</div><div class="metric__k">Control prototype</div></div>
+          <div class="metric"><div class="metric__v">Next</div><div class="metric__k">Model validation</div></div>
         </div>
         <div class="chips"><span class="chip chip--accent">Python</span><span class="chip">NumPy / SciPy</span><span class="chip">Monte Carlo</span><span class="chip">TVC</span><span class="chip">Aerothermodynamics</span></div>
         <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/rocket-landing-gnc.html">Read case study</a><a class="btn btn--sm" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></div>
@@ -188,27 +188,26 @@
     </article>
 
     <article class="case" id="md11" data-reveal>
-      <div class="case__visual case__visual--cover">
+      <div class="case__visual case__visual--evidence">
         <span class="case__id">PRJ-04</span>
-        <img src="assets/img/project-covers/md11-visual.webp" width="1440" height="807" loading="lazy" alt="Concept visualization of a transport-aircraft wing structure mounted in a mechanical load-test fixture.">
-        <span class="case__visual-note">Concept visualization</span>
+        <img src="assets/evidence/aeroframe/fe-response.png" width="2057" height="868" loading="lazy" alt="AeroFrame-DT finite-element response and failure-mode correlation plot.">
       </div>
       <div class="case__body">
         <div style="display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between">
-          <span class="pill pill--done">Complete</span><span class="case__sub">JUN 2025</span>
+          <span class="pill pill--done">18 / 18 requirements verified</span><span class="case__sub">SYNTHETIC / NON-OEM</span>
         </div>
-        <h2 class="case__title"><a href="projects/md11-structures.html">AeroFrame-MD11: CAD Assembly &amp; Structural Analysis</a></h2>
-        <p class="case__sub">24-part parametric assembly &middot; static / thermal / modal FEA &middot; release drawing package</p>
-        <div class="case__block"><h4>Overview</h4><p>A full parametric CAD assembly of an MD-11-class airframe section with GD&amp;T, taken through static, thermal and modal finite element analysis at 2.5 g limit manoeuvre loading, and closed out with a manufacturing-release drawing package.</p></div>
-        <div class="case__block"><h4>Result</h4><p>Three stress concentration sites identified, root joint, upper skin panel and attach lug, each traced to a geometry decision rather than a mesh artefact, and each with a proposed design change.</p></div>
+        <h2 class="case__title"><a href="projects/md11-structures.html">AeroFrame-DT: Aircraft Fitting Stress Substantiation</a></h2>
+        <p class="case__sub">Classical margins &middot; FE verification &middot; fatigue &middot; damage tolerance &middot; digital thread</p>
+        <div class="case__block"><h4>Overview</h4><p>A synthetic aircraft fitting carried from load basis through hand analysis, finite-element verification, allowables, fatigue, damage tolerance, manufacturing constraints, and configuration control.</p></div>
+        <div class="case__block"><h4>Evidence boundary</h4><p>Educational, synthetic, and non-OEM. The work demonstrates a reviewable substantiation method; it is not approved aircraft stress analysis.</p></div>
         <div class="metrics">
-          <div class="metric"><div class="metric__v">24</div><div class="metric__k">Parts in assembly</div></div>
-          <div class="metric metric--orange"><div class="metric__v">3</div><div class="metric__k">Failure sites</div></div>
-          <div class="metric"><div class="metric__v">2.5 g</div><div class="metric__k">Limit load case</div></div>
-          <div class="metric"><div class="metric__v">3</div><div class="metric__k">Analysis types</div></div>
+          <div class="metric metric--green"><div class="metric__v">+0.151</div><div class="metric__k">Governing margin</div></div>
+          <div class="metric metric--green"><div class="metric__v">18 / 18</div><div class="metric__k">Requirements verified</div></div>
+          <div class="metric"><div class="metric__v">+0.128</div><div class="metric__k">Worst tolerance stack</div></div>
+          <div class="metric"><div class="metric__v">3.51 mm</div><div class="metric__k">Critical crack</div></div>
         </div>
-        <div class="chips"><span class="chip chip--accent">SolidWorks</span><span class="chip chip--accent">Abaqus</span><span class="chip">Static FEA</span><span class="chip">Thermal</span><span class="chip">Modal</span><span class="chip">GD&amp;T</span></div>
-        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/md11-structures.html">Read case study</a></div>
+        <div class="chips"><span class="chip chip--accent">Stress analysis</span><span class="chip chip--accent">FEA</span><span class="chip">Fatigue / DT</span><span class="chip">Allowables</span><span class="chip">Requirements</span></div>
+        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/md11-structures.html">Inspect evidence record</a><a class="btn btn--sm" href="https://github.com/XpiredRuby/aeroframe-dt" target="_blank" rel="noopener noreferrer">GitHub</a></div>
       </div>
     </article>
 
@@ -315,27 +314,26 @@
         <li><a href="projects.html">Projects</a></li>
         <li><a href="experience.html">Experience</a></li>
         <li><a href="skills.html">Technical skills</a></li>
-        <li><a href="resume.html">Resume</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul></div>
       <div><h5>Case studies</h5><ul>
-        <li><a href="projects/ghost.html">GHOST</a></li>
-        <li><a href="projects/astrasim-fsw.html">AstraSim-FSW</a></li>
+        <li><a href="projects/ghost.html">GHOST-X</a></li>
+        <li><a href="projects/astrasim-fsw.html">ASTRA-OS</a></li>
         <li><a href="projects/rocket-landing-gnc.html">Rocket Landing GNC</a></li>
-        <li><a href="projects/md11-structures.html">AeroFrame-MD11</a></li>
+        <li><a href="projects/md11-structures.html">Aircraft Structures Study</a></li>
         <li><a href="projects/aeroframe-dt.html">AeroFrame-DT</a></li>
         <li><a href="projects/interceptor.html">Interception Robot</a></li>
       </ul></div>
       <div><h5>Elsewhere</h5><ul>
         <li><a href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-        <li><a href="https://linkedin.com/in/Vin2005" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-        <li><a href="mailto:vinhoustontexas@gmail.com">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/vinayakmnair/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="mailto:Vin.manoj.nair@gmail.com">Email</a></li>
       </ul></div>
       <div><h5>Status</h5><ul>
         <li class="u-dim" style="font-size:.855rem">Texas A&amp;M University</li>
         <li class="u-dim" style="font-size:.855rem">B.S. Aerospace Engineering</li>
         <li class="u-dim" style="font-size:.855rem">Expected May 2027</li>
-        <li class="u-green" style="font-size:.855rem">Open to opportunities</li>
+        <li class="u-green" style="font-size:.855rem">Portfolio reviewed regularly</li>
       </ul></div>
     </div>
     <div class="footer__bar">

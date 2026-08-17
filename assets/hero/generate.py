@@ -72,13 +72,14 @@ def txt(x, y, s, size=14, fill=None, anchor="start", ls="0.1em", w=400):
 
 
 def write(name, body):
-    open(os.path.join(OUT, name), "w").write(body)
+    with open(os.path.join(OUT, name), "w", encoding="utf-8", newline="\n") as f:
+        f.write(body)
     print("wrote", name)
 
 
-# ------------------------------------------------------------------ GHOST
+# ------------------------------------------------------------------ GHOST-X
 a = C["cyan"]
-s = head(a, "GHOST", "GPS-denied visual-inertial tracking")
+s = head(a, "GHOST-X", "Target estimation through visual occlusion; non-VIO")
 s += f'<circle cx="760" cy="330" r="330" fill="url(#glow)"/>'
 # ground plane perspective
 for i in range(12):
@@ -105,12 +106,12 @@ s += f'<rect x="662" y="278" width="76" height="44" rx="8" fill="url(#metal)" st
 s += f'<circle cx="700" cy="300" r="9" fill="{a}"/><circle cx="700" cy="300" r="16" fill="none" stroke="{a}" stroke-opacity="0.5"/>'
 # trajectory
 s += f'<path d="M120 400 C 300 250, 460 470, 700 300" fill="none" stroke="{a}" stroke-width="2" stroke-opacity="0.55" stroke-dasharray="2 8" stroke-linecap="round"/>'
-s += foot(a, "PRJ-01 / GHOST", "GPS-DENIED VISUAL-INERTIAL STATE ESTIMATION")
+s += foot(a, "PRJ-01 / GHOST-X", "TARGET ESTIMATION / HARDWARE + SOFTWARE EVIDENCE / NON-VIO")
 write("ghost.svg", s)
 
-# ------------------------------------------------------------------ ASTRASIM
+# ------------------------------------------------------------------ ASTRA-OS
 a = C["green"]
-s = head(a, "AstraSim-FSW", "Flight software hardware-in-the-loop verification")
+s = head(a, "ASTRA-OS", "Native Raspberry Pi target execution and software assurance")
 s += f'<circle cx="880" cy="340" r="300" fill="url(#glow)"/>'
 # board
 s += f'<rect x="620" y="200" width="440" height="290" rx="10" fill="#0E1A16" stroke="{a}" stroke-opacity="0.45"/>'
@@ -139,12 +140,12 @@ s += txt(438, 396, "FAULT INJECTED", 11, C["orange"], anchor="middle", ls="0.12e
 pts = " ".join(f"{120 + i*24},{560 - (18 if i % 3 else 40) * math.sin(i*0.8)*0.9:.0f}" for i in range(41))
 s += f'<polyline points="{pts}" fill="none" stroke="{a}" stroke-width="2" stroke-opacity="0.75"/>'
 s += txt(120, 600, "TELEMETRY @ 10 Hz", 12, C["faint"], ls="0.16em")
-s += foot(a, "PRJ-02 / ASTRASIM-FSW", "FLIGHT SOFTWARE HARDWARE-IN-THE-LOOP VERIFICATION")
+s += foot(a, "PRJ-02 / ASTRA-OS", "NATIVE TARGET EXECUTION / NOT HARDWARE-IN-THE-LOOP")
 write("astrasim.svg", s)
 
 # ------------------------------------------------------------------ ROCKET GNC
 a = C["orange"]
-s = head(a, "Rocket Landing GNC", "6-DOF propulsive descent and Monte Carlo dispersion")
+s = head(a, "Rocket Landing GNC", "Exploratory point-mass descent prototype; evidence pending")
 s += f'<circle cx="620" cy="600" r="420" fill="url(#glow)"/>'
 # horizon + pad
 s += f'<line x1="0" y1="600" x2="{W}" y2="600" stroke="{C["line2"]}" stroke-opacity="0.7"/>'
@@ -153,9 +154,6 @@ s += f'<ellipse cx="620" cy="600" rx="140" ry="21" fill="none" stroke="{a}" stro
 s += f'<ellipse cx="620" cy="600" rx="58" ry="9" fill="{a}" fill-opacity="0.16" stroke="{a}" stroke-opacity="0.7"/>'
 # descent trajectory
 s += f'<path d="M170 120 C 330 300, 520 380, 620 520" fill="none" stroke="{a}" stroke-width="2.5" stroke-opacity="0.5" stroke-dasharray="10 7"/>'
-# dispersion ellipses
-for r, o in [(210, 0.10), (150, 0.14), (95, 0.20)]:
-    s += f'<ellipse cx="620" cy="600" rx="{r}" ry="{r*0.15:.0f}" fill="{a}" fill-opacity="{o}"/>'
 # booster
 s += f'<g transform="translate(620,470) rotate(9)">'
 s += f'<rect x="-27" y="-190" width="54" height="230" rx="7" fill="url(#metal)" stroke="{C["line2"]}"/>'
@@ -168,19 +166,19 @@ s += f'<path d="M27 20 L52 62 L30 62 Z" fill="#1B2432" stroke="{C["line2"]}"/>'
 s += f'<path d="M-20 44 C -34 108, -14 172, 0 214 C 14 172, 34 108, 20 44 Z" fill="{a}" fill-opacity="0.55" filter="url(#soft2)"/>'
 s += f'<path d="M-10 46 C -16 96, -6 140, 0 166 C 6 140, 16 96, 10 46 Z" fill="#FFD9A8" fill-opacity="0.85"/>'
 s += '</g>'
-# side readouts
-for i, (lab, val) in enumerate([("ALT", "1 240 m"), ("V", "84 m/s"), ("GIMBAL", "3.2 deg")]):
+# evidence-status readouts; these are scope labels, not simulated telemetry
+for i, (lab, val) in enumerate([("PLANT", "POINT MASS"), ("RUNS", "1 NOMINAL"), ("DATA", "PENDING")]):
     y = 200 + i * 44
     s += txt(980, y, lab, 12, C["faint"], ls="0.18em")
     s += txt(1150, y, val, 15, C["txt"], anchor="end", ls="0.06em", w=500)
     s += f'<line x1="980" y1="{y+12}" x2="1150" y2="{y+12}" stroke="{C["line"]}"/>'
-s += txt(620, 656, "500-RUN DISPERSION FOOTPRINT", 12, a, anchor="middle", ls="0.16em")
-s += foot(a, "PRJ-03 / ROCKET LANDING GNC", "6-DOF PROPULSIVE DESCENT, MONTE CARLO CAMPAIGN")
+s += txt(620, 656, "SINGLE-RUN PROTOTYPE / NO DISPERSION DATA", 12, a, anchor="middle", ls="0.14em")
+s += foot(a, "PROTOTYPE / ROCKET LANDING GNC", "POINT-MASS DESCENT / EVIDENCE PENDING / NO ACCURACY CLAIM")
 write("rocket.svg", s)
 
-# ------------------------------------------------------------------ MD-11
+# ------------------------------------------------------------------ AEROFRAME-DT
 a = C["violet"]
-s = head(a, "AeroFrame-MD11", "Airframe assembly and structural analysis")
+s = head(a, "AeroFrame-DT", "Synthetic fitting stress substantiation; educational non-OEM")
 s += f'<circle cx="600" cy="330" r="360" fill="url(#glow)"/>'
 s += f'<defs><linearGradient id="stress" x1="0" y1="0" x2="1" y2="0">' \
      f'<stop offset="0%" stop-color="{C["orange"]}" stop-opacity="0.75"/>' \
@@ -210,12 +208,12 @@ for x in (400, 470, 700, 780):
     s += f'<line x1="{x}" y1="560" x2="{x}" y2="500" stroke="{a}" stroke-opacity="0.6" stroke-width="2"/>'
     s += f'<path d="M{x-5} 506 L{x} 496 L{x+5} 506 Z" fill="{a}" fill-opacity="0.8"/>'
 s += txt(600, 592, "2.5 g LIMIT MANOEUVRE, DISTRIBUTED LIFT", 12, a, anchor="middle", ls="0.16em")
-s += foot(a, "PRJ-04 / AEROFRAME-MD11", "24-PART ASSEMBLY, STATIC / THERMAL / MODAL FEA")
+s += foot(a, "PRJ-03 / AEROFRAME-DT", "SYNTHETIC FITTING / STATIC + FE + LIFE / NON-OEM")
 write("md11.svg", s)
 
 # ------------------------------------------------------------------ INTERCEPTOR
 a = C["blue"]
-s = head(a, "Interception Robot", "Perception to actuation under a 100 ms budget")
+s = head(a, "Interception Robot", "Reported perception-to-actuation prototype; public artifacts unavailable")
 s += f'<circle cx="380" cy="340" r="300" fill="url(#glow)"/>'
 # camera FOV
 s += f'<path d="M300 340 L1100 150 L1100 530 Z" fill="{a}" fill-opacity="0.06" stroke="{a}" stroke-opacity="0.25"/>'
@@ -234,7 +232,7 @@ s += f'<rect x="880" y="250" width="150" height="150" fill="none" stroke="{C["gr
 for cx2, cy2 in [(880, 250), (1030, 250), (880, 400), (1030, 400)]:
     s += f'<rect x="{cx2-4}" y="{cy2-4}" width="8" height="8" fill="{C["green"]}"/>'
 s += f'<rect x="880" y="222" width="112" height="22" fill="{C["green"]}" fill-opacity="0.9"/>'
-s += txt(886, 238, "target 0.94", 13, "#04120B", ls="0.02em", w=600)
+s += txt(886, 238, "CONCEPT TARGET", 11, "#04120B", ls="0.01em", w=600)
 s += f'<circle cx="955" cy="325" r="30" fill="{C["green"]}" fill-opacity="0.12"/>'
 # predicted position
 s += f'<rect x="1000" y="270" width="150" height="150" fill="none" stroke="{a}" stroke-width="2" stroke-dasharray="7 6"/>'
@@ -251,7 +249,7 @@ for frac, col, lab in segs:
     x0 += w
 s += txt(228, 546, "END-TO-END BUDGET", 12, C["faint"], ls="0.16em")
 s += txt(968, 546, "&lt; 100 ms", 13, C["green"], anchor="end", ls="0.08em", w=600)
-s += foot(a, "PRJ-05 / INTERCEPTION ROBOT", "PERCEPTION TO ACTUATION ON EMBEDDED LINUX")
+s += foot(a, "REPORTED / INTERCEPTION ROBOT", "DESIGN BUDGET / NO PUBLIC TIMING TRACE")
 write("interceptor.svg", s)
 
 # ------------------------------------------------------------------ SPIRIT
@@ -300,7 +298,7 @@ write("spirit.svg", s)
 
 # ------------------------------------------------------------------ KESTREL
 a = C["faint"]
-s = head(C["dim"], "Project KESTREL", "Throw-launch precision landing UAV, archived")
+s = head(C["dim"], "Project KESTREL", "Archived design study; reported CDR readiness")
 s += f'<circle cx="600" cy="360" r="330" fill="url(#glow)"/>'
 s += f'<line x1="0" y1="580" x2="{W}" y2="580" stroke="{C["line2"]}" stroke-opacity="0.6"/>'
 # launch arc
@@ -325,5 +323,5 @@ s += f'<g transform="translate(1010,150) rotate(-9)">'
 s += f'<rect x="-118" y="-30" width="236" height="60" rx="5" fill="none" stroke="{C["faint"]}" stroke-width="3"/>'
 s += txt(0, 10, "ARCHIVED", 30, C["faint"], anchor="middle", ls="0.14em", w=700)
 s += '</g>'
-s += foot(C["dim"], "PRJ-07 / KESTREL", "THROW-LAUNCH PRECISION LANDING UAV, CLOSED AT CDR")
+s += foot(C["dim"], "ARCHIVED / KESTREL", "REPORTED CDR READINESS / NO FLIGHT TEST")
 write("kestrel.svg", s)

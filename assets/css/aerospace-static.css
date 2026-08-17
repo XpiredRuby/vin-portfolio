@@ -1,0 +1,228 @@
+/* Static aerospace presentation fallback.
+   This layer intentionally does not depend on JavaScript-added body classes. */
+
+:root {
+  --aero-bg: #020710;
+  --aero-panel: rgba(7, 17, 31, 0.84);
+  --aero-panel-2: rgba(10, 24, 43, 0.68);
+  --aero-line: rgba(107, 158, 221, 0.20);
+  --aero-line-strong: rgba(91, 162, 247, 0.42);
+  --aero-blue: #2d8cff;
+  --aero-cyan: #5ad9ff;
+  --aero-text: #f4f8fd;
+  --aero-muted: #9eacbf;
+}
+
+body {
+  background:
+    radial-gradient(circle at 78% 7%, rgba(45, 140, 255, .18), transparent 28rem),
+    radial-gradient(circle at 18% 30%, rgba(26, 86, 170, .10), transparent 34rem),
+    linear-gradient(180deg, #020710 0%, #07111e 48%, #030811 100%);
+  color: var(--aero-text);
+}
+
+body::before {
+  opacity: .55;
+  background-image:
+    linear-gradient(rgba(116, 160, 210, .024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(116, 160, 210, .024) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.shell { max-width: 1440px; }
+
+.masthead {
+  background: rgba(2, 7, 14, .82);
+  border-bottom: 1px solid rgba(110, 154, 207, .16);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+}
+.masthead__bar { height: 72px; }
+.brand__mark {
+  border-radius: 9px;
+  border-color: rgba(82, 158, 255, .52);
+  background: linear-gradient(145deg, rgba(45,140,255,.25), rgba(45,140,255,.04));
+  box-shadow: inset 0 0 22px rgba(45,140,255,.12), 0 0 22px rgba(45,140,255,.10);
+}
+.nav a { border-radius: 8px; color: #aeb9c8; }
+.nav a:hover, .nav a[aria-current="page"] { color: #fff; background: rgba(45,140,255,.09); }
+.nav__cta { background: rgba(255,255,255,.025); border-color: rgba(102,160,228,.30); }
+.statusbar { display: none; }
+
+.eyebrow { color: #76b6ff; font-weight: 600; }
+h1, h2, h3, h4 { color: var(--aero-text); }
+.lede, .section-head p, .panel__body, .case__body > p, .tl p, .doc__section p { color: var(--aero-muted); }
+
+.btn {
+  min-height: 42px;
+  border-radius: 9px;
+  border-color: rgba(120, 156, 198, .28);
+  background: rgba(8, 18, 31, .82);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+}
+.btn:hover { transform: translateY(-1px); border-color: rgba(81,157,255,.58); background: rgba(14,31,53,.95); }
+.btn--primary {
+  background: linear-gradient(135deg, #146ddd, #2c8dff);
+  border-color: #4098ff;
+  box-shadow: 0 12px 32px rgba(34,127,244,.24), inset 0 1px 0 rgba(255,255,255,.18);
+}
+
+/* Homepage: cinematic first viewport even before site.js runs. */
+.hero {
+  min-height: min(720px, calc(100vh - 72px));
+  padding-block: clamp(4.5rem, 8vw, 7rem) 3rem;
+  isolation: isolate;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse at 74% 40%, rgba(36,132,255,.13), transparent 28%);
+}
+.hero__grid {
+  grid-template-columns: minmax(0,.92fr) minmax(420px,1.08fr);
+  gap: clamp(3rem, 7vw, 7rem);
+  align-items: center;
+}
+.hero h1 {
+  font-size: clamp(3.2rem, 6vw, 5.6rem);
+  line-height: .98;
+  letter-spacing: -.05em;
+}
+.hero__spec { color: #8fa1b7; letter-spacing: .075em; text-transform: uppercase; }
+.hero__spec b { color: #bddcff; }
+.hero__meta { color: #708199; }
+
+.portrait {
+  max-width: none;
+  min-height: 480px;
+  border: 1px solid rgba(114,157,205,.23);
+  border-radius: 22px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(12,27,46,.60), rgba(3,9,17,.76)),
+    radial-gradient(circle at 50% 45%, rgba(47,142,255,.13), transparent 48%);
+  box-shadow: 0 28px 80px rgba(0,0,0,.35), 0 0 70px rgba(45,140,255,.11), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.portrait::before {
+  content: "MISSION SYSTEMS / ENGINEERING PROOF";
+  position: absolute;
+  left: 24px;
+  top: 21px;
+  z-index: 8;
+  font: 600 .66rem/1.2 var(--f-mono);
+  letter-spacing: .15em;
+  color: #6dafff;
+}
+.portrait__tick { inset: 18px; border-color: rgba(89,153,229,.15); border-radius: 14px; }
+.portrait__frame {
+  border: 0;
+  background: transparent;
+  padding: 52px 28px 18px;
+  height: 100%;
+}
+.portrait__frame::before, .portrait__frame::after { display: none; }
+.portrait img {
+  width: 100%;
+  height: 390px;
+  aspect-ratio: auto;
+  object-fit: cover;
+  border-radius: 15px;
+  opacity: .40;
+  filter: saturate(.55) contrast(1.12) brightness(.72) hue-rotate(8deg);
+  mix-blend-mode: screen;
+}
+.portrait__readout {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 24px;
+  color: #8fbaf0;
+  z-index: 6;
+}
+
+.panel, .case, .fig, .gh {
+  border-color: var(--aero-line);
+  background: linear-gradient(145deg, rgba(10,23,40,.82), rgba(5,13,24,.88));
+  border-radius: 14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025), 0 18px 50px rgba(0,0,0,.14);
+}
+.panel:hover, .case:hover { border-color: var(--aero-line-strong); }
+.panel__head, .gh__bar {
+  background: rgba(4,12,23,.70);
+  border-bottom-color: rgba(111,155,207,.14);
+}
+
+/* Flagship cards: image-first, closer to the generated concept-art composition. */
+.case {
+  grid-template-columns: minmax(0,1.18fr) minmax(320px,.82fr);
+  min-height: 390px;
+}
+.case__visual {
+  min-height: 390px;
+  padding: 0;
+  border-right-color: rgba(106,154,211,.14);
+  background: #06101c;
+  overflow: hidden;
+}
+.case__visual img {
+  width: 100%;
+  height: 100%;
+  min-height: 390px;
+  object-fit: cover;
+  filter: saturate(.92) contrast(1.06) brightness(.82);
+  transform: scale(1.002);
+}
+.case__visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 45%, rgba(3,8,16,.70) 100%), linear-gradient(180deg, transparent 65%, rgba(3,8,16,.42));
+  pointer-events: none;
+}
+.case__body { justify-content: center; padding: clamp(1.5rem,3vw,2.4rem); }
+.case__title { font-size: clamp(1.35rem,2.2vw,1.8rem); line-height: 1.12; }
+
+/* Show the generated ASTRA artwork without requiring JavaScript. */
+.case__visual:has(img[src$="astrasim.svg"]) {
+  background: url("../hero/astrasim-ai.jpg") center / cover no-repeat;
+}
+.case__visual:has(img[src$="astrasim.svg"]) img { opacity: 0; }
+
+.metrics, .stats, .tech-grid { border-color: var(--aero-line); background: rgba(98,145,199,.12); border-radius: 12px; }
+.metric, .stat, .tech { background: rgba(5,14,25,.86); }
+.metric__v { color: var(--aero-cyan); }
+
+.page-hero { border-bottom-color: rgba(111,155,207,.14); padding-block: clamp(3.25rem,6vw,5.5rem) 3rem; }
+.page-hero h1 { font-size: clamp(2.6rem,5vw,4.6rem); letter-spacing: -.045em; }
+.doc__section + .doc__section { border-top-color: rgba(111,155,207,.12); }
+.toc { border-left-color: rgba(111,155,207,.18); }
+.toc a.is-active { color: #70b7ff; border-left-color: #2d8cff; }
+
+.footer { background: rgba(2,7,14,.72); border-top-color: rgba(111,155,207,.14); }
+
+@media (min-width: 1050px) {
+  /* Broader project register reads as a visual engineering gallery. */
+  main .grid-2 > .case { grid-template-columns: 1fr; min-height: 0; }
+  main .grid-2 > .case .case__visual { min-height: 250px; border-right: 0; border-bottom: 1px solid rgba(106,154,211,.14); }
+  main .grid-2 > .case .case__visual img { min-height: 250px; max-height: 300px; }
+}
+
+@media (max-width: 900px) {
+  .hero { min-height: auto; padding-top: 3.6rem; }
+  .hero__grid { grid-template-columns: 1fr; gap: 2rem; }
+  .portrait { min-height: 360px; }
+  .portrait img { height: 300px; }
+  .case { grid-template-columns: 1fr; min-height: 0; }
+  .case__visual, .case__visual img { min-height: 260px; }
+  .case__visual { border-right: 0; border-bottom: 1px solid rgba(106,154,211,.14); }
+}
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: clamp(2.65rem, 14vw, 4rem); }
+  .portrait { min-height: 315px; border-radius: 16px; }
+  .portrait__frame { padding: 50px 18px 14px; }
+  .portrait img { height: 250px; }
+  .case__visual, .case__visual img { min-height: 220px; }
+}
