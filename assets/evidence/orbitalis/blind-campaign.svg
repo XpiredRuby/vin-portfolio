@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700" role="img" aria-labelledby="title desc">
+  <title id="title">ORBITALIS-RPO frozen blind validation campaign</title>
+  <desc id="desc">Summary of 200 frozen blind software-in-the-loop runs: 132 mission completions, 62 safe abort-retreat completions, 6 timeouts, and zero truth-level keep-out violations.</desc>
+  <rect width="1400" height="700" fill="#0b0f14"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="80" y="85" fill="#eef4f8" font-size="38" font-weight="700">Frozen blind RPO campaign</text>
+    <text x="80" y="125" fill="#8fa4b4" font-size="20">200 pre-seeded software-in-the-loop runs with failures retained</text>
+    <g transform="translate(80 205)">
+      <rect width="1240" height="74" rx="12" fill="#111923" stroke="#2b3d4c"/>
+      <rect width="818.4" height="74" rx="12" fill="#1f7a57"/>
+      <rect x="818.4" width="384.4" height="74" fill="#2f5b7a"/>
+      <rect x="1202.8" width="37.2" height="74" rx="12" fill="#7a4b2f"/>
+      <text x="25" y="47" fill="#f7fbff" font-size="20" font-weight="700">132 mission completions</text>
+      <text x="845" y="47" fill="#f7fbff" font-size="20" font-weight="700">62 safe abort-retreats</text>
+    </g>
+    <g fill="#eef4f8">
+      <text x="80" y="365" font-size="62" font-weight="700">66%</text>
+      <text x="80" y="400" fill="#8fa4b4" font-size="18">full mission completion</text>
+      <text x="420" y="365" font-size="62" font-weight="700">62</text>
+      <text x="420" y="400" fill="#8fa4b4" font-size="18">safe abort-retreat completions</text>
+      <text x="800" y="365" font-size="62" font-weight="700">6</text>
+      <text x="800" y="400" fill="#8fa4b4" font-size="18">timeouts retained</text>
+      <text x="1080" y="365" fill="#6ee7a8" font-size="62" font-weight="700">0</text>
+      <text x="1080" y="400" fill="#8fa4b4" font-size="18">truth-level keep-out violations</text>
+    </g>
+    <line x1="80" y1="470" x2="1320" y2="470" stroke="#2b3d4c"/>
+    <text x="80" y="525" fill="#67d8ff" font-size="19" font-weight="700">NAVIGATION CONSISTENCY</text>
+    <text x="80" y="570" fill="#eef4f8" font-size="26">NIS: 93.34% within nominal 95% bounds</text>
+    <text x="80" y="610" fill="#eef4f8" font-size="26">NEES: 81.39% within nominal 95% bounds</text>
+    <text x="80" y="652" fill="#8fa4b4" font-size="16">Samples are temporally correlated; coverage is reported descriptively rather than as independent-test proof.</text>
+  </g>
+</svg>
