@@ -319,6 +319,20 @@ code, .code {
 
 .btn-row { display: flex; flex-wrap: wrap; gap: 0.65rem; align-items: center; }
 
+/* Grid and flex items default to min-width:auto, so one wide table or plot
+   can push the whole page sideways on a phone. Every track that can hold
+   wide content is explicitly allowed to shrink. */
+.doc > *,
+.doc__section,
+.grid-2 > *, .grid-3 > *, .grid-4 > *,
+.featured-grid > *, .project-catalog > *,
+.model-grid > *, .evidence-grid > *,
+.metrics > *, .claim-strip > *,
+.tech-grid > *, .tool-logo-grid > *,
+.kpis > *, .proof-grid > *, .proof-ribbon > * {
+  min-width: 0;
+}
+
 /* ---------- 5. MASTHEAD ---------- */
 .masthead {
   position: sticky;
@@ -474,6 +488,12 @@ code, .code {
 .pill--active { border-color: color-mix(in srgb, var(--warn) 46%, transparent); color: var(--warn); background: color-mix(in srgb, var(--warn) 11%, transparent); }
 .pill--done   { border-color: var(--line-2); color: var(--txt-2); }
 .pill--live   { border-color: color-mix(in srgb, var(--ok) 46%, transparent); color: var(--ok); background: color-mix(in srgb, var(--ok) 11%, transparent); }
+
+.pill--lab {
+  border-color: var(--accent-line); color: var(--accent);
+  background: var(--accent-a); font-weight: 550;
+}
+.pill--lab .dot { background: currentColor; box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 20%, transparent); margin-right: 0; }
 
 .discipline-tag {
   font-family: var(--f-mono); font-size: 0.66rem;
@@ -858,6 +878,46 @@ code, .code {
 .case__block p { font-size: 0.92rem; color: var(--txt-2); }
 .case .btn-row { margin-top: auto; padding-top: 0.35rem; }
 
+/* Model directory — the routes straight into the runnable work. */
+.model-grid {
+  display: grid; gap: 0.7rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+.model-card {
+  display: grid; gap: 0.32rem; align-content: start;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--txt-4);
+  border-radius: var(--r);
+  background: var(--surface);
+  transition: transform 0.18s var(--ease), border-color 0.18s var(--ease), background-color 0.18s var(--ease);
+}
+.model-card:hover { transform: translateY(-2px); background: var(--surface-2); }
+.model-card__top { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; }
+.model-card__project {
+  font-family: var(--f-mono); font-size: 0.62rem;
+  letter-spacing: 0.13em; text-transform: uppercase; color: var(--txt-3);
+}
+.model-card__go {
+  font-family: var(--f-mono); font-size: 0.6rem;
+  letter-spacing: 0.11em; text-transform: uppercase;
+  padding: 0.16rem 0.42rem; border-radius: 4px;
+  border: 1px solid currentColor;
+  opacity: 0; transform: translateX(-4px);
+  transition: opacity 0.18s var(--ease), transform 0.18s var(--ease);
+}
+.model-card:hover .model-card__go,
+.model-card:focus-visible .model-card__go { opacity: 1; transform: none; }
+.model-card strong { font-family: var(--f-head); font-size: 1rem; font-weight: 600; letter-spacing: -0.015em; }
+.model-card small { font-size: 0.82rem; color: var(--txt-3); line-height: 1.5; }
+.model-card--mechanical { border-left-color: var(--mechanical); color: var(--mechanical); }
+.model-card--controls   { border-left-color: var(--controls);   color: var(--controls); }
+.model-card--systems    { border-left-color: var(--systems);    color: var(--systems); }
+.model-card--software   { border-left-color: var(--software);   color: var(--software); }
+.model-card strong, .model-card small { color: var(--txt); }
+.model-card small { color: var(--txt-3); }
+.model-card:hover strong { color: inherit; }
+
 /* Project filter toolbar */
 .project-filter {
   display: grid; gap: 0.85rem;
@@ -1015,9 +1075,12 @@ code, .code {
 }
 .tool-logo-card:hover { border-color: var(--accent-line); transform: translateY(-2px); }
 .tool-logo-card img { width: 2.1rem; height: 2.1rem; object-fit: contain; }
+.tool-logo-card > div { display: grid; gap: 0.2rem; }
+.tool-logo-card strong { display: block; font-family: var(--f-head); font-size: 0.92rem; font-weight: 600; }
 .tool-logo-card span, .tool-logo-card .c {
-  font-family: var(--f-mono); font-size: 0.68rem;
-  letter-spacing: 0.06em; color: var(--txt-3);
+  display: block;
+  font-family: var(--f-mono); font-size: 0.64rem; line-height: 1.45;
+  letter-spacing: 0.05em; color: var(--txt-3);
 }
 [data-theme="dark"] .tool-logo-card img,
 :root:not([data-theme="light"]) .tool-logo-card img { filter: saturate(0.85) brightness(1.12); }
@@ -1254,7 +1317,8 @@ a.contact-card:hover { border-color: var(--accent-line); transform: translateY(-
 .lightbox__cap { padding: 0.6rem 0.9rem; border-top: 1px solid var(--line); font-size: 0.82rem; color: var(--txt-2); }
 
 /* ---------- 20. MISC PAGE COMPONENTS ---------- */
-.discipline-overview { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+/* A section wrapper, not a card grid: the cards inside carry their own grid. */
+.discipline-overview > .grid-4 { gap: 0.9rem; }
 .discipline-card .panel__body { display: grid; gap: 0.8rem; }
 
 .portrait { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--surface); }

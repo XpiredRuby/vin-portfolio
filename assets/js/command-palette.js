@@ -31,7 +31,7 @@
   }
 
   function scoreEntry(entry, query) {
-    if (!query) { return entry.kind === 'Project' ? 40 : 20; }
+    if (!query) { return entry.kind === 'Project' ? 40 : (entry.kind === 'Model' ? 30 : 20); }
     var tokens = normalize(query).split(/\s+/).filter(Boolean);
     var title = normalize(entry.title);
     var subtitle = normalize(entry.subtitle);
@@ -50,6 +50,7 @@
     }
 
     if (entry.kind === 'Project') { score += 8; }
+    else if (entry.kind === 'Model') { score += 6; }
     return score;
   }
 
@@ -84,7 +85,7 @@
       '</div>' +
       '<div class="command-palette__search">' +
         '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.4-4.4m2.4-5.1a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/></svg>' +
-        '<input id="command-input" type="search" autocomplete="off" spellcheck="false" placeholder="Search projects, skills, pages…" aria-controls="command-results" aria-autocomplete="list">' +
+        '<input id="command-input" type="search" autocomplete="off" spellcheck="false" placeholder="Search projects, models, skills, pages…" aria-controls="command-results" aria-autocomplete="list">' +
       '</div>' +
       '<div id="command-results" class="command-palette__results" role="listbox" aria-label="Navigation results"></div>' +
       '<div class="command-palette__foot"><span><kbd>↑</kbd><kbd>↓</kbd> select</span><span><kbd>Enter</kbd> open</span><span><kbd>Esc</kbd> close</span></div>' +

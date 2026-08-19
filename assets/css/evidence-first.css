@@ -157,6 +157,7 @@
 
 .evidence-source {
   display: inline-flex; align-items: center; gap: 0.35rem;
+  max-width: 100%; overflow-wrap: anywhere;
   font-family: var(--f-mono); font-size: 0.68rem;
   letter-spacing: 0.06em;
   color: var(--accent);

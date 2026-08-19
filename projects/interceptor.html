@@ -253,14 +253,14 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
     <section class="doc__section" id="implementation" data-reveal>
       <h2><span class="num">04</span>Reported implementation</h2>
       <p>The stack below is drawn from the project narrative; no public dependency lockfile, source tree, or hardware configuration record is linked.</p>
-      <table class="spec">
+      <div class="table-wrap"><table class="spec">
         <tr><th>Language</th><td>Python with OpenCV and NumPy</td></tr>
         <tr><th>Detection</th><td>YOLO object detector, CPU inference</td></tr>
         <tr><th>Estimation</th><td>Linear Kalman filter, constant-velocity model</td></tr>
         <tr><th>Control</th><td>PID on azimuth and elevation, PWM motor drive</td></tr>
         <tr><th>Platform</th><td>Raspberry Pi 4, embedded Linux</td></tr>
         <tr><th>Instrumentation</th><td>Per-stage timestamps with a rolling latency histogram</td></tr>
-      </table>
+      </table></div>
     </section>
 
     <section class="doc__section" id="testing" data-reveal>
