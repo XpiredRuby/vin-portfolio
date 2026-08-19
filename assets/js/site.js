@@ -158,6 +158,37 @@
     });
   });
 
+  /* ---------- Project-link consistency ---------- */
+  document.querySelectorAll('a').forEach(function (link) {
+    var href = link.getAttribute('href') || '';
+    if (/md11-structures\.html(?:$|[?#])/.test(href)) {
+      link.setAttribute('href', '/projects/aeroframe-dt.html');
+      if (/aircraft structures study|aeroframe/i.test(link.textContent)) {
+        link.textContent = 'AeroFrame-DT';
+      }
+    }
+  });
+
+  document.querySelectorAll('.footer h5').forEach(function (heading) {
+    if (heading.textContent.trim() !== 'Case studies') { return; }
+    var list = heading.parentElement && heading.parentElement.querySelector('ul');
+    if (!list) { return; }
+    [
+      ['/projects/orbitalis-rpo.html', 'ORBITALIS-RPO'],
+      ['/projects/aeroframe-dt.html', 'AeroFrame-DT'],
+      ['/projects/md11-aircraft-cad.html', 'MD-11 Aircraft CAD']
+    ].forEach(function (item) {
+      var exists = Array.prototype.some.call(list.querySelectorAll('a'), function (a) {
+        return (a.getAttribute('href') || '').indexOf(item[0].replace(/^\//, '')) !== -1 || (a.getAttribute('href') || '') === item[0];
+      });
+      if (!exists) {
+        var li = document.createElement('li');
+        li.innerHTML = '<a href="' + item[0] + '">' + item[1] + '</a>';
+        list.appendChild(li);
+      }
+    });
+  });
+
   /* ---------- Optional product-grade enhancements ---------- */
   function loadEnhancement(filename) {
     if (!scriptUrl) { return; }
