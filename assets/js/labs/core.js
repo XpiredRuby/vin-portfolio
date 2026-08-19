@@ -240,9 +240,14 @@
     if (o.label) {
       c.setLineDash([]);
       c.font = '10px ui-monospace, monospace';
+      c.font = '10px ui-monospace, monospace';
       c.fillStyle = o.color || palette.ink3;
-      c.textAlign = o.align || 'left'; c.textBaseline = 'bottom';
-      c.fillText(o.label, X + (o.align === 'right' ? -4 : 4), this.h - this.pad.b - 4);
+      /* flip the label inboard when the line sits near the right edge */
+      var flip = o.align === 'right' ||
+        (o.align !== 'left' && X + c.measureText(o.label).width + 8 > this.w - this.pad.r);
+      c.textAlign = flip ? 'right' : 'left';
+      c.textBaseline = 'bottom';
+      c.fillText(o.label, X + (flip ? -4 : 4), this.h - this.pad.b - 4);
     }
     c.restore();
     return this;

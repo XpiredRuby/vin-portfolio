@@ -122,6 +122,60 @@
   --shadow-3: 0 24px 56px -24px rgba(31, 38, 45, 0.42);
 }
 
+/* Without JavaScript the head script never runs, so no data-theme is set and
+   the dark :root defaults apply. Honour the system preference in that case
+   too. Scoped to :root:not([data-theme]) so an explicit choice always wins. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+  color-scheme: light;
+
+  --bg:         #E4E1D8;
+  --bg-far:     #D8D4C9;
+  --surface:    #F1EFE8;
+  --surface-2:  #F9F8F4;
+  --surface-3:  #FFFFFF;
+  --surface-in: #DCD8CD;
+
+  --line:       rgba(35, 42, 48, 0.16);
+  --line-2:     rgba(35, 42, 48, 0.28);
+  --line-3:     rgba(35, 42, 48, 0.46);
+
+  --txt:        #171C22;
+  --txt-2:      #3C4753;
+  --txt-3:      #566371;
+  --txt-4:      #6B7887;
+
+  --accent:      #1C6494;
+  --accent-2:    #124A72;
+  --accent-ink:  #FFFFFF;
+  --accent-a:    rgba(28, 100, 148, 0.10);
+  --accent-line: rgba(28, 100, 148, 0.34);
+
+  --mechanical: #A9432F;
+  --controls:   #1C6494;
+  --systems:    #64489B;
+  --software:   #1C6A4D;
+
+  --ok:     #1C6A4D;
+  --warn:   #8A5A11;
+  --danger: #A9342C;
+
+  --shadow-1: 0 1px 2px rgba(31, 38, 45, 0.10);
+  --shadow-2: 0 10px 26px -14px rgba(31, 38, 45, 0.35);
+  --shadow-3: 0 24px 56px -24px rgba(31, 38, 45, 0.42);
+  }
+  :root:not([data-theme])[data-discipline] { --accent-ink: #FFFFFF; }
+  :root:not([data-theme])[data-discipline="mechanical"] { --accent-a: rgba(169, 67, 47, 0.10); --accent-line: rgba(169, 67, 47, 0.34); --accent-2: #7E2F20; }
+  :root:not([data-theme])[data-discipline="controls"] { --accent-2: #124A72; }
+  :root:not([data-theme])[data-discipline="systems"] { --accent-a: rgba(100, 72, 155, 0.10); --accent-line: rgba(100, 72, 155, 0.34); --accent-2: #4A3277; }
+  :root:not([data-theme])[data-discipline="software"] { --accent-a: rgba(28, 106, 77, 0.10); --accent-line: rgba(28, 106, 77, 0.34); --accent-2: #14503A; }
+  :root:not([data-theme]) body::before {
+    background:
+      radial-gradient(ellipse 70rem 40rem at 78% -6%, var(--accent-a), transparent 70%),
+      radial-gradient(ellipse 60rem 36rem at 4% 22%, rgba(169, 67, 47, 0.05), transparent 70%);
+  }
+}
+
 /* Discipline accent binding — one attribute repaints a whole page. */
 [data-discipline="mechanical"] { --accent: var(--mechanical); --accent-a: rgba(232, 154, 107, 0.13); --accent-line: rgba(232, 154, 107, 0.40); }
 [data-discipline="controls"]   { --accent: var(--controls);   --accent-a: rgba(107, 183, 245, 0.13); --accent-line: rgba(107, 183, 245, 0.40); }
@@ -293,7 +347,7 @@ code, .code {
   padding-inline: var(--gut);
 }
 
-.section { padding-block: clamp(3.2rem, 7vw, 6rem); }
+.section { padding-block: clamp(2.75rem, 5.5vw, 4.75rem); }
 .section--tight { padding-block: clamp(2rem, 4vw, 3.2rem); }
 
 .section-head {
@@ -421,7 +475,7 @@ code, .code {
 }
 .statusbar__inner { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; padding-block: 0.6rem; }
 .statusbar b { color: var(--txt-2); font-weight: 500; }
-.statusbar .sep { color: var(--line-3); }
+.statusbar .sep { color: var(--txt-4); }
 
 .dot {
   display: inline-block; width: 6px; height: 6px; border-radius: 50%;
@@ -439,6 +493,7 @@ code, .code {
   background: var(--surface-2);
   color: var(--txt);
   font-size: 0.9rem; font-weight: 550;
+  white-space: nowrap;
   cursor: pointer;
   transition: transform 0.16s var(--ease), border-color 0.16s var(--ease), background-color 0.16s var(--ease), color 0.16s var(--ease);
 }
@@ -521,7 +576,8 @@ code, .code {
 }
 .crumbs a { color: var(--txt-3); border-bottom: 1px solid transparent; }
 .crumbs a:hover { color: var(--accent); border-bottom-color: var(--accent-line); }
-.crumbs span { color: var(--line-3); }
+.crumbs span { color: var(--txt-4); }
+.crumbs span:last-child { color: var(--txt-2); }
 
 /* ---------- 8. PANELS AND CARDS ---------- */
 .panel {
@@ -1321,7 +1377,7 @@ a.contact-card:hover { border-color: var(--accent-line); transform: translateY(-
 .discipline-overview > .grid-4 { gap: 0.9rem; }
 .discipline-card .panel__body { display: grid; gap: 0.8rem; }
 
-.portrait { border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--surface); }
+.portrait { align-self: start; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: var(--surface); }
 .portrait__frame { position: relative; }
 .portrait__frame img { width: 100%; object-fit: cover; }
 .portrait__readout {

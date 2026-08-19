@@ -30,6 +30,18 @@ public_html = "\n".join(
     if page != ROOT / "assets" / "og-image.src.html"
 )
 
+labs_dir = ROOT / "assets" / "js" / "labs"
+lab_modules = {path.stem for path in labs_dir.glob("*.js")} - {"core"}
+mounted_labs = set(re.findall(r'data-lab="([a-z0-9]+)"', public_html))
+case_studies = sorted(
+    path for path in (ROOT / "projects").glob("*.html")
+    if "http-equiv=\"refresh\"" not in path.read_text(encoding="utf-8")
+)
+interactive_case_studies = [
+    path for path in case_studies
+    if 'id="interactive"' in path.read_text(encoding="utf-8")
+]
+
 checks = {
     "professional cross-disciplinary hero is active": "portfolio-hero" in index and "structure to software" in index.lower(),
     "homepage represents four engineering areas": all(
@@ -65,6 +77,15 @@ checks = {
     "resume surface remains removed": not (ROOT / "resume.html").exists() and not (ROOT / "assets" / "resume.pdf").exists() and "resume.html" not in public_html.lower() and "resume.pdf" not in public_html.lower(),
     "professional mid-tone palette is retained": "#E4E1D8" in site_css and "#A9432F" in site_css,
     "evidence components remain styled": '@import url("./evidence-first.css")' in site_css,
+    "every case study is interactive": len(interactive_case_studies) == len(case_studies),
+    "every mounted model has a module": mounted_labs == lab_modules,
+    "models declare their scope": all(
+        (labs_dir / (name + ".js")).exists()
+        and "note:" in (labs_dir / (name + ".js")).read_text(encoding="utf-8")
+        for name in sorted(mounted_labs)
+    ),
+    "models are reachable from the project index": projects.count("#interactive") >= 9,
+    "theme switching is wired": "vn-theme" in index and "--f-head" in site_css,
     "GitHub feed keeps a public fallback": "https://api.github.com/users/" in github_js and "fallbackMarkup" in github_js,
 }
 
