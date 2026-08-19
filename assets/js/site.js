@@ -268,10 +268,12 @@
   })();
 
   /* ---------- Optional enhancements ---------- */
+  /* Resolving a relative URL drops the query string, so a redeploy would ship
+     a new site.js beside a cached command-palette.js. Carry the version down. */
   function loadScript(relative) {
     if (!scriptUrl) { return; }
     var script = document.createElement('script');
-    script.src = new URL(relative, scriptUrl).href;
+    script.src = new URL(relative + scriptUrl.search, scriptUrl).href;
     script.async = true;
     document.head.appendChild(script);
   }

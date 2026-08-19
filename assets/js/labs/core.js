@@ -15,6 +15,7 @@
   var here = document.currentScript && document.currentScript.src;
   if (!here) { return; }
   var base = new URL('./', here);
+  var version = new URL(here).search;
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -566,7 +567,7 @@
 
   Object.keys(wanted).forEach(function (name) {
     var s = document.createElement('script');
-    s.src = new URL(name + '.js', base).href;
+    s.src = new URL(name + '.js' + version, base).href;
     s.async = true;
     s.onerror = function () {
       (pending[name] || []).forEach(function (host) {

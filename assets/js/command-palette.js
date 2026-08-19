@@ -9,7 +9,9 @@
   if (!scriptSrc) { return; }
 
   var siteRoot = new URL('../../', scriptSrc);
-  var indexUrl = new URL('../data/search-index.json', scriptSrc);
+  /* Inherit this script's version so the index cannot be served stale. */
+  var version = new URL(scriptSrc).search;
+  var indexUrl = new URL('../data/search-index.json' + version, scriptSrc);
   var fallbackEntries = [
     { title: 'About', subtitle: 'Engineering identity', href: 'about.html', kind: 'Page', tags: ['about'] },
     { title: 'Projects', subtitle: 'Engineering case studies', href: 'projects.html', kind: 'Page', tags: ['projects'] },
