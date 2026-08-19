@@ -1,0 +1,31 @@
+{
+  "project": "MD-11 Aircraft CAD Assembly",
+  "artifact_count": 4,
+  "artifacts": [
+    {
+      "name": "Assem1.SLDASM",
+      "format": "SolidWorks assembly",
+      "bytes": 684708,
+      "sha256": "e59decea452e38888b1566fc88031838a2d94a2cdd48f4e23290bf8b028163a4"
+    },
+    {
+      "name": "MD11.SLDPRT",
+      "format": "SolidWorks part",
+      "bytes": 453990,
+      "sha256": "484f83ba7e8ded34d9cef2d287afe4b052e0f357dba470b47375c5ca5a227352"
+    },
+    {
+      "name": "MD11_Drawing.SLDDRW",
+      "format": "SolidWorks drawing",
+      "bytes": 418275,
+      "sha256": "1762bef364ecb29945df7f3c5b732cd96606994e1d2fe299acb27c6dac015b50"
+    },
+    {
+      "name": "MD-11 Plane.x_t",
+      "format": "Parasolid text geometry",
+      "bytes": 1301648,
+      "sha256": "36aef55bd847ff04fbdb491795a70d408ef3436eb14dc65ba9d839673a1613e8"
+    }
+  ],
+  "note": "SHA-256 hashes are published so a downloaded source package can be checked against the retained project artifacts."
+}
