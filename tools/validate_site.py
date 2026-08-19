@@ -19,6 +19,9 @@ SKIP_SCHEMES = {"http", "https", "mailto", "tel", "data", "javascript"}
 # HTML used as an asset-generation source is not a navigable site page. We still
 # parse its local links and JSON-LD, but do not require SEO/page metadata.
 NON_PUBLIC_HTML = {Path("assets/og-image.src.html")}
+# Redirect stubs carry no content of their own, so page-level SEO and
+# heading rules do not apply to them.
+REDIRECT_STUBS = {Path("projects/md11-structures.html")}
 REQUIRED_ROOT_FILES = [
     ROOT / "index.html",
     ROOT / "projects.html",
@@ -97,7 +100,7 @@ def check_html(page: Path) -> list[str]:
         return [f"{page.relative_to(ROOT)}: cannot parse: {exc}"]
 
     rel = page.relative_to(ROOT)
-    is_public_page = rel not in NON_PUBLIC_HTML
+    is_public_page = rel not in NON_PUBLIC_HTML and rel not in REDIRECT_STUBS
     if is_public_page and not parser.title.strip():
         errors.append(f"{rel}: missing <title>")
     if is_public_page and page.name != "404.html":
@@ -303,7 +306,7 @@ def main() -> int:
             errors.append(f"missing evidence-first artifact: {evidence.relative_to(ROOT)}")
 
     project_index = (ROOT / "projects.html").read_text(encoding="utf-8")
-    aeroframe_detail = (ROOT / "projects" / "md11-structures.html").read_text(encoding="utf-8")
+    aeroframe_detail = (ROOT / "projects" / "aeroframe-dt.html").read_text(encoding="utf-8")
     evidence_checks = {
         "Rocket prototype boundary": "Exploratory prototype" in project_index,
         # Exact AeroFrame results belong on its case study, not the project index.

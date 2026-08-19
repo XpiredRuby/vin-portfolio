@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-discipline="software">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Autonomous Interception Robot: Reported Prototype | Vinayak Manoj Nair</title>
 <meta name="description" content="Portfolio account of an embedded perception-to-actuation prototype using object detection, Kalman estimation, and PID control; public source and measurement artifacts are not currently available.">
 <meta name="author" content="Vinayak Manoj Nair">
-<meta name="theme-color" content="#E4E1D8">
+<meta name="theme-color" content="#0B1017" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#E4E1D8" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://vinnair.me/projects/interceptor.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
@@ -16,11 +17,12 @@
 <meta property="og:image" content="https://vinnair.me/assets/og-image-light.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://vinnair.me/assets/og-image-light.png">
+<script>(function(){try{var t=localStorage.getItem("vn-theme");if(!t){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/site.css?v=20260817d">
+<link rel="stylesheet" href="../assets/css/site.css?v=20260819r1">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"TechArticle","headline":"AI-Powered Autonomous Interception Robot","description":"Portfolio account of an embedded perception, estimation, and control prototype with public evidence limits stated explicitly.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Computer vision","Kalman filter","Embedded systems","Control architecture"],"url":"https://vinnair.me/projects/interceptor.html"}
 </script>
@@ -72,7 +74,7 @@
 <div class="doc">
 
   <nav class="toc" aria-label="Case study contents">
-    <p class="toc__t">Contents</p>
+    <p class="toc__t">Contents</p><a class="toc__lab" href="#interactive">&#9654; Interactive model</a>
     <a href="#evidence">00 Evidence status</a>
     <a href="#problem">01 Problem</a>
     <a href="#design">02 Architecture</a>
@@ -101,6 +103,7 @@
         <p class="evidence-source"><b>Evidence source:</b> project narrative supplied for this portfolio. Public verification artifacts are unavailable.</p>
       </div>
     </section>
+<section class="doc__section doc__section--lab" id="interactive" data-reveal><h2><span class="num">&#9654;</span>Build the latency budget</h2><p>Set each stage of the perception-to-actuation pipeline and watch the total against the 100 ms design target, then see the angular lag that budget produces and what predicting across the delay recovers.</p><div class="lab" data-lab="interceptor"><p class="lab__fallback">This model needs JavaScript. Everything it demonstrates is described in the sections below.</p></div></section>
 
     <section class="doc__section" id="problem" data-reveal>
       <h2><span class="num">01</span>Problem</h2>
@@ -379,6 +382,6 @@ u = clamp(u, ±u_max)                    <span class="c">saturation with integra
 
 <footer class="footer"><div class="shell"><div class="footer__bar"><span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span><span>vinnair.me</span></div></div></footer>
 
-<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/site.js?v=20260819r1" defer></script>
 </body>
 </html>

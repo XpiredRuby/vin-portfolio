@@ -1,6 +1,7 @@
 /* ============================================================
-   site.js — minimal, dependency-free interaction layer
-   Content and presentation remain usable with JavaScript disabled.
+   site.js — dependency-free interaction layer.
+   Content stays usable with JavaScript disabled; everything here
+   is progressive enhancement.
    ============================================================ */
 (function () {
   'use strict';
@@ -8,26 +9,14 @@
   document.documentElement.classList.add('js');
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var scriptUrl = document.currentScript && document.currentScript.src ? new URL(document.currentScript.src) : null;
-
-  /* Authoritative high-contrast visual layer. Appended after document styles so
-     project-specific legacy rules cannot create low-contrast text-on-card states. */
-  if (scriptUrl && !document.getElementById('professional-contrast-css')) {
-    var contrastLink = document.createElement('link');
-    contrastLink.id = 'professional-contrast-css';
-    contrastLink.rel = 'stylesheet';
-    contrastLink.href = new URL('../css/professional-contrast.css?v=20260819a', scriptUrl).href;
-    document.head.appendChild(contrastLink);
-  }
+  var scriptUrl = document.currentScript && document.currentScript.src
+    ? new URL(document.currentScript.src)
+    : null;
 
   var path = window.location.pathname.replace(/\/+$/, '');
   var isHome = path === '' || path === '/' || /\/index\.html$/.test(path);
   var isProjects = /\/projects\.html$/.test(path);
   var isProjectDetail = /\/projects\/[^/]+\.html$/.test(path);
-  var isAbout = /\/about\.html$/.test(path);
-  var isExperience = /\/experience\.html$/.test(path);
-  var isSkills = /\/skills\.html$/.test(path);
-  var isContact = /\/contact\.html$/.test(path);
 
   document.body.classList.add('aero-ui');
   if (isHome) { document.body.classList.add('page-home'); }
@@ -35,11 +24,45 @@
   else if (isProjectDetail) { document.body.classList.add('page-project-detail'); }
   else {
     document.body.classList.add('page-standard');
-    if (isAbout) { document.body.classList.add('page-about'); }
-    else if (isExperience) { document.body.classList.add('page-experience'); }
-    else if (isSkills) { document.body.classList.add('page-skills'); }
-    else if (isContact) { document.body.classList.add('page-contact'); }
+    if (/\/about\.html$/.test(path)) { document.body.classList.add('page-about'); }
+    else if (/\/experience\.html$/.test(path)) { document.body.classList.add('page-experience'); }
+    else if (/\/skills\.html$/.test(path)) { document.body.classList.add('page-skills'); }
+    else if (/\/contact\.html$/.test(path)) { document.body.classList.add('page-contact'); }
   }
+
+  /* ---------- Theme switch ----------
+     The initial theme is resolved by an inline <head> script so the page
+     never paints the wrong palette first. This only wires the control. */
+  (function theme() {
+    var root = document.documentElement;
+    var nav = document.getElementById('primary-nav');
+    if (!nav) { return; }
+
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'theme-toggle';
+    button.setAttribute('aria-label', 'Switch colour theme');
+    button.innerHTML = '' +
+      '<svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>' +
+      '<svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+
+    function sync() {
+      var dark = root.getAttribute('data-theme') !== 'light';
+      button.setAttribute('aria-pressed', String(dark));
+      button.title = dark ? 'Switch to light theme' : 'Switch to dark theme';
+    }
+
+    button.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('vn-theme', next); } catch (err) { /* private mode */ }
+      sync();
+      window.dispatchEvent(new CustomEvent('vn:themechange', { detail: { theme: next } }));
+    });
+
+    sync();
+    nav.appendChild(button);
+  })();
 
   /* ---------- Mobile navigation ---------- */
   var toggle = document.querySelector('.nav-toggle');
@@ -83,7 +106,11 @@
     if (isNaN(target)) { return; }
 
     var bar = el.parentElement && el.parentElement.querySelector('.stat__bar i');
-    if (bar) { requestAnimationFrame(function () { bar.style.width = (el.getAttribute('data-fill') || '100') + '%'; }); }
+    if (bar) {
+      requestAnimationFrame(function () {
+        bar.style.width = (el.getAttribute('data-fill') || '100') + '%';
+      });
+    }
 
     if (reduceMotion) { el.textContent = target.toFixed(decimals); return; }
 
@@ -133,7 +160,7 @@
     grad.textContent = 'T-' + days + 'd';
   }
 
-  /* ---------- Table-of-contents scroll spy ---------- */
+  /* ---------- Case-study contents: scroll spy + reading progress ---------- */
   var tocLinks = document.querySelectorAll('.toc a[href^="#"]');
   if (tocLinks.length && 'IntersectionObserver' in window) {
     var map = {};
@@ -151,16 +178,34 @@
         var active = map[entry.target.id];
         if (active) { active.classList.add('is-active'); }
       });
-    }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+    }, { rootMargin: '-12% 0px -72% 0px', threshold: 0 });
 
     sections.forEach(function (s) { spy.observe(s); });
+  }
+
+  if (document.querySelector('.doc')) {
+    var rail = document.createElement('div');
+    rail.className = 'read-progress';
+    document.body.appendChild(rail);
+    var railTick = false;
+    var updateRail = function () {
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - doc.clientHeight;
+      var pct = max > 0 ? Math.min(100, (doc.scrollTop / max) * 100) : 0;
+      rail.style.width = pct.toFixed(2) + '%';
+      railTick = false;
+    };
+    window.addEventListener('scroll', function () {
+      if (!railTick) { railTick = true; requestAnimationFrame(updateRail); }
+    }, { passive: true });
+    updateRail();
   }
 
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = String(new Date().getFullYear());
   });
 
-  /* Native details stay fully usable without JS; this only opens a role before
+  /* Native <details> stays usable without JS; this only opens a role before
      an in-page jump so the destination content is immediately visible. */
   document.querySelectorAll('.experience-jump a[href^="#"]').forEach(function (link) {
     link.addEventListener('click', function () {
@@ -169,46 +214,69 @@
     });
   });
 
-  /* ---------- Project-link consistency ---------- */
-  document.querySelectorAll('a').forEach(function (link) {
-    var href = link.getAttribute('href') || '';
-    if (/md11-structures\.html(?:$|[?#])/.test(href)) {
-      link.setAttribute('href', '/projects/aeroframe-dt.html');
-      if (/aircraft structures study|aeroframe/i.test(link.textContent)) {
-        link.textContent = 'AeroFrame-DT';
-      }
-    }
-  });
+  /* ---------- Evidence lightbox ----------
+     Evidence plots are repository artifacts; reviewers need to read the
+     axis labels. Opening in a dialog beats a new tab full of raw PNG. */
+  (function lightbox() {
+    if (!('HTMLDialogElement' in window)) { return; }
 
-  document.querySelectorAll('.footer h5').forEach(function (heading) {
-    if (heading.textContent.trim() !== 'Case studies') { return; }
-    var list = heading.parentElement && heading.parentElement.querySelector('ul');
-    if (!list) { return; }
-    [
-      ['/projects/orbitalis-rpo.html', 'ORBITALIS-RPO'],
-      ['/projects/aeroframe-dt.html', 'AeroFrame-DT'],
-      ['/projects/md11-aircraft-cad.html', 'MD-11 Aircraft CAD']
-    ].forEach(function (item) {
-      var exists = Array.prototype.some.call(list.querySelectorAll('a'), function (a) {
-        return (a.getAttribute('href') || '').indexOf(item[0].replace(/^\//, '')) !== -1 || (a.getAttribute('href') || '') === item[0];
-      });
-      if (!exists) {
-        var li = document.createElement('li');
-        li.innerHTML = '<a href="' + item[0] + '">' + item[1] + '</a>';
-        list.appendChild(li);
-      }
+    var candidates = Array.prototype.slice.call(
+      document.querySelectorAll('.evidence-card > a:first-child, .fig > a:first-child')
+    ).filter(function (a) { return a.querySelector('img'); });
+    if (!candidates.length) { return; }
+
+    var dialog = document.createElement('dialog');
+    dialog.className = 'lightbox';
+    dialog.innerHTML = '' +
+      '<div class="lightbox__bar"><span data-lb-label>EVIDENCE</span>' +
+      '<span><a data-lb-open target="_blank" rel="noopener noreferrer" style="margin-right:.5rem">Open original ↗</a>' +
+      '<button type="button" data-lb-close>Close · Esc</button></span></div>' +
+      '<div class="lightbox__stage"><img alt="" data-lb-img></div>' +
+      '<p class="lightbox__cap" data-lb-cap></p>';
+    document.body.appendChild(dialog);
+
+    var lbImg = dialog.querySelector('[data-lb-img]');
+    var lbCap = dialog.querySelector('[data-lb-cap]');
+    var lbOpen = dialog.querySelector('[data-lb-open]');
+    var lbLabel = dialog.querySelector('[data-lb-label]');
+    var opener = null;
+
+    dialog.querySelector('[data-lb-close]').addEventListener('click', function () { dialog.close(); });
+    dialog.addEventListener('click', function (event) {
+      if (event.target === dialog) { dialog.close(); }
     });
-  });
+    dialog.addEventListener('close', function () {
+      if (opener && typeof opener.focus === 'function') { opener.focus(); }
+    });
 
-  /* ---------- Optional product-grade enhancements ---------- */
-  function loadEnhancement(filename) {
+    candidates.forEach(function (link) {
+      var img = link.querySelector('img');
+      link.addEventListener('click', function (event) {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) { return; }
+        event.preventDefault();
+        opener = link;
+        lbImg.src = img.currentSrc || img.src;
+        lbImg.alt = img.alt || '';
+        var caption = link.parentElement && link.parentElement.querySelector('figcaption h3');
+        var tag = link.parentElement && link.parentElement.querySelector('.evidence-tag');
+        lbLabel.textContent = tag ? tag.textContent.toUpperCase() : 'EVIDENCE';
+        lbCap.textContent = caption ? caption.textContent : (img.alt || '');
+        lbOpen.href = link.getAttribute('href');
+        dialog.showModal();
+      });
+    });
+  })();
+
+  /* ---------- Optional enhancements ---------- */
+  function loadScript(relative) {
     if (!scriptUrl) { return; }
     var script = document.createElement('script');
-    script.src = new URL(filename, scriptUrl).href;
+    script.src = new URL(relative, scriptUrl).href;
     script.async = true;
     document.head.appendChild(script);
   }
 
-  loadEnhancement('command-palette.js');
-  if (isProjects) { loadEnhancement('project-filter.js'); }
+  loadScript('command-palette.js');
+  if (isProjects) { loadScript('project-filter.js'); }
+  if (document.querySelector('[data-lab]')) { loadScript('labs/core.js'); }
 })();

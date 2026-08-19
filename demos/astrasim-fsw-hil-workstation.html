@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-discipline="software">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ASTRA-OS Interactive Mission Console | Vinayak Manoj Nair</title>
 <meta name="description" content="Launch the current ASTRA-OS interactive mission console from the authoritative flight-software repository and inspect the underlying source and assurance evidence.">
 <link rel="canonical" href="https://vinnair.me/demos/astrasim-fsw-hil-workstation.html">
-<meta name="theme-color" content="#07090D">
+<meta name="theme-color" content="#0B1017" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#E4E1D8" media="(prefers-color-scheme: light)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ASTRA-OS Interactive Mission Console">
 <meta property="og:description" content="Interactive engineering demonstration of the ASTRA-OS mode and fault-response model, with links to the authoritative source and verification evidence.">
 <meta property="og:url" content="https://vinnair.me/demos/astrasim-fsw-hil-workstation.html">
 <meta property="og:image" content="https://vinnair.me/assets/og-image.png">
+<script>(function(){try{var t=localStorage.getItem("vn-theme");if(!t){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/site.css?v=20260817d">
+<link rel="stylesheet" href="../assets/css/site.css?v=20260819r1">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -26,6 +28,6 @@
 <section class="shell section"><div class="grid-3"><div class="panel"><div class="panel__head"><span>What it demonstrates</span></div><div class="panel__body"><p>Mode transitions, command handling, fault injection and event/telemetry behavior from the documented ASTRA-OS model.</p></div></div><div class="panel"><div class="panel__head"><span>What it is not</span></div><div class="panel__body"><p>The browser console is not the native C++ executable, a WebAssembly build, or a live Raspberry Pi process.</p></div></div><div class="panel"><div class="panel__head"><span>Verification records</span></div><div class="panel__body"><p>CTest, scenarios, FDIR campaign, protocol checks, Monte Carlo and preserved target-execution records live in the project repository.</p></div></div></div></section>
 </main>
 <footer class="footer"><div class="shell"><div class="footer__bar"><span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span><span>vinnair.me</span></div></div></footer>
-<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/site.js?v=20260819r1" defer></script>
 </body>
 </html>

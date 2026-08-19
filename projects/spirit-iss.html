@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-discipline="systems">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TAMU-SPIRIT: ISS Payload Systems Engineering | Vinayak Manoj Nair</title>
 <meta name="description" content="Professional experience case study: internal-program systems engineering for four ISS-bound experiments, with public disclosure limited to approved process, scope, and milestone information.">
 <meta name="author" content="Vinayak Manoj Nair">
-<meta name="theme-color" content="#E4E1D8">
+<meta name="theme-color" content="#0B1017" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#E4E1D8" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://vinnair.me/projects/spirit-iss.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
@@ -16,11 +17,12 @@
 <meta property="og:image" content="https://vinnair.me/assets/og-image-light.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://vinnair.me/assets/og-image-light.png">
+<script>(function(){try{var t=localStorage.getItem("vn-theme");if(!t){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/site.css?v=20260817d">
+<link rel="stylesheet" href="../assets/css/site.css?v=20260819r1">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"TechArticle","headline":"TAMU-SPIRIT: ISS Payload Systems Engineering","description":"Professional internal-program systems engineering experience for four ISS-bound experiments, presented at an approved public level.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Systems engineering","Requirements management","Design reviews","Thermal analysis"],"url":"https://vinnair.me/projects/spirit-iss.html"}
 </script>
@@ -75,7 +77,7 @@
 <div class="doc">
 
   <nav class="toc" aria-label="Case study contents">
-    <p class="toc__t">Contents</p>
+    <p class="toc__t">Contents</p><a class="toc__lab" href="#interactive">&#9654; Interactive model</a>
     <a href="#evidence">00 Evidence boundary</a>
     <a href="#problem">01 Problem</a>
     <a href="#design">04 Review lifecycle</a>
@@ -103,6 +105,7 @@
         <p class="evidence-source"><b>Evidence source:</b> professional programme record and approved portfolio language. There is no public project repository. The public <a href="https://github.com/XpiredRuby/PACT-Controls" target="_blank" rel="noopener noreferrer">PACT-Controls repository</a> is a separate academic controls project and is not evidence for TAMU-SPIRIT.</p>
       </div>
     </section>
+<section class="doc__section doc__section--lab" id="interactive" data-reveal><h2><span class="num">&#9654;</span>Trade the thermal pair against the gate</h2><p>Pick a material pair for the payload interface and sweep it across the declared LEO cycling band, then step the review gate to see which requirement themes have to be closed by then.</p><div class="lab" data-lab="spirit"><p class="lab__fallback">This model needs JavaScript. Everything it demonstrates is described in the sections below.</p></div></section>
 
     <section class="doc__section" id="problem" data-reveal>
       <h2><span class="num">01</span>Problem</h2>
@@ -368,6 +371,6 @@ inspection or demonstration. no orphans in either direction.</span></div>
 
 <footer class="footer"><div class="shell"><div class="footer__bar"><span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span><span>vinnair.me</span></div></div></footer>
 
-<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/site.js?v=20260819r1" defer></script>
 </body>
 </html>
