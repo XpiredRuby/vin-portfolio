@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">ORBITALIS-RPO software-in-the-loop architecture</title>
+  <desc id="desc">Architecture linking orbital dynamics, relative navigation, guidance and control, six degree of freedom spacecraft dynamics, resource models, autonomy and verification evidence.</desc>
+  <rect width="1600" height="900" fill="#0b0f14"/>
+  <g font-family="Inter,Arial,sans-serif" fill="#eef4f8">
+    <text x="90" y="95" font-size="42" font-weight="700">ORBITALIS-RPO</text>
+    <text x="90" y="135" font-size="22" fill="#8fa4b4">Representative autonomous spacecraft inspection and rendezvous SIL</text>
+  </g>
+  <g stroke="#2b3d4c" stroke-width="2" fill="#111923">
+    <rect x="90" y="205" width="300" height="145" rx="16"/>
+    <rect x="480" y="205" width="300" height="145" rx="16"/>
+    <rect x="870" y="205" width="300" height="145" rx="16"/>
+    <rect x="1260" y="205" width="250" height="145" rx="16"/>
+    <rect x="285" y="470" width="340" height="155" rx="16"/>
+    <rect x="730" y="470" width="340" height="155" rx="16"/>
+    <rect x="1175" y="470" width="335" height="155" rx="16"/>
+  </g>
+  <g font-family="Inter,Arial,sans-serif">
+    <g fill="#67d8ff"><text x="120" y="245" font-size="19" font-weight="700">ORBIT / RELATIVE DYNAMICS</text></g>
+    <g fill="#eef4f8" font-size="18"><text x="120" y="280">Two-body + J2 propagation</text><text x="120" y="310">CW / matrix-exponential checks</text><text x="120" y="340">550 km SSO reference case</text></g>
+    <g fill="#67d8ff"><text x="510" y="245" font-size="19" font-weight="700">RELATIVE NAVIGATION</text></g>
+    <g fill="#eef4f8" font-size="18"><text x="510" y="280">Bias, latency, dropout, outliers</text><text x="510" y="310">NIS / NEES consistency metrics</text><text x="510" y="340">Asynchronous measurement model</text></g>
+    <g fill="#67d8ff"><text x="900" y="245" font-size="19" font-weight="700">GUIDANCE / CONTROL</text></g>
+    <g fill="#eef4f8" font-size="18"><text x="900" y="280">Waypoint and constrained guidance</text><text x="900" y="310">Keep-out monitoring</text><text x="900" y="340">Abort / retreat logic</text></g>
+    <g fill="#67d8ff"><text x="1290" y="245" font-size="19" font-weight="700">6-DOF PLANT</text></g>
+    <g fill="#eef4f8" font-size="18"><text x="1290" y="280">Quaternion rigid body</text><text x="1290" y="310">Thruster allocation + MIB</text><text x="1290" y="340">Mass depletion</text></g>
+
+    <g fill="#6ee7a8"><text x="315" y="512" font-size="19" font-weight="700">AUTONOMY EXECUTIVE</text></g>
+    <g fill="#eef4f8" font-size="18"><text x="315" y="550">Commissioning to inspection</text><text x="315" y="580">Hold points + contingency modes</text><text x="315" y="610">Operations rehearsal</text></g>
+    <g fill="#6ee7a8"><text x="760" y="512" font-size="19" font-weight="700">RESOURCE CLOSURE</text></g>
+    <g fill="#eef4f8" font-size="18"><text x="760" y="550">Power / eclipse / data</text><text x="760" y="580">Thermal + propellant timeline</text><text x="760" y="610">Architecture trade sensitivity</text></g>
+    <g fill="#6ee7a8"><text x="1205" y="512" font-size="19" font-weight="700">VERIFICATION EVIDENCE</text></g>
+    <g fill="#eef4f8" font-size="18"><text x="1205" y="550">Frozen blind Monte Carlo</text><text x="1205" y="580">C++20 equivalence vectors</text><text x="1205" y="610">Requirements + evidence manifest</text></g>
+  </g>
+  <g stroke="#67d8ff" stroke-width="4" fill="none" marker-end="url(#arrow)">
+    <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#67d8ff"/></marker></defs>
+    <path d="M390 278 H475"/><path d="M780 278 H865"/><path d="M1170 278 H1255"/>
+    <path d="M1385 350 C1385 420 560 420 455 470"/>
+    <path d="M625 548 H725"/><path d="M1070 548 H1170"/>
+  </g>
+  <g font-family="JetBrains Mono,monospace" font-size="17" fill="#8fa4b4">
+    <text x="90" y="760">SOFTWARE-IN-THE-LOOP EVIDENCE ONLY</text>
+    <text x="90" y="794">No claim of flight readiness, certification, collision-risk assurance, or hardware validation.</text>
+    <text x="90" y="828">External GMAT, Orekit, and STK execution remains outside the verified boundary.</text>
+  </g>
+</svg>
