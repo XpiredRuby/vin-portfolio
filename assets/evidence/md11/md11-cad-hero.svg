@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">MD-11 aircraft CAD visualization</title>
+<desc id="desc">Technical three-view-inspired visualization of a tri-jet widebody aircraft with fuselage, swept wings, T-tail, wing engines and tail engine.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0B1220"/><stop offset="1" stop-color="#111827"/></linearGradient>
+  <linearGradient id="body" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#E2E8F0"/><stop offset="1" stop-color="#94A3B8"/></linearGradient>
+  <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#020617" flood-opacity=".55"/></filter>
+  <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#334155" stroke-width="1" opacity=".32"/></pattern>
+</defs>
+<rect width="1600" height="900" fill="url(#bg)"/>
+<rect width="1600" height="900" fill="url(#grid)"/>
+<g opacity=".5" stroke="#38BDF8" stroke-width="1.5" fill="none">
+  <path d="M90 120H1510M90 760H1510" stroke-dasharray="7 10"/>
+  <path d="M230 94V786M1360 94V786" stroke-dasharray="7 10"/>
+</g>
+
+<!-- main side-profile visualization -->
+<g transform="translate(110 250)" filter="url(#shadow)">
+  <!-- fuselage -->
+  <path d="M90 210 C150 155 240 145 370 145 H1040 C1160 145 1245 168 1320 205 C1248 244 1165 266 1040 266 H350 C225 266 143 252 90 210Z" fill="url(#body)" stroke="#F8FAFC" stroke-width="3"/>
+  <!-- cockpit glazing -->
+  <path d="M128 196 C164 169 205 162 248 161 L222 190 L145 205Z" fill="#0F172A" stroke="#38BDF8" stroke-width="2"/>
+  <!-- windows -->
+  <g fill="#0F172A" opacity=".95">
+    <rect x="275" y="176" width="18" height="9" rx="4"/><rect x="307" y="176" width="18" height="9" rx="4"/><rect x="339" y="176" width="18" height="9" rx="4"/><rect x="371" y="176" width="18" height="9" rx="4"/><rect x="403" y="176" width="18" height="9" rx="4"/><rect x="435" y="176" width="18" height="9" rx="4"/><rect x="467" y="176" width="18" height="9" rx="4"/><rect x="499" y="176" width="18" height="9" rx="4"/><rect x="531" y="176" width="18" height="9" rx="4"/><rect x="563" y="176" width="18" height="9" rx="4"/><rect x="595" y="176" width="18" height="9" rx="4"/><rect x="627" y="176" width="18" height="9" rx="4"/><rect x="659" y="176" width="18" height="9" rx="4"/><rect x="691" y="176" width="18" height="9" rx="4"/><rect x="723" y="176" width="18" height="9" rx="4"/><rect x="755" y="176" width="18" height="9" rx="4"/><rect x="787" y="176" width="18" height="9" rx="4"/><rect x="819" y="176" width="18" height="9" rx="4"/><rect x="851" y="176" width="18" height="9" rx="4"/><rect x="883" y="176" width="18" height="9" rx="4"/><rect x="915" y="176" width="18" height="9" rx="4"/><rect x="947" y="176" width="18" height="9" rx="4"/><rect x="979" y="176" width="18" height="9" rx="4"/>
+  </g>
+  <!-- wing -->
+  <path d="M510 224 L830 70 L925 78 L740 226Z" fill="#CBD5E1" stroke="#F8FAFC" stroke-width="3"/>
+  <path d="M545 236 L820 365 L900 357 L725 230Z" fill="#64748B" stroke="#CBD5E1" stroke-width="2" opacity=".9"/>
+  <!-- horizontal tail -->
+  <path d="M1090 166 L1268 113 L1305 119 L1190 181Z" fill="#CBD5E1" stroke="#F8FAFC" stroke-width="2.5"/>
+  <!-- vertical tail / T-tail -->
+  <path d="M1110 152 L1175 -65 L1240 -58 L1270 167Z" fill="#94A3B8" stroke="#F8FAFC" stroke-width="3"/>
+  <path d="M1166 -53 L1268 -90 L1325 -83 L1237 -43Z" fill="#CBD5E1" stroke="#F8FAFC" stroke-width="2.5"/>
+  <!-- tail engine intake and nacelle -->
+  <ellipse cx="1168" cy="102" rx="47" ry="31" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
+  <ellipse cx="1168" cy="102" rx="28" ry="18" fill="#020617" stroke="#64748B" stroke-width="2"/>
+  <path d="M1168 72 L1260 90 L1265 115 L1168 132Z" fill="#64748B" opacity=".88"/>
+  <!-- wing engines -->
+  <g>
+    <path d="M600 224 C600 186 640 166 704 170 C748 173 775 193 778 221 C774 254 743 271 698 271 C638 272 601 253 600 224Z" fill="#64748B" stroke="#E2E8F0" stroke-width="3"/>
+    <ellipse cx="613" cy="222" rx="35" ry="40" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
+    <ellipse cx="613" cy="222" rx="20" ry="24" fill="#020617"/>
+  </g>
+  <g transform="translate(250 12) scale(.86)">
+    <path d="M600 224 C600 186 640 166 704 170 C748 173 775 193 778 221 C774 254 743 271 698 271 C638 272 601 253 600 224Z" fill="#64748B" stroke="#E2E8F0" stroke-width="3"/>
+    <ellipse cx="613" cy="222" rx="35" ry="40" fill="#0F172A" stroke="#38BDF8" stroke-width="3"/>
+    <ellipse cx="613" cy="222" rx="20" ry="24" fill="#020617"/>
+  </g>
+  <!-- landing gear suggestion -->
+  <g stroke="#CBD5E1" stroke-width="4" fill="#0F172A">
+    <path d="M330 255v57"/><circle cx="323" cy="323" r="12"/><circle cx="343" cy="323" r="12"/>
+    <path d="M760 258v74"/><path d="M760 318h46"/><circle cx="747" cy="340" r="14"/><circle cx="774" cy="340" r="14"/><circle cx="805" cy="340" r="14"/>
+    <path d="M930 258v72"/><path d="M930 316h44"/><circle cx="918" cy="338" r="14"/><circle cx="945" cy="338" r="14"/><circle cx="974" cy="338" r="14"/>
+  </g>
+  <!-- reference line -->
+  <path d="M78 210H1335" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="10 10" opacity=".7"/>
+</g>
+
+<!-- lower technical callouts -->
+<g font-family="JetBrains Mono, Consolas, monospace" fill="#CBD5E1">
+  <text x="112" y="92" font-size="20" letter-spacing="5" fill="#38BDF8">CAD VISUALIZATION / TRI-JET AIRCRAFT ASSEMBLY</text>
+  <text x="112" y="126" font-size="15" fill="#94A3B8">PARAMETRIC ASSEMBLY · DRAWING WORKFLOW · PARASOLID EXPORT</text>
+  <g transform="translate(120 724)">
+    <rect width="335" height="94" rx="12" fill="#111827" stroke="#334155"/>
+    <text x="22" y="34" font-size="14" fill="#94A3B8">ASSEMBLY</text><text x="22" y="68" font-size="28" fill="#F9FAFB" font-family="Space Grotesk, sans-serif" font-weight="700">24 parts</text>
+  </g>
+  <g transform="translate(475 724)">
+    <rect width="335" height="94" rx="12" fill="#111827" stroke="#334155"/>
+    <text x="22" y="34" font-size="14" fill="#94A3B8">NATIVE CAD</text><text x="22" y="68" font-size="28" fill="#F9FAFB" font-family="Space Grotesk, sans-serif" font-weight="700">SLDASM / SLDPRT / SLDDRW</text>
+  </g>
+  <g transform="translate(830 724)">
+    <rect width="335" height="94" rx="12" fill="#111827" stroke="#334155"/>
+    <text x="22" y="34" font-size="14" fill="#94A3B8">NEUTRAL CAD</text><text x="22" y="68" font-size="28" fill="#F9FAFB" font-family="Space Grotesk, sans-serif" font-weight="700">Parasolid X_T</text>
+  </g>
+  <g transform="translate(1185 724)">
+    <rect width="295" height="94" rx="12" fill="#111827" stroke="#334155"/>
+    <text x="22" y="34" font-size="14" fill="#94A3B8">WORKFLOW</text><text x="22" y="68" font-size="28" fill="#F9FAFB" font-family="Space Grotesk, sans-serif" font-weight="700">CAD → Drawing</text>
+  </g>
+</g>
+</svg>
