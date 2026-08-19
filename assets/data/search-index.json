@@ -4,62 +4,43 @@
     "subtitle": "Engineering identity, working principles, and current focus",
     "href": "about.html",
     "kind": "Page",
-    "tags": [
-      "about",
-      "bio",
-      "profile",
-      "engineering"
-    ]
+    "tags": ["about", "bio", "profile", "engineering"]
   },
   {
     "title": "Projects",
     "subtitle": "Evidence-backed aerospace engineering case studies",
     "href": "projects.html",
     "kind": "Page",
-    "tags": [
-      "projects",
-      "portfolio",
-      "case studies",
-      "evidence"
-    ]
+    "tags": ["projects", "portfolio", "case studies", "evidence"]
   },
   {
     "title": "Experience",
     "subtitle": "Spacecraft systems, controls, and research experience",
     "href": "experience.html",
     "kind": "Page",
-    "tags": [
-      "experience",
-      "work",
-      "systems",
-      "controls"
-    ]
+    "tags": ["experience", "work", "systems", "controls"]
   },
   {
     "title": "Technical skills",
     "subtitle": "Mechanical, controls, software, structures, and systems capabilities",
     "href": "skills.html",
     "kind": "Page",
-    "tags": [
-      "skills",
-      "cpp",
-      "python",
-      "ros2",
-      "fea",
-      "controls"
-    ]
+    "tags": ["skills", "cpp", "python", "ros2", "fea", "controls"]
   },
   {
     "title": "Contact",
     "subtitle": "Email, LinkedIn, and GitHub",
     "href": "contact.html",
     "kind": "Page",
-    "tags": [
-      "contact",
-      "email",
-      "linkedin",
-      "github"
-    ]
+    "tags": ["contact", "email", "linkedin", "github"]
+  },
+  {
+    "title": "ORBITALIS-RPO",
+    "subtitle": "Spacecraft rendezvous · relative navigation · 6-DOF · autonomy · interactive verification",
+    "href": "projects/orbitalis-rpo.html",
+    "kind": "Project",
+    "key": "orbitalis",
+    "tags": ["gnc", "spacecraft", "rpo", "relative navigation", "6-dof", "autonomy", "c++20", "monte carlo"]
   },
   {
     "title": "GHOST-X",
@@ -67,15 +48,7 @@
     "href": "projects/ghost.html",
     "kind": "Project",
     "key": "ghost",
-    "tags": [
-      "gnc",
-      "state estimation",
-      "imm",
-      "kalman",
-      "ros2",
-      "raspberry pi",
-      "tracking"
-    ]
+    "tags": ["gnc", "state estimation", "imm", "kalman", "ros2", "raspberry pi", "tracking"]
   },
   {
     "title": "ASTRA-OS",
@@ -83,88 +56,55 @@
     "href": "projects/astrasim-fsw.html",
     "kind": "Project",
     "key": "astra",
-    "tags": [
-      "flight software",
-      "cpp",
-      "fdir",
-      "verification",
-      "telemetry",
-      "spacecraft"
-    ]
+    "tags": ["flight software", "cpp", "fdir", "verification", "telemetry", "spacecraft"]
   },
   {
     "title": "AeroFrame-DT",
-    "subtitle": "Aircraft fitting substantiation · stress · FE verification · fatigue",
-    "href": "projects/md11-structures.html",
+    "subtitle": "Structural substantiation · pylon attachment trade · nonlinear FEA · fatigue / damage tolerance",
+    "href": "projects/aeroframe-dt.html",
     "kind": "Project",
     "key": "aeroframe",
-    "tags": [
-      "structures",
-      "stress",
-      "fea",
-      "fatigue",
-      "damage tolerance",
-      "allowables"
-    ]
-  },
-  {
-    "title": "Rocket Landing GNC",
-    "subtitle": "Exploratory point-mass descent prototype · verification gates pending",
-    "href": "projects/rocket-landing-gnc.html",
-    "kind": "Project",
-    "key": "rocket",
-    "tags": [
-      "gnc",
-      "point mass",
-      "prototype",
-      "controls",
-      "evidence pending",
-      "rocket"
-    ]
-  },
-  {
-    "title": "Interception Robot",
-    "subtitle": "Reported perception-to-actuation prototype - public timing and test artifacts unavailable",
-    "href": "projects/interceptor.html",
-    "kind": "Project",
-    "key": "interceptor",
-    "tags": [
-      "autonomy",
-      "embedded",
-      "perception",
-      "controls",
-      "robotics"
-    ]
+    "tags": ["structures", "stress", "fea", "fatigue", "damage tolerance", "allowables", "pylon", "cad"]
   },
   {
     "title": "TAMU-SPIRIT",
-    "subtitle": "Internal-program ISS payload systems engineering - public artifacts limited",
+    "subtitle": "ISS payload systems engineering · requirements · reviews · thermal trades",
     "href": "projects/spirit-iss.html",
     "kind": "Project",
     "key": "spirit",
-    "tags": [
-      "systems",
-      "spacecraft",
-      "iss",
-      "requirements",
-      "thermal",
-      "reviews"
-    ]
+    "tags": ["systems", "spacecraft", "iss", "requirements", "thermal", "reviews"]
   },
   {
-    "title": "F-16-inspired flight-controls SIL",
+    "title": "Fixed-Wing Flight Controls SIL",
     "subtitle": "Representative fixed-wing controls SIL · response plots · seeded 50-run uncertainty",
     "href": "projects/f16-flight-controls.html",
     "kind": "Project",
     "key": "f16",
-    "tags": [
-      "controls",
-      "flight dynamics",
-      "sil",
-      "monte carlo",
-      "python",
-      "evidence"
-    ]
+    "tags": ["controls", "flight dynamics", "sil", "monte carlo", "matlab", "simulink", "evidence"]
+  },
+  {
+    "title": "MD-11 Aircraft CAD Assembly",
+    "subtitle": "Earliest portfolio project · 24-part SolidWorks aircraft assembly · drawings · BOM",
+    "href": "projects/md11-aircraft-cad.html",
+    "kind": "Project",
+    "key": "md11cad",
+    "tags": ["solidworks", "cad", "mechanical design", "assembly", "drawing", "bom", "md-11"]
+  },
+  {
+    "title": "Interception Robot",
+    "subtitle": "Embedded perception-to-actuation prototype · target tracking · closed-loop control",
+    "href": "projects/interceptor.html",
+    "kind": "Project",
+    "key": "interceptor",
+    "tags": ["autonomy", "embedded", "perception", "controls", "robotics"]
+  },
+  {
+    "title": "Rocket Landing GNC",
+    "subtitle": "Exploratory descent and landing controls prototype",
+    "href": "projects/rocket-landing-gnc.html",
+    "kind": "Project",
+    "key": "rocket",
+    "tags": ["gnc", "prototype", "controls", "rocket", "tvc"]
   },
   {
     "title": "Project CHASER",
@@ -173,14 +113,7 @@
     "kind": "Repository",
     "key": "chaser",
     "external": true,
-    "tags": [
-      "relative navigation",
-      "ukf",
-      "fdir",
-      "replay",
-      "spacecraft",
-      "pre-hardware"
-    ]
+    "tags": ["relative navigation", "ukf", "fdir", "replay", "spacecraft", "pre-hardware"]
   },
   {
     "title": "GHOST-X source",
@@ -188,11 +121,7 @@
     "href": "https://github.com/XpiredRuby/ghost-vins-eskf",
     "kind": "Repository",
     "external": true,
-    "tags": [
-      "github",
-      "ghost",
-      "source"
-    ]
+    "tags": ["github", "ghost", "source"]
   },
   {
     "title": "ASTRA-OS source",
@@ -200,11 +129,7 @@
     "href": "https://github.com/XpiredRuby/AstraSim-FSW",
     "kind": "Repository",
     "external": true,
-    "tags": [
-      "github",
-      "astra",
-      "source"
-    ]
+    "tags": ["github", "astra", "source"]
   },
   {
     "title": "AeroFrame-DT source",
@@ -212,10 +137,14 @@
     "href": "https://github.com/XpiredRuby/aeroframe-dt",
     "kind": "Repository",
     "external": true,
-    "tags": [
-      "github",
-      "aeroframe",
-      "source"
-    ]
+    "tags": ["github", "aeroframe", "source"]
+  },
+  {
+    "title": "ORBITALIS-RPO source",
+    "subtitle": "Open the spacecraft RPO software and retained verification evidence",
+    "href": "https://github.com/XpiredRuby/orbitalis-rpo",
+    "kind": "Repository",
+    "external": true,
+    "tags": ["github", "orbitalis", "rpo", "source", "verification"]
   }
 ]
