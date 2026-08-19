@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">MD-11 aircraft CAD project overview</title>
+  <desc id="desc">Portfolio schematic showing the retained SolidWorks assembly, part, drawing, and Parasolid artifacts around a wireframe tri-jet aircraft model.</desc>
+  <rect width="1600" height="900" fill="#f6f4ee"/>
+  <rect x="44" y="44" width="1512" height="812" rx="28" fill="#fbfaf7" stroke="#1f2937" stroke-width="3"/>
+  <text x="84" y="104" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="28" fill="#0f172a" letter-spacing="3">MD-11 AIRCRAFT CAD ASSEMBLY / ARTIFACT OVERVIEW</text>
+  <text x="84" y="143" font-family="Arial, sans-serif" font-size="22" fill="#475569">Earliest portfolio project · SolidWorks assembly + drawing workflow · source artifacts retained</text>
+
+  <g transform="translate(78 205)">
+    <rect width="340" height="548" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="28" y="48" font-family="ui-monospace, monospace" font-size="20" fill="#334155">SOURCE ARTIFACTS</text>
+    <g font-family="Arial, sans-serif" font-size="20" fill="#0f172a">
+      <rect x="28" y="82" width="284" height="82" rx="12" fill="#eff6ff" stroke="#93c5fd"/>
+      <text x="48" y="115" font-weight="700">Assem1.SLDASM</text><text x="48" y="143" fill="#475569">SolidWorks assembly</text>
+      <rect x="28" y="180" width="284" height="82" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="48" y="213" font-weight="700">MD11.SLDPRT</text><text x="48" y="241" fill="#475569">Primary part model</text>
+      <rect x="28" y="278" width="284" height="82" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="48" y="311" font-weight="700">MD11_Drawing.SLDDRW</text><text x="48" y="339" fill="#475569">Drawing package</text>
+      <rect x="28" y="376" width="284" height="82" rx="12" fill="#ecfdf3" stroke="#86efac"/>
+      <text x="48" y="409" font-weight="700">MD-11 Plane.x_t</text><text x="48" y="437" fill="#475569">Parasolid export</text>
+    </g>
+    <text x="28" y="502" font-family="Arial, sans-serif" font-size="17" fill="#64748b">Original SolidWorks files dated Nov 2024.</text>
+  </g>
+
+  <g transform="translate(470 190)" stroke="#334155" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="0" y="0" width="780" height="575" rx="22" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="28" y="48" font-family="ui-monospace, monospace" font-size="20" fill="#334155" stroke="none">ASSEMBLY VIEW / SCHEMATIC</text>
+    <line x1="40" y1="292" x2="740" y2="292" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="9 10"/>
+    <line x1="390" y1="85" x2="390" y2="505" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="9 10"/>
+
+    <path d="M130 292 L340 270 L492 120 L533 132 L468 270 L650 282 L694 236 L718 244 L692 292 L718 340 L694 348 L650 302 L468 314 L533 452 L492 464 L340 314 L130 292 Z" fill="#f8fafc"/>
+    <path d="M120 292 L315 292"/>
+    <ellipse cx="450" cy="286" rx="18" ry="10" fill="#ffffff"/>
+    <ellipse cx="450" cy="305" rx="18" ry="10" fill="#ffffff"/>
+    <path d="M665 286 Q690 250 710 228"/>
+    <circle cx="444" cy="282" r="5" fill="#2563eb" stroke="none"/>
+    <circle cx="444" cy="309" r="5" fill="#2563eb" stroke="none"/>
+    <circle cx="688" cy="257" r="5" fill="#2563eb" stroke="none"/>
+
+    <g stroke="#2563eb" stroke-width="2">
+      <line x1="225" y1="196" x2="300" y2="250"/><line x1="300" y1="250" x2="324" y2="250"/>
+      <line x1="565" y1="160" x2="520" y2="245"/><line x1="520" y1="245" x2="496" y2="245"/>
+      <line x1="565" y1="425" x2="516" y2="330"/><line x1="516" y1="330" x2="492" y2="330"/>
+    </g>
+    <g font-family="Arial, sans-serif" font-size="18" fill="#1d4ed8" stroke="none">
+      <text x="75" y="186">Parametric fuselage + empennage</text>
+      <text x="565" y="150">Wing / pylon interfaces</text>
+      <text x="565" y="455">Assembly mates + configuration intent</text>
+    </g>
+    <rect x="40" y="510" width="700" height="38" rx="8" fill="#0f172a" stroke="none"/>
+    <text x="60" y="536" font-family="ui-monospace, monospace" font-size="17" fill="#e2e8f0" stroke="none">24-part parametric SolidWorks aircraft assembly · drawing package · BOM</text>
+  </g>
+
+  <g transform="translate(1290 205)">
+    <rect width="230" height="548" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="24" y="48" font-family="ui-monospace, monospace" font-size="20" fill="#334155">WORKFLOW</text>
+    <g font-family="Arial, sans-serif" font-size="18" fill="#0f172a">
+      <circle cx="38" cy="104" r="15" fill="#2563eb"/><text x="68" y="111">Model parts</text>
+      <line x1="38" y1="122" x2="38" y2="164" stroke="#94a3b8" stroke-width="3"/>
+      <circle cx="38" cy="186" r="15" fill="#2563eb"/><text x="68" y="193">Build assembly</text>
+      <line x1="38" y1="204" x2="38" y2="246" stroke="#94a3b8" stroke-width="3"/>
+      <circle cx="38" cy="268" r="15" fill="#2563eb"/><text x="68" y="275">Release drawing</text>
+      <line x1="38" y1="286" x2="38" y2="328" stroke="#94a3b8" stroke-width="3"/>
+      <circle cx="38" cy="350" r="15" fill="#2563eb"/><text x="68" y="357">Check BOM</text>
+      <line x1="38" y1="368" x2="38" y2="410" stroke="#94a3b8" stroke-width="3"/>
+      <circle cx="38" cy="432" r="15" fill="#16a34a"/><text x="68" y="439">Export geometry</text>
+    </g>
+    <text x="24" y="500" font-family="Arial, sans-serif" font-size="16" fill="#64748b">Portfolio schematic.</text>
+    <text x="24" y="525" font-family="Arial, sans-serif" font-size="16" fill="#64748b">Not an OEM model.</text>
+  </g>
+</svg>
