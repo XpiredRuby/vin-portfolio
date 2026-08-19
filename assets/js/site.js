@@ -9,6 +9,17 @@
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var scriptUrl = document.currentScript && document.currentScript.src ? new URL(document.currentScript.src) : null;
+
+  /* Authoritative high-contrast visual layer. Appended after document styles so
+     project-specific legacy rules cannot create low-contrast text-on-card states. */
+  if (scriptUrl && !document.getElementById('professional-contrast-css')) {
+    var contrastLink = document.createElement('link');
+    contrastLink.id = 'professional-contrast-css';
+    contrastLink.rel = 'stylesheet';
+    contrastLink.href = new URL('../css/professional-contrast.css?v=20260819a', scriptUrl).href;
+    document.head.appendChild(contrastLink);
+  }
+
   var path = window.location.pathname.replace(/\/+$/, '');
   var isHome = path === '' || path === '/' || /\/index\.html$/.test(path);
   var isProjects = /\/projects\.html$/.test(path);
