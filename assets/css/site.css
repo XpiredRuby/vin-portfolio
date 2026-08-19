@@ -937,7 +937,8 @@ code, .code {
 /* Model directory — the routes straight into the runnable work. */
 .model-grid {
   display: grid; gap: 0.7rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  /* Nine models: 22rem lands a clean 3x3 at desktop instead of an orphan row. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
 }
 .model-card {
   display: grid; gap: 0.32rem; align-content: start;
