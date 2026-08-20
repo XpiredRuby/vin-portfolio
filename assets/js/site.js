@@ -278,6 +278,7 @@
     document.head.appendChild(script);
   }
 
+  loadScript('motion.js');
   loadScript('command-palette.js');
   if (isProjects) { loadScript('project-filter.js'); }
   if (document.querySelector('[data-lab]')) { loadScript('labs/core.js'); }

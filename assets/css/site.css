@@ -1226,7 +1226,11 @@ a.contact-card:hover { border-color: var(--accent-line); transform: translateY(-
   margin-top: clamp(3rem, 6vw, 5rem);
   position: relative; z-index: 1;
 }
-.footer__inner { padding-block: clamp(2.2rem, 4vw, 3.2rem); }
+.footer__inner {
+  padding-block: clamp(2.2rem, 4vw, 3.2rem);
+  display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; gap: 1rem 1.5rem;
+}
 .footer__grid {
   display: grid; gap: 1.6rem;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
@@ -1594,4 +1598,162 @@ html:not(.js) [data-reveal] { opacity: 1; transform: none; }
   .panel__head, .reqs thead th { background: #f4f4f4; color: #333; }
   .chip, .pill { border-color: #bbb; color: #333; background: #fff; }
   .tl, .case { page-break-inside: avoid; }
+}
+
+/* ============================================================
+   24. AMBIENT MOTION AND ICONS
+   Presence-driven effects: the cursor, the scroll, the pointer
+   entering a card. None of it carries meaning, so all of it is
+   switched off under prefers-reduced-motion and on touch.
+   ============================================================ */
+
+/* ---------- Cursor spotlight ---------- */
+[data-spot] { position: relative; isolation: isolate; }
+[data-spot]::before {
+  content: "";
+  position: absolute; inset: 0; z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.28s var(--ease);
+  background: radial-gradient(
+    22rem circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent) 14%, transparent),
+    transparent 62%);
+}
+[data-spot] > * { position: relative; z-index: 1; }
+@media (hover: hover) and (pointer: fine) {
+  [data-spot]:hover::before { opacity: 1; }
+}
+
+/* Cards that tilt need a stable transform origin and no competing hover. */
+.featured-grid .case,
+.project-catalog .case {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ---------- Magnetic controls ---------- */
+[data-magnetic] {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              background-color 0.16s var(--ease),
+              border-color 0.16s var(--ease),
+              color 0.16s var(--ease);
+}
+[data-magnetic]:hover { transition-duration: 0.08s; }
+
+/* ---------- Staggered reveal ---------- */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+}
+.stagger-item.is-in { opacity: 1; transform: none; }
+html:not(.js) .stagger-item { opacity: 1; transform: none; }
+
+/* ---------- Icons ---------- */
+.icon {
+  width: 1.05em; height: 1.05em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.icon--solid { fill: currentColor; stroke: none; }
+.icon--lg { width: 1.35em; height: 1.35em; }
+
+/* A square, icon-first control. The label is still in the DOM for
+   screen readers and appears on hover for everyone else. */
+.icon-tile {
+  position: relative;
+  display: grid; place-items: center;
+  width: 2.9rem; height: 2.9rem;
+  border: 1px solid var(--line-2);
+  border-radius: 11px;
+  background: var(--surface);
+  color: var(--txt-2);
+  transition: color 0.18s var(--ease), border-color 0.18s var(--ease),
+              background-color 0.18s var(--ease), transform 0.18s var(--ease);
+}
+.icon-tile:hover,
+.icon-tile:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-a);
+  transform: translateY(-3px);
+}
+.icon-tile .icon { width: 1.2rem; height: 1.2rem; }
+
+/* Hover label */
+.icon-tile__label {
+  position: absolute; bottom: calc(100% + 0.5rem); left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid var(--line-2);
+  background: var(--surface-3);
+  color: var(--txt);
+  font-family: var(--f-mono); font-size: 0.63rem;
+  letter-spacing: 0.06em; white-space: nowrap;
+  box-shadow: var(--shadow-2);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.18s var(--ease), transform 0.18s var(--ease);
+  z-index: 5;
+}
+.icon-tile:hover .icon-tile__label,
+.icon-tile:focus-visible .icon-tile__label {
+  opacity: 1; transform: translateX(-50%) translateY(0);
+}
+.icon-tile[data-copied="yes"] { color: var(--ok); border-color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, transparent); }
+.icon-tile[data-copied="fail"] { color: var(--warn); border-color: var(--warn); }
+
+.icon-row { display: flex; flex-wrap: wrap; gap: 0.55rem; align-items: center; }
+
+/* ---------- Icon-led contact cards ---------- */
+.contact-card { position: relative; overflow: hidden; }
+.contact-card__icon {
+  display: grid; place-items: center;
+  width: 2.35rem; height: 2.35rem;
+  margin-bottom: 0.55rem;
+  border-radius: 9px;
+  border: 1px solid var(--accent-line);
+  background: var(--accent-a);
+  color: var(--accent);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.contact-card__icon .icon { width: 1.15rem; height: 1.15rem; }
+a.contact-card:hover .contact-card__icon { transform: scale(1.08) rotate(-4deg); }
+
+/* The arrow that appears when a card is worth clicking. */
+.contact-card__go {
+  position: absolute; top: 0.9rem; right: 0.95rem;
+  color: var(--accent);
+  opacity: 0; transform: translate(-4px, 4px);
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+}
+a.contact-card:hover .contact-card__go,
+a.contact-card:focus-visible .contact-card__go { opacity: 1; transform: none; }
+
+/* ---------- Buttons carrying icons ---------- */
+.btn .icon { margin-right: -0.1rem; }
+.btn--icon-end .icon { margin-right: 0; margin-left: -0.1rem; }
+
+/* An arrow that slides on hover, used on outbound links. */
+.btn:hover .icon--travel { transform: translate(2px, -2px); }
+.icon--travel { transition: transform 0.18s var(--ease); }
+
+/* ---------- Footer social row ---------- */
+.footer .icon-row { margin-top: 0.2rem; }
+.footer .icon-tile { width: 2.5rem; height: 2.5rem; background: var(--surface); }
+
+.icon-row--compact .icon-tile { width: 2.1rem; height: 2.1rem; border-radius: 8px; }
+.icon-row--compact .icon-tile .icon { width: 0.95rem; height: 0.95rem; }
+.footer__bar .icon-row--compact { margin-block: -0.35rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-spot]::before { display: none; }
+  .stagger-item { opacity: 1; transform: none; }
+  .contact-card__go { opacity: 1; transform: none; }
 }

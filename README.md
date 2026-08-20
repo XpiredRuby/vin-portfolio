@@ -54,6 +54,22 @@ Pages never hard-code a colour. A case study declares `data-discipline` on
 for controls, violet for systems, green for flight software — which gives each
 project its own identity without leaving the system.
 
+## Ambient interaction
+
+Alongside the models, the site responds to presence rather than only to
+clicks: a cursor spotlight tracks across cards, featured project cards lean
+toward the pointer, primary actions drift a few pixels to meet it, the hero
+portrait parallaxes on scroll, and grids assemble one item at a time.
+
+None of it carries information. All of it is switched off under
+`prefers-reduced-motion`, and on touch devices, where a hover state is a lie.
+`assets/js/motion.js` gates every effect behind both checks and clears any
+inline transforms if the preference changes mid-session.
+
+Contact routes are icons rather than repeated text — email, LinkedIn, GitHub,
+and a copy-to-clipboard control. Each keeps a real label in the DOM for screen
+readers and surfaces it on hover, so nothing is guessable-only.
+
 ## Interactive models
 
 Every case study carries a model a reviewer can drive in the browser. They are
@@ -101,6 +117,7 @@ vin-portfolio/
 │   ├── css/evidence-first.css  evidence components (defines no colours)
 │   ├── css/labs.css            interactive-model chrome
 │   ├── js/site.js              theme, reveal, lightbox, reading progress
+│   ├── js/motion.js            cursor, tilt, magnet, parallax, clipboard
 │   ├── js/labs/core.js         plotting and control runtime for the models
 │   ├── js/labs/<project>.js    one interactive model per case study
 │   ├── js/github.js            selected live public-repository feed
