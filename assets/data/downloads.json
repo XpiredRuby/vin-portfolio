@@ -1,0 +1,21 @@
+{
+  "md11": {
+    "title": "MD-11 CAD package",
+    "note": "Synthetic, non-OEM student geometry. SHA-256 values come from the retained source manifest so a download can be checked against the originals.",
+    "files": [
+      { "file": "md11-cad-package.zip", "label": "Full SolidWorks package", "format": "ZIP · SLDASM + SLDPRT + SLDDRW + x_t", "bytes": 2858621, "sha256": null,
+        "contains": ["Assem1.SLDASM", "MD11.SLDPRT", "MD11_Drawing.SLDDRW", "MD-11 Plane.x_t"] },
+      { "file": "md11-plane.x_t", "label": "Parasolid geometry", "format": "x_t · neutral solid", "bytes": 1301648,
+        "sha256": "36aef55bd847ff04fbdb491795a70d408ef3436eb14dc65ba9d839673a1613e8" },
+      { "file": "md11-drawing.pdf", "label": "Drawing sheet", "format": "PDF · no CAD seat required", "bytes": null, "sha256": null }
+    ]
+  },
+  "aeroframe": {
+    "title": "AeroFrame-DT geometry and report",
+    "note": "Synthetic pylon attachment fitting. Not OEM geometry and not a certified analysis.",
+    "files": [
+      { "file": "aeroframe-dt-geometry.step", "label": "AF-DT-1000 fitting", "format": "STEP · neutral solid", "bytes": null, "sha256": null },
+      { "file": "aeroframe-dt-report.pdf", "label": "Substantiation report", "format": "PDF · analysis write-up", "bytes": null, "sha256": null }
+    ]
+  }
+}

@@ -201,6 +201,17 @@
     updateRail();
   }
 
+  /* A [data-reveal] inside a closed <details> never intersects, so it would
+     still be at opacity 0 when the disclosure is finally opened. */
+  document.querySelectorAll('details').forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) { return; }
+      d.querySelectorAll('[data-reveal]:not(.is-in)').forEach(function (el) {
+        el.classList.add('is-in');
+      });
+    });
+  });
+
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = String(new Date().getFullYear());
   });
@@ -281,5 +292,7 @@
   loadScript('motion.js');
   loadScript('command-palette.js');
   if (isProjects) { loadScript('project-filter.js'); }
+  if (document.getElementById('skill-grid')) { loadScript('skills.js'); }
+  if (document.querySelector('[data-downloads]')) { loadScript('downloads.js'); }
   if (document.querySelector('[data-lab]')) { loadScript('labs/core.js'); }
 })();

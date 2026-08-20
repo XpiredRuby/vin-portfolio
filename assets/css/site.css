@@ -1194,8 +1194,48 @@ code, .code {
 }
 .gh__repo:last-child { border-bottom: 0; }
 .gh__repo:hover { background: var(--surface-2); }
-.gh__name { font-family: var(--f-mono); font-size: 0.9rem; color: var(--accent); font-weight: 500; }
-.gh__desc { font-size: 0.86rem; color: var(--txt-3); }
+.gh__name {
+  display: flex; align-items: center; gap: 0.45rem;
+  font-family: var(--f-mono); font-size: 0.9rem; color: var(--accent); font-weight: 500;
+}
+.gh__name svg { width: 0.95rem; height: 0.95rem; fill: var(--txt-3); flex: none; }
+.gh__vis {
+  font-family: var(--f-mono); font-size: 0.58rem;
+  letter-spacing: 0.11em; text-transform: uppercase;
+  padding: 0.12rem 0.42rem; border-radius: 20px;
+  border: 1px solid var(--line-2); color: var(--txt-3);
+  margin-left: 0.15rem;
+}
+.gh__desc { font-size: 0.86rem; color: var(--txt-2); line-height: 1.55; }
+
+/* Topic chips, the way GitHub renders them. */
+.gh__topics { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.15rem; }
+.gh__topic {
+  font-size: 0.68rem; line-height: 1;
+  padding: 0.28rem 0.5rem; border-radius: 20px;
+  background: var(--accent-a); color: var(--accent);
+  border: 1px solid var(--accent-line);
+}
+
+/* Language dot, star and fork counts, last-pushed date. */
+.gh__meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 1rem;
+  margin-top: 0.2rem;
+  font-size: 0.74rem; color: var(--txt-3);
+}
+.gh__meta span { display: inline-flex; align-items: center; gap: 0.3rem; }
+.gh__meta svg { width: 0.82rem; height: 0.82rem; fill: currentColor; }
+.gh__lang {
+  width: 10px; height: 10px; border-radius: 50%;
+  display: inline-block; flex: none;
+  border: 1px solid color-mix(in srgb, var(--txt) 16%, transparent);
+}
+.gh__empty { padding: 1.2rem 1rem; font-size: 0.88rem; color: var(--txt-3); }
+.gh__empty a { color: var(--accent); border-bottom: 1px solid var(--accent-line); }
+.gh__status {
+  font-family: var(--f-mono); font-size: 0.62rem;
+  letter-spacing: 0.11em; text-transform: uppercase; color: var(--txt-3);
+}
 .gh-skel {
   display: inline-block; min-width: 12rem; height: 0.8em;
   border-radius: 4px; background: var(--surface-3);
@@ -1757,3 +1797,168 @@ a.contact-card:focus-visible .contact-card__go { opacity: 1; transform: none; }
   .stagger-item { opacity: 1; transform: none; }
   .contact-card__go { opacity: 1; transform: none; }
 }
+
+/* ============================================================
+   25. SKILL GRID
+   The capability matrix used to be 43 rows of text. This is the
+   same information, entered through the tool you recognise.
+   ============================================================ */
+.skill-filters {
+  display: flex; flex-wrap: wrap; gap: 0.4rem;
+  margin-bottom: 1.2rem;
+}
+.skill-filters button {
+  padding: 0.42rem 0.85rem;
+  border: 1px solid var(--line-2); border-radius: 20px;
+  background: var(--surface-2); color: var(--txt-2);
+  font-size: 0.82rem; font-weight: 500; cursor: pointer;
+  transition: color 0.16s var(--ease), border-color 0.16s var(--ease), background-color 0.16s var(--ease);
+}
+.skill-filters button:hover { color: var(--txt); border-color: var(--line-3); }
+.skill-filters button[aria-pressed="true"] {
+  background: var(--accent); border-color: var(--accent);
+  color: var(--accent-ink); font-weight: 600;
+}
+
+.skill-grid {
+  display: grid; gap: 0.6rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 8.6rem), 1fr));
+}
+.skill-tile {
+  display: grid; gap: 0.55rem; place-items: center;
+  padding: 1rem 0.6rem 0.85rem;
+  border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--surface);
+  color: var(--txt-2);
+  cursor: pointer; text-align: center;
+  transition: transform 0.18s var(--ease), border-color 0.18s var(--ease),
+              background-color 0.18s var(--ease), color 0.18s var(--ease);
+}
+.skill-tile:hover { transform: translateY(-3px); border-color: var(--accent-line); color: var(--txt); }
+.skill-tile[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent-a);
+  color: var(--accent);
+}
+.skill-tile__icon { display: grid; place-items: center; height: 2.5rem; }
+.skill-tile__icon img { width: 2.2rem; height: 2.2rem; object-fit: contain; }
+.skill-tile__icon .icon { width: 2rem; height: 2rem; stroke-width: 1.5; }
+.skill-tile__name {
+  font-family: var(--f-mono); font-size: 0.72rem;
+  letter-spacing: 0.04em; line-height: 1.3;
+}
+:root:not([data-theme="light"]) .skill-tile__icon img { filter: saturate(0.9) brightness(1.1); }
+
+/* Detail panel */
+.skill-detail {
+  margin-top: 1rem;
+  min-height: 5.5rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--r) var(--r) 0;
+  background: var(--surface-2);
+  padding: 1rem 1.15rem;
+  display: flex; align-items: center;
+}
+.skill-detail__hint { color: var(--txt-3); font-size: 0.9rem; }
+.skill-detail__body { display: grid; gap: 0.45rem; }
+.skill-detail__eyebrow {
+  font-family: var(--f-mono); font-size: 0.68rem;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent);
+}
+.skill-detail__what { color: var(--txt); font-size: 1rem; max-width: 62ch; }
+.skill-detail__where {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem;
+  margin-top: 0.15rem;
+}
+.skill-detail__where span {
+  font-family: var(--f-mono); font-size: 0.63rem;
+  letter-spacing: 0.13em; text-transform: uppercase; color: var(--txt-3);
+  margin-right: 0.2rem;
+}
+.skill-detail__where a {
+  font-size: 0.82rem;
+  padding: 0.28rem 0.6rem; border-radius: 20px;
+  border: 1px solid var(--accent-line);
+  background: var(--accent-a); color: var(--accent);
+  transition: background-color 0.16s var(--ease), border-color 0.16s var(--ease);
+}
+.skill-detail__where a:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 18%, transparent); }
+
+/* The exhaustive matrix stays available, folded. */
+.matrix-fold { margin-top: 0; }
+.matrix-fold > summary {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--line-2); border-radius: var(--r);
+  background: var(--surface);
+  cursor: pointer;
+  font-family: var(--f-mono); font-size: 0.72rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--txt-2);
+  list-style: none;
+}
+.matrix-fold > summary::-webkit-details-marker { display: none; }
+.matrix-fold > summary::before {
+  content: "+"; font-size: 1rem; line-height: 1; color: var(--accent);
+}
+.matrix-fold[open] > summary::before { content: "\2212"; }
+.matrix-fold > summary:hover { border-color: var(--accent-line); color: var(--txt); }
+.matrix-fold > summary span { color: var(--txt-3); }
+.matrix-fold[open] > summary { margin-bottom: 0.8rem; }
+
+@media (max-width: 520px) {
+  .skill-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 7rem), 1fr)); }
+}
+
+/* ---------- 26. DOWNLOAD PACKAGES ---------- */
+.dl-head {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 0.5rem 1rem; margin-bottom: 0.75rem;
+}
+.dl-head strong { font-family: var(--f-head); font-size: 1rem; font-weight: 600; }
+.dl-head span {
+  font-family: var(--f-mono); font-size: 0.63rem;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--txt-3);
+}
+.dl-grid {
+  display: grid; gap: 0.65rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+}
+.dl-card {
+  display: flex; gap: 0.75rem; align-items: flex-start;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--surface);
+  transition: border-color 0.18s var(--ease), transform 0.18s var(--ease), background-color 0.18s var(--ease);
+}
+a.dl-card:hover { border-color: var(--accent); background: var(--accent-a); transform: translateY(-2px); }
+.dl-card__icon {
+  display: grid; place-items: center; flex: none;
+  width: 2.2rem; height: 2.2rem;
+  border-radius: 8px;
+  border: 1px solid var(--accent-line);
+  background: var(--accent-a);
+  color: var(--accent);
+}
+.dl-card__icon .icon { width: 1.1rem; height: 1.1rem; }
+.dl-card__body { display: grid; gap: 0.22rem; min-width: 0; }
+.dl-card__body strong { font-size: 0.92rem; }
+.dl-card__meta {
+  font-family: var(--f-mono); font-size: 0.66rem;
+  letter-spacing: 0.06em; color: var(--txt-3);
+}
+.dl-card__contains { font-size: 0.72rem; color: var(--txt-3); line-height: 1.5; word-break: break-word; }
+.dl-card__hash {
+  font-size: 0.62rem; padding: 0.08em 0.35em;
+  background: var(--surface-in); border-color: var(--line);
+  color: var(--txt-3); justify-self: start;
+}
+.dl-card__ask { font-size: 0.76rem; color: var(--txt-3); }
+.dl-card__ask a { color: var(--accent); border-bottom: 1px solid var(--accent-line); }
+
+.dl-card--pending { border-style: dashed; background: var(--surface-2); }
+.dl-card--pending .dl-card__icon {
+  border-color: var(--line-2); background: var(--surface-3); color: var(--txt-3);
+}
+.dl-note { margin-top: 0.8rem; font-size: 0.8rem; color: var(--txt-3); line-height: 1.55; max-width: 70ch; }
+.dl-note a { color: var(--accent); border-bottom: 1px solid var(--accent-line); }

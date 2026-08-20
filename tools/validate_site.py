@@ -257,6 +257,13 @@ def main() -> int:
         for page in pages
         if page.relative_to(ROOT) not in NON_PUBLIC_HTML
     )
+    # A GitHub repository slug is an upstream fact, not portfolio copy: the
+    # repo really is named AstraSim-FSW even though the case study is called
+    # ASTRA-OS. Exclude repository names from the display-name rules below so
+    # the feed can show what GitHub actually returns.
+    display_name_text = re.sub(
+        r'<span class="gh__name">.*?</span>', "", public_text, flags=re.DOTALL
+    )
     banned_sitewide = {
         "linkedin.com/in/Vin2005": "obsolete LinkedIn profile",
         "Fall 2026": "stale availability window",
@@ -273,7 +280,7 @@ def main() -> int:
         "GHOST case study": "obsolete project display name",
     }
     for needle, reason in banned_sitewide.items():
-        if needle.lower() in public_text.lower():
+        if needle.lower() in display_name_text.lower():
             errors.append(f"sitewide: {reason}: {needle!r}")
 
     # Keep private recruiting details off every public HTML surface.
