@@ -208,8 +208,28 @@ def check_og_image(path: Path) -> list[str]:
     return []
 
 
+def check_asset_version() -> list[str]:
+    """A stale ?v= means returning visitors keep old CSS and JS.
+
+    This is not hypothetical: the stylesheet changed five times in one session
+    while the query string stayed fixed, so the cursor, the skill grid and the
+    tool strip all shipped invisible to anyone who had visited before.
+    """
+    import subprocess
+
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "tools" / "bump_assets.py"), "--check"],
+        capture_output=True, text=True,
+    )
+    if result.returncode == 0:
+        return []
+    detail = (result.stdout or result.stderr).strip().splitlines()
+    return ["asset version is stale: " + (detail[0] if detail else "run tools/bump_assets.py")]
+
+
 def main() -> int:
     errors: list[str] = []
+    errors.extend(check_asset_version())
     for required in REQUIRED_ROOT_FILES:
         if not required.exists():
             errors.append(f"missing required portfolio asset: {required.relative_to(ROOT)}")
