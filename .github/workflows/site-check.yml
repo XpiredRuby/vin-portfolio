@@ -25,6 +25,9 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Validate asset cache-busting version
+        run: python tools/bump_assets.py --check
+
       - name: Validate static site
         run: python tools/validate_site.py
 
