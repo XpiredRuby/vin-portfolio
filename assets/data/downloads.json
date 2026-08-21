@@ -1,21 +1,48 @@
 {
   "md11": {
     "title": "MD-11 CAD package",
-    "note": "Synthetic, non-OEM student geometry. SHA-256 values come from the retained source manifest so a download can be checked against the originals.",
+    "note": "Synthetic, non-OEM student geometry from November 2024. Every SHA-256 below matches the retained source manifest, so a download can be checked against the original artifacts.",
     "files": [
-      { "file": "md11-cad-package.zip", "label": "Full SolidWorks package", "format": "ZIP · SLDASM + SLDPRT + SLDDRW + x_t", "bytes": 2858621, "sha256": null,
-        "contains": ["Assem1.SLDASM", "MD11.SLDPRT", "MD11_Drawing.SLDDRW", "MD-11 Plane.x_t"] },
-      { "file": "md11-plane.x_t", "label": "Parasolid geometry", "format": "x_t · neutral solid", "bytes": 1301648,
-        "sha256": "36aef55bd847ff04fbdb491795a70d408ef3436eb14dc65ba9d839673a1613e8" },
-      { "file": "md11-drawing.pdf", "label": "Drawing sheet", "format": "PDF · no CAD seat required", "bytes": null, "sha256": null }
+      {
+        "file": "md11-cad-package.zip",
+        "label": "Full SolidWorks package",
+        "format": "ZIP · SLDASM + SLDPRT + SLDDRW + x_t",
+        "bytes": 2092164,
+        "sha256": "cbf46b2a70eac0f41e74118ddf3150e6baf36a72210fd2e297befee342f3ce99",
+        "contains": [
+          "Assem1.SLDASM",
+          "MD11.SLDPRT",
+          "MD11_Drawing.SLDDRW",
+          "MD-11 Plane.x_t"
+        ]
+      },
+      {
+        "file": "md11-plane.x_t",
+        "label": "Parasolid geometry",
+        "format": "x_t · opens without a SolidWorks seat",
+        "bytes": 1301648,
+        "sha256": "36aef55bd847ff04fbdb491795a70d408ef3436eb14dc65ba9d839673a1613e8"
+      }
     ]
   },
   "aeroframe": {
-    "title": "AeroFrame-DT geometry and report",
-    "note": "Synthetic pylon attachment fitting. Not OEM geometry and not a certified analysis.",
+    "title": "AeroFrame-DT geometry and drawing",
+    "note": "Synthetic pylon attachment hardware. Not OEM geometry and not a certified analysis — the margins on this page are engineering evidence, not a substantiation report.",
     "files": [
-      { "file": "aeroframe-dt-geometry.step", "label": "AF-DT-1000 fitting", "format": "STEP · neutral solid", "bytes": null, "sha256": null },
-      { "file": "aeroframe-dt-report.pdf", "label": "Substantiation report", "format": "PDF · analysis write-up", "bytes": null, "sha256": null }
+      {
+        "file": "aeroframe-dt-pylon-attachment.x_t",
+        "label": "AF-DT-2000 attachment assembly",
+        "format": "x_t · neutral solid geometry",
+        "bytes": 110932,
+        "sha256": "ba2bac2d4d57ed3d380fe545b8fb5d1a99841f4624b418232e4115f823976a03"
+      },
+      {
+        "file": "aeroframe-dt-fitting-drawing.pdf",
+        "label": "AF-DT-1000 fitting drawing",
+        "format": "PDF · B-size sheet, 432 × 279 mm",
+        "bytes": 191356,
+        "sha256": "2710373e34547acb7829b339a66de8ec679309e3a352df92d6ca595f109bdf33"
+      }
     ]
   }
 }
