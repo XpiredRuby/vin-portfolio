@@ -290,6 +290,7 @@
   }
 
   loadScript('motion.js');
+  loadScript('cursor.js');
   loadScript('command-palette.js');
   if (isProjects) { loadScript('project-filter.js'); }
   if (document.getElementById('skill-grid')) { loadScript('skills.js'); }
