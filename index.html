@@ -27,9 +27,9 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="assets/headshot.png" type="image/png">
+<link rel="preload" as="image" href="assets/headshot-640.webp" type="image/webp" imagesrcset="assets/headshot-400.webp 400w, assets/headshot-640.webp 640w, assets/headshot-900.webp 900w" imagesizes="(max-width: 960px) 92vw, 430px">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=8ab381b14037">
+<link rel="stylesheet" href="assets/css/site.css?v=b837052645d6">
 
 <script type="application/ld+json">
 {
@@ -112,7 +112,7 @@
 
     <div class="profile-stage" data-reveal data-delay="2">
       <div class="profile-stage__image">
-        <img data-parallax="0.045" src="assets/headshot.png" width="1254" height="1254" alt="Vinayak Manoj Nair" fetchpriority="high" decoding="async">
+        <picture><source type="image/webp" srcset="assets/headshot-400.webp 400w, assets/headshot-640.webp 640w, assets/headshot-900.webp 900w" sizes="(max-width: 960px) 92vw, 430px"><img data-parallax="0.045" src="assets/headshot.png" width="900" height="900" alt="Vinayak Manoj Nair" fetchpriority="high" decoding="async"></picture>
       </div>
       <div class="profile-stage__disciplines" aria-label="Engineering disciplines">
         <span class="profile-stage__discipline profile-stage__discipline--mechanical">Mechanical<br><b>CAD &amp; FEA</b></span>
@@ -238,7 +238,7 @@
     <article class="case" data-reveal>
       <div class="case__visual case__visual--cover">
         <span class="case__id">PRJ-01</span>
-        <img src="assets/img/project-covers/ghost-visual.webp" width="1440" height="807" loading="lazy" alt="Concept visualization of a quadrotor visual-inertial localization test bench.">
+        <img src="assets/img/project-covers/ghost-visual.webp" width="1100" height="619" loading="lazy" alt="Concept visualization of a quadrotor visual-inertial localization test bench.">
         <span class="case__visual-note">Concept visualization</span>
       </div>
       <div class="case__body">
@@ -261,7 +261,7 @@
     <article class="case" data-reveal>
       <div class="case__visual case__visual--cover">
         <span class="case__id">PRJ-06</span>
-        <img src="assets/img/project-covers/spirit-visual.webp" width="1440" height="807" loading="lazy" alt="Concept visualization of integrated spaceflight payload hardware on a clean-room test bench.">
+        <img src="assets/img/project-covers/spirit-visual.webp" width="1100" height="619" loading="lazy" alt="Concept visualization of integrated spaceflight payload hardware on a clean-room test bench.">
         <span class="case__visual-note">Concept visualization</span>
       </div>
       <div class="case__body">
@@ -284,7 +284,7 @@
     <article class="case" data-reveal>
       <div class="case__visual case__visual--cover">
         <span class="case__id">PRJ-02</span>
-        <img src="assets/img/project-covers/astrasim-visual.webp" width="1440" height="807" loading="lazy" alt="Concept visualization of a spacecraft flight-software hardware-in-the-loop avionics bench.">
+        <img src="assets/img/project-covers/astrasim-visual.webp" width="1100" height="619" loading="lazy" alt="Concept visualization of a spacecraft flight-software hardware-in-the-loop avionics bench.">
         <span class="case__visual-note">Concept visualization</span>
       </div>
       <div class="case__body">
@@ -453,7 +453,7 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=8ab381b14037" defer></script>
+<script src="assets/js/site.js?v=b837052645d6" defer></script>
 <script src="assets/js/github.js" defer></script>
 </body>
 </html>
