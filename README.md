@@ -70,6 +70,22 @@ Contact routes are icons rather than repeated text — email, LinkedIn, GitHub,
 and a copy-to-clipboard control. Each keeps a real label in the DOM for screen
 readers and surfaces it on hover, so nothing is guessable-only.
 
+## The cursor
+
+On a fine pointer with motion allowed, the cursor is three marks rather than
+one: a dot pinned exactly to the pointer, a reticle that lags behind and
+morphs to lock onto whatever it is over, and a dashed ghost showing where a
+constant-velocity filter predicts the pointer will be one lead-time from now.
+
+Move slowly and the ghost sits on the dot. Move fast and it runs ahead. Stop
+and it converges. That convergence is the same behaviour the GHOST-X estimator
+performs on a target, which is why the GHOST-X case study points at it.
+
+`assets/js/cursor.js` never mounts on touch or under `prefers-reduced-motion`,
+hands the native caret back over inputs and editable content, and switches the
+dot to the surface ink colour on accent-filled controls where an accent dot
+would otherwise disappear.
+
 ## Interactive models
 
 Every case study carries a model a reviewer can drive in the browser. They are
@@ -117,7 +133,8 @@ vin-portfolio/
 │   ├── css/evidence-first.css  evidence components (defines no colours)
 │   ├── css/labs.css            interactive-model chrome
 │   ├── js/site.js              theme, reveal, lightbox, reading progress
-│   ├── js/motion.js            cursor, tilt, magnet, parallax, clipboard
+│   ├── js/motion.js            spotlight, tilt, magnet, parallax, clipboard
+│   ├── js/cursor.js            reticle and constant-velocity pointer prediction
 │   ├── js/labs/core.js         plotting and control runtime for the models
 │   ├── js/labs/<project>.js    one interactive model per case study
 │   ├── js/github.js            selected live public-repository feed
