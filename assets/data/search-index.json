@@ -4,99 +4,188 @@
     "subtitle": "Engineering identity, working principles, and current focus",
     "href": "about.html",
     "kind": "Page",
-    "tags": ["about", "bio", "profile", "engineering"]
+    "tags": [
+      "about",
+      "bio",
+      "profile",
+      "engineering"
+    ]
   },
   {
     "title": "Projects",
     "subtitle": "Evidence-backed aerospace engineering case studies",
     "href": "projects.html",
     "kind": "Page",
-    "tags": ["projects", "portfolio", "case studies", "evidence"]
+    "tags": [
+      "projects",
+      "portfolio",
+      "case studies",
+      "evidence"
+    ]
   },
   {
     "title": "Experience",
     "subtitle": "Spacecraft systems, controls, and research experience",
     "href": "experience.html",
     "kind": "Page",
-    "tags": ["experience", "work", "systems", "controls"]
+    "tags": [
+      "experience",
+      "work",
+      "systems",
+      "controls"
+    ]
   },
   {
     "title": "Technical skills",
     "subtitle": "Mechanical, controls, software, structures, and systems capabilities",
     "href": "skills.html",
     "kind": "Page",
-    "tags": ["skills", "cpp", "python", "ros2", "fea", "controls"]
+    "tags": [
+      "skills",
+      "cpp",
+      "python",
+      "ros2",
+      "fea",
+      "controls"
+    ]
   },
   {
     "title": "Contact",
     "subtitle": "Email, LinkedIn, and GitHub",
     "href": "contact.html",
     "kind": "Page",
-    "tags": ["contact", "email", "linkedin", "github"]
+    "tags": [
+      "contact",
+      "email",
+      "linkedin",
+      "github"
+    ]
   },
   {
     "title": "ORBITALIS-RPO",
-    "subtitle": "Spacecraft rendezvous · relative navigation · 6-DOF · autonomy · interactive verification",
+    "subtitle": "Spacecraft rendezvous \u00b7 relative navigation \u00b7 6-DOF \u00b7 autonomy \u00b7 interactive verification",
     "href": "projects/orbitalis-rpo.html",
     "kind": "Project",
     "key": "orbitalis",
-    "tags": ["gnc", "spacecraft", "rpo", "relative navigation", "6-dof", "autonomy", "c++20", "monte carlo"]
+    "tags": [
+      "gnc",
+      "spacecraft",
+      "rpo",
+      "relative navigation",
+      "6-dof",
+      "autonomy",
+      "c++20",
+      "monte carlo"
+    ]
   },
   {
     "title": "GHOST-X",
-    "subtitle": "Occlusion-tolerant target estimation · ROS 2 · Raspberry Pi · IMM",
+    "subtitle": "Occlusion-tolerant target estimation \u00b7 ROS 2 \u00b7 Raspberry Pi \u00b7 IMM",
     "href": "projects/ghost.html",
     "kind": "Project",
     "key": "ghost",
-    "tags": ["gnc", "state estimation", "imm", "kalman", "ros2", "raspberry pi", "tracking"]
+    "tags": [
+      "gnc",
+      "state estimation",
+      "imm",
+      "kalman",
+      "ros2",
+      "raspberry pi",
+      "tracking"
+    ]
   },
   {
     "title": "ASTRA-OS",
-    "subtitle": "Spacecraft-style flight software assurance · C++17 · FDIR · verification",
+    "subtitle": "Spacecraft-style flight software assurance \u00b7 C++17 \u00b7 FDIR \u00b7 verification",
     "href": "projects/astrasim-fsw.html",
     "kind": "Project",
     "key": "astra",
-    "tags": ["flight software", "cpp", "fdir", "verification", "telemetry", "spacecraft"]
+    "tags": [
+      "flight software",
+      "cpp",
+      "fdir",
+      "verification",
+      "telemetry",
+      "spacecraft"
+    ]
   },
   {
     "title": "AeroFrame-DT",
-    "subtitle": "Structural substantiation · pylon attachment trade · nonlinear FEA · fatigue / damage tolerance",
+    "subtitle": "Structural substantiation \u00b7 pylon attachment trade \u00b7 nonlinear FEA \u00b7 fatigue / damage tolerance",
     "href": "projects/aeroframe-dt.html",
     "kind": "Project",
     "key": "aeroframe",
-    "tags": ["structures", "stress", "fea", "fatigue", "damage tolerance", "allowables", "pylon", "cad"]
+    "tags": [
+      "structures",
+      "stress",
+      "fea",
+      "fatigue",
+      "damage tolerance",
+      "allowables",
+      "pylon",
+      "cad"
+    ]
   },
   {
     "title": "TAMU-SPIRIT",
-    "subtitle": "ISS payload systems engineering · requirements · reviews · thermal trades",
+    "subtitle": "ISS payload systems engineering \u00b7 requirements \u00b7 reviews \u00b7 thermal trades",
     "href": "projects/spirit-iss.html",
     "kind": "Project",
     "key": "spirit",
-    "tags": ["systems", "spacecraft", "iss", "requirements", "thermal", "reviews"]
+    "tags": [
+      "systems",
+      "spacecraft",
+      "iss",
+      "requirements",
+      "thermal",
+      "reviews"
+    ]
   },
   {
     "title": "Fixed-Wing Flight Controls SIL",
-    "subtitle": "Representative fixed-wing controls SIL · response plots · seeded 50-run uncertainty",
+    "subtitle": "Representative fixed-wing controls SIL \u00b7 response plots \u00b7 seeded 50-run uncertainty",
     "href": "projects/f16-flight-controls.html",
     "kind": "Project",
     "key": "f16",
-    "tags": ["controls", "flight dynamics", "sil", "monte carlo", "matlab", "simulink", "evidence"]
+    "tags": [
+      "controls",
+      "flight dynamics",
+      "sil",
+      "monte carlo",
+      "matlab",
+      "simulink",
+      "evidence"
+    ]
   },
   {
     "title": "MD-11 Aircraft CAD Assembly",
-    "subtitle": "Earliest portfolio project · 24-part SolidWorks aircraft assembly · drawings · BOM",
+    "subtitle": "Earliest portfolio project \u00b7 24-part SolidWorks aircraft assembly \u00b7 drawings \u00b7 BOM",
     "href": "projects/md11-aircraft-cad.html",
     "kind": "Project",
     "key": "md11cad",
-    "tags": ["solidworks", "cad", "mechanical design", "assembly", "drawing", "bom", "md-11"]
+    "tags": [
+      "solidworks",
+      "cad",
+      "mechanical design",
+      "assembly",
+      "drawing",
+      "bom",
+      "md-11"
+    ]
   },
   {
     "title": "Interception Robot",
-    "subtitle": "Embedded perception-to-actuation prototype · target tracking · closed-loop control",
+    "subtitle": "Embedded perception-to-actuation prototype \u00b7 target tracking \u00b7 closed-loop control",
     "href": "projects/interceptor.html",
     "kind": "Project",
     "key": "interceptor",
-    "tags": ["autonomy", "embedded", "perception", "controls", "robotics"]
+    "tags": [
+      "autonomy",
+      "embedded",
+      "perception",
+      "controls",
+      "robotics"
+    ]
   },
   {
     "title": "Rocket Landing GNC",
@@ -104,7 +193,13 @@
     "href": "projects/rocket-landing-gnc.html",
     "kind": "Project",
     "key": "rocket",
-    "tags": ["gnc", "prototype", "controls", "rocket", "tvc"]
+    "tags": [
+      "gnc",
+      "prototype",
+      "controls",
+      "rocket",
+      "tvc"
+    ]
   },
   {
     "title": "Project CHASER",
@@ -113,7 +208,14 @@
     "kind": "Repository",
     "key": "chaser",
     "external": true,
-    "tags": ["relative navigation", "ukf", "fdir", "replay", "spacecraft", "pre-hardware"]
+    "tags": [
+      "relative navigation",
+      "ukf",
+      "fdir",
+      "replay",
+      "spacecraft",
+      "pre-hardware"
+    ]
   },
   {
     "title": "GHOST-X source",
@@ -121,7 +223,11 @@
     "href": "https://github.com/XpiredRuby/ghost-vins-eskf",
     "kind": "Repository",
     "external": true,
-    "tags": ["github", "ghost", "source"]
+    "tags": [
+      "github",
+      "ghost",
+      "source"
+    ]
   },
   {
     "title": "ASTRA-OS source",
@@ -129,7 +235,11 @@
     "href": "https://github.com/XpiredRuby/AstraSim-FSW",
     "kind": "Repository",
     "external": true,
-    "tags": ["github", "astra", "source"]
+    "tags": [
+      "github",
+      "astra",
+      "source"
+    ]
   },
   {
     "title": "AeroFrame-DT source",
@@ -137,7 +247,11 @@
     "href": "https://github.com/XpiredRuby/aeroframe-dt",
     "kind": "Repository",
     "external": true,
-    "tags": ["github", "aeroframe", "source"]
+    "tags": [
+      "github",
+      "aeroframe",
+      "source"
+    ]
   },
   {
     "title": "ORBITALIS-RPO source",
@@ -145,6 +259,161 @@
     "href": "https://github.com/XpiredRuby/orbitalis-rpo",
     "kind": "Repository",
     "external": true,
-    "tags": ["github", "orbitalis", "rpo", "source", "verification"]
+    "tags": [
+      "github",
+      "orbitalis",
+      "rpo",
+      "source",
+      "verification"
+    ]
+  },
+  {
+    "title": "Run the estimator",
+    "subtitle": "GHOST-X: track a target through a measurement gap",
+    "href": "projects/ghost.html#interactive",
+    "kind": "Model",
+    "tags": [
+      "ghost",
+      "estimation",
+      "kalman",
+      "imm",
+      "occlusion",
+      "dropout",
+      "covariance",
+      "interactive",
+      "demo",
+      "simulation"
+    ]
+  },
+  {
+    "title": "Break a packet",
+    "subtitle": "ASTRA-OS: CRC-16 framing, acceptance chain and FDIR escalation",
+    "href": "projects/astrasim-fsw.html#interactive",
+    "kind": "Model",
+    "tags": [
+      "astra",
+      "flight software",
+      "crc",
+      "packet",
+      "telemetry",
+      "fdir",
+      "fault injection",
+      "interactive",
+      "demo"
+    ]
+  },
+  {
+    "title": "Sweep the e/D trade",
+    "subtitle": "AeroFrame-DT: lug margins and the failure-mode crossover",
+    "href": "projects/aeroframe-dt.html#interactive",
+    "kind": "Model",
+    "tags": [
+      "aeroframe",
+      "lug",
+      "margin of safety",
+      "bearing",
+      "net section",
+      "structures",
+      "fea",
+      "interactive",
+      "demo"
+    ]
+  },
+  {
+    "title": "Fly the altitude capture",
+    "subtitle": "Fixed-wing SIL: gains, gusts and a dispersion campaign",
+    "href": "projects/f16-flight-controls.html#interactive",
+    "kind": "Model",
+    "tags": [
+      "f16",
+      "flight controls",
+      "autopilot",
+      "monte carlo",
+      "elevator",
+      "sil",
+      "interactive",
+      "demo"
+    ]
+  },
+  {
+    "title": "Drive the autonomy guards",
+    "subtitle": "ORBITALIS-RPO: rendezvous mode transitions and safety guards",
+    "href": "projects/orbitalis-rpo.html#interactive",
+    "kind": "Model",
+    "tags": [
+      "orbitalis",
+      "rendezvous",
+      "rpo",
+      "proximity operations",
+      "state machine",
+      "abort",
+      "interactive",
+      "demo"
+    ]
+  },
+  {
+    "title": "Fly the powered descent",
+    "subtitle": "Rocket landing GNC: point-mass descent, throttle and gimbal",
+    "href": "projects/rocket-landing-gnc.html#interactive",
+    "kind": "Model",
+    "tags": [
+      "rocket",
+      "landing",
+      "descent",
+      "gnc",
+      "throttle",
+      "gimbal",
+      "interactive",
+      "demo"
+    ]
+  },
+  {
+    "title": "Build the latency budget",
+    "subtitle": "Interception robot: perception-to-actuation timing and tracking lag",
+    "href": "projects/interceptor.html#interactive",
+    "kind": "Model",
+    "tags": [
+      "interceptor",
+      "latency",
+      "perception",
+      "tracking",
+      "robotics",
+      "embedded",
+      "interactive",
+      "demo"
+    ]
+  },
+  {
+    "title": "Trade the thermal pair",
+    "subtitle": "TAMU-SPIRIT: LEO cycling stress and review-gate traceability",
+    "href": "projects/spirit-iss.html#interactive",
+    "kind": "Model",
+    "tags": [
+      "spirit",
+      "iss",
+      "thermal",
+      "cte",
+      "materials",
+      "requirements",
+      "review gate",
+      "interactive",
+      "demo"
+    ]
+  },
+  {
+    "title": "Drive the assembly",
+    "subtitle": "MD-11: parametric three-view, part suppression and explode",
+    "href": "projects/md11-aircraft-cad.html#interactive",
+    "kind": "Model",
+    "tags": [
+      "md11",
+      "cad",
+      "solidworks",
+      "assembly",
+      "three view",
+      "parametric",
+      "interactive",
+      "demo"
+    ]
   }
 ]

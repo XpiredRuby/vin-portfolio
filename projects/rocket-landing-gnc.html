@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-discipline="controls">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rocket Landing GNC: Point-Mass Prototype | Vinayak Manoj Nair</title>
 <meta name="description" content="Exploratory rocket-landing GNC prototype: a point-mass descent model, single-run controller demonstration, current evidence boundary, and the verification work still required.">
 <meta name="author" content="Vinayak Manoj Nair">
-<meta name="theme-color" content="#E4E1D8">
+<meta name="theme-color" content="#0B1017" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#E4E1D8" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://vinnair.me/projects/rocket-landing-gnc.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Vinayak Manoj Nair">
@@ -16,11 +17,12 @@
 <meta property="og:image" content="https://vinnair.me/assets/og-image-light.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://vinnair.me/assets/og-image-light.png">
+<script>(function(){try{var t=localStorage.getItem("vn-theme");if(!t){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/site.css?v=20260817d">
+<link rel="stylesheet" href="../assets/css/site.css?v=20260819r1">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"TechArticle","headline":"Rocket Landing GNC: Point-Mass Prototype","description":"Exploratory point-mass descent simulation and controller concept with current evidence limits stated explicitly.","author":{"@type":"Person","name":"Vinayak Manoj Nair","url":"https://vinnair.me/"},"about":["Guidance navigation and control","Point-mass simulation","Flight dynamics","Prototype verification"],"url":"https://vinnair.me/projects/rocket-landing-gnc.html"}
 </script>
@@ -57,8 +59,8 @@
       descent scenario; it does not yet substantiate a 6-DOF, Monte Carlo, or landing-accuracy claim.
     </p>
     <div class="btn-row" style="margin-top:1.75rem">
-      <a class="btn btn--primary" href="#evidence">Review evidence status</a>
-      <a class="btn btn--ghost" href="../projects.html">All projects</a>
+      <a class="btn btn--primary" href="#evidence">Where the evidence stops</a>
+      <a class="btn btn--ghost" href="../projects.html">Every project</a>
     </div>
   </div>
 </section>
@@ -72,7 +74,7 @@
 <div class="doc">
 
   <nav class="toc" aria-label="Case study contents">
-    <p class="toc__t">Contents</p>
+    <p class="toc__t">Contents</p><a class="toc__lab" href="#interactive"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z"/></svg> Interactive model</a>
     <a href="#evidence">00 Evidence status</a>
     <a href="#problem">01 Problem</a>
     <a href="#design">02 Prototype design</a>
@@ -100,6 +102,7 @@
         <p class="evidence-source"><b>Evidence source:</b> source inspection of the private FalconV5 prototype. No public repository, downloadable report, or result-plot set is currently available.</p>
       </div>
     </section>
+<section class="doc__section doc__section--lab" id="interactive" data-reveal><h2><span class="num"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z"/></svg></span>Fly the point-mass descent</h2><p>This is the prototype's actual fidelity: one point mass, one guidance loop, one run. Change the ignition state and the gains, and see whether the loop closes before the propellant does.</p><div class="lab" data-lab="rocket"><p class="lab__fallback">This model needs JavaScript. Everything it demonstrates is described in the sections below.</p></div></section>
 
     <section class="doc__section" id="problem" data-reveal>
       <h2><span class="num">01</span>Problem</h2>
@@ -241,14 +244,14 @@ Q = ∫ q̇ dt                     <span class="c">integrated heat load along th
 
     <section class="doc__section" id="implementation" data-reveal>
       <h2><span class="num">04</span>Implementation</h2>
-      <table class="spec">
+      <div class="table-wrap"><table class="spec">
         <tr><th>Language</th><td>Python 3 with NumPy and SciPy</td></tr>
         <tr><th>Plant</th><td>Exploratory point-mass descent model</td></tr>
         <tr><th>Controller</th><td>Basic closed-loop demonstration for one nominal scenario</td></tr>
         <tr><th>Execution</th><td>Single-run prototype; no published batch runner</td></tr>
         <tr><th>Source</th><td>Private FalconV5 repository; no public release</td></tr>
         <tr><th>Outputs</th><td>No curated, reproducible plot or data package published yet</td></tr>
-      </table>
+      </table></div>
     </section>
 
     <section class="doc__section" id="testing" data-reveal>
@@ -362,8 +365,8 @@ Q = ∫ q̇ dt                     <span class="c">integrated heat load along th
         <p class="evidence-source">Public evidence will be added only with a reproducible data package and clearly identified source revision.</p>
       </div>
       <div class="btn-row">
-        <a class="btn btn--primary" href="../projects.html">All projects</a>
-        <a class="btn btn--ghost" href="md11-structures.html">Next: AeroFrame-DT &rarr;</a>
+        <a class="btn btn--primary" href="../projects.html">Every project</a>
+        <a class="btn btn--ghost" href="aeroframe-dt.html">Next: AeroFrame-DT &rarr;</a>
       </div>
     </section>
 
@@ -373,8 +376,8 @@ Q = ∫ q̇ dt                     <span class="c">integrated heat load along th
 
 </main>
 
-<footer class="footer"><div class="shell"><div class="footer__bar"><span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span><span>vinnair.me</span></div></div></footer>
+<footer class="footer"><div class="shell"><div class="footer__bar"><span>&copy; <span data-year>2026</span> Vinayak Manoj Nair</span><div class="icon-row icon-row--compact"><a class="icon-tile" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="icon icon--solid" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg><span class="icon-tile__label" aria-hidden="true">GitHub</span></a><a class="icon-tile" href="https://www.linkedin.com/in/vinayakmnair/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3.2 9h3.6v12H3.2zM9.3 9h3.45v1.64h.05c.48-.9 1.75-1.85 3.6-1.85 3.85 0 4.6 2.4 4.6 5.53V21h-3.6v-5.3c0-1.27-.02-2.9-1.8-2.9-1.8 0-2.08 1.37-2.08 2.8V21H9.3z"/></svg><span class="icon-tile__label" aria-hidden="true">LinkedIn</span></a><a class="icon-tile" href="mailto:Vin.manoj.nair@gmail.com" aria-label="Email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.6 7 8.4 5.8L20.4 7"/></svg><span class="icon-tile__label" aria-hidden="true">Email</span></a></div><span>vinnair.me</span></div></div></footer>
 
-<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/site.js?v=20260819r1" defer></script>
 </body>
 </html>

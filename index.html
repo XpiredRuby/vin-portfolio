@@ -6,7 +6,8 @@
 <title>Vinayak Manoj Nair | Mechanical, Controls &amp; Systems Engineering</title>
 <meta name="description" content="Aerospace engineering portfolio spanning mechanical design and FEA, controls, flight software, and systems engineering, with documented calculations, analysis, tests, and results.">
 <meta name="author" content="Vinayak Manoj Nair">
-<meta name="theme-color" content="#E4E1D8">
+<meta name="theme-color" content="#0B1017" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#E4E1D8" media="(prefers-color-scheme: light)">
 <link rel="canonical" href="https://vinnair.me/">
 
 <meta property="og:type" content="profile">
@@ -22,12 +23,13 @@
 <meta name="twitter:description" content="Mechanical Design &amp; FEA · Controls · Systems Engineering · Flight Software. Texas A&amp;M Aerospace Engineering, May 2027.">
 <meta name="twitter:image" content="https://vinnair.me/assets/og-image-light.png">
 
+<script>(function(){try{var t=localStorage.getItem("vn-theme");if(!t){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/headshot.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=20260817d">
+<link rel="stylesheet" href="assets/css/site.css?v=20260819r1">
 
 <script type="application/ld+json">
 {
@@ -64,13 +66,7 @@
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
       <span></span><span></span><span></span>
     </button>
-    <nav class="nav" id="primary-nav" aria-label="Primary">
-      <a href="projects.html">Projects</a>
-      <a href="experience.html">Experience</a>
-      <a href="skills.html">Skills</a>
-      <a href="#github">GitHub</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <nav class="nav" id="primary-nav" aria-label="Primary"><a href="about.html">About</a><a href="projects.html">Projects</a><a href="experience.html">Experience</a><a href="skills.html">Skills</a><a href="contact.html">Contact</a></nav>
   </div>
 </header>
 
@@ -98,24 +94,25 @@
       </div>
       <h1>Engineering from <em>structure to software.</em></h1>
       <p class="portfolio-hero__lede">
-        I work across structural mechanics, controls, embedded software, and systems engineering,
-        with clear calculations, models, test results, and design decisions for each project.
+        I design and analyse hardware, write the software that flies it, and hold the requirements that keep
+        both honest. Every project here carries the calculations, models, test results and decisions behind it.
       </p>
       <div class="btn-row portfolio-hero__actions">
-        <a class="btn btn--primary" href="projects.html">Explore engineering work</a>
-        <a class="btn" href="skills.html">View technical capabilities</a>
-        <a class="link-arrow" href="contact.html">Start a conversation</a>
+        <a class="btn btn--primary" data-magnetic href="projects.html">Show me the work</a>
+        <a class="btn btn--cyan" data-magnetic href="#models"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z"/></svg> Run a model</a>
+        <a class="btn" href="skills.html">Technical capabilities</a>
+        <a class="link-arrow" href="contact.html">Say hello</a>
       </div>
       <div class="portfolio-hero__credentials" aria-label="Profile details">
         <span><b>TAMU</b> Aerospace Engineering</span>
         <span><b>BS/MS</b> Fast Track</span>
         <span><b>Open</b> to relocation</span>
-      </div>
+      <div class="icon-row" style="margin-top:1.25rem"><a class="icon-tile" href="mailto:Vin.manoj.nair@gmail.com" aria-label="Email me"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.6 7 8.4 5.8L20.4 7"/></svg><span class="icon-tile__label" aria-hidden="true">Email me</span></a><a class="icon-tile" href="https://www.linkedin.com/in/vinayakmnair/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3.2 9h3.6v12H3.2zM9.3 9h3.45v1.64h.05c.48-.9 1.75-1.85 3.6-1.85 3.85 0 4.6 2.4 4.6 5.53V21h-3.6v-5.3c0-1.27-.02-2.9-1.8-2.9-1.8 0-2.08 1.37-2.08 2.8V21H9.3z"/></svg><span class="icon-tile__label" aria-hidden="true">LinkedIn</span></a><a class="icon-tile" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="icon icon--solid" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg><span class="icon-tile__label" aria-hidden="true">GitHub</span></a><button type="button" class="icon-tile" data-copy="Vin.manoj.nair@gmail.com" aria-label="Copy my email address"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5.5 15.5V6a1.5 1.5 0 0 1 1.5-1.5h9"/></svg><span class="icon-tile__label" data-copy-label>Copy address</span></button></div></div>
     </div>
 
     <div class="profile-stage" data-reveal data-delay="2">
       <div class="profile-stage__image">
-        <img src="assets/headshot.png" width="1254" height="1254" alt="Vinayak Manoj Nair" fetchpriority="high" decoding="async">
+        <img data-parallax="0.045" src="assets/headshot.png" width="1254" height="1254" alt="Vinayak Manoj Nair" fetchpriority="high" decoding="async">
       </div>
       <div class="profile-stage__disciplines" aria-label="Engineering disciplines">
         <span class="profile-stage__discipline profile-stage__discipline--mechanical">Mechanical<br><b>CAD &amp; FEA</b></span>
@@ -125,8 +122,8 @@
       </div>
     </div>
 
-    <div class="proof-ribbon" aria-label="Selected engineering results" data-reveal>
-      <a class="proof-ribbon__item proof-ribbon__item--mechanical" href="projects/md11-structures.html">
+    <div class="proof-ribbon" aria-label="Selected engineering results" data-stagger>
+      <a class="proof-ribbon__item proof-ribbon__item--mechanical" href="projects/aeroframe-dt.html">
         <span>Mechanical / FEA</span><strong>+0.151 MS</strong><small>released synthetic fitting margin</small>
       </a>
       <a class="proof-ribbon__item proof-ribbon__item--gnc" href="projects/f16-flight-controls.html">
@@ -148,9 +145,9 @@
     <div>
       <p class="eyebrow">01 / Capabilities</p>
       <h2 id="disc-h">Core engineering areas</h2>
-      <p>A balanced set of mechanical, controls, systems, and software capabilities supported by project work.</p>
+      <p>Four areas I work in, each carrying its own projects and its own evidence — not one specialism with three footnotes.</p>
     </div>
-    <a class="link-arrow" href="skills.html">Full skills matrix</a>
+    <a class="link-arrow" href="skills.html">The whole matrix</a>
   </div>
 
   <div class="grid-4">
@@ -189,34 +186,17 @@
   </div>
 </section>
 
-<!-- ============ TECH STACK ============ -->
-<section class="shell section" aria-labelledby="stack-h">
+<!-- ============ TOOLS ============ -->
+<section class="shell section" aria-labelledby="tools-h">
   <div class="section-head">
     <div>
-      <p class="eyebrow">02 / Toolchain</p>
-      <h2 id="stack-h">Working toolchain</h2>
-      <p>Tools I have used to produce delivered analysis, code, or hardware results, not a list of things I have read about.</p>
+      <p class="eyebrow">02 / The stack</p>
+      <h2 id="tools-h">What I build with</h2>
+      <p>Tools I have used to produce delivered analysis, code or hardware &mdash; not a reading list. Click any of them to see the project that proves it.</p>
     </div>
+    <a class="link-arrow" href="skills.html">All 28 tools</a>
   </div>
-
-  <div class="tech-grid" data-reveal>
-    <div class="tech"><span class="tech__i">01</span><span class="tech__n">SolidWorks</span></div>
-    <div class="tech"><span class="tech__i">02</span><span class="tech__n">ANSYS Mechanical</span></div>
-    <div class="tech"><span class="tech__i">03</span><span class="tech__n">Abaqus</span></div>
-    <div class="tech"><span class="tech__i">04</span><span class="tech__n">GD&amp;T</span></div>
-    <div class="tech"><span class="tech__i">05</span><span class="tech__n">Python</span></div>
-    <div class="tech"><span class="tech__i">06</span><span class="tech__n">MATLAB</span></div>
-    <div class="tech"><span class="tech__i">07</span><span class="tech__n">C++17</span></div>
-    <div class="tech"><span class="tech__i">08</span><span class="tech__n">Kalman Filtering</span></div>
-    <div class="tech"><span class="tech__i">09</span><span class="tech__n">Requirements &amp; V&amp;V</span></div>
-    <div class="tech"><span class="tech__i">10</span><span class="tech__n">Trade Studies</span></div>
-    <div class="tech"><span class="tech__i">11</span><span class="tech__n">Linux</span></div>
-    <div class="tech"><span class="tech__i">12</span><span class="tech__n">LabVIEW</span></div>
-    <div class="tech"><span class="tech__i">13</span><span class="tech__n">Git</span></div>
-    <div class="tech"><span class="tech__i">14</span><span class="tech__n">Raspberry Pi</span></div>
-    <div class="tech"><span class="tech__i">15</span><span class="tech__n">Monte Carlo</span></div>
-    <div class="tech"><span class="tech__i">16</span><span class="tech__n">Hardware-in-the-loop</span></div>
-  </div>
+  <div class="tool-strip" data-stagger><a class="tool-chip" href="skills.html?tool=cplusplus" aria-label="C++"><span class="tool-chip__icon"><img src="assets/icons/tools/cplusplus.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy"></span><span class="tool-chip__label" aria-hidden="true">C++</span></a><a class="tool-chip" href="skills.html?tool=python" aria-label="Python"><span class="tool-chip__icon"><img src="assets/icons/tools/python.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy"></span><span class="tool-chip__label" aria-hidden="true">Python</span></a><a class="tool-chip" href="skills.html?tool=matlab" aria-label="MATLAB"><span class="tool-chip__icon"><img src="assets/icons/tools/matlab.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy"></span><span class="tool-chip__label" aria-hidden="true">MATLAB</span></a><a class="tool-chip" href="skills.html?tool=ros" aria-label="ROS 2"><span class="tool-chip__icon"><img src="assets/icons/tools/ros.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy"></span><span class="tool-chip__label" aria-hidden="true">ROS 2</span></a><a class="tool-chip" href="skills.html?tool=opencv" aria-label="OpenCV"><span class="tool-chip__icon"><img src="assets/icons/tools/opencv.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy"></span><span class="tool-chip__label" aria-hidden="true">OpenCV</span></a><a class="tool-chip" href="skills.html?tool=solidworks" aria-label="SolidWorks"><span class="tool-chip__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.4 12 4l8 4.4v7.2L12 20l-8-4.4Z"/><path d="m4 8.4 8 4.4 8-4.4M12 12.8V20"/><path d="M3 3.2h2M3 3.2v2M21 3.2h-2M21 3.2v2"/></svg></span><span class="tool-chip__label" aria-hidden="true">SolidWorks</span></a><a class="tool-chip" href="skills.html?tool=ansys" aria-label="ANSYS"><span class="tool-chip__icon"><img src="assets/icons/tools/ansys.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy"></span><span class="tool-chip__label" aria-hidden="true">ANSYS</span></a><a class="tool-chip" href="skills.html?tool=abaqus" aria-label="Abaqus"><span class="tool-chip__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.6" y="5.4" width="16.8" height="13.2" rx="1.4"/><path d="M3.6 11.2h16.8M3.6 15h16.8M9.2 5.4v13.2M15 5.4v13.2"/><path d="m3.6 5.4 5.6 5.8M15 11.2l5.4 3.8"/></svg></span><span class="tool-chip__label" aria-hidden="true">Abaqus</span></a><a class="tool-chip" href="skills.html?tool=onshape" aria-label="Onshape"><span class="tool-chip__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.6 18.4A4.1 4.1 0 0 1 8 10.3a5.6 5.6 0 0 1 10.7 1.5 3.6 3.6 0 0 1-.9 7"/><path d="M9.4 15.2 12 13.6l2.6 1.6v3L12 19.8l-2.6-1.6Z"/></svg></span><span class="tool-chip__label" aria-hidden="true">Onshape</span></a><a class="tool-chip" href="skills.html?tool=cadquery" aria-label="CadQuery"><span class="tool-chip__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.6 5.4 4.4 12l4.2 6.6M15.4 5.4l4.2 6.6-4.2 6.6"/><path d="m10.8 15.6 2.4-7.2"/></svg></span><span class="tool-chip__label" aria-hidden="true">CadQuery</span></a><a class="tool-chip" href="skills.html?tool=stk" aria-label="STK"><span class="tool-chip__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9.6" ry="4" transform="rotate(-28 12 12)"/><circle cx="19.1" cy="8.2" r="1.7" fill="currentColor" stroke="none"/></svg></span><span class="tool-chip__label" aria-hidden="true">STK</span></a><a class="tool-chip" href="skills.html?tool=raspberrypi" aria-label="Raspberry Pi"><span class="tool-chip__icon"><img src="assets/icons/tools/raspberrypi.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy"></span><span class="tool-chip__label" aria-hidden="true">Raspberry Pi</span></a><a class="tool-chip" href="skills.html?tool=linux" aria-label="Linux"><span class="tool-chip__icon"><img src="assets/icons/tools/linux.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy"></span><span class="tool-chip__label" aria-hidden="true">Linux</span></a><a class="tool-chip" href="skills.html?tool=cmake" aria-label="CMake"><span class="tool-chip__icon"><img src="assets/icons/tools/cmake.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy"></span><span class="tool-chip__label" aria-hidden="true">CMake</span></a><a class="tool-chip" href="skills.html?tool=git" aria-label="Git"><span class="tool-chip__icon"><img src="assets/icons/tools/git.svg" width="40" height="40" alt="" aria-hidden="true" loading="lazy"></span><span class="tool-chip__label" aria-hidden="true">Git</span></a><a class="tool-chip" href="skills.html?tool=labview" aria-label="LabVIEW"><span class="tool-chip__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.4" y="4.6" width="17.2" height="14.8" rx="2"/><circle cx="9" cy="12" r="2.6"/><path d="M9 9.4V12l1.7 1.4M15 8.6v6.8M17.6 8.6v6.8"/></svg></span><span class="tool-chip__label" aria-hidden="true">LabVIEW</span></a></div>
 </section>
 
 <!-- ============ FEATURED PROJECTS ============ -->
@@ -228,7 +208,7 @@
       <p>Each project is documented as an engineering report: problem, requirements, architecture,
          design decisions, results, tradeoffs, and what I would change.</p>
     </div>
-    <a class="link-arrow" href="projects.html">All projects</a>
+    <a class="link-arrow" href="projects.html">Every project</a>
   </div>
 
   <div class="featured-grid">
@@ -251,7 +231,7 @@
           <div class="metric"><div class="metric__v">10</div><div class="metric__k">Frozen variables</div></div>
         </div>
         <div class="chips"><span class="chip chip--accent">ANSYS Mechanical</span><span class="chip">Parametric CAD</span><span class="chip">Lug analysis</span><span class="chip">APDL</span><span class="chip">GD&amp;T</span></div>
-        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/aeroframe-dt.html">Read mechanical case study</a></div>
+        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/aeroframe-dt.html">See how I sized it</a></div>
       </div>
     </article>
 
@@ -274,7 +254,7 @@
           <div class="metric metric--green"><div class="metric__v">20</div><div class="metric__k">Flaws resolved</div></div>
         </div>
         <div class="chips"><span class="chip chip--accent">C++</span><span class="chip">ESKF</span><span class="chip">IMM</span><span class="chip">PX4 SITL</span><span class="chip">Raspberry Pi</span></div>
-        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/ghost.html">Read estimation case study</a></div>
+        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/ghost.html">See how it tracks</a></div>
       </div>
     </article>
 
@@ -297,7 +277,7 @@
           <div class="metric metric--orange"><div class="metric__v">240 &deg;C</div><div class="metric__k">Thermal band</div></div>
         </div>
         <div class="chips"><span class="chip chip--accent">Requirements</span><span class="chip">SCR / SRR / PDR</span><span class="chip">Trade studies</span><span class="chip">Configuration control</span></div>
-        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/spirit-iss.html">Read systems case study</a></div>
+        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/spirit-iss.html">See how it shipped</a></div>
       </div>
     </article>
 
@@ -320,21 +300,35 @@
           <div class="metric"><div class="metric__v">40%</div><div class="metric__k">CRC overhead cut</div></div>
         </div>
         <div class="chips"><span class="chip chip--accent">C++17</span><span class="chip">CMake / CTest</span><span class="chip">CRC-16</span><span class="chip">Fault injection</span><span class="chip">FDIR</span></div>
-        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/astrasim-fsw.html">Read software case study</a><a class="btn btn--sm btn--cyan" href="demos/astrasim-fsw-hil-workstation.html">Open HIL demo</a></div>
+        <div class="btn-row"><a class="btn btn--sm btn--primary" href="projects/astrasim-fsw.html">See how it is proven</a><a class="btn btn--sm btn--cyan" href="demos/astrasim-fsw-hil-workstation.html">Step onto the bench</a></div>
       </div>
     </article>
 
   </div>
 </section>
 
+
+<!-- ============ INTERACTIVE MODELS ============ -->
+<section class="shell section" id="models" aria-labelledby="models-h">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">04 / Interactive</p>
+      <h2 id="models-h">Run the engineering yourself</h2>
+      <p>Every case study carries a model you can drive in the browser. Each one states what it demonstrates and what it does not evidence, so the repository results stay separate from the teaching model.</p>
+    </div>
+    <a class="link-arrow" href="projects.html">Every case study</a>
+  </div>
+  <div class="model-grid" data-stagger><a class="model-card model-card--controls" href="projects/ghost.html#interactive"><span class="model-card__top"><span class="model-card__project">GHOST-X</span><span class="model-card__go"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z"/></svg> Run</span></span><strong>Track a target through a measurement gap</strong><small>Set the occlusion length, switch IMM mixing off, watch the covariance grow.</small></a><a class="model-card model-card--mechanical" href="projects/aeroframe-dt.html#interactive"><span class="model-card__top"><span class="model-card__project">AeroFrame-DT</span><span class="model-card__go"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z"/></svg> Run</span></span><strong>Sweep the edge-distance trade</strong><small>Move e/D and watch the governing failure mode change hands at 1.35.</small></a><a class="model-card model-card--software" href="projects/astrasim-fsw.html#interactive"><span class="model-card__top"><span class="model-card__project">ASTRA-OS</span><span class="model-card__go"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z"/></svg> Run</span></span><strong>Frame a packet, then corrupt it</strong><small>Real CRC-16, real acceptance order, live FDIR escalation.</small></a><a class="model-card model-card--controls" href="projects/f16-flight-controls.html#interactive"><span class="model-card__top"><span class="model-card__project">Fixed-Wing SIL</span><span class="model-card__go"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z"/></svg> Run</span></span><strong>Fly the altitude capture</strong><small>Retune the loop, add gust, run the dispersion campaign.</small></a><a class="model-card model-card--controls" href="projects/orbitalis-rpo.html#interactive"><span class="model-card__top"><span class="model-card__project">ORBITALIS-RPO</span><span class="model-card__go"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z"/></svg> Run</span></span><strong>Drive the autonomy guards</strong><small>Change range, health and approval; the mode transitions follow the real guards.</small></a><a class="model-card model-card--systems" href="projects/spirit-iss.html#interactive"><span class="model-card__top"><span class="model-card__project">TAMU-SPIRIT</span><span class="model-card__go"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z"/></svg> Run</span></span><strong>Trade the thermal pair</strong><small>Pick a material pair across the LEO cycling band, then step the review gate.</small></a><a class="model-card model-card--controls" href="projects/rocket-landing-gnc.html#interactive"><span class="model-card__top"><span class="model-card__project">Rocket Landing GNC</span><span class="model-card__go"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z"/></svg> Run</span></span><strong>Fly the powered descent</strong><small>One point mass, one guidance loop — land it before the propellant runs out.</small></a><a class="model-card model-card--software" href="projects/interceptor.html#interactive"><span class="model-card__top"><span class="model-card__project">Interception Robot</span><span class="model-card__go"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z"/></svg> Run</span></span><strong>Build the latency budget</strong><small>Stage-by-stage timing against the 100 ms target, and the lag it buys.</small></a><a class="model-card model-card--mechanical" href="projects/md11-aircraft-cad.html#interactive"><span class="model-card__top"><span class="model-card__project">MD-11 CAD</span><span class="model-card__go"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6L19 12z"/></svg> Run</span></span><strong>Drive the assembly parameters</strong><small>Sketch parameters rebuild the three-view; suppress groups or explode it.</small></a></div>
+</section>
+
 <!-- ============ EXPERIENCE ============ -->
 <section class="shell section" aria-labelledby="exp-h">
   <div class="section-head">
     <div>
-      <p class="eyebrow">04 / Engineering experience</p>
+      <p class="eyebrow">05 / Engineering experience</p>
       <h2 id="exp-h">Engineering experience</h2>
     </div>
-    <a class="link-arrow" href="experience.html">Full experience record</a>
+    <a class="link-arrow" href="experience.html">The full record</a>
   </div>
 
   <div class="timeline" data-reveal>
@@ -371,7 +365,7 @@
 <section class="shell section" id="github" aria-labelledby="gh-h">
   <div class="section-head">
     <div>
-      <p class="eyebrow">05 / Repositories</p>
+      <p class="eyebrow">06 / Repositories</p>
       <h2 id="gh-h">Selected engineering code</h2>
       <p>Every project above has a repository. This list is pulled live from GitHub.</p>
     </div>
@@ -379,17 +373,20 @@
 
   <div class="gh" data-reveal>
     <div class="gh__bar">
-      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
       <b>XpiredRuby</b>
-      <span>/ repositories</span>
+      <span>/ <span id="gh-count">…</span> repositories</span>
       <span class="gh__spacer"></span>
-      <a class="gh__btn" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">View profile</a>
+      <span class="gh__status" id="gh-status">Loading current repository data…</span>
+      <a class="gh__btn" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">Browse the repos</a>
     </div>
-    <div class="gh__list" id="gh-list">
-      <div class="gh__repo">
-        <span class="gh__name"><span class="gh-skel">loading repository</span></span>
-        <span class="gh__desc"><span class="gh-skel">loading description text</span></span>
-      </div>
+    <div class="gh__list" id="gh-list" aria-busy="true">
+        <a class="gh__repo" href="https://github.com/XpiredRuby/ghost-vins-eskf" target="_blank" rel="noopener noreferrer"><span class="gh__name">ghost-vins-eskf<span class="gh__vis">Public</span></span><span class="gh__desc">Occlusion-tolerant target estimation: IMM tracker, ROS 2, Raspberry Pi hardware campaign.</span><span class="gh__meta"><span><i class="gh__lang" style="background:#f34b7d"></i>C++</span></span></a>
+        <a class="gh__repo" href="https://github.com/XpiredRuby/AstraSim-FSW" target="_blank" rel="noopener noreferrer"><span class="gh__name">AstraSim-FSW<span class="gh__vis">Public</span></span><span class="gh__desc">Spacecraft-style flight software with command/telemetry framing, FDIR and a regression campaign.</span><span class="gh__meta"><span><i class="gh__lang" style="background:#f34b7d"></i>C++</span></span></a>
+        <a class="gh__repo" href="https://github.com/XpiredRuby/aeroframe-dt" target="_blank" rel="noopener noreferrer"><span class="gh__name">aeroframe-dt<span class="gh__vis">Public</span></span><span class="gh__desc">Structural substantiation: parametric CAD, lug hand checks, nonlinear FEA, fatigue and damage tolerance.</span><span class="gh__meta"><span><i class="gh__lang" style="background:#3572A5"></i>Python</span></span></a>
+        <a class="gh__repo" href="https://github.com/XpiredRuby/orbitalis-rpo" target="_blank" rel="noopener noreferrer"><span class="gh__name">orbitalis-rpo<span class="gh__vis">Public</span></span><span class="gh__desc">Autonomous rendezvous and proximity operations with a frozen software-in-the-loop campaign.</span><span class="gh__meta"><span><i class="gh__lang" style="background:#f34b7d"></i>C++</span></span></a>
+        <a class="gh__repo" href="https://github.com/XpiredRuby/f16-flight-sim" target="_blank" rel="noopener noreferrer"><span class="gh__name">f16-flight-sim<span class="gh__vis">Public</span></span><span class="gh__desc">Fixed-wing flight controls SIL with actuator limits, seeded sensor errors and a Monte Carlo campaign.</span><span class="gh__meta"><span><i class="gh__lang" style="background:#3572A5"></i>Python</span></span></a>
+        <a class="gh__repo" href="https://github.com/XpiredRuby/vin-portfolio" target="_blank" rel="noopener noreferrer"><span class="gh__name">vin-portfolio<span class="gh__vis">Public</span></span><span class="gh__desc">This site. Static HTML, CSS and JavaScript with no framework and no build step.</span><span class="gh__meta"><span><i class="gh__lang" style="background:#e34c26"></i>HTML</span></span></a>
     </div>
   </div>
 </section>
@@ -397,19 +394,15 @@
 <!-- ============ CONTACT CTA ============ -->
 <section class="shell section" aria-labelledby="cta-h">
   <div class="panel" data-reveal>
-    <div class="panel__head"><span>06 / Availability</span><span><i class="dot" aria-hidden="true"></i>OPEN</span></div>
+    <div class="panel__head"><span>07 / Availability</span><span><i class="dot" aria-hidden="true"></i>OPEN</span></div>
     <div class="panel__body" style="padding:clamp(1.5rem,4vw,2.5rem)">
-      <h2 id="cta-h" style="max-width:22ch">Interested in mechanical, controls, flight software, and systems engineering roles.</h2>
+      <h2 id="cta-h" style="max-width:22ch">Spacecraft systems, software, mechanical design, controls. I work across all four.</h2>
       <p class="lede" style="margin-top:1rem">
-        Interested in aerospace engineering work across structures, controls, embedded software, and systems.
-        I can walk through a CAD decision, derivation, verification result, or engineering trade in detail.
+        I am looking for roles in spacecraft and mission systems, engineering software, mechanical design and
+        analysis, or guidance and control — and I can walk through a CAD decision, a derivation, a
+        verification result or a design trade in whichever of those a conversation needs.
       </p>
-      <div class="btn-row" style="margin-top:1.75rem">
-        <a class="btn btn--primary" href="mailto:Vin.manoj.nair@gmail.com">Vin.manoj.nair@gmail.com</a>
-        <a class="btn" href="about.html">About me</a>
-        <a class="btn" href="https://www.linkedin.com/in/vinayakmnair/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a class="btn" href="contact.html">All contact details</a>
-      </div>
+      <div class="btn-row" style="margin-top:1.75rem"><a class="btn btn--primary" data-magnetic href="mailto:Vin.manoj.nair@gmail.com"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.6 7 8.4 5.8L20.4 7"/></svg>Email me</a><button type="button" class="btn" data-copy="Vin.manoj.nair@gmail.com" aria-label="Copy my email address"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5.5 15.5V6a1.5 1.5 0 0 1 1.5-1.5h9"/></svg><span data-copy-label>Copy address</span></button><a class="btn" href="https://www.linkedin.com/in/vinayakmnair/" target="_blank" rel="noopener noreferrer"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3.2 9h3.6v12H3.2zM9.3 9h3.45v1.64h.05c.48-.9 1.75-1.85 3.6-1.85 3.85 0 4.6 2.4 4.6 5.53V21h-3.6v-5.3c0-1.27-.02-2.9-1.8-2.9-1.8 0-2.08 1.37-2.08 2.8V21H9.3z"/></svg>LinkedIn<svg class="icon icon--travel" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9.5 7H17v7.5"/></svg></a><a class="btn" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer"><svg class="icon icon--solid" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>GitHub<svg class="icon icon--travel" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9.5 7H17v7.5"/></svg></a><a class="btn btn--ghost" href="contact.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="m15.4 8.6-4.6 2.2L8.6 15.4l4.6-2.2 2.2-4.6Z"/></svg>All contact details</a></div>
     </div>
   </div>
 </section>
@@ -434,18 +427,14 @@
           <li><a href="projects/ghost.html">GHOST-X</a></li>
           <li><a href="projects/astrasim-fsw.html">ASTRA-OS</a></li>
           <li><a href="projects/rocket-landing-gnc.html">Rocket Landing GNC</a></li>
-          <li><a href="projects/md11-structures.html">Aircraft Structures Study</a></li>
+          <li><a href="projects/aeroframe-dt.html">Aircraft Structures Study</a></li>
           <li><a href="projects/aeroframe-dt.html">AeroFrame-DT</a></li>
           <li><a href="projects/interceptor.html">Interception Robot</a></li>
         </ul>
       </div>
       <div>
         <h5>Elsewhere</h5>
-        <ul>
-          <li><a href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-          <li><a href="https://www.linkedin.com/in/vinayakmnair/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><a href="mailto:Vin.manoj.nair@gmail.com">Email</a></li>
-        </ul>
+        <div class="icon-row"><a class="icon-tile" href="https://github.com/XpiredRuby" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="icon icon--solid" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg><span class="icon-tile__label" aria-hidden="true">GitHub</span></a><a class="icon-tile" href="https://www.linkedin.com/in/vinayakmnair/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="icon icon--solid" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3.2 9h3.6v12H3.2zM9.3 9h3.45v1.64h.05c.48-.9 1.75-1.85 3.6-1.85 3.85 0 4.6 2.4 4.6 5.53V21h-3.6v-5.3c0-1.27-.02-2.9-1.8-2.9-1.8 0-2.08 1.37-2.08 2.8V21H9.3z"/></svg><span class="icon-tile__label" aria-hidden="true">LinkedIn</span></a><a class="icon-tile" href="mailto:Vin.manoj.nair@gmail.com" aria-label="Email"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.6 7 8.4 5.8L20.4 7"/></svg><span class="icon-tile__label" aria-hidden="true">Email</span></a></div>
       </div>
       <div>
         <h5>Status</h5>
@@ -464,7 +453,7 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js" defer></script>
+<script src="assets/js/site.js?v=20260819r1" defer></script>
 <script src="assets/js/github.js" defer></script>
 </body>
 </html>
