@@ -242,7 +242,10 @@
       '<div class="lightbox__bar"><span data-lb-label>EVIDENCE</span>' +
       '<span><a data-lb-open target="_blank" rel="noopener noreferrer" style="margin-right:.5rem">Open original ↗</a>' +
       '<button type="button" data-lb-close>Close · Esc</button></span></div>' +
-      '<div class="lightbox__stage"><img alt="" data-lb-img></div>' +
+      /* A transparent 1x1 until a figure is opened: src is required on <img>,
+         and a src-less one reports as a broken image to any page audit. */
+      '<div class="lightbox__stage"><img alt="" data-lb-img ' +
+      'src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></div>' +
       '<p class="lightbox__cap" data-lb-cap></p>';
     document.body.appendChild(dialog);
 
