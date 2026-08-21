@@ -41,7 +41,9 @@ jobs:
           done
 
       - name: Validate local search index
-        run: python -m json.tool assets/data/search-index.json > /dev/null
+        run: |
+          python -m json.tool assets/data/search-index.json > /dev/null
+          python tools/build_search_index.py --check
 
       - name: Validate social preview cards
         run: |

@@ -261,6 +261,20 @@ def check_social_images(page: Path) -> list[str]:
     return errors
 
 
+def check_search_text() -> list[str]:
+    """A stale full-text index silently searches the previous copy of the site."""
+    import subprocess
+
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "tools" / "build_search_index.py"), "--check"],
+        capture_output=True, text=True,
+    )
+    if result.returncode == 0:
+        return []
+    detail = (result.stdout or result.stderr).strip().splitlines()
+    return [detail[0] if detail else "run tools/build_search_index.py"]
+
+
 def check_social_cards() -> list[str]:
     """Cards are generated, so a hand-edited manifest must not outrun them."""
     import subprocess
@@ -311,6 +325,7 @@ def main() -> int:
         if not required.exists():
             errors.append(f"missing required portfolio asset: {required.relative_to(ROOT)}")
     errors.extend(check_social_cards())
+    errors.extend(check_search_text())
 
     pages = sorted(ROOT.rglob("*.html"))
     if not pages:

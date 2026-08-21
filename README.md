@@ -138,7 +138,8 @@ vin-portfolio/
 │   ├── js/labs/core.js         plotting and control runtime for the models
 │   ├── js/labs/<project>.js    one interactive model per case study
 │   ├── js/github.js            selected live public-repository feed
-│   ├── data/search-index.json  command-palette index
+│   ├── data/search-index.json  curated command-palette targets (hand-written)
+│   ├── data/search-text.json   page text + tools, generated, loaded on demand
 │   ├── og-card.src.html        social card template (never served)
 │   ├── og/                     one rendered social card per case study
 │   ├── evidence/               pinned source-backed plots + provenance manifest
@@ -147,6 +148,7 @@ vin-portfolio/
 ├── tools/validate_site.py      zero-dependency integrity gate
 ├── tools/validate_hiring_surface.py
 ├── tools/bump_assets.py        content-hash cache-busting version
+├── tools/build_search_index.py full-text palette index (generated)
 ├── tools/render_og.js          social preview cards
 ├── tools/og-cards.json         one card definition per page
 ├── .github/workflows/site-check.yml
@@ -170,6 +172,7 @@ python tools/validate_site.py
 python tools/validate_hiring_surface.py
 for f in assets/js/*.js assets/js/labs/*.js; do node --check "$f"; done
 python -m json.tool assets/data/search-index.json > /dev/null
+python tools/build_search_index.py --check
 node tools/render_og.js --check
 python -m py_compile assets/hero/generate.py assets/diagrams/generate.py
 ```
@@ -182,6 +185,23 @@ python tools/bump_assets.py
 ```
 
 GitHub Actions runs the same checks on pull requests. The validators fail on broken local links/assets, missing page metadata, malformed JSON-LD, a case study that has lost its interactive model, a model module with no mount point or no declared scope, and a small set of known presentation regressions.
+
+## Search
+
+The command palette (Ctrl/Cmd-K) searches two tiers. `search-index.json` holds
+the curated navigation targets and is edited by hand. `search-text.json` is
+generated: it carries every page's text split at the same anchors the table of
+contents uses, plus the skills-page tools, so a query like `damage tolerance`,
+`CRC` or `Abaqus` lands on the section that discusses it rather than the top of
+a page. Regenerate it whenever page copy changes:
+
+```bash
+python tools/build_search_index.py
+```
+
+It is ~110 KB, so it is fetched the first time the palette opens rather than on
+every page load, and the palette still works from the curated tier alone if that
+request fails.
 
 ## Social preview cards
 

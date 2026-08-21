@@ -1364,6 +1364,31 @@ a.contact-card:hover { border-color: var(--accent-line); transform: translateY(-
 .command-result__copy { display: grid; gap: 0.1rem; min-width: 0; }
 .command-result__copy strong { font-size: 0.9rem; font-weight: 600; }
 .command-result__copy small { font-size: 0.78rem; color: var(--txt-3); }
+
+/* Full-text hits: a section excerpt rather than a curated subtitle, so it is
+   allowed two lines and marks the matched terms. The rule keeps them visibly
+   a second tier below the navigation results above them. */
+.command-result--deep { border-left: 2px solid var(--line-2); border-radius: 0 8px 8px 0; }
+.command-result--deep[aria-selected="true"] { border-left-color: var(--accent); }
+.command-result__where {
+  display: block; font-family: var(--f-mono); font-size: 0.68rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--txt-3);
+  margin-bottom: 0.12rem;
+  /* A case-study heading can be a full sentence; one line keeps the excerpt
+     below it the thing that grows. */
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+}
+.command-result--deep .command-result__copy small {
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+  line-clamp: 2; overflow: hidden;
+  line-height: 1.45; color: var(--txt-4);
+}
+.command-result__copy mark {
+  background: var(--accent-a); color: var(--accent);
+  border-radius: 3px; padding: 0 0.12em; font-weight: 600;
+}
+.command-result[aria-selected="true"] .command-result__copy mark { color: var(--txt); }
+
 .command-result__kind {
   font-family: var(--f-mono); font-size: 0.6rem;
   letter-spacing: 0.11em; text-transform: uppercase; color: var(--txt-3);
