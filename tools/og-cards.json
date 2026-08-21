@@ -1,0 +1,96 @@
+{
+  "_comment": "One card per page. Social preview cards. Rendered from assets/og-card.src.html by tools/render_og.js at 1200x630. Keep `out` in sync with the og:image and twitter:image tags on the page that owns each card.",
+  "cards": [
+    {
+      "out": "assets/og-image.png",
+      "theme": "dark",
+      "eyebrow": "Texas A&M Aerospace · B.S. May 2027",
+      "title": "Vinayak Manoj\nNair",
+      "lede": "Guidance, Navigation & Control / Flight Software\nStructures & CAD / Autonomous Robotics",
+      "chips": ["9 interactive models", "C++17 · Python · MATLAB", "ROS 2 · PX4 · HIL", "SolidWorks · Abaqus · ANSYS"],
+      "kicker": "Run the simulations in your browser"
+    },
+
+    {
+      "out": "assets/og/ghost.png",
+      "theme": "dark", "discipline": "controls",
+      "eyebrow": "Case study · Estimation & Controls",
+      "title": "GHOST-X",
+      "lede": "Occlusion-tolerant target estimation\nUncertainty-aware behaviour through measurement loss",
+      "chips": ["IMM estimator", "Hardware + SIL evidence", "Interactive model"],
+      "kicker": "Drop the measurements yourself"
+    },
+    {
+      "out": "assets/og/astrasim-fsw.png",
+      "theme": "dark", "discipline": "software",
+      "eyebrow": "Case study · Flight Software",
+      "title": "ASTRA-OS",
+      "lede": "Spacecraft flight-software assurance\nRequirements, faults and protocols as executable evidence",
+      "chips": ["CRC-16/CCITT", "Fault injection", "Interactive model"],
+      "kicker": "Corrupt a packet and watch it reject"
+    },
+    {
+      "out": "assets/og/aeroframe-dt.png",
+      "theme": "dark", "discipline": "mechanical",
+      "eyebrow": "Case study · Structures & FEA",
+      "title": "AeroFrame-DT",
+      "lede": "Pylon attachment fitting, geometry to substantiation\nNonlinear FEA / allowables / fatigue / damage tolerance",
+      "chips": ["Melcon-Hoblit lug analysis", "MMPDS A-basis", "CAD download"],
+      "kicker": "Size the lug in your browser"
+    },
+    {
+      "out": "assets/og/f16-flight-controls.png",
+      "theme": "dark", "discipline": "controls",
+      "eyebrow": "Case study · Flight Controls",
+      "title": "Fixed-Wing\nFlight Controls SIL",
+      "lede": "Flight dynamics and autopilot software\nverified over a seeded 50-run uncertainty campaign",
+      "chips": ["Monte Carlo dispersion", "Deterministic scenarios", "Interactive model"],
+      "kicker": "Fly the dispersion campaign"
+    },
+    {
+      "out": "assets/og/rocket-landing-gnc.png",
+      "theme": "dark", "discipline": "controls",
+      "eyebrow": "Case study · Descent Guidance",
+      "title": "Rocket Landing GNC",
+      "lede": "Point-mass powered-descent prototype\nwith an explicit evidence boundary",
+      "chips": ["Throttle-limited descent", "Propellant budget", "Interactive model"],
+      "kicker": "Land it, or run out of propellant"
+    },
+    {
+      "out": "assets/og/orbitalis-rpo.png",
+      "theme": "dark", "discipline": "controls",
+      "eyebrow": "Case study · Spacecraft RPO",
+      "title": "ORBITALIS-RPO",
+      "lede": "Rendezvous and proximity-operations autonomy\nwith the run procedure and raw evidence open",
+      "chips": ["Approach corridor", "Abort logic", "Interactive model"],
+      "kicker": "Fly the approach and trip an abort"
+    },
+    {
+      "out": "assets/og/interceptor.png",
+      "theme": "dark", "discipline": "software",
+      "eyebrow": "Case study · Autonomy & Perception",
+      "title": "Autonomous\nInterception Robot",
+      "lede": "Embedded perception, estimation and control\nwith reported results separated from public evidence",
+      "chips": ["OpenCV + YOLO", "Raspberry Pi", "Interactive model"],
+      "kicker": "Run the intercept loop"
+    },
+    {
+      "out": "assets/og/spirit-iss.png",
+      "theme": "dark", "discipline": "systems",
+      "eyebrow": "Case study · Systems Engineering",
+      "title": "TAMU-SPIRIT",
+      "lede": "ISS payload systems engineering\nfor four flight-bound experiments",
+      "chips": ["Requirements flow-down", "Verification matrix", "Interactive model"],
+      "kicker": "Trace a requirement to its evidence"
+    },
+    {
+      "out": "assets/og/md11-aircraft-cad.png",
+      "theme": "dark", "discipline": "mechanical",
+      "eyebrow": "Case study · CAD & Drawings",
+      "title": "MD-11\nAircraft Assembly",
+      "lede": "Full-aircraft SolidWorks assembly and drawing workflow\nwith the native CAD retained and downloadable",
+      "chips": ["SolidWorks", "Parasolid + STEP export", "Interactive model"],
+      "kicker": "Spin the airframe, then take the files"
+    }
+  ]
+}

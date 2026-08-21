@@ -43,6 +43,12 @@ jobs:
       - name: Validate local search index
         run: python -m json.tool assets/data/search-index.json > /dev/null
 
+      - name: Validate social preview cards
+        run: |
+          python -m json.tool tools/og-cards.json > /dev/null
+          node --check tools/render_og.js
+          node tools/render_og.js --check
+
       - name: Validate generated-asset scripts compile
         run: |
           python -m py_compile assets/hero/generate.py

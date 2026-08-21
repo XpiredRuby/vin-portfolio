@@ -139,11 +139,16 @@ vin-portfolio/
 │   ├── js/labs/<project>.js    one interactive model per case study
 │   ├── js/github.js            selected live public-repository feed
 │   ├── data/search-index.json  command-palette index
+│   ├── og-card.src.html        social card template (never served)
+│   ├── og/                     one rendered social card per case study
 │   ├── evidence/               pinned source-backed plots + provenance manifest
 │   ├── hero/                   generated project illustrations
 │   └── diagrams/               generated technical diagrams
 ├── tools/validate_site.py      zero-dependency integrity gate
 ├── tools/validate_hiring_surface.py
+├── tools/bump_assets.py        content-hash cache-busting version
+├── tools/render_og.js          social preview cards
+├── tools/og-cards.json         one card definition per page
 ├── .github/workflows/site-check.yml
 ├── robots.txt
 ├── sitemap.xml
@@ -160,14 +165,40 @@ python3 -m http.server 8000
 ## Validate before publishing
 
 ```bash
+python tools/bump_assets.py --check
 python tools/validate_site.py
 python tools/validate_hiring_surface.py
 for f in assets/js/*.js assets/js/labs/*.js; do node --check "$f"; done
 python -m json.tool assets/data/search-index.json > /dev/null
+node tools/render_og.js --check
 python -m py_compile assets/hero/generate.py assets/diagrams/generate.py
 ```
 
+After changing any CSS or JS, stamp a new cache-busting version, or returning
+visitors keep the old files:
+
+```bash
+python tools/bump_assets.py
+```
+
 GitHub Actions runs the same checks on pull requests. The validators fail on broken local links/assets, missing page metadata, malformed JSON-LD, a case study that has lost its interactive model, a model module with no mount point or no declared scope, and a small set of known presentation regressions.
+
+## Social preview cards
+
+Every page carries its own 1200x630 card so a pasted link previews the page it
+opens, not a generic banner. Cards are generated — never hand-edited — from one
+template plus a manifest:
+
+```bash
+node tools/render_og.js                  # all cards
+node tools/render_og.js ghost            # just the matching card
+node tools/render_og.js --check          # sizes only; no browser needed
+```
+
+Editing `tools/og-cards.json` means re-rendering. The validator fails on a card
+that is missing, off-size, or referenced by a page that no longer matches, and
+on any `og:image` that is not a raster a scraper will accept — an `.svg` there
+previews as no image at all.
 
 ## Graphics policy
 
