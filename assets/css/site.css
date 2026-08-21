@@ -1370,6 +1370,16 @@ a.contact-card:hover { border-color: var(--accent-line); transform: translateY(-
    a second tier below the navigation results above them. */
 .command-result--deep { border-left: 2px solid var(--line-2); border-radius: 0 8px 8px 0; }
 .command-result--deep[aria-selected="true"] { border-left-color: var(--accent); }
+/* Footer freshness stamp. The date is written by tools/stamp_updated.py from
+   the repository history, so it is checkable rather than a claim. */
+.footer__stamp {
+  font-family: var(--f-mono); font-size: 0.72rem;
+  letter-spacing: 0.06em; color: var(--txt-4);
+}
+/* Only the block form needs separating; on the one-line bar it is a flex item. */
+p.footer__stamp { padding-top: 0.75rem; border-top: 1px solid var(--line); margin-top: 0.9rem; }
+.footer__updated { font-variant-numeric: tabular-nums; color: var(--txt-3); }
+
 .command-result__where {
   display: block; font-family: var(--f-mono); font-size: 0.68rem;
   letter-spacing: 0.08em; text-transform: uppercase; color: var(--txt-3);

@@ -149,6 +149,7 @@ vin-portfolio/
 ├── tools/validate_hiring_surface.py
 ├── tools/bump_assets.py        content-hash cache-busting version
 ├── tools/build_search_index.py full-text palette index (generated)
+├── tools/stamp_updated.py      git-derived last-updated dates
 ├── tools/render_og.js          social preview cards
 ├── tools/og-cards.json         one card definition per page
 ├── .github/workflows/site-check.yml
@@ -173,6 +174,7 @@ python tools/validate_hiring_surface.py
 for f in assets/js/*.js assets/js/labs/*.js; do node --check "$f"; done
 python -m json.tool assets/data/search-index.json > /dev/null
 python tools/build_search_index.py --check
+python tools/stamp_updated.py --check
 node tools/render_og.js --check
 python -m py_compile assets/hero/generate.py assets/diagrams/generate.py
 ```
@@ -185,6 +187,24 @@ python tools/bump_assets.py
 ```
 
 GitHub Actions runs the same checks on pull requests. The validators fail on broken local links/assets, missing page metadata, malformed JSON-LD, a case study that has lost its interactive model, a model module with no mount point or no declared scope, and a small set of known presentation regressions.
+
+## Freshness
+
+The footer used to say "Portfolio reviewed regularly", which a reader has no way
+to check, and `sitemap.xml` carried no `<lastmod>`. Both now show a date taken
+from the repository history. Refresh it before publishing:
+
+```bash
+python tools/stamp_updated.py
+```
+
+The check is not an equality test against git — stamping a page changes that
+page, so its own last-commit date moves and an exact match could never hold
+twice. What is enforced is that every page carries a well-formed date that is
+not in the future, and that every sitemap URL has one.
+
+There is no analytics script. Adding one means sending visitor data to a third
+party from this domain, and choosing that party is the site owner's call.
 
 ## Search
 

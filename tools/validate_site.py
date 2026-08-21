@@ -261,6 +261,19 @@ def check_social_images(page: Path) -> list[str]:
     return errors
 
 
+def check_updated_stamps() -> list[str]:
+    """A footer date that is missing or in the future is worse than none."""
+    import subprocess
+
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "tools" / "stamp_updated.py"), "--check"],
+        capture_output=True, text=True,
+    )
+    if result.returncode == 0:
+        return []
+    return (result.stdout or result.stderr).strip().splitlines()
+
+
 def check_search_text() -> list[str]:
     """A stale full-text index silently searches the previous copy of the site."""
     import subprocess
@@ -326,6 +339,7 @@ def main() -> int:
             errors.append(f"missing required portfolio asset: {required.relative_to(ROOT)}")
     errors.extend(check_social_cards())
     errors.extend(check_search_text())
+    errors.extend(check_updated_stamps())
 
     pages = sorted(ROOT.rglob("*.html"))
     if not pages:
