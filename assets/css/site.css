@@ -1284,6 +1284,16 @@ a.contact-card:hover { border-color: var(--accent-line); transform: translateY(-
 .footer ul { list-style: none; display: grid; gap: 0.42rem; }
 .footer a { font-size: 0.88rem; color: var(--txt-2); border-bottom: 1px solid transparent; }
 .footer a:hover { color: var(--accent); border-bottom-color: var(--accent-line); }
+
+/* Footer navigation links measured 17px tall on a phone, under the 24px
+   WCAG 2.2 minimum for a standalone target. They are list items, not links
+   inside a sentence, so the inline exception does not cover them. Coarse
+   pointers only, so the desktop footer keeps its tight rhythm. */
+@media (pointer: coarse) {
+  .footer li > a,
+  .evidence-source { display: inline-flex; align-items: center; min-height: 26px; }
+  .footer ul { gap: 0.2rem; }
+}
 .footer p { font-size: 0.88rem; color: var(--txt-2); }
 .footer__bar {
   display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem;
@@ -1378,7 +1388,10 @@ a.contact-card:hover { border-color: var(--accent-line); transform: translateY(-
 }
 /* Only the block form needs separating; on the one-line bar it is a flex item. */
 p.footer__stamp { padding-top: 0.75rem; border-top: 1px solid var(--line); margin-top: 0.9rem; }
-.footer__updated { font-variant-numeric: tabular-nums; color: var(--txt-3); }
+.footer__updated {
+  font-family: var(--f-mono); font-size: 0.72rem;
+  font-variant-numeric: tabular-nums; letter-spacing: 0.04em; color: var(--txt-3);
+}
 
 .command-result__where {
   display: block; font-family: var(--f-mono); font-size: 0.68rem;
