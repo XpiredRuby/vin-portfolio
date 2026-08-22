@@ -138,12 +138,20 @@ vin-portfolio/
 │   ├── js/labs/core.js         plotting and control runtime for the models
 │   ├── js/labs/<project>.js    one interactive model per case study
 │   ├── js/github.js            selected live public-repository feed
-│   ├── data/search-index.json  command-palette index
+│   ├── data/search-index.json  curated command-palette targets (hand-written)
+│   ├── data/search-text.json   page text + tools, generated, loaded on demand
+│   ├── og-card.src.html        social card template (never served)
+│   ├── og/                     one rendered social card per case study
 │   ├── evidence/               pinned source-backed plots + provenance manifest
 │   ├── hero/                   generated project illustrations
 │   └── diagrams/               generated technical diagrams
 ├── tools/validate_site.py      zero-dependency integrity gate
 ├── tools/validate_hiring_surface.py
+├── tools/bump_assets.py        content-hash cache-busting version
+├── tools/build_search_index.py full-text palette index (generated)
+├── tools/stamp_updated.py      git-derived last-updated dates
+├── tools/render_og.js          social preview cards
+├── tools/og-cards.json         one card definition per page
 ├── .github/workflows/site-check.yml
 ├── robots.txt
 ├── sitemap.xml
@@ -160,14 +168,77 @@ python3 -m http.server 8000
 ## Validate before publishing
 
 ```bash
+python tools/bump_assets.py --check
 python tools/validate_site.py
 python tools/validate_hiring_surface.py
 for f in assets/js/*.js assets/js/labs/*.js; do node --check "$f"; done
 python -m json.tool assets/data/search-index.json > /dev/null
+python tools/build_search_index.py --check
+python tools/stamp_updated.py --check
+node tools/render_og.js --check
 python -m py_compile assets/hero/generate.py assets/diagrams/generate.py
 ```
 
+After changing any CSS or JS, stamp a new cache-busting version, or returning
+visitors keep the old files:
+
+```bash
+python tools/bump_assets.py
+```
+
 GitHub Actions runs the same checks on pull requests. The validators fail on broken local links/assets, missing page metadata, malformed JSON-LD, a case study that has lost its interactive model, a model module with no mount point or no declared scope, and a small set of known presentation regressions.
+
+## Freshness
+
+The footer used to say "Portfolio reviewed regularly", which a reader has no way
+to check, and `sitemap.xml` carried no `<lastmod>`. Both now show a date taken
+from the repository history. Refresh it before publishing:
+
+```bash
+python tools/stamp_updated.py
+```
+
+The check is not an equality test against git — stamping a page changes that
+page, so its own last-commit date moves and an exact match could never hold
+twice. What is enforced is that every page carries a well-formed date that is
+not in the future, and that every sitemap URL has one.
+
+There is no analytics script. Adding one means sending visitor data to a third
+party from this domain, and choosing that party is the site owner's call.
+
+## Search
+
+The command palette (Ctrl/Cmd-K) searches two tiers. `search-index.json` holds
+the curated navigation targets and is edited by hand. `search-text.json` is
+generated: it carries every page's text split at the same anchors the table of
+contents uses, plus the skills-page tools, so a query like `damage tolerance`,
+`CRC` or `Abaqus` lands on the section that discusses it rather than the top of
+a page. Regenerate it whenever page copy changes:
+
+```bash
+python tools/build_search_index.py
+```
+
+It is ~110 KB, so it is fetched the first time the palette opens rather than on
+every page load, and the palette still works from the curated tier alone if that
+request fails.
+
+## Social preview cards
+
+Every page carries its own 1200x630 card so a pasted link previews the page it
+opens, not a generic banner. Cards are generated — never hand-edited — from one
+template plus a manifest:
+
+```bash
+node tools/render_og.js                  # all cards
+node tools/render_og.js ghost            # just the matching card
+node tools/render_og.js --check          # sizes only; no browser needed
+```
+
+Editing `tools/og-cards.json` means re-rendering. The validator fails on a card
+that is missing, off-size, or referenced by a page that no longer matches, and
+on any `og:image` that is not a raster a scraper will accept — an `.svg` there
+previews as no image at all.
 
 ## Graphics policy
 

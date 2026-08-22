@@ -12,13 +12,17 @@ from urllib.parse import unquote, urlsplit
 import json
 import re
 import struct
+import os
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SKIP_SCHEMES = {"http", "https", "mailto", "tel", "data", "javascript"}
+# Canonical and social metadata are absolute, and must stay on this origin.
+SITE_ORIGIN = "https://vinnair.me/"
 # HTML used as an asset-generation source is not a navigable site page. We still
 # parse its local links and JSON-LD, but do not require SEO/page metadata.
-NON_PUBLIC_HTML = {Path("assets/og-image.src.html")}
+# Any *.src.html is a render source for tools/render_og.js, never a page.
+NON_PUBLIC_HTML = {path.relative_to(ROOT) for path in ROOT.rglob("*.src.html")}
 # Redirect stubs carry no content of their own, so page-level SEO and
 # heading rules do not apply to them.
 REDIRECT_STUBS = {Path("projects/md11-structures.html")}
@@ -208,6 +212,106 @@ def check_og_image(path: Path) -> list[str]:
     return []
 
 
+SOCIAL_IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg"}
+
+
+def check_social_images(page: Path) -> list[str]:
+    """Social metadata uses absolute URLs, so the local-link pass never sees it.
+
+    That gap let og:image point at an .svg on the MD-11 page, which every
+    major scraper refuses to render, and at a raw evidence plot on two others.
+    Resolve each social URL back to a repository file and check it is a raster
+    a scraper will actually accept.
+    """
+    rel = page.relative_to(ROOT)
+    if rel in NON_PUBLIC_HTML or rel in REDIRECT_STUBS:
+        return []
+    text = page.read_text(encoding="utf-8")
+    found: dict[str, str] = {}
+    for prop, pattern in (
+        ("og:image", r'<meta property="og:image" content="([^"]*)"'),
+        ("twitter:image", r'<meta name="twitter:image" content="([^"]*)"'),
+    ):
+        match = re.search(pattern, text)
+        if match:
+            found[prop] = match.group(1)
+
+    errors: list[str] = []
+    for prop in ("og:image", "twitter:image"):
+        if prop not in found:
+            errors.append(f"{rel}: missing {prop}; the link previews with no image")
+    if len(found) == 2 and found["og:image"] != found["twitter:image"]:
+        errors.append(f"{rel}: og:image and twitter:image disagree")
+
+    for prop, url in found.items():
+        if not url.startswith(SITE_ORIGIN):
+            errors.append(f"{rel}: {prop} is not an absolute {SITE_ORIGIN} URL: {url}")
+            continue
+        target = ROOT / url[len(SITE_ORIGIN):]
+        suffix = target.suffix.lower()
+        if suffix not in SOCIAL_IMAGE_SUFFIXES:
+            errors.append(
+                f"{rel}: {prop} is {suffix or 'extensionless'}; scrapers need "
+                + "/".join(sorted(SOCIAL_IMAGE_SUFFIXES))
+            )
+        elif not target.exists():
+            errors.append(f"{rel}: {prop} resolves to a missing file: {target.relative_to(ROOT)}")
+        elif suffix == ".png":
+            errors.extend(check_og_image(target))
+    return errors
+
+
+def check_updated_stamps() -> list[str]:
+    """A footer date that is missing or in the future is worse than none."""
+    import subprocess
+
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "tools" / "stamp_updated.py"), "--check"],
+        capture_output=True, text=True,
+    )
+    if result.returncode == 0:
+        return []
+    return (result.stdout or result.stderr).strip().splitlines()
+
+
+def check_search_text() -> list[str]:
+    """A stale full-text index silently searches the previous copy of the site."""
+    import subprocess
+
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "tools" / "build_search_index.py"), "--check"],
+        capture_output=True, text=True,
+    )
+    if result.returncode == 0:
+        return []
+    detail = (result.stdout or result.stderr).strip().splitlines()
+    return [detail[0] if detail else "run tools/build_search_index.py"]
+
+
+def check_social_cards() -> list[str]:
+    """Cards are generated, so a hand-edited manifest must not outrun them."""
+    import subprocess
+
+    script = ROOT / "tools" / "render_og.js"
+    if not script.exists():
+        return []
+    env = dict(os.environ)
+    env.setdefault("NODE_PATH", "/opt/node22/lib/node_modules")
+    try:
+        result = subprocess.run(
+            ["node", str(script), "--check"],
+            capture_output=True, text=True, env=env,
+        )
+    except FileNotFoundError:
+        return []  # no node here; CI still covers it
+    if result.returncode == 0:
+        return []
+    detail = (result.stderr or result.stdout).strip().splitlines()
+    return ["social cards are stale: " + line for line in detail] or [
+        "social cards are stale: run node tools/render_og.js"
+    ]
+
+
 def check_asset_version() -> list[str]:
     """A stale ?v= means returning visitors keep old CSS and JS.
 
@@ -233,9 +337,9 @@ def main() -> int:
     for required in REQUIRED_ROOT_FILES:
         if not required.exists():
             errors.append(f"missing required portfolio asset: {required.relative_to(ROOT)}")
-    og_image = ROOT / "assets" / "og-image.png"
-    if og_image.exists():
-        errors.extend(check_og_image(og_image))
+    errors.extend(check_social_cards())
+    errors.extend(check_search_text())
+    errors.extend(check_updated_stamps())
 
     pages = sorted(ROOT.rglob("*.html"))
     if not pages:
@@ -244,6 +348,7 @@ def main() -> int:
     for page in pages:
         errors.extend(check_html(page))
         errors.extend(check_json_ld(page))
+        errors.extend(check_social_images(page))
     for page in pages:
         errors.extend(check_fragments(page, id_cache))
     referenced_webps: set[Path] = set()
@@ -345,6 +450,8 @@ def main() -> int:
         if not ok:
             errors.append(f"missing evidence boundary: {label}")
 
+    # Two pages can quote the same broken card; report each fault once.
+    errors = list(dict.fromkeys(errors))
     if errors:
         print(f"Portfolio validation FAILED with {len(errors)} issue(s):")
         for error in errors:

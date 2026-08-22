@@ -1,0 +1,151 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>Social card template</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* One 1200x630 template for every social card on the site.
+   tools/render_og.js loads this with ?card=<id>, reads tools/og-cards.json,
+   and screenshots the result. Colours mirror the tokens in
+   assets/css/site.css so a shared link previews the page it opens. */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden}
+body{background:var(--bg);font-family:Inter,system-ui,sans-serif;color:var(--txt);position:relative}
+
+:root{
+  --bg:#0B1017; --surface:rgba(18,26,36,.88);
+  --txt:#F1F5F9; --txt-2:#B9C6D4; --txt-3:#8FA0B2; --txt-4:#74889C;
+  --hair:160,189,216; --hair-a:.055; --line:rgba(160,189,216,.24);
+  --controls:#6BB7F5; --mechanical:#E89A6B; --systems:#B49BEE; --software:#5FCFA0;
+}
+body[data-theme="light"]{
+  --bg:#E4E1D8; --surface:rgba(249,248,244,.88);
+  --txt:#171C22; --txt-2:#3C4753; --txt-3:#566371; --txt-4:#6B7887;
+  --hair:35,42,48; --hair-a:.055; --line:rgba(35,42,48,.22);
+  --controls:#1C6494; --mechanical:#A9432F; --systems:#64489B; --software:#1C6A4D;
+}
+body{--accent:var(--controls)}
+body[data-discipline="mechanical"]{--accent:var(--mechanical)}
+body[data-discipline="systems"]{--accent:var(--systems)}
+body[data-discipline="software"]{--accent:var(--software)}
+body[data-discipline="controls"]{--accent:var(--controls)}
+
+.grid{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(var(--hair),var(--hair-a)) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(var(--hair),var(--hair-a)) 1px,transparent 1px);
+  background-size:48px 48px;
+  -webkit-mask-image:radial-gradient(120% 100% at 78% 42%,#000 20%,transparent 78%);
+          mask-image:radial-gradient(120% 100% at 78% 42%,#000 20%,transparent 78%)}
+.wash{position:absolute;width:900px;height:900px;right:-230px;top:-250px;border-radius:50%;
+  background:radial-gradient(circle,color-mix(in srgb,var(--accent) 17%,transparent),transparent 62%)}
+.wash2{position:absolute;width:620px;height:620px;left:-220px;bottom:-260px;border-radius:50%;
+  background:radial-gradient(circle,color-mix(in srgb,var(--mechanical) 11%,transparent),transparent 64%)}
+
+svg.plate{position:absolute;right:-96px;top:50%;transform:translateY(-50%)}
+svg.plate .faint{stroke:rgba(var(--hair),.16)}
+svg.plate .faint2{stroke:rgba(var(--hair),.22)}
+svg.plate .orbit{stroke:color-mix(in srgb,var(--accent) 42%,transparent)}
+svg.plate .orbit2{stroke:color-mix(in srgb,var(--systems) 26%,transparent)}
+svg.plate .traj{stroke:var(--mechanical)}
+svg.plate .tick{stroke:rgba(var(--hair),.34)}
+
+.wrap{position:absolute;inset:0;padding:66px 74px;display:flex;flex-direction:column;justify-content:space-between}
+
+.top{display:flex;align-items:center;gap:18px}
+.mark{width:46px;height:46px;flex:none;border:1.5px solid color-mix(in srgb,var(--accent) 60%,transparent);
+  color:var(--accent);display:grid;place-items:center;border-radius:10px;
+  background:color-mix(in srgb,var(--accent) 12%,transparent);
+  font-family:'JetBrains Mono',monospace;font-weight:500;font-size:16px;letter-spacing:.04em}
+.top span{font-family:'JetBrains Mono',monospace;font-size:14.5px;letter-spacing:.17em;color:var(--txt-3);text-transform:uppercase}
+
+h1{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-.03em;line-height:1.0;
+  font-size:86px;max-width:700px}
+body[data-size="m"] h1{font-size:70px;line-height:1.04}
+body[data-size="s"] h1{font-size:57px;line-height:1.08}
+.rule{width:74px;height:3px;margin:26px 0 22px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--mechanical))}
+.spec{font-family:'JetBrains Mono',monospace;font-size:17.5px;letter-spacing:.045em;line-height:1.7;
+  color:var(--txt-2);max-width:640px}
+body[data-size="s"] .spec{font-size:16px;max-width:600px}
+.spec b{color:var(--accent);font-weight:500}
+
+.chips{display:flex;gap:9px;margin-top:26px;flex-wrap:wrap;max-width:600px}
+.chip{font-family:'JetBrains Mono',monospace;font-size:13.5px;letter-spacing:.03em;color:var(--txt-2);
+  border:1px solid var(--line);border-radius:6px;padding:7px 12px;background:var(--surface)}
+.chip i{font-style:normal;color:var(--accent);margin-right:7px}
+
+.foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+  font-family:'JetBrains Mono',monospace;font-size:14.5px;letter-spacing:.13em;color:var(--txt-4);text-transform:uppercase}
+.foot .site{color:var(--txt);letter-spacing:.1em;flex:none}
+.bar{position:absolute;left:0;right:0;bottom:0;height:5px;
+  background:linear-gradient(90deg,var(--controls) 0%,var(--software) 38%,var(--systems) 68%,var(--mechanical) 100%)}
+</style></head><body>
+<div class="grid"></div><div class="wash"></div><div class="wash2"></div>
+
+<svg class="plate" width="700" height="700" viewBox="0 0 600 600" fill="none">
+  <circle class="faint" cx="300" cy="300" r="286"/>
+  <circle class="faint2" cx="300" cy="300" r="212" stroke-dasharray="3 9"/>
+  <circle class="faint" cx="300" cy="300" r="126"/>
+  <ellipse class="orbit" cx="300" cy="300" rx="278" ry="102" transform="rotate(-21 300 300)"/>
+  <ellipse class="orbit2" cx="300" cy="300" rx="258" ry="150" transform="rotate(33 300 300)"/>
+  <path class="traj" d="M60 430 C 160 250, 300 168, 470 196" stroke-width="2" stroke-dasharray="7 7" opacity=".68"/>
+  <circle cx="470" cy="196" r="6.5" fill="currentColor" style="color:var(--mechanical)"/>
+  <circle cx="494" cy="254" r="5" fill="currentColor" style="color:var(--accent)"/>
+  <circle cx="150" cy="392" r="4" fill="currentColor" style="color:var(--software)"/>
+  <line class="tick" x1="300" y1="14" x2="300" y2="42"/>
+  <line class="tick" x1="300" y1="558" x2="300" y2="586"/>
+  <line class="tick" x1="558" y1="300" x2="586" y2="300"/>
+</svg>
+
+<div class="wrap">
+  <div class="top"><div class="mark">VN</div><span id="eyebrow"></span></div>
+  <div>
+    <h1 id="title"></h1>
+    <div class="rule"></div>
+    <div class="spec" id="lede"></div>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="foot"><span class="site">vinnair.me</span><span id="kicker"></span></div>
+</div>
+<div class="bar"></div>
+
+<script>
+/* The renderer sets window.__CARD before the screenshot. Falling back to a
+   sample card keeps this file openable on its own while iterating. */
+(function () {
+  var card = window.__CARD || {
+    eyebrow: 'Texas A&M Aerospace · B.S. May 2027',
+    title: 'Vinayak Manoj\nNair',
+    lede: 'Guidance, Navigation & Control / Flight Software\nStructures & CAD / Autonomous Robotics',
+    chips: ['9 interactive models', 'C++17 · Python · MATLAB', 'ROS 2 · PX4 · HIL', 'SolidWorks · Abaqus · ANSYS'],
+    kicker: 'Run the simulations in your browser'
+  };
+  var body = document.body;
+  if (card.theme === 'light') { body.setAttribute('data-theme', 'light'); }
+  if (card.discipline) { body.setAttribute('data-discipline', card.discipline); }
+
+  function lines(text) {
+    return String(text || '').split('\n').map(function (part, i) {
+      return (i ? '<br>' : '') + part
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/\s\/\s/g, ' <b>/</b> ');
+    }).join('');
+  }
+  document.getElementById('eyebrow').textContent = card.eyebrow || '';
+  document.getElementById('title').innerHTML = lines(card.title).replace(/<b>\/<\/b>/g, '/');
+  document.getElementById('lede').innerHTML = lines(card.lede);
+  document.getElementById('kicker').textContent = card.kicker || '';
+  document.getElementById('chips').innerHTML = (card.chips || []).map(function (c) {
+    return '<div class="chip"><i>&#9656;</i>' + String(c).replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</div>';
+  }).join('');
+
+  /* Long project names need a smaller display size or they collide with the
+     orbit plate. Measure the rendered title rather than guessing from length. */
+  var h1 = document.getElementById('title');
+  var sizes = ['', 'm', 's'];
+  for (var i = 0; i < sizes.length; i += 1) {
+    if (sizes[i]) { body.setAttribute('data-size', sizes[i]); }
+    if (h1.getBoundingClientRect().height <= 190) { break; }
+  }
+  document.documentElement.setAttribute('data-card-ready', '1');
+}());
+</script>
+</body></html>

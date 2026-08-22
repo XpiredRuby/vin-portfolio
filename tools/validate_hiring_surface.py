@@ -27,7 +27,7 @@ public_pages = sorted(ROOT.rglob("*.html"))
 public_html = "\n".join(
     page.read_text(encoding="utf-8")
     for page in public_pages
-    if page != ROOT / "assets" / "og-image.src.html"
+    if not page.name.endswith(".src.html")
 )
 
 labs_dir = ROOT / "assets" / "js" / "labs"

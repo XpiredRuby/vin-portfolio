@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://vinnair.me/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://vinnair.me/about.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://vinnair.me/projects.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://vinnair.me/experience.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://vinnair.me/skills.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://vinnair.me/contact.html</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://vinnair.me/projects/orbitalis-rpo.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://vinnair.me/projects/ghost.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://vinnair.me/projects/astrasim-fsw.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://vinnair.me/projects/aeroframe-dt.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://vinnair.me/projects/spirit-iss.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://vinnair.me/projects/f16-flight-controls.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://vinnair.me/projects/md11-aircraft-cad.html</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://vinnair.me/projects/interceptor.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://vinnair.me/projects/rocket-landing-gnc.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://vinnair.me/demos/astrasim-fsw-hil-workstation.html</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://vinnair.me/</loc><lastmod>2026-08-21</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://vinnair.me/about.html</loc><lastmod>2026-08-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://vinnair.me/projects.html</loc><lastmod>2026-08-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://vinnair.me/experience.html</loc><lastmod>2026-08-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://vinnair.me/skills.html</loc><lastmod>2026-08-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://vinnair.me/contact.html</loc><lastmod>2026-08-21</lastmod><changefreq>yearly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vinnair.me/projects/orbitalis-rpo.html</loc><lastmod>2026-08-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://vinnair.me/projects/ghost.html</loc><lastmod>2026-08-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://vinnair.me/projects/astrasim-fsw.html</loc><lastmod>2026-08-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://vinnair.me/projects/aeroframe-dt.html</loc><lastmod>2026-08-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://vinnair.me/projects/spirit-iss.html</loc><lastmod>2026-08-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://vinnair.me/projects/f16-flight-controls.html</loc><lastmod>2026-08-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://vinnair.me/projects/md11-aircraft-cad.html</loc><lastmod>2026-08-21</lastmod><changefreq>yearly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vinnair.me/projects/interceptor.html</loc><lastmod>2026-08-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://vinnair.me/projects/rocket-landing-gnc.html</loc><lastmod>2026-08-21</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://vinnair.me/demos/astrasim-fsw-hil-workstation.html</loc><lastmod>2026-08-21</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
 </urlset>

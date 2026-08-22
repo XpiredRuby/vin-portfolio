@@ -26,6 +26,7 @@ ASSET_GLOBS = [
     "assets/js/*.js",
     "assets/js/labs/*.js",
     "assets/data/search-index.json",
+    "assets/data/search-text.json",
 ]
 
 VERSION_RE = re.compile(r'((?:href|src)="[^"]*?(?:site\.css|site\.js))\?v=[^"]*(")')

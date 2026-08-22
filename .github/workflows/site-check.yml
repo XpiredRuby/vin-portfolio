@@ -41,7 +41,18 @@ jobs:
           done
 
       - name: Validate local search index
-        run: python -m json.tool assets/data/search-index.json > /dev/null
+        run: |
+          python -m json.tool assets/data/search-index.json > /dev/null
+          python tools/build_search_index.py --check
+
+      - name: Validate last-updated stamps
+        run: python tools/stamp_updated.py --check
+
+      - name: Validate social preview cards
+        run: |
+          python -m json.tool tools/og-cards.json > /dev/null
+          node --check tools/render_og.js
+          node tools/render_og.js --check
 
       - name: Validate generated-asset scripts compile
         run: |
